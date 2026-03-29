@@ -131,7 +131,7 @@ function PrivacidadeContent() {
       </header>
 
       {/* Product Selector Cards */}
-      <div className="max-w-[900px] mx-auto px-6 py-12">
+      <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {products.map((product) => (
             <button
@@ -182,7 +182,7 @@ function PrivacidadeContent() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 pb-12 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-12 relative">
         <div className="flex gap-12 justify-center">
           {/* Table of Contents — Desktop Only */}
           <aside className="hidden xl:block w-[200px] sticky top-[100px] self-start shrink-0">

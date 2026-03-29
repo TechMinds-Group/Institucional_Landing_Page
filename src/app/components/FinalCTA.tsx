@@ -96,8 +96,8 @@ export function FinalCTA() {
           Entre em contato pelo canal que preferir. Nossa equipe está pronta para te atender.
         </p>
 
-        {/* Contact Items Grid */}
-        <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        {/* Contact Items Grid — 1 col mobile, 2 col sm+ */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {contactItems.map((item, index) => {
             const Icon = item.icon;
             const isCopied = copiedIndex === index;

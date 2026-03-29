@@ -1,0 +1,203 @@
+Keep all existing desktop styles, interactions, and content 
+exactly as they are. Add mobile responsiveness only, using 
+a mobile-first approach with the breakpoints below.
+
+---
+
+BREAKPOINTS:
+  Mobile:  max-width 767px  (priority: 360px, 375px, 390px)
+  Tablet:  768px – 1099px
+  Desktop: 1100px+          (existing styles unchanged)
+
+---
+
+NAVBAR — HAMBURGER DRAWER:
+At max-width 767px:
+- Hide all nav links and the language switcher.
+- Hide the "Ver soluções" / "Get started" CTA button.
+- Show a hamburger button on the right side of the navbar:
+  · Three horizontal lines icon, 24px, white.
+  · Background: transparent, no border.
+  · cursor: pointer, 44px tap target minimum.
+
+DRAWER BEHAVIOR:
+- Clicking hamburger opens a full-height lateral drawer 
+  from the right side.
+- Drawer width: 80% of screen width, max 300px.
+- Background: #111318, 1px left border color 
+  rgba(91,200,192,0.2).
+- Overlay: semi-transparent dark backdrop 
+  rgba(0,0,0,0.6) covering the rest of the screen.
+  Clicking the overlay closes the drawer.
+- Open/close animation: slide in from right, 
+  transform: translateX(100%) → translateX(0), 
+  duration 250ms ease-out.
+- Close button (×) inside drawer, top-right, 
+  same size as hamburger.
+- Drawer content (top to bottom):
+  · TechMinds logo + name (same as navbar)
+  · Nav links stacked vertically, 48px height each,
+    16px font-size, border-bottom 1px rgba(255,255,255,0.06)
+  · Language switcher (PT / EN / ES) as three horizontal 
+    pill buttons, centered, 32px height, 14px font-size.
+    Active language: gradient background. 
+    Inactive: transparent with border.
+  · "Ver soluções" CTA button at the bottom of the drawer,
+    full width, same gradient style as desktop.
+- Body scroll must be locked (overflow: hidden) while 
+  drawer is open.
+
+---
+
+HERO SECTION:
+At max-width 767px:
+- Switch from 2-column layout to single column.
+- Constellation canvas: HIDE completely 
+  (display: none). Do not render or animate it.
+- Text content takes full width, centered or left-aligned.
+- Headline font-size: 32px (reduced from desktop size).
+- Subheadline font-size: 15px.
+- CTA buttons: stack vertically, full width (100%), 
+  gap 12px between them.
+- Section padding: 48px top, 40px bottom.
+
+At 768px – 1099px (tablet):
+- Constellation canvas: show but reduce to 40% width.
+- Text content: 60% width.
+- Headline font-size: 40px.
+
+---
+
+SOCIAL PROOF BAR:
+At max-width 767px:
+- Logos wrap into 2 rows if needed, centered.
+- Font-size of label reduced to 13px.
+
+---
+
+PROBLEM → SOLUTION BLOCK:
+At max-width 767px:
+- Switch from 2-column to single column.
+- Pain points appear first (full width).
+- Gradient divider replaced by a horizontal line 
+  (16px margin top and bottom).
+- Solutions appear below, full width.
+- Section title font-size: 24px.
+
+---
+
+FEATURES GRID:
+At max-width 767px:
+- Switch from 3-column grid to single column.
+- Each card: full width, maintain existing card style.
+
+At 768px – 1099px:
+- 2-column grid.
+
+---
+
+HOW IT WORKS:
+At max-width 767px:
+- Switch from horizontal 3-step row to vertical stack.
+- Each step: full width, left-aligned icon + number, 
+  title and description below.
+- Dashed connector line replaced by a vertical dashed 
+  line on the left side connecting the steps.
+- Step number: 32px, gradient color.
+
+---
+
+PRODUCTS SECTION:
+At max-width 767px:
+- Cards stack vertically, single column, full width.
+- Each card maintains existing dark style, padding, 
+  badges, and "Saiba mais" button.
+- "Saiba mais" button: full width.
+
+At 768px – 1099px:
+- 2-column grid.
+
+PRODUCT MODALS (at max-width 767px):
+- Modal width: 100% of screen.
+- Modal height: 90vh, positioned at the bottom of the 
+  screen (like a bottom sheet).
+- Border radius: 16px 16px 0 0 (top corners only).
+- Open animation: slide up from bottom 
+  (translateY(100%) → translateY(0)), 250ms ease-out.
+- Content inside: scrollable, -webkit-overflow-scrolling: touch.
+- Close button stays fixed at top-right of the modal.
+
+---
+
+CONTACT SECTION:
+At max-width 767px:
+- Contact cards grid: switch to single column, full width.
+- Each card: full width, maintain existing style.
+
+At 768px – 1099px:
+- 2-column grid (already matches desktop).
+
+---
+
+FOOTER:
+At max-width 767px:
+- Stack all columns vertically, full width.
+- Column order (top to bottom):
+  1. TechMinds logo + tagline + social icons
+  2. Sistemas
+  3. Empresa
+  4. Contatos
+  5. Legal
+- Each column: 
+  · Column header font-size: 13px, uppercase, 
+    letter-spacing 0.08em.
+  · Links: 15px, 36px line height.
+  · 24px gap between columns.
+- Copyright line: centered, 13px, full width.
+
+At 768px – 1099px:
+- 2-column grid: 
+  Row 1: Logo column (full width)
+  Row 2: Sistemas + Empresa
+  Row 3: Contatos + Legal
+
+---
+
+LEGAL PAGES (/terms-of-use and /privacy):
+At max-width 767px:
+- Product selector cards: 
+  · Stack vertically, full width, single column.
+  · Disabled cards: reduced opacity as on desktop.
+- Content area: full width, 16px horizontal padding.
+- Sidebar table of contents: hidden (already planned).
+- Back-to-top button: 40px diameter, 16px from edges.
+
+At 768px – 1099px:
+- Product selector: 2-column grid.
+- Sidebar hidden (threshold is 1100px).
+
+---
+
+GLOBAL MOBILE RULES:
+- Minimum tap target size: 44×44px for all 
+  interactive elements (buttons, links, icons).
+- No horizontal scrolling at any breakpoint — 
+  all content must fit within the viewport width.
+- All font-sizes minimum 14px — never smaller on mobile.
+- Images and illustrations: max-width 100%, height auto.
+- Touch-friendly hover states: on mobile, hover states 
+  should not be triggered by touch (use 
+  @media (hover: hover) to scope hover CSS).
+- Smooth scroll behavior: maintained on mobile.
+- All modals and drawers use 
+  -webkit-overflow-scrolling: touch for iOS momentum 
+  scrolling.
+
+---
+
+TESTING REFERENCE SIZES:
+Verify layout integrity at exactly these widths:
+  360px — Samsung Galaxy
+  375px — iPhone SE
+  390px — iPhone 14
+  768px — iPad (tablet breakpoint)

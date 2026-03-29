@@ -13,7 +13,7 @@ export function Testimonials() {
           </span>
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {t.testimonials.items.map((testimonial, index) => (
             <div
               key={index}

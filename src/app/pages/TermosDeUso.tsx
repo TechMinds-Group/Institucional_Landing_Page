@@ -137,7 +137,7 @@ function TermosDeUsoContent() {
       </header>
 
       {/* Product Selector Cards */}
-      <div className="max-w-[900px] mx-auto px-6 py-12">
+      <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {products.map((product) => (
             <button
@@ -188,7 +188,7 @@ function TermosDeUsoContent() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 pb-12 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-12 relative">
         <div className="flex gap-12 justify-center">
           {/* Table of Contents — Desktop Only */}
           <aside className="hidden xl:block w-[200px] sticky top-[100px] self-start shrink-0">
@@ -946,7 +946,7 @@ function VibeCutTermsES() {
 
       <section id="section-7" className="mb-12">
         <h2 className="text-[18px] font-semibold text-white mb-4 pl-3 border-l-2 border-[#7B5EA7]">
-          7. PRIVACIDAD, DATOS Y PROPIEDAD INTELECTUAL DEL USUARIO
+          7. PRIVACIDAD, DATOS Y PROPIEDAD INTELECTUAL DEL USUÁRIO
         </h2>
         <p className="text-[16px] leading-[1.8] text-gray-300 mb-4">
           Para el funcionamiento del análisis, solicitamos acceso a la cámara y galería.

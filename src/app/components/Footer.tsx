@@ -82,10 +82,15 @@ export function Footer({ onProductClick }: FooterProps) {
   return (
     <footer className="bg-[#0D0D0D] border-t border-white/5 py-16 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-6 gap-12 mb-12">
-          {/* Logo and tagline */}
-          <div className="md:col-span-2">
-            <div 
+        {/*
+          Mobile:  single column stack (all 5 columns)
+          Tablet:  logo full-width, then 2-col rows
+          Desktop: 6-col grid as before
+        */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-6 md:gap-12 mb-12">
+          {/* Logo and tagline — full span on desktop */}
+          <div className="sm:col-span-2 md:col-span-2">
+            <div
               className="flex items-center gap-3 mb-4 cursor-pointer group"
               onClick={handleLogoClick}
             >
@@ -95,14 +100,14 @@ export function Footer({ onProductClick }: FooterProps) {
               </span>
             </div>
             <p className="text-gray-400 mb-6">{t.footer.tagline}</p>
-            
+
             {/* Quick Access Icons */}
             <div className="flex gap-4">
               {/* GitHub */}
               <div className="relative">
-                <a 
-                  href="https://github.com/TechMinds-Group" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/TechMinds-Group"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-[#1A1A2E] flex items-center justify-center text-[#5BC8C0] hover:brightness-125 transition-all"
                   onMouseEnter={() => setHoveredIcon('github')}
@@ -119,7 +124,7 @@ export function Footer({ onProductClick }: FooterProps) {
 
               {/* Email */}
               <div className="relative">
-                <button 
+                <button
                   onClick={handleEmailIconClick}
                   onMouseEnter={() => setHoveredIcon('email')}
                   onMouseLeave={() => setHoveredIcon(null)}
@@ -141,9 +146,9 @@ export function Footer({ onProductClick }: FooterProps) {
 
               {/* WhatsApp */}
               <div className="relative">
-                <a 
-                  href="https://wa.me/555180547148" 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/555180547148"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-[#1A1A2E] flex items-center justify-center text-[#5BC8C0] hover:brightness-125 transition-all"
                   onMouseEnter={() => setHoveredIcon('whatsapp')}
@@ -160,9 +165,9 @@ export function Footer({ onProductClick }: FooterProps) {
 
               {/* Telegram */}
               <div className="relative">
-                <a 
-                  href="https://t.me/+5551980547148" 
-                  target="_blank" 
+                <a
+                  href="https://t.me/+5551980547148"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-[#1A1A2E] flex items-center justify-center text-[#5BC8C0] hover:brightness-125 transition-all"
                   onMouseEnter={() => setHoveredIcon('telegram')}
@@ -181,13 +186,18 @@ export function Footer({ onProductClick }: FooterProps) {
 
           {/* Products Links */}
           <div>
-            <h4 className="text-white font-semibold mb-4">{t.footer.productsTitle}</h4>
+            <h4 className="text-white font-semibold mb-4"
+              style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.08em" }}
+            >
+              {t.footer.productsTitle}
+            </h4>
             <ul className="space-y-3">
               {t.footer.productLinks.map((link, index) => (
-                <li key={index}>
-                  <button 
+                <li key={index} style={{ lineHeight: "36px" }}>
+                  <button
                     onClick={() => onProductClick?.(link)}
                     className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer text-left"
+                    style={{ fontSize: "15px" }}
                   >
                     {link}
                   </button>
@@ -198,20 +208,26 @@ export function Footer({ onProductClick }: FooterProps) {
 
           {/* Company Links */}
           <div>
-            <h4 className="text-white font-semibold mb-4">{t.footer.companyTitle}</h4>
+            <h4 className="text-white font-semibold mb-4"
+              style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.08em" }}
+            >
+              {t.footer.companyTitle}
+            </h4>
             <ul className="space-y-3">
-              <li>
-                <button 
+              <li style={{ lineHeight: "36px" }}>
+                <button
                   onClick={() => handleSmoothScroll('section-sobre')}
                   className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer"
+                  style={{ fontSize: "15px" }}
                 >
                   {t.footer.companyLinks[0]}
                 </button>
               </li>
-              <li>
-                <button 
+              <li style={{ lineHeight: "36px" }}>
+                <button
                   onClick={() => handleSmoothScroll('section-contato')}
                   className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer"
+                  style={{ fontSize: "15px" }}
                 >
                   {t.footer.companyLinks[1]}
                 </button>
@@ -219,46 +235,27 @@ export function Footer({ onProductClick }: FooterProps) {
             </ul>
           </div>
 
-          {/* Legal Links */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">{t.footer.legalTitle}</h4>
-            <ul className="space-y-3">
-              <li>
-                <a 
-                  href="/terms-of-use" 
-                  className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer"
-                >
-                  {t.footer.legalLinks[0]}
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="/privacy" 
-                  className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer"
-                >
-                  {t.footer.legalLinks[1]}
-                </a>
-              </li>
-            </ul>
-          </div>
-
           {/* Contatos Column */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Contatos</h4>
+            <h4 className="text-white font-semibold mb-4"
+              style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.08em" }}
+            >
+              Contatos
+            </h4>
             <ul className="space-y-3">
               {/* Business Email */}
-              <li className="relative">
+              <li className="relative" style={{ lineHeight: "36px" }}>
                 <button
                   onClick={(e) => handleCopyEmail(e, 'business@techminds.net.br')}
                   onMouseEnter={() => setHoveredEmail('business')}
                   onMouseLeave={() => setHoveredEmail(null)}
                   className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 text-left border-0 bg-transparent p-0 outline-none"
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', fontSize: "15px" }}
                 >
                   <span className="relative inline-block min-h-[20px]">
-                    <span 
+                    <span
                       className="transition-opacity duration-150"
-                      style={{ 
+                      style={{
                         opacity: copiedEmail === 'business@techminds.net.br' ? 0 : 1,
                         position: copiedEmail === 'business@techminds.net.br' ? 'absolute' : 'static'
                       }}
@@ -266,10 +263,7 @@ export function Footer({ onProductClick }: FooterProps) {
                       business@techminds.net.br
                     </span>
                     {copiedEmail === 'business@techminds.net.br' && (
-                      <span 
-                        className="text-[#5BC8C0] transition-opacity duration-150"
-                        style={{ opacity: 1 }}
-                      >
+                      <span className="text-[#5BC8C0] transition-opacity duration-150" style={{ opacity: 1 }}>
                         Copiado ✓
                       </span>
                     )}
@@ -283,18 +277,18 @@ export function Footer({ onProductClick }: FooterProps) {
               </li>
 
               {/* Careers Email */}
-              <li className="relative">
+              <li className="relative" style={{ lineHeight: "36px" }}>
                 <button
                   onClick={(e) => handleCopyEmail(e, 'careers@techminds.net.br')}
                   onMouseEnter={() => setHoveredEmail('careers')}
                   onMouseLeave={() => setHoveredEmail(null)}
                   className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 text-left border-0 bg-transparent p-0 outline-none"
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', fontSize: "15px" }}
                 >
                   <span className="relative inline-block min-h-[20px]">
-                    <span 
+                    <span
                       className="transition-opacity duration-150"
-                      style={{ 
+                      style={{
                         opacity: copiedEmail === 'careers@techminds.net.br' ? 0 : 1,
                         position: copiedEmail === 'careers@techminds.net.br' ? 'absolute' : 'static'
                       }}
@@ -302,10 +296,7 @@ export function Footer({ onProductClick }: FooterProps) {
                       careers@techminds.net.br
                     </span>
                     {copiedEmail === 'careers@techminds.net.br' && (
-                      <span 
-                        className="text-[#5BC8C0] transition-opacity duration-150"
-                        style={{ opacity: 1 }}
-                      >
+                      <span className="text-[#5BC8C0] transition-opacity duration-150" style={{ opacity: 1 }}>
                         Copiado ✓
                       </span>
                     )}
@@ -319,18 +310,18 @@ export function Footer({ onProductClick }: FooterProps) {
               </li>
 
               {/* Support Email */}
-              <li className="relative">
+              <li className="relative" style={{ lineHeight: "36px" }}>
                 <button
                   onClick={(e) => handleCopyEmail(e, 'support@techminds.net.br')}
                   onMouseEnter={() => setHoveredEmail('support')}
                   onMouseLeave={() => setHoveredEmail(null)}
                   className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 text-left border-0 bg-transparent p-0 outline-none"
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', fontSize: "15px" }}
                 >
                   <span className="relative inline-block min-h-[20px]">
-                    <span 
+                    <span
                       className="transition-opacity duration-150"
-                      style={{ 
+                      style={{
                         opacity: copiedEmail === 'support@techminds.net.br' ? 0 : 1,
                         position: copiedEmail === 'support@techminds.net.br' ? 'absolute' : 'static'
                       }}
@@ -338,10 +329,7 @@ export function Footer({ onProductClick }: FooterProps) {
                       support@techminds.net.br
                     </span>
                     {copiedEmail === 'support@techminds.net.br' && (
-                      <span 
-                        className="text-[#5BC8C0] transition-opacity duration-150"
-                        style={{ opacity: 1 }}
-                      >
+                      <span className="text-[#5BC8C0] transition-opacity duration-150" style={{ opacity: 1 }}>
                         Copiado ✓
                       </span>
                     )}
@@ -355,18 +343,18 @@ export function Footer({ onProductClick }: FooterProps) {
               </li>
 
               {/* Compliance Email */}
-              <li className="relative">
+              <li className="relative" style={{ lineHeight: "36px" }}>
                 <button
                   onClick={(e) => handleCopyEmail(e, 'compliance@techminds.net.br')}
                   onMouseEnter={() => setHoveredEmail('compliance')}
                   onMouseLeave={() => setHoveredEmail(null)}
                   className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 text-left border-0 bg-transparent p-0 outline-none"
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', fontSize: "15px" }}
                 >
                   <span className="relative inline-block min-h-[20px]">
-                    <span 
+                    <span
                       className="transition-opacity duration-150"
-                      style={{ 
+                      style={{
                         opacity: copiedEmail === 'compliance@techminds.net.br' ? 0 : 1,
                         position: copiedEmail === 'compliance@techminds.net.br' ? 'absolute' : 'static'
                       }}
@@ -374,10 +362,7 @@ export function Footer({ onProductClick }: FooterProps) {
                       compliance@techminds.net.br
                     </span>
                     {copiedEmail === 'compliance@techminds.net.br' && (
-                      <span 
-                        className="text-[#5BC8C0] transition-opacity duration-150"
-                        style={{ opacity: 1 }}
-                      >
+                      <span className="text-[#5BC8C0] transition-opacity duration-150" style={{ opacity: 1 }}>
                         Copiado ✓
                       </span>
                     )}
@@ -388,6 +373,35 @@ export function Footer({ onProductClick }: FooterProps) {
                     Clique para copiar
                   </div>
                 )}
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal Links */}
+          <div>
+            <h4 className="text-white font-semibold mb-4"
+              style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.08em" }}
+            >
+              {t.footer.legalTitle}
+            </h4>
+            <ul className="space-y-3">
+              <li style={{ lineHeight: "36px" }}>
+                <a
+                  href="/terms-of-use"
+                  className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer"
+                  style={{ fontSize: "15px" }}
+                >
+                  {t.footer.legalLinks[0]}
+                </a>
+              </li>
+              <li style={{ lineHeight: "36px" }}>
+                <a
+                  href="/privacy"
+                  className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer"
+                  style={{ fontSize: "15px" }}
+                >
+                  {t.footer.legalLinks[1]}
+                </a>
               </li>
             </ul>
           </div>
