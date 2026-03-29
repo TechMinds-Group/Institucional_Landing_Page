@@ -210,7 +210,7 @@ export function Navigation() {
               {/* CTA Button */}
               <button
                 onClick={handleCTAClick}
-                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#7B5EA7] via-[#6B8DC4] to-[#5BC8C0] text-white font-semibold hover:shadow-lg hover:shadow-[#7B5EA7]/30 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5BC8C0]"
+                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#7B5EA7] via-[#6B8DC4] to-[#5BC8C0] text-white font-semibold hover:shadow-lg hover:shadow-[#7B5EA7]/30 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5BC8C0] shadow-md shadow-[#7B5EA7]/50 border border-[#7B5EA7]/30"
               >
                 {t.nav.getStarted}
               </button>
@@ -318,7 +318,7 @@ export function Navigation() {
           {/* CTA Button */}
           <button
             onClick={handleDrawerCTAClick}
-            className="w-full py-3 rounded-full bg-gradient-to-r from-[#7B5EA7] via-[#6B8DC4] to-[#5BC8C0] text-white font-semibold cursor-pointer focus:outline-none"
+            className="w-full py-3 rounded-full bg-gradient-to-r from-[#7B5EA7] via-[#6B8DC4] to-[#5BC8C0] text-white font-semibold cursor-pointer focus:outline-none shadow-lg shadow-[#7B5EA7]/50 border border-[#7B5EA7]/30"
             style={{ fontSize: "15px" }}
           >
             {t.nav.getStarted}

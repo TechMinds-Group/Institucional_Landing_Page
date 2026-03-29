@@ -52,7 +52,7 @@ export function Hero() {
             >
               <button
                 onClick={() => smoothScrollTo("section-produtos")}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-[#7B5EA7] via-[#6B8DC4] to-[#5BC8C0] text-white font-semibold hover:shadow-xl hover:shadow-[#7B5EA7]/40 transition-all duration-300 hover:scale-105 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5BC8C0]"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-[#7B5EA7] via-[#6B8DC4] to-[#5BC8C0] text-white font-semibold hover:shadow-xl hover:shadow-[#7B5EA7]/40 transition-all duration-300 hover:scale-105 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5BC8C0] shadow-lg shadow-[#7B5EA7]/50 border border-[#7B5EA7]/30"
               >
                 {t.hero.requestDemo}
               </button>

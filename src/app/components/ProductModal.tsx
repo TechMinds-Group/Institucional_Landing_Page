@@ -82,10 +82,10 @@ export function ProductModal({ isOpen, onClose, product }: ProductModalProps) {
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5BC8C0]"
+              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5BC8C0] shadow-lg"
               aria-label="Close modal"
             >
-              <X className="w-5 h-5 text-gray-400" />
+              <X className="w-5 h-5 text-white" />
             </button>
 
             {/* Tag and Status */}
@@ -170,10 +170,10 @@ export function ProductModal({ isOpen, onClose, product }: ProductModalProps) {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5BC8C0]"
+          className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5BC8C0] shadow-lg"
           aria-label="Close modal"
         >
-          <X className="w-5 h-5 text-gray-400" />
+          <X className="w-5 h-5 text-white" />
         </button>
 
         {/* Tag and Status */}
