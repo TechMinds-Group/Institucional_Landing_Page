@@ -18,6 +18,12 @@ export interface Translations {
   };
   socialProof: {
     label: string;
+    title: string;
+    titleHighlight: string;
+    sectors: {
+      name: string;
+      description: string;
+    }[];
   };
   problemSolution: {
     title: string;
@@ -114,7 +120,7 @@ export const translations: Record<Language, Translations> = {
       seeHowItWorks: 'Falar com um especialista'
     },
     socialProof: {
-      label: 'Soluções utilizadas por negócios de todos os segmentos.'
+      label: 'Áreas de atuação e especialização.'
     },
     problemSolution: {
       title: 'Tecnologia que cresce com você,',
@@ -277,7 +283,7 @@ export const translations: Record<Language, Translations> = {
       seeHowItWorks: 'See how it works'
     },
     socialProof: {
-      label: 'Trusted by companies of all sizes.'
+      label: 'Business areas and specialization.'
     },
     problemSolution: {
       title: 'The complexity of modern systems',
@@ -441,7 +447,7 @@ export const translations: Record<Language, Translations> = {
       seeHowItWorks: 'Ver cómo funciona'
     },
     socialProof: {
-      label: 'Con la confianza de empresas de todos los tamaños.'
+      label: 'Áreas de actuación y especialización.'
     },
     problemSolution: {
       title: 'La complejidad de los sistemas modernos',
@@ -508,7 +514,7 @@ export const translations: Record<Language, Translations> = {
           name: 'Escola Conectada',
           tag: 'Gestión Educativa',
           status: 'Disponible',
-          description: 'Sistema de gestión escolar completo: matrículas, asistencia, calificaciones, comunicación con padres y reportes pedagógicos en un solo lugar.',
+          description: 'Sistema de gestión escolar completo: matrículas, asistencia, calificaciones, comunicación con responsables y reportes pedagógicos en un solo lugar.',
           highlight: 'Comunicación integrada con responsables.',
           cta: 'Más información'
         }
