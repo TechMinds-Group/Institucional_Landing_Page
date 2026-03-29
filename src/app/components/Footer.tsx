@@ -235,6 +235,35 @@ export function Footer({ onProductClick }: FooterProps) {
             </ul>
           </div>
 
+          {/* Legal Links */}
+          <div>
+            <h4 className="text-white font-semibold mb-4"
+              style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.08em" }}
+            >
+              {t.footer.legalTitle}
+            </h4>
+            <ul className="space-y-3">
+              <li style={{ lineHeight: "36px" }}>
+                <a
+                  href="/terms-of-use"
+                  className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer"
+                  style={{ fontSize: "15px" }}
+                >
+                  {t.footer.legalLinks[0]}
+                </a>
+              </li>
+              <li style={{ lineHeight: "36px" }}>
+                <a
+                  href="/privacy"
+                  className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer"
+                  style={{ fontSize: "15px" }}
+                >
+                  {t.footer.legalLinks[1]}
+                </a>
+              </li>
+            </ul>
+          </div>
+
           {/* Contatos Column */}
           <div>
             <h4 className="text-white font-semibold mb-4"
@@ -373,35 +402,6 @@ export function Footer({ onProductClick }: FooterProps) {
                     Clique para copiar
                   </div>
                 )}
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div>
-            <h4 className="text-white font-semibold mb-4"
-              style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.08em" }}
-            >
-              {t.footer.legalTitle}
-            </h4>
-            <ul className="space-y-3">
-              <li style={{ lineHeight: "36px" }}>
-                <a
-                  href="/terms-of-use"
-                  className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer"
-                  style={{ fontSize: "15px" }}
-                >
-                  {t.footer.legalLinks[0]}
-                </a>
-              </li>
-              <li style={{ lineHeight: "36px" }}>
-                <a
-                  href="/privacy"
-                  className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer"
-                  style={{ fontSize: "15px" }}
-                >
-                  {t.footer.legalLinks[1]}
-                </a>
               </li>
             </ul>
           </div>
