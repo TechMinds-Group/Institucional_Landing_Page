@@ -6,23 +6,32 @@ export function Hero() {
   const { t } = useI18n();
 
   return (
-    <section className="relative bg-[#0D0D0D] overflow-hidden"
-      style={{ paddingTop: "128px", paddingBottom: "96px", paddingLeft: "24px", paddingRight: "24px" }}
+    <section
+      className="relative bg-[#0D0D0D] overflow-hidden"
+      style={{
+        paddingTop: "80px",
+        paddingBottom: "64px",
+        paddingLeft: "24px",
+        paddingRight: "24px",
+      }}
     >
       {/* Abstract background elements */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute top-20 left-10 w-64 h-64 bg-[#7B5EA7] blur-[120px] rounded-full" />
         <div className="absolute bottom-20 right-10 w-64 h-64 bg-[#5BC8C0] blur-[120px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* ── Mobile: single column ─────────────────────────── */}
+        {/* ── Mobile: single column / Desktop: two-column grid ── */}
         <div className="flex flex-col md:grid md:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
-          <div className="w-full text-center md:text-left">
+
+          {/* Left: Text Content */}
+          <div
+            className="w-full text-center md:text-left flex flex-col justify-center items-center md:items-start"
+          >
             <h1
-              className="font-bold mb-6 leading-tight"
-              style={{ fontSize: "clamp(32px, 6vw, 56px)" }}
+              className="hero-headline font-bold mb-6 leading-tight"
+              style={{ fontSize: "clamp(32px, 5vw, 56px)" }}
             >
               <span className="bg-gradient-to-r from-[#7B5EA7] via-[#6B8DC4] to-[#5BC8C0] bg-clip-text text-transparent">
                 {t.hero.headline}
@@ -30,14 +39,17 @@ export function Hero() {
             </h1>
 
             <p
-              className="text-gray-300 mb-8 leading-relaxed"
-              style={{ fontSize: "clamp(15px, 2vw, 20px)" }}
+              className="hero-subheadline text-gray-300 mb-8 leading-relaxed"
+              style={{ fontSize: "clamp(15px, 1.8vw, 20px)" }}
             >
               {t.hero.subheadline}
             </p>
 
-            {/* CTA Buttons — stacked full-width on mobile, inline on md+ */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+            {/* CTA Buttons */}
+            <div
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
+              style={{ marginTop: "32px", flexShrink: 0 }}
+            >
               <button
                 onClick={() => smoothScrollTo("section-produtos")}
                 className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#7B5EA7] via-[#6B8DC4] to-[#5BC8C0] text-white font-semibold hover:shadow-xl hover:shadow-[#7B5EA7]/40 transition-all duration-300 hover:scale-105 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5BC8C0]"
@@ -53,15 +65,31 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Constellation Canvas — hidden on mobile, 40% on tablet, 50% on desktop */}
+          {/* Right: Constellation Canvas — hidden on mobile */}
           <div
-            className="hidden md:block relative"
-            style={{ height: "clamp(320px, 40vw, 520px)" }}
+            className="hidden md:block relative overflow-hidden"
+            style={{ height: "clamp(300px, 38vw, 500px)" }}
           >
             <ConstellationCanvas />
           </div>
         </div>
       </div>
+
+      {/* Viewport-height safety: shorter desktop/laptop screens */}
+      <style>{`
+        @media (max-height: 700px) and (min-width: 768px) {
+          .hero-section {
+            padding-top: 60px !important;
+            padding-bottom: 40px !important;
+          }
+          .hero-headline {
+            font-size: clamp(28px, 4vw, 48px) !important;
+          }
+          .hero-subheadline {
+            font-size: 14px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
