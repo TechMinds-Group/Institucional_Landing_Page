@@ -5,7 +5,7 @@ export interface SectionInfo {
   title: string;
 }
 
-// ─── Section titles per language ─────────────────────────────────────────────
+// ─── VibeCut — Section titles per language ────────────────────────────────────
 
 export const termsSections: Record<Language, SectionInfo[]> = {
   pt: [
@@ -97,6 +97,92 @@ export const privacySections: Record<Language, SectionInfo[]> = {
   ],
 };
 
+// ─── Lumen — Section titles per language ─────────────────────────────────────
+
+export const lumenTermsSections: Record<Language, SectionInfo[]> = {
+  pt: [
+    { id: 'section-1',  title: '1. Aceitação dos Termos' },
+    { id: 'section-2',  title: '2. Modificações e Encargos' },
+    { id: 'section-3',  title: '3. Conectividade e Dados Móveis' },
+    { id: 'section-4',  title: '4. Limitação de Responsabilidade' },
+    { id: 'section-5',  title: '5. Análise Algorítmica e Diagnóstico' },
+    { id: 'section-6',  title: '6. Privacidade, Dados e PI do Usuário' },
+    { id: 'section-7',  title: '7. Publicidade e Terceiros' },
+    { id: 'section-8',  title: '8. Atualizações e Encerramento' },
+    { id: 'section-9',  title: '9. Alterações a estes Termos' },
+    { id: 'section-10', title: '10. Legislação Aplicável e Foro' },
+    { id: 'section-11', title: '11. Contato' },
+  ],
+  en: [
+    { id: 'section-1',  title: '1. Acceptance of Terms' },
+    { id: 'section-2',  title: '2. Modifications and Fees' },
+    { id: 'section-3',  title: '3. Connectivity and Mobile Data' },
+    { id: 'section-4',  title: '4. Limitation of Liability' },
+    { id: 'section-5',  title: '5. Algorithmic Analysis & Profile Diagnosis' },
+    { id: 'section-6',  title: '6. Privacy, Data and User IP' },
+    { id: 'section-7',  title: '7. Advertising and Third Parties' },
+    { id: 'section-8',  title: '8. Updates and Service Termination' },
+    { id: 'section-9',  title: '9. Changes to These Terms' },
+    { id: 'section-10', title: '10. Governing Law and Jurisdiction' },
+    { id: 'section-11', title: '11. Contact' },
+  ],
+  es: [
+    { id: 'section-1',  title: '1. Aceptación de los Términos' },
+    { id: 'section-2',  title: '2. Modificaciones y Cargos' },
+    { id: 'section-3',  title: '3. Conectividad y Datos Móviles' },
+    { id: 'section-4',  title: '4. Limitación de Responsabilidad' },
+    { id: 'section-5',  title: '5. Análisis Algorítmico y Diagnóstico' },
+    { id: 'section-6',  title: '6. Privacidad, Datos y PI del Usuario' },
+    { id: 'section-7',  title: '7. Publicidad y Terceros' },
+    { id: 'section-8',  title: '8. Actualizaciones y Cierre del Servicio' },
+    { id: 'section-9',  title: '9. Cambios en estos Términos' },
+    { id: 'section-10', title: '10. Legislación Aplicable y Jurisdicción' },
+    { id: 'section-11', title: '11. Contacto' },
+  ],
+};
+
+export const lumenPrivacySections: Record<Language, SectionInfo[]> = {
+  pt: [
+    { id: 'section-1',  title: '1. Informações que Coletamos' },
+    { id: 'section-2',  title: '2. Permissões do Dispositivo' },
+    { id: 'section-3',  title: '3. Publicidade e Terceiros' },
+    { id: 'section-4',  title: '4. Finalidade e Base Legal (LGPD)' },
+    { id: 'section-5',  title: '5. Compartilhamento de Dados' },
+    { id: 'section-6',  title: '6. Retenção e Segurança' },
+    { id: 'section-7',  title: '7. Seus Direitos (LGPD)' },
+    { id: 'section-8',  title: '8. Privacidade de Crianças' },
+    { id: 'section-9',  title: '9. Transferência Internacional' },
+    { id: 'section-10', title: '10. Alterações nesta Política' },
+    { id: 'section-11', title: '11. Contate-nos (DPO)' },
+  ],
+  en: [
+    { id: 'section-1',  title: '1. Information We Collect' },
+    { id: 'section-2',  title: '2. Device Permissions' },
+    { id: 'section-3',  title: '3. Advertising and Third Parties' },
+    { id: 'section-4',  title: '4. Legal Basis for Processing' },
+    { id: 'section-5',  title: '5. Data Sharing' },
+    { id: 'section-6',  title: '6. Data Retention and Security' },
+    { id: 'section-7',  title: '7. Your Rights' },
+    { id: 'section-8',  title: "8. Children's Privacy" },
+    { id: 'section-9',  title: '9. International Data Transfers' },
+    { id: 'section-10', title: '10. Changes to This Policy' },
+    { id: 'section-11', title: '11. Contact Us' },
+  ],
+  es: [
+    { id: 'section-1',  title: '1. Información que Recopilamos' },
+    { id: 'section-2',  title: '2. Permisos del Dispositivo' },
+    { id: 'section-3',  title: '3. Publicidad y Terceros' },
+    { id: 'section-4',  title: '4. Base Legal del Tratamiento' },
+    { id: 'section-5',  title: '5. Compartición de Datos' },
+    { id: 'section-6',  title: '6. Retención y Seguridad' },
+    { id: 'section-7',  title: '7. Tus Derechos' },
+    { id: 'section-8',  title: '8. Privacidad de Menores' },
+    { id: 'section-9',  title: '9. Transferencia Internacional' },
+    { id: 'section-10', title: '10. Cambios en esta Política' },
+    { id: 'section-11', title: '11. Contáctenos (DPO)' },
+  ],
+};
+
 // ─── Product card metadata per language ──────────────────────────────────────
 
 export interface LegalProductMeta {
@@ -105,6 +191,8 @@ export interface LegalProductMeta {
   groomTag: string;
   zonemapTag: string;
   escolaConectadaTag: string;
+  lumenTag: string;
+  lumenLastUpdated: string;
   termsInPrep: string;
   policyInPrep: string;
 }
@@ -116,6 +204,8 @@ export const legalProductMeta: Record<Language, LegalProductMeta> = {
     groomTag: 'Gestão & Automação',
     zonemapTag: 'Mapas Interativos',
     escolaConectadaTag: 'Gestão Educacional',
+    lumenTag: 'Educação & Filosofia',
+    lumenLastUpdated: '24 de maio de 2026',
     termsInPrep: 'Termos em elaboração',
     policyInPrep: 'Política em elaboração',
   },
@@ -125,6 +215,8 @@ export const legalProductMeta: Record<Language, LegalProductMeta> = {
     groomTag: 'Management & Automation',
     zonemapTag: 'Interactive Maps',
     escolaConectadaTag: 'Educational Management',
+    lumenTag: 'Education & Philosophy',
+    lumenLastUpdated: 'May 24, 2026',
     termsInPrep: 'Terms in preparation',
     policyInPrep: 'Policy in preparation',
   },
@@ -134,6 +226,8 @@ export const legalProductMeta: Record<Language, LegalProductMeta> = {
     groomTag: 'Gestión & Automatización',
     zonemapTag: 'Mapas Interactivos',
     escolaConectadaTag: 'Gestión Educativa',
+    lumenTag: 'Educación & Filosofía',
+    lumenLastUpdated: '24 de mayo de 2026',
     termsInPrep: 'Términos en elaboración',
     policyInPrep: 'Política en elaboración',
   },

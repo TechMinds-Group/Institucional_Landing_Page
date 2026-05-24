@@ -3,11 +3,12 @@ import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { I18nProvider, useI18n } from "../i18n/I18nContext";
 import { Language } from "../i18n/translations";
-import { privacySections, legalProductMeta, crossLinkLabels } from "../i18n/legalContent";
+import { privacySections, lumenPrivacySections, legalProductMeta, crossLinkLabels } from "../i18n/legalContent";
+import { LumenPrivacyPolicy } from "../components/legal/LumenPrivacyPolicy";
 import { ArrowUp } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 
-type ProductId = "vibecut" | "groom" | "zonemap" | "escola-conectada";
+type ProductId = "vibecut" | "groom" | "zonemap" | "escola-conectada" | "lumen";
 
 // ─── Outer wrapper — single source of truth for I18nProvider ─────────────────
 export function Privacidade() {
@@ -36,6 +37,7 @@ function PrivacidadeContent() {
     { id: "groom" as ProductId,            name: "Groom",            tag: meta.groomTag,          lastUpdated: t.legal.comingSoon,      disabled: true  },
     { id: "zonemap" as ProductId,          name: "ZoneMap",          tag: meta.zonemapTag,        lastUpdated: t.legal.comingSoon,      disabled: true  },
     { id: "escola-conectada" as ProductId, name: "Escola Conectada", tag: meta.escolaConectadaTag,lastUpdated: t.legal.comingSoon,      disabled: true  },
+    { id: "lumen" as ProductId,            name: "Lumen",            tag: meta.lumenTag,          lastUpdated: meta.lumenLastUpdated,   disabled: false },
   ];
 
   const defaultProduct = "vibecut";
@@ -56,11 +58,17 @@ function PrivacidadeContent() {
     return () => clearTimeout(timeout);
   }, [language]);
 
-  const sections = privacySections[safeLang];
+  const sections = selectedProduct === "lumen" ? lumenPrivacySections[safeLang] : privacySections[safeLang];
 
   useEffect(() => {
+    const getScrollTop = () =>
+      window.scrollY ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+
     const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 300);
+      setShowBackToTop(getScrollTop() > 300);
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i].id);
@@ -71,18 +79,23 @@ function PrivacidadeContent() {
       }
     };
 
+    // capture:true catches scroll from any element (window, div, iframe body, etc.)
+    document.addEventListener("scroll", handleScroll, true);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      document.removeEventListener("scroll", handleScroll, true);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [sections]);
 
-  const handleBackToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const handleBackToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+    document.body.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleSectionClick = (sectionId: string) => {
-    const el = document.getElementById(sectionId);
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const handleProductClick = (productId: ProductId) => {
@@ -214,6 +227,7 @@ function PrivacidadeContent() {
           >
             {/* ── PART D: safety-checked renderContent equivalent ────────────── */}
             {selectedProduct === "vibecut" && <VibeCutPrivacyPolicy language={safeLang} />}
+            {selectedProduct === "lumen" && <LumenPrivacyPolicy language={safeLang} />}
 
             {/* Cross-linking */}
             <div className="mt-16 pt-8 border-t border-white/5">

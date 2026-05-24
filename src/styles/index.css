@@ -2,6 +2,11 @@
 @import './tailwind.css';
 @import './theme.css';
 
+/* ── Scroll offset for fixed navbar ──────────────────────────── */
+section[id] {
+  scroll-margin-top: 100px;
+}
+
 /* ── Global mobile rules ──────────────────────────────────────── */
 
 /* Prevent horizontal overflow at any breakpoint */

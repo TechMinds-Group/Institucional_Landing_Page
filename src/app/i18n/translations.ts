@@ -190,6 +190,14 @@ export const translations: Record<Language, Translations> = {
           description: 'Sistema de gestão escolar completo: matrículas, frequência, notas, comunicação com responsáveis e relatórios pedagógicos — customizável para se adequar à realidade de cada instituição.',
           highlight: 'Customização sob medida para cada escola.',
           cta: 'Saiba mais'
+        },
+        {
+          name: 'Lumen',
+          tag: 'Educação & Filosofia',
+          status: 'Disponível',
+          description: 'Dashboard educacional interativo para exploração histórica e filosófica do pensamento político ocidental, mapeando pensadores através de nove eixos analíticos.',
+          highlight: 'Taxonomia multidimensional com 9 eixos analíticos.',
+          cta: 'Saiba mais'
         }
       ]
     },
@@ -246,7 +254,7 @@ export const translations: Record<Language, Translations> = {
       tagline: 'Sistemas que evoluem. Negócios que crescem.',
       copyright: '© 2025 TechMinds. Todos os direitos reservados.',
       productsTitle: 'Sistemas',
-      productLinks: ['Groom', 'VibeCut', 'ZoneMap', 'Escola Conectada'],
+      productLinks: ['Groom', 'VibeCut', 'ZoneMap', 'Escola Conectada', 'Lumen'],
       companyTitle: 'Empresa',
       companyLinks: ['Sobre nós', 'Contato'],
       legalTitle: 'Legal',
@@ -353,6 +361,14 @@ export const translations: Record<Language, Translations> = {
           description: 'Complete school management system: enrollments, attendance, grades, parent communication, and pedagogical reports in one place.',
           highlight: 'Integrated communication with parents.',
           cta: 'Learn more'
+        },
+        {
+          name: 'Lumen',
+          tag: 'Education & Philosophy',
+          status: 'Available',
+          description: 'Interactive educational dashboard for historical and philosophical exploration of Western political thought, mapping thinkers through nine analytical axes.',
+          highlight: 'Multidimensional taxonomy with 9 analytical axes.',
+          cta: 'Learn more'
         }
       ]
     },
@@ -409,7 +425,7 @@ export const translations: Record<Language, Translations> = {
       tagline: 'Technology that works for you.',
       copyright: '© 2025 TechMinds. All rights reserved.',
       productsTitle: 'Products',
-      productLinks: ['Groom', 'VibeCut', 'ZoneMap', 'Escola Conectada'],
+      productLinks: ['Groom', 'VibeCut', 'ZoneMap', 'Escola Conectada', 'Lumen'],
       companyTitle: 'Company',
       companyLinks: ['About us', 'Contact'],
       legalTitle: 'Legal',
@@ -517,6 +533,14 @@ export const translations: Record<Language, Translations> = {
           description: 'Sistema de gestión escolar completo: matrículas, asistencia, calificaciones, comunicación con responsables y reportes pedagógicos en un solo lugar.',
           highlight: 'Comunicación integrada con responsables.',
           cta: 'Más información'
+        },
+        {
+          name: 'Lumen',
+          tag: 'Educación & Filosofía',
+          status: 'Disponible',
+          description: 'Dashboard educacional interactivo para exploración histórica y filosófica del pensamiento político occidental, mapeando pensadores a través de nueve ejes analíticos.',
+          highlight: 'Taxonomía multidimensional con 9 ejes analíticos.',
+          cta: 'Más información'
         }
       ]
     },
@@ -573,7 +597,7 @@ export const translations: Record<Language, Translations> = {
       tagline: 'Tecnología que trabaja por ti.',
       copyright: '© 2025 TechMinds. Todos los derechos reservados.',
       productsTitle: 'Productos',
-      productLinks: ['Groom', 'VibeCut', 'ZoneMap', 'Escola Conectada'],
+      productLinks: ['Groom', 'VibeCut', 'ZoneMap', 'Escola Conectada', 'Lumen'],
       companyTitle: 'Empresa',
       companyLinks: ['Sobre nosotros', 'Contacto'],
       legalTitle: 'Legal',

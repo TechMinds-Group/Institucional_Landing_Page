@@ -64,6 +64,22 @@ export function Products() {
         "Customização sob medida para cada instituição",
       ],
     },
+    Lumen: {
+      name: "Lumen",
+      tag: "Educação & Filosofia",
+      status: t.products.items[4].status,
+      description:
+        "Dashboard educacional interativo para exploração histórica e filosófica do pensamento político ocidental. Mapeie pensadores desde a Antiguidade até o Contemporâneo através de nove eixos analíticos (4 políticos + 5 metodológicos), rastreie leituras e visualize seu perfil político-filosófico personalizado.",
+      features: [
+        "Mapeamento multidimensional com 9 eixos taxonômicos",
+        "Navegação por 7 eras históricas (Antiguidade ao Contemporâneo)",
+        "Rastreamento de leituras com progresso visual",
+        "Diagnóstico político personalizado com radar chart",
+        "Recomendações inteligentes para diversificar repertório",
+        "Exportação de dados em planilhas Excel estruturadas",
+        "Internacionalização completa (PT-BR, EN, ES)",
+      ],
+    },
   };
 
   const handleProductClick = (productName: string) => {
