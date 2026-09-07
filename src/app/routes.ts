@@ -2,6 +2,7 @@ import { createBrowserRouter, redirect } from "react-router";
 import { MainPage } from "./pages/MainPage";
 import { TermosDeUso } from "./pages/TermosDeUso";
 import { Privacidade } from "./pages/Privacidade";
+import { Groom } from "./pages/Groom";
 
 export const router = createBrowserRouter([
   {
@@ -23,5 +24,9 @@ export const router = createBrowserRouter([
   {
     path: "/privacy/:product",
     Component: Privacidade,
+  },
+  {
+    path: "/groom",
+    Component: Groom,
   },
 ]);

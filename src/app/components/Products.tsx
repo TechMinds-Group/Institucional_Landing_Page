@@ -2,9 +2,10 @@ import { Sparkles, ArrowRight } from "lucide-react";
 import { useI18n } from "../i18n/I18nContext";
 import { ProductModal, ProductData } from "./ProductModal";
 import { useState } from "react";
-
+import { useNavigate } from "react-router";
 export function Products() {
   const { t } = useI18n();
+  const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState<ProductData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -83,6 +84,10 @@ export function Products() {
   };
 
   const handleProductClick = (productName: string) => {
+    if (productName === "Groom") {
+      navigate("/groom");
+      return;
+    }
     setSelectedProduct(productDetails[productName]);
     setIsModalOpen(true);
   };
