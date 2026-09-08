@@ -1,7 +1,8 @@
 import imgIconContainer from "../../imports/GroomLandingPage-3/2e6ab184d92ccf9c9cc749dc008d4aec29ea5790.png";
 import imgLogo from "../../imports/logo.png";
 import imgDashboardPreview from "../../imports/GroomLandingPage-3/20860e87f1caa68bf54946def42a084f479fa552.png";
-import { CreditCard, Bot, Ghost, Brain, DollarSign, RefreshCw, Flame, Crown, Sprout } from "lucide-react";
+import { CreditCard, Bot, Ghost, Brain, DollarSign, RefreshCw, Flame, Crown, Sprout, Menu, X } from "lucide-react";
+import { useState } from "react";
 
 const svgPaths = {
   p12fd63e0: "M2 22C2 17.5 5.5 14 10 14C11.5 14 12.8 14.4 14 15",
@@ -24,8 +25,40 @@ const svgPaths = {
 };
 
 function SectionHero() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const navLinks = ["Como Funciona", "Funcionalidades", "Diferenciais", "Preços", "FAQ"];
+
   return (
-    <div className="bg-gradient-to-b content-stretch flex flex-col from-[#0b0f1a] gap-[64px] items-center pb-[100px] pt-[80px] px-[120px] relative shrink-0 to-[#1a2233] w-full" data-name="section-hero">
+    <div className="bg-gradient-to-b content-stretch flex flex-col from-[#0b0f1a] gap-8 lg:gap-[64px] items-center pb-10 lg:pb-[100px] pt-14 lg:pt-[80px] px-5 md:px-12 lg:px-[120px] relative shrink-0 to-[#1a2233] w-full" data-name="section-hero">
+      {/* Mobile Drawer Overlay */}
+      {drawerOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 flex justify-end">
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setDrawerOpen(false)} />
+          {/* Drawer */}
+          <div className="relative z-10 bg-[#0d1117] w-[280px] h-full flex flex-col pt-14 px-6 pb-6 gap-8 shadow-2xl">
+            {/* Drawer header */}
+            <div className="flex items-center justify-between">
+              <div className="flex gap-[10px] items-center">
+                <img alt="" className="size-[28px] object-contain" src={imgLogo} />
+                <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold text-[#f8fafc] text-[20px]">Groom</p>
+              </div>
+              <button onClick={() => setDrawerOpen(false)} className="text-[#94a3b8] hover:text-[#f8fafc] p-1">
+                <X size={22} />
+              </button>
+            </div>
+            {/* Nav links */}
+            <nav className="flex flex-col gap-1">
+              {navLinks.map((link) => (
+                <button key={link} onClick={() => setDrawerOpen(false)} className="text-left px-3 py-3 rounded-lg text-[#cbd5e1] font-['Inter:Semi_Bold',sans-serif] font-semibold text-[15px] hover:bg-[#1f2937] hover:text-[#f8fafc] transition-colors">
+                  {link}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+
       {/* Nav */}
       <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
         {/* Logo */}
@@ -35,16 +68,12 @@ function SectionHero() {
           </div>
           <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#f8fafc] text-[24px] whitespace-nowrap">Groom</p>
         </div>
-        {/* Nav links */}
-        <div className="[word-break:break-word] content-stretch flex font-['Inter:Semi_Bold',sans-serif] font-semibold gap-[32px] items-center leading-[normal] not-italic relative shrink-0 text-[#cbd5e1] text-[14px] whitespace-nowrap">
-          <p className="relative shrink-0">Como Funciona</p>
-          <p className="relative shrink-0">Funcionalidades</p>
-          <p className="relative shrink-0">Diferenciais</p>
-          <p className="relative shrink-0">Preços</p>
-          <p className="relative shrink-0">FAQ</p>
+        {/* Nav links — desktop only */}
+        <div className="hidden lg:flex [word-break:break-word] content-stretch font-['Inter:Semi_Bold',sans-serif] font-semibold gap-[32px] items-center leading-[normal] not-italic relative shrink-0 text-[#cbd5e1] text-[14px] whitespace-nowrap">
+          {navLinks.map((link) => <p key={link} className="relative shrink-0">{link}</p>)}
         </div>
-        {/* CTA group */}
-        <div className="content-stretch flex gap-[16px] items-center justify-center overflow-clip relative shrink-0">
+        {/* CTA group — desktop only */}
+        <div className="hidden lg:flex content-stretch gap-[16px] items-center justify-center overflow-clip relative shrink-0">
           <div className="border-[#f1c75c] border-[1.5px] border-solid content-stretch flex items-center justify-center overflow-clip px-[20px] py-[8px] relative rounded-[8px] shrink-0">
             <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#f1c75c] text-[14px] whitespace-nowrap">Entrar</p>
           </div>
@@ -52,30 +81,34 @@ function SectionHero() {
             <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[14px] whitespace-nowrap">TESTAR GRÁTIS</p>
           </div>
         </div>
+        {/* Hamburger — mobile/tablet only */}
+        <button className="lg:hidden text-[#f8fafc] p-1" onClick={() => setDrawerOpen(true)}>
+          <Menu size={26} />
+        </button>
       </div>
       {/* Hero body */}
-      <div className="content-stretch flex gap-[48px] items-center relative shrink-0 w-full">
+      <div className="content-stretch flex flex-col lg:flex-row gap-[48px] items-center relative shrink-0 w-full">
         {/* Hero left */}
-        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[32px] items-start min-w-px relative">
-          
-          <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[0] min-w-full relative shrink-0 text-[#f8fafc] text-[44px] w-[min-content]">
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[32px] items-start min-w-px relative w-full">
+
+          <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[0] min-w-full relative shrink-0 text-[#f8fafc] text-3xl lg:text-[44px] w-[min-content]">
             <span className="leading-[1.15]">{`Enquanto você organiza agenda no papel, seu concorrente está faturando com o `}</span>
             <span className="leading-[1.15] text-[#f1c75c]">Groom.</span>
           </p>
           <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.6] min-w-full not-italic relative shrink-0 text-[#cbd5e1] text-[16px] w-[min-content]">O Groom é o sistema mais completo de agendamento e gestão para barbearias, salões de beleza, estúdios de tatuagem e clínicas de estética. O cliente agenda online, você recebe no WhatsApp, ninguém perde horário e seu faturamento escala.</p>
           <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
-            <div className="bg-[#f1c75c] content-stretch flex gap-[10px] items-center px-[32px] py-[16px] relative rounded-[8px] shrink-0">
-              <p className="[word-break:break-word] font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[15px] whitespace-nowrap">QUERO TESTAR GRÁTIS POR 15 DIAS</p>
+            <a href="https://wa.me/5551997066347?text=Ol%C3%A1%2C%20equipe%20Groom!%20Tudo%20bem%20por%20a%C3%AD%3F%20Fiquei%20super%20interessado%20e%20gostaria%20de%20aproveitar%20o%20teste%20gratuito%20de%2015%20dias.%20Podem%20me%20ajudar%20a%20dar%20os%20primeiros%20passos%3F" target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex gap-[10px] items-center w-full md:w-auto px-[32px] py-4 md:py-[16px] relative rounded-[8px] shrink-0 justify-center md:justify-start">
+              <p className="[word-break:break-word] font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[15px] text-center">QUERO TESTAR GRÁTIS POR 15 DIAS</p>
               <svg className="relative shrink-0" fill="none" height="18" viewBox="0 0 18 18" width="18">
                 <path d={svgPaths.p394a7400} stroke="#0F172A" strokeLinecap="round" strokeWidth="2" />
               </svg>
-            </div>
-            <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#94a3b8] text-[12px] whitespace-nowrap">⚡ Sem cartão de crédito. Sem compromisso. Configuração em 5 minutos.</p>
+            </a>
+            <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#94a3b8] text-[12px]">⚡ Sem cartão de crédito. Sem compromisso. Configuração em 5 minutos.</p>
           </div>
         </div>
         {/* Dashboard preview */}
-        <div className="flex-1 min-w-0 relative shrink-0">
-          <img alt="" className="w-full h-auto object-cover rounded-[15px]" src={imgDashboardPreview} />
+        <div className="flex-1 min-w-0 relative shrink-0 w-full">
+          <img alt="" className="hidden md:block w-full h-auto object-cover rounded-[15px]" src={imgDashboardPreview} />
         </div>
       </div>
     </div>
@@ -84,17 +117,17 @@ function SectionHero() {
 
 function SectionPainSolution() {
   return (
-    <div className="bg-[#f8fafc] content-stretch flex flex-col gap-[64px] items-center px-[120px] py-[96px] relative shrink-0 w-full">
+    <div className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(13,110,253,0.08)] content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
           <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0d6efd] text-[12px] uppercase whitespace-nowrap">CONTROLE TOTAL</p>
         </div>
-        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#0f172a] text-[36px] text-center w-[min-content]">Você reconhece esses problemas na sua gestão?</p>
+        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#0f172a] text-2xl md:text-3xl lg:text-[36px] text-center w-[min-content]">Você reconhece esses problemas na sua gestão?</p>
       </div>
-      <div className="content-start flex flex-wrap gap-[24px] items-start relative shrink-0 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative shrink-0 w-full">
         {/* Pain Card 1 */}
-        <div className="content-stretch flex flex-col gap-[20px] h-[304px] items-start p-[24px] relative rounded-[12px] shrink-0 w-[384px]">
+        <div className="content-stretch flex flex-col gap-[20px] h-auto items-start p-[24px] relative rounded-[12px] shrink-0 w-full">
           <div aria-hidden className="absolute border border-[#e2e8f0] border-solid inset-0 pointer-events-none rounded-[12px] shadow-[0px_4px_12px_0px_rgba(15,23,42,0.02)]" />
           <div className="bg-[rgba(13,110,253,0.06)] content-stretch flex items-center justify-center relative rounded-[8px] shrink-0 size-[48px]">
             <svg fill="none" height="24" viewBox="0 0 24 24" width="24">
@@ -107,7 +140,7 @@ function SectionPainSolution() {
           </div>
         </div>
         {/* Pain Card 2 */}
-        <div className="content-stretch flex flex-col gap-[20px] h-[304px] items-start p-[24px] relative rounded-[12px] shrink-0 w-[384px]">
+        <div className="content-stretch flex flex-col gap-[20px] h-auto items-start p-[24px] relative rounded-[12px] shrink-0 w-full">
           <div aria-hidden className="absolute border border-[#e2e8f0] border-solid inset-0 pointer-events-none rounded-[12px] shadow-[0px_4px_12px_0px_rgba(15,23,42,0.02)]" />
           <div className="bg-[rgba(13,110,253,0.06)] content-stretch flex items-center justify-center relative rounded-[8px] shrink-0 size-[48px]">
             <svg fill="none" height="24" viewBox="0 0 24 24" width="24">
@@ -120,7 +153,7 @@ function SectionPainSolution() {
           </div>
         </div>
         {/* Pain Card 3 */}
-        <div className="content-stretch flex flex-col gap-[20px] h-[304px] items-start p-[24px] relative rounded-[12px] shrink-0 w-[384px]">
+        <div className="content-stretch flex flex-col gap-[20px] h-auto items-start p-[24px] relative rounded-[12px] shrink-0 w-full">
           <div aria-hidden className="absolute border border-[#e2e8f0] border-solid inset-0 pointer-events-none rounded-[12px] shadow-[0px_4px_12px_0px_rgba(15,23,42,0.02)]" />
           <div className="bg-[rgba(13,110,253,0.06)] content-stretch flex items-center justify-center relative rounded-[8px] shrink-0 size-[48px]">
             <svg fill="none" height="24" viewBox="0 0 24 24" width="24">
@@ -133,7 +166,7 @@ function SectionPainSolution() {
           </div>
         </div>
         {/* Pain Card 4 */}
-        <div className="content-stretch flex flex-col gap-[20px] h-[283px] items-start p-[24px] relative rounded-[12px] shrink-0 w-[384px]">
+        <div className="content-stretch flex flex-col gap-[20px] h-auto items-start p-[24px] relative rounded-[12px] shrink-0 w-full">
           <div aria-hidden className="absolute border border-[#e2e8f0] border-solid inset-0 pointer-events-none rounded-[12px] shadow-[0px_4px_12px_0px_rgba(15,23,42,0.02)]" />
           <div className="bg-[rgba(13,110,253,0.06)] content-stretch flex items-center justify-center relative rounded-[8px] shrink-0 size-[48px]">
             <svg fill="none" height="24" viewBox="0 0 24 24" width="24">
@@ -146,7 +179,7 @@ function SectionPainSolution() {
           </div>
         </div>
         {/* Pain Card 5 */}
-        <div className="border border-[#e2e8f0] border-solid content-stretch flex flex-col gap-[20px] h-[283px] items-start overflow-clip p-[24px] relative rounded-[12px] shadow-[0px_4px_12px_0px_rgba(15,23,42,0.02)] shrink-0 w-[384px]">
+        <div className="border border-[#e2e8f0] border-solid content-stretch flex flex-col gap-[20px] h-auto items-start overflow-clip p-[24px] relative rounded-[12px] shadow-[0px_4px_12px_0px_rgba(15,23,42,0.02)] shrink-0 w-full">
           <div className="bg-[rgba(13,110,253,0.06)] content-stretch flex items-center justify-center overflow-clip relative rounded-[12px] shrink-0 size-[48px]">
             <svg fill="none" height="24" viewBox="0 0 24 24" width="24">
               <g>
@@ -163,7 +196,7 @@ function SectionPainSolution() {
           </div>
         </div>
         {/* Pain Card 6 */}
-        <div className="border border-[#e2e8f0] border-solid content-stretch flex flex-col gap-[20px] h-[283px] items-start overflow-clip p-[24px] relative rounded-[12px] shadow-[0px_4px_12px_0px_rgba(15,23,42,0.02)] shrink-0 w-[384px]">
+        <div className="border border-[#e2e8f0] border-solid content-stretch flex flex-col gap-[20px] h-auto items-start overflow-clip p-[24px] relative rounded-[12px] shadow-[0px_4px_12px_0px_rgba(15,23,42,0.02)] shrink-0 w-full">
           <div className="bg-[rgba(13,110,253,0.06)] content-stretch flex items-center justify-center overflow-clip relative rounded-[12px] shrink-0 size-[48px]">
             <svg fill="none" height="24" viewBox="0 0 24 24" width="24">
               <circle cx="9" cy="6" r="3" stroke="#0D6EFD" strokeWidth="2" />
@@ -190,17 +223,17 @@ function SectionHowItWorks() {
     { num: "04", icon: <path d={svgPaths.p26837680} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "Você domina o painel", desc: "Faturamento, ocupação, planos ativos, ranking da equipe e muito mais. Conte com análise preditiva, simulações de cenários — como mais clientes, valores diferentes — e dados completos para tomar decisões com segurança." },
   ];
   return (
-    <div className="bg-[#1a2233] content-stretch flex flex-col gap-[64px] items-center px-[120px] py-[96px] relative shrink-0 w-full">
+    <div className="bg-[#1a2233] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(241,199,92,0.08)] content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
           <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#f1c75c] text-[12px] uppercase whitespace-nowrap">SIMPLICIDADE MÁXIMA</p>
         </div>
-        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#f8fafc] text-[36px] text-center w-[min-content]">Como o Groom Funciona</p>
+        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#f8fafc] text-2xl md:text-3xl lg:text-[36px] text-center w-[min-content]">Como o Groom Funciona</p>
       </div>
-      <div className="content-stretch flex gap-[24px] items-start relative shrink-0 w-full">
+      <div className="flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row gap-6 relative shrink-0 w-full">
         {steps.map((s) => (
-          <div key={s.num} className="bg-[#161b22] content-stretch flex flex-[1_0_66px] flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[12px] self-stretch">
+          <div key={s.num} className="bg-[#161b22] content-stretch flex flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[12px] self-stretch">
             <div aria-hidden className="absolute border border-[#1f2937] border-solid inset-0 pointer-events-none rounded-[12px]" />
             <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
               <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#f1c75c] text-[32px] whitespace-nowrap">{s.num}</p>
@@ -251,29 +284,24 @@ function SectionFeatures() {
     { title: "Tema Claro/Escuro", desc: "Adapte o visual do seu painel administrativo como preferir com elegância premium." },
     { title: "Multi-idioma nativo", desc: "Suporte nativo e completo para clientes em português, inglês e espanhol." },
   ];
-  const rows = [features.slice(0, 3), features.slice(3, 6), features.slice(6, 9), features.slice(9, 12)];
   return (
-    <div className="bg-[#f8fafc] content-stretch flex flex-col gap-[56px] items-center px-[120px] py-[96px] relative shrink-0 w-full">
+    <div className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(13,110,253,0.08)] content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
           <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0d6efd] text-[12px] uppercase whitespace-nowrap">RECURSOS COMPLETOS</p>
         </div>
-        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#0f172a] text-[36px] text-center w-[min-content]">Tudo que você precisa em uma única plataforma</p>
+        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#0f172a] text-2xl md:text-3xl lg:text-[36px] text-center w-[min-content]">Tudo que você precisa em uma única plataforma</p>
       </div>
-      <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
-        {rows.map((row, ri) => (
-          <div key={ri} className="content-stretch flex gap-[24px] items-start relative shrink-0 w-full">
-            {row.map((f) => (
-              <div key={f.title} className="content-stretch flex flex-[1_0_50px] flex-col gap-[16px] items-start min-w-px p-[24px] relative rounded-[12px] self-stretch">
-                <div aria-hidden className="absolute border border-[#e2e8f0] border-solid inset-0 pointer-events-none rounded-[12px]" />
-                <div className="content-stretch flex gap-[12px] items-center relative shrink-0">
-                  <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 size-[20px]"><CheckIcon /></div>
-                  <p className="[word-break:break-word] font-['Manrope:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[#0f172a] text-[16px] whitespace-nowrap">{f.title}</p>
-                </div>
-                <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.4] min-w-full not-italic opacity-70 relative shrink-0 text-[#0f172a] text-[14px] w-[min-content]">{f.desc}</p>
-              </div>
-            ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative shrink-0 w-full">
+        {features.map((f) => (
+          <div key={f.title} className="content-stretch flex flex-col gap-[16px] items-start min-w-px p-[24px] relative rounded-[12px]">
+            <div aria-hidden className="absolute border border-[#e2e8f0] border-solid inset-0 pointer-events-none rounded-[12px]" />
+            <div className="content-stretch flex gap-[12px] items-center relative shrink-0">
+              <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 size-[20px]"><CheckIcon /></div>
+              <p className="[word-break:break-word] font-['Manrope:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[#0f172a] text-[16px]">{f.title}</p>
+            </div>
+            <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.4] min-w-full not-italic opacity-70 relative shrink-0 text-[#0f172a] text-[14px] w-[min-content]">{f.desc}</p>
           </div>
         ))}
       </div>
@@ -325,17 +353,17 @@ function SectionBenefits() {
   ];
 
   return (
-    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-[64px] items-center px-[120px] py-[96px] relative shrink-0 w-full">
+    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[24px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(241,199,92,0.08)] content-stretch flex items-center gap-[8px] px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
-          <span className="text-[12px] relative">⚠️ 🔥</span>
+          <Flame size={13} color="#f1c75c" className="shrink-0" />
           <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#f1c75c] text-[12px] uppercase whitespace-nowrap">POR QUE O GROOM É DIFERENTE?</p>
         </div>
-        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[1.2] min-w-full relative shrink-0 text-[#f8fafc] text-[40px] text-center w-[min-content]">O que o Groom faz pelo seu negócio que nenhum outro sistema faz</p>
+        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[1.2] min-w-full relative shrink-0 text-[#f8fafc] text-2xl md:text-3xl lg:text-[40px] text-center w-[min-content]">O que o Groom faz pelo seu negócio que nenhum outro sistema faz</p>
         <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[#94a3b8] text-[15px] text-center">Tecnologia de verdade para quem quer crescer: Inteligência Artificial, Robô de WhatsApp 24h, Clube de Assinaturas e migração simplificada.</p>
       </div>
-      <div className="grid grid-cols-2 gap-[24px] relative shrink-0 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative shrink-0 w-full">
         {cards.map((card) => (
           <div key={card.title} className="bg-[#161b22] content-stretch flex flex-col gap-[20px] items-start p-[32px] relative rounded-[12px]">
             <div aria-hidden className="absolute border border-[#1f2937] border-solid inset-0 pointer-events-none rounded-[12px]" />
@@ -355,23 +383,23 @@ function SectionBenefits() {
 
 function SectionPricing() {
   return (
-    <div className="bg-[#f8fafc] content-stretch flex flex-col gap-[56px] items-center px-[120px] py-[96px] relative shrink-0 w-full">
+    <div className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       {/* Header */}
       <div className="content-stretch flex flex-col gap-[20px] items-center relative shrink-0 w-full">
         <div className="content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
           <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0d6efd] text-[12px] uppercase whitespace-nowrap">PLANOS E PREÇOS</p>
         </div>
-        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[1.2] min-w-full relative shrink-0 text-[#0f172a] text-[40px] text-center w-[min-content]">Escolha o plano ideal para automatizar seu atendimento e aumentar seu faturamento.</p>
+        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[1.2] min-w-full relative shrink-0 text-[#0f172a] text-2xl md:text-3xl lg:text-[40px] text-center w-[min-content]">Escolha o plano ideal para automatizar seu atendimento e aumentar seu faturamento.</p>
         <p className="font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#64748b] text-[15px] text-center">Teste por 15 dias sem pagar nada. Cancele quando quiser, sem taxas e sem fidelidade.</p>
         <div className="w-[32px] h-[2px] bg-[#f1c75c] rounded-full" />
       </div>
 
       {/* Plans */}
-      <div className="content-stretch flex gap-[24px] items-stretch relative shrink-0 w-full">
+      <div className="flex flex-col lg:flex-row gap-6 items-stretch relative shrink-0 w-full">
 
         {/* Plan 1: Essencial */}
-        <div className="bg-white content-stretch flex flex-[1_0_0] flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
+        <div className="bg-white content-stretch flex flex-1 flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
           <div aria-hidden className="absolute border border-[#e2e8f0] border-solid inset-0 pointer-events-none rounded-[16px]" />
           <div className="content-stretch flex items-center gap-[5px] px-[12px] py-[4px] relative rounded-[100px] shrink-0">
             <div aria-hidden className="absolute border border-[#cbd5e1] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -405,16 +433,16 @@ function SectionPricing() {
             ))}
           </div>
           <div className="mt-auto content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-            <div className="content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
+            <a href="https://wa.me/5551997066347?text=Ol%C3%A1!%20Adorei%20a%20proposta%20do%20Plano%20Essencial%20e%20gostaria%20de%20come%C3%A7ar%20a%20usar%20o%20teste%20gr%C3%A1tis%20de%2015%20dias%20no%20meu%20estabelecimento.%20Como%20podemos%20iniciar%3F" target="_blank" rel="noreferrer" className="content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
               <div aria-hidden className="absolute border border-[#0f172a] border-solid inset-0 pointer-events-none rounded-[8px]" />
               <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[13px] tracking-wide whitespace-nowrap">COMEÇAR 15 DIAS GRÁTIS</p>
-            </div>
+            </a>
             <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#94a3b8] text-[12px]">Inclui até 3 profissionais e 500 clientes.</p>
           </div>
         </div>
 
         {/* Plan 2: Profissional (featured) */}
-        <div className="bg-[#0f172a] content-stretch drop-shadow-[0px_8px_24px_rgba(241,199,92,0.12)] flex flex-[1_0_0] flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
+        <div className="bg-[#0f172a] content-stretch drop-shadow-[0px_8px_24px_rgba(241,199,92,0.12)] flex flex-1 flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
           <div aria-hidden className="absolute border-2 border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[16px]" />
           <div className="bg-[rgba(241,199,92,0.1)] content-stretch flex items-center gap-[6px] px-[12px] py-[4px] relative rounded-[100px] shrink-0">
             <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -449,15 +477,15 @@ function SectionPricing() {
             ))}
           </div>
           <div className="mt-auto content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-            <div className="bg-[#f1c75c] content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
-              <p className="font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[13px] tracking-wide whitespace-nowrap">QUERO O PLANO PROFISSIONAL GRÁTIS</p>
-            </div>
+            <a href="https://wa.me/5551997066347?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Fiquei%20muito%20impressionado%20com%20os%20recursos%20do%20Plano%20Profissional!%20Quero%20experimentar%20os%2015%20dias%20gratuitos%20para%20ver%20tudo%20na%20pr%C3%A1tica.%20Como%20fa%C3%A7o%20para%20ativar%3F" target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
+              <p className="font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[13px] tracking-wide text-center">QUERO O PLANO PROFISSIONAL GRÁTIS</p>
+            </a>
             <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#f8fafc] text-[12px]">Inclui até 5 profissionais e 1.000 clientes.</p>
           </div>
         </div>
 
         {/* Plan 3: Elite */}
-        <div className="bg-[#f0f4ff] content-stretch flex flex-[1_0_0] flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
+        <div className="bg-[#f0f4ff] content-stretch flex flex-1 flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
           <div aria-hidden className="absolute border border-[#818cf8] border-solid inset-0 pointer-events-none rounded-[16px]" />
           <div className="content-stretch flex items-center gap-[6px] px-[12px] py-[4px] relative rounded-[100px] shrink-0">
             <div aria-hidden className="absolute border border-[#818cf8] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -517,31 +545,26 @@ function SectionFaq() {
     { q: "Tem suporte para me ajudar?", a: "Claro! Nosso time atende diretamente via WhatsApp de verdade. Sem respostas automáticas padrão, atendimento feito por pessoas prontas para te ajudar." },
     { q: "Posso cancelar quando quiser?", a: "Sim. Sem contratos ou multas. Você pode exportar seus dados a qualquer momento e solicitar o cancelamento da sua assinatura com 1 clique." },
   ];
-  const rows = [faqs.slice(0, 2), faqs.slice(2, 4), faqs.slice(4, 6)];
   return (
-    <div className="bg-[#0d1117] content-stretch flex flex-col gap-[56px] items-center px-[120px] py-[96px] relative shrink-0 w-full">
+    <div className="bg-[#0d1117] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
           <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0d6efd] text-[12px] uppercase whitespace-nowrap">FAQ</p>
         </div>
-        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#f8fafc] text-[40px] text-center w-[min-content]">Perguntas Frequentes</p>
+        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#f8fafc] text-2xl md:text-3xl lg:text-[40px] text-center w-[min-content]">Perguntas Frequentes</p>
       </div>
-      <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
-        {rows.map((row, ri) => (
-          <div key={ri} className="content-stretch flex gap-[24px] items-start relative shrink-0 w-full">
-            {row.map((faq) => (
-              <div key={faq.q} className="bg-[#161b22] content-stretch flex flex-[1_0_50px] flex-col gap-[16px] items-start min-w-px p-[28px] relative rounded-[12px]">
-                <div aria-hidden className="absolute border border-[#1f2937] border-solid inset-0 pointer-events-none rounded-[12px]" />
-                <div className="content-stretch flex items-center justify-between gap-[12px] relative shrink-0 w-full">
-                  <p className="[word-break:break-word] flex-[1_0_0] font-['Manrope:Bold',sans-serif] font-bold leading-[1.3] min-w-px relative text-[#f8fafc] text-[16px]">{faq.q}</p>
-                  <svg className="shrink-0" fill="none" height="20" viewBox="0 0 20 20" width="20">
-                    <path d="M5 7.5L10 12.5L15 7.5" stroke="#0D6EFD" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-                  </svg>
-                </div>
-                <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.6] not-italic relative shrink-0 text-[#94a3b8] text-[14px] w-full">{faq.a}</p>
-              </div>
-            ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative shrink-0 w-full">
+        {faqs.map((faq) => (
+          <div key={faq.q} className="bg-[#161b22] content-stretch flex flex-col gap-[16px] items-start min-w-px p-[28px] relative rounded-[12px]">
+            <div aria-hidden className="absolute border border-[#1f2937] border-solid inset-0 pointer-events-none rounded-[12px]" />
+            <div className="content-stretch flex items-center justify-between gap-[12px] relative shrink-0 w-full">
+              <p className="[word-break:break-word] flex-[1_0_0] font-['Manrope:Bold',sans-serif] font-bold leading-[1.3] min-w-px relative text-[#f8fafc] text-[16px]">{faq.q}</p>
+              <svg className="shrink-0" fill="none" height="20" viewBox="0 0 20 20" width="20">
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="#0D6EFD" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+              </svg>
+            </div>
+            <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.6] not-italic relative shrink-0 text-[#94a3b8] text-[14px] w-full">{faq.a}</p>
           </div>
         ))}
       </div>
@@ -551,21 +574,21 @@ function SectionFaq() {
 
 function SectionFinalCta() {
   return (
-    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-[40px] items-center px-[120px] py-[100px] relative shrink-0 w-full">
+    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-[40px] items-center px-5 md:px-12 lg:px-[120px] py-[100px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(241,199,92,0.08)] content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
           <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#f1c75c] text-[12px] uppercase whitespace-nowrap">APROVEITE A OPORTUNIDADE</p>
         </div>
-        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#f8fafc] text-[40px] text-center w-[min-content]">Pronto para profissionalizar seu negócio?</p>
+        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#f8fafc] text-2xl md:text-3xl lg:text-[40px] text-center w-[min-content]">Pronto para profissionalizar seu negócio?</p>
       </div>
       <div className="content-stretch flex flex-col gap-[24px] items-center relative shrink-0 w-full">
-        <div className="bg-[#f1c75c] content-stretch flex gap-[12px] items-center px-[48px] py-[20px] relative rounded-[8px] shrink-0">
-          <p className="[word-break:break-word] font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[16px] whitespace-nowrap">COMEÇAR GRÁTIS POR 15 DIAS</p>
+        <a href="https://wa.me/5551997066347?text=Ol%C3%A1%2C%20equipe%20Groom!%20Tudo%20bem%20por%20a%C3%AD%3F%20Fiquei%20super%20interessado%20e%20gostaria%20de%20aproveitar%20o%20teste%20gratuito%20de%2015%20dias.%20Podem%20me%20ajudar%20a%20dar%20os%20primeiros%20passos%3F" target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex gap-[12px] items-center w-full md:w-auto px-[48px] py-[20px] relative rounded-[8px] shrink-0 justify-center">
+          <p className="[word-break:break-word] font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[16px] text-center">COMEÇAR GRÁTIS POR 15 DIAS</p>
           <svg fill="none" height="20" viewBox="0 0 20 20" width="20">
             <path d={svgPaths.p2df9a900} stroke="#0F172A" strokeLinecap="round" strokeWidth="2" />
           </svg>
-        </div>
+        </a>
         <p className="font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#cbd5e1] text-[13px] text-center">⚡ Sem cartão de crédito. Configuração em 5 minutos. Cancele quando quiser.</p>
       </div>
     </div>
@@ -574,17 +597,17 @@ function SectionFinalCta() {
 
 function SectionFooter() {
   return (
-    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-[48px] items-start pb-[48px] pt-[64px] px-[120px] relative shrink-0 w-full">
+    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-[48px] items-start pb-[48px] pt-[64px] px-5 md:px-12 lg:px-[120px] relative shrink-0 w-full">
       <div aria-hidden className="absolute border-[#1f2937] border-solid border-t inset-0 pointer-events-none" />
-      <div className="content-stretch flex items-start justify-between relative shrink-0 w-full">
-        <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-[360px]">
+      <div className="content-stretch flex flex-col lg:flex-row items-start justify-between gap-10 relative shrink-0 w-full">
+        <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full lg:w-[360px]">
           <div className="flex gap-[10px] items-center relative shrink-0">
             <img alt="Groom logo" className="size-[36px] object-contain" src={imgLogo} />
             <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#f8fafc] text-[20px] whitespace-nowrap">Groom</p>
           </div>
           <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.5] min-w-full not-italic relative shrink-0 text-[#94a3b8] text-[13px] w-[min-content]">Sistema completo de gestão e agendamento para barbearias, salões de beleza, estúdios de tatuagem e clínicas de estética.</p>
         </div>
-        <div className="[word-break:break-word] content-stretch flex gap-[64px] items-start relative shrink-0 whitespace-nowrap">
+        <div className="content-stretch flex flex-wrap gap-8 lg:gap-[64px] items-start relative shrink-0">
           <div className="content-stretch flex flex-col gap-[16px] items-start leading-[normal] relative shrink-0">
             <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold relative shrink-0 text-[#f8fafc] text-[14px]">Navegação</p>
             <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#94a3b8] text-[13px]">Como Funciona</p>
@@ -611,19 +634,27 @@ function SectionFooter() {
 }
 
 function FloatingWhatsappCta() {
+  const handleClick = () => {
+    window.open("https://wa.me/5551997066347?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Vi%20o%20site%20do%20Groom%20e%20adorei%20a%20proposta.%20Gostaria%20muito%20de%20conversar%20com%20voc%C3%AAs%20para%20conhecer%20melhor%20o%20sistema%20e%20entender%20como%20ele%20pode%20me%20ajudar.", "_blank", "noopener,noreferrer");
+  };
   return (
-    <div className="fixed bg-[#22c55e] bottom-[32px] content-stretch flex gap-[10px] items-center justify-center overflow-clip pl-[20px] pr-[24px] py-[14px] right-[32px] rounded-[50px] shadow-[0px_4px_16px_0px_rgba(0,0,0,0.3)] z-50">
+    <button
+      onClick={handleClick}
+      className="fixed bg-[#22c55e] bottom-[32px] content-stretch flex gap-[10px] items-center justify-center overflow-clip pl-[20px] pr-[24px] py-[14px] right-[32px] rounded-[50px] shadow-[0px_4px_16px_0px_rgba(0,0,0,0.3)] z-50"
+    >
       <svg fill="none" height="20" viewBox="0 0 24 20" width="24">
         <path d={svgPaths.p16656200} fill="white" />
       </svg>
       <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-nowrap">Fale conosco e teste grátis</p>
-    </div>
+    </button>
   );
 }
 
+
+
 export function Groom() {
   return (
-    <div className="bg-[#0b0f1a] content-stretch flex flex-col items-start relative w-full">
+    <div className="bg-[#0b0f1a] content-stretch flex flex-col items-start relative w-full overflow-x-hidden">
       <SectionHero />
       <SectionPainSolution />
       <SectionHowItWorks />
