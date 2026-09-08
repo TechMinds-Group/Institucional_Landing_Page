@@ -82,9 +82,9 @@ function SectionHero() {
         </div>
         {/* CTA group — desktop only */}
         <div className="hidden lg:flex content-stretch gap-[16px] items-center justify-center overflow-clip relative shrink-0">
-          <div className="border-[#f1c75c] border-[1.5px] border-solid content-stretch flex items-center justify-center overflow-clip px-[20px] py-[8px] relative rounded-[8px] shrink-0">
+          <a href="https://groom.techminds.net.br/login" className="border-[#f1c75c] border-[1.5px] border-solid cursor-pointer content-stretch flex items-center justify-center overflow-clip px-[20px] py-[8px] relative rounded-[8px] shrink-0 hover:bg-[#f1c75c]/10 transition-colors">
             <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#f1c75c] text-[14px] whitespace-nowrap">Entrar</p>
-          </div>
+          </a>
           <a href="https://wa.me/5551997066347?text=Ol%C3%A1%2C%20equipe%20Groom!%20Tudo%20bem%20por%20a%C3%AD%3F%20Fiquei%20super%20interessado%20e%20gostaria%20de%20aproveitar%20o%20teste%20gratuito%20de%2015%20dias.%20Podem%20me%20ajudar%20a%20dar%20os%20primeiros%20passos%3F" target="_blank" rel="noreferrer" className="bg-[#f1c75c] cursor-pointer content-stretch flex items-start px-[24px] py-[10px] relative rounded-[8px] shrink-0">
             <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[14px] whitespace-nowrap">TESTAR GRÁTIS</p>
           </a>
