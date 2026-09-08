@@ -2,7 +2,7 @@ import imgIconContainer from "../../imports/GroomLandingPage-3/2e6ab184d92ccf9c9
 import imgLogo from "../../imports/logo.png";
 import imgDashboardPreview from "../../imports/GroomLandingPage-3/20860e87f1caa68bf54946def42a084f479fa552.png";
 import { CreditCard, Bot, Ghost, Brain, DollarSign, RefreshCw, Flame, Crown, Sprout, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const svgPaths = {
   p12fd63e0: "M2 22C2 17.5 5.5 14 10 14C11.5 14 12.8 14.4 14 15",
@@ -26,7 +26,13 @@ const svgPaths = {
 
 function SectionHero() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const navLinks = ["Como Funciona", "Funcionalidades", "Diferenciais", "Preços", "FAQ"];
+  const navLinks = [
+    { label: "Como Funciona", href: "#como-funciona" },
+    { label: "Funcionalidades", href: "#funcionalidades" },
+    { label: "Diferenciais", href: "#diferenciais" },
+    { label: "Preços", href: "#precos" },
+    { label: "FAQ", href: "#faq" },
+  ];
 
   return (
     <div className="bg-gradient-to-b content-stretch flex flex-col from-[#0b0f1a] gap-8 lg:gap-[64px] items-center pb-10 lg:pb-[100px] pt-14 lg:pt-[80px] px-5 md:px-12 lg:px-[120px] relative shrink-0 to-[#1a2233] w-full" data-name="section-hero">
@@ -50,9 +56,9 @@ function SectionHero() {
             {/* Nav links */}
             <nav className="flex flex-col gap-1">
               {navLinks.map((link) => (
-                <button key={link} onClick={() => setDrawerOpen(false)} className="text-left px-3 py-3 rounded-lg text-[#cbd5e1] font-['Inter:Semi_Bold',sans-serif] font-semibold text-[15px] hover:bg-[#1f2937] hover:text-[#f8fafc] transition-colors">
-                  {link}
-                </button>
+                <a key={link.href} href={link.href} onClick={() => setDrawerOpen(false)} className="px-3 py-3 rounded-lg text-[#cbd5e1] font-['Inter:Semi_Bold',sans-serif] font-semibold text-[15px] hover:bg-[#1f2937] hover:text-[#f8fafc] transition-colors">
+                  {link.label}
+                </a>
               ))}
             </nav>
           </div>
@@ -70,16 +76,18 @@ function SectionHero() {
         </div>
         {/* Nav links — desktop only */}
         <div className="hidden lg:flex [word-break:break-word] content-stretch font-['Inter:Semi_Bold',sans-serif] font-semibold gap-[32px] items-center leading-[normal] not-italic relative shrink-0 text-[#cbd5e1] text-[14px] whitespace-nowrap">
-          {navLinks.map((link) => <p key={link} className="relative shrink-0">{link}</p>)}
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} className="relative shrink-0 hover:text-[#f8fafc] transition-colors">{link.label}</a>
+          ))}
         </div>
         {/* CTA group — desktop only */}
         <div className="hidden lg:flex content-stretch gap-[16px] items-center justify-center overflow-clip relative shrink-0">
           <div className="border-[#f1c75c] border-[1.5px] border-solid content-stretch flex items-center justify-center overflow-clip px-[20px] py-[8px] relative rounded-[8px] shrink-0">
             <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#f1c75c] text-[14px] whitespace-nowrap">Entrar</p>
           </div>
-          <div className="bg-[#f1c75c] content-stretch flex items-start px-[24px] py-[10px] relative rounded-[8px] shrink-0">
+          <a href="https://wa.me/5551997066347?text=Ol%C3%A1%2C%20equipe%20Groom!%20Tudo%20bem%20por%20a%C3%AD%3F%20Fiquei%20super%20interessado%20e%20gostaria%20de%20aproveitar%20o%20teste%20gratuito%20de%2015%20dias.%20Podem%20me%20ajudar%20a%20dar%20os%20primeiros%20passos%3F" target="_blank" rel="noreferrer" className="bg-[#f1c75c] cursor-pointer content-stretch flex items-start px-[24px] py-[10px] relative rounded-[8px] shrink-0">
             <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[14px] whitespace-nowrap">TESTAR GRÁTIS</p>
-          </div>
+          </a>
         </div>
         {/* Hamburger — mobile/tablet only */}
         <button className="lg:hidden text-[#f8fafc] p-1" onClick={() => setDrawerOpen(true)}>
@@ -223,7 +231,7 @@ function SectionHowItWorks() {
     { num: "04", icon: <path d={svgPaths.p26837680} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "Você domina o painel", desc: "Faturamento, ocupação, planos ativos, ranking da equipe e muito mais. Conte com análise preditiva, simulações de cenários — como mais clientes, valores diferentes — e dados completos para tomar decisões com segurança." },
   ];
   return (
-    <div className="bg-[#1a2233] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div id="como-funciona" className="bg-[#1a2233] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(241,199,92,0.08)] content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -285,7 +293,7 @@ function SectionFeatures() {
     { title: "Multi-idioma nativo", desc: "Suporte nativo e completo para clientes em português, inglês e espanhol." },
   ];
   return (
-    <div className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div id="funcionalidades" className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(13,110,253,0.08)] content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -353,7 +361,7 @@ function SectionBenefits() {
   ];
 
   return (
-    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div id="diferenciais" className="bg-[#0b0f1a] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[24px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(241,199,92,0.08)] content-stretch flex items-center gap-[8px] px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -383,7 +391,7 @@ function SectionBenefits() {
 
 function SectionPricing() {
   return (
-    <div className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div id="precos" className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       {/* Header */}
       <div className="content-stretch flex flex-col gap-[20px] items-center relative shrink-0 w-full">
         <div className="content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
@@ -546,7 +554,7 @@ function SectionFaq() {
     { q: "Posso cancelar quando quiser?", a: "Sim. Sem contratos ou multas. Você pode exportar seus dados a qualquer momento e solicitar o cancelamento da sua assinatura com 1 clique." },
   ];
   return (
-    <div className="bg-[#0d1117] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div id="faq" className="bg-[#0d1117] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -633,6 +641,40 @@ function SectionFooter() {
   );
 }
 
+function ScrollToTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const sentinel = document.getElementById("groom-scroll-sentinel");
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setVisible(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToTop = () => {
+    const sentinel = document.getElementById("groom-scroll-sentinel");
+    sentinel?.scrollIntoView({ behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <button
+      onClick={scrollToTop}
+      className={`fixed bottom-[96px] right-[32px] z-50 bg-[#1f2937] hover:bg-[#374151] cursor-pointer text-[#f8fafc] rounded-full size-[44px] flex items-center justify-center shadow-[0px_4px_16px_0px_rgba(0,0,0,0.3)] transition-all duration-300 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}
+      aria-label="Voltar ao topo"
+    >
+      <svg fill="none" height="18" viewBox="0 0 18 18" width="18">
+        <path d="M9 13.5V4.5M4.5 9L9 4.5L13.5 9" stroke="#F8FAFC" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+      </svg>
+    </button>
+  );
+}
+
 function FloatingWhatsappCta() {
   const handleClick = () => {
     window.open("https://wa.me/5551997066347?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Vi%20o%20site%20do%20Groom%20e%20adorei%20a%20proposta.%20Gostaria%20muito%20de%20conversar%20com%20voc%C3%AAs%20para%20conhecer%20melhor%20o%20sistema%20e%20entender%20como%20ele%20pode%20me%20ajudar.", "_blank", "noopener,noreferrer");
@@ -640,7 +682,7 @@ function FloatingWhatsappCta() {
   return (
     <button
       onClick={handleClick}
-      className="fixed bg-[#22c55e] bottom-[32px] content-stretch flex gap-[10px] items-center justify-center overflow-clip pl-[20px] pr-[24px] py-[14px] right-[32px] rounded-[50px] shadow-[0px_4px_16px_0px_rgba(0,0,0,0.3)] z-50"
+      className="fixed bg-[#22c55e] bottom-[32px] content-stretch cursor-pointer flex gap-[10px] items-center justify-center overflow-clip pl-[20px] pr-[24px] py-[14px] right-[32px] rounded-[50px] shadow-[0px_4px_16px_0px_rgba(0,0,0,0.3)] z-50"
     >
       <svg fill="none" height="20" viewBox="0 0 24 20" width="24">
         <path d={svgPaths.p16656200} fill="white" />
@@ -655,6 +697,7 @@ function FloatingWhatsappCta() {
 export function Groom() {
   return (
     <div className="bg-[#0b0f1a] content-stretch flex flex-col items-start relative w-full overflow-x-hidden">
+      <div id="groom-scroll-sentinel" className="absolute top-0 h-px w-px pointer-events-none" />
       <SectionHero />
       <SectionPainSolution />
       <SectionHowItWorks />
@@ -665,6 +708,7 @@ export function Groom() {
       <SectionFinalCta />
       <SectionFooter />
       <FloatingWhatsappCta />
+      <ScrollToTopButton />
     </div>
   );
 }
