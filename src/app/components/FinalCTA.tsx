@@ -19,27 +19,11 @@ export function FinalCTA() {
     {
       icon: Phone,
       label: "Telefone",
-      value: "+55 (51) 8054-7148",
-      copyValue: "+55 (51) 8054-7148",
-      href: "tel:+555180547148",
+      value: "+55 (51) 99706-6347",
+      copyValue: "+55 (51) 99706-6347",
+      href: "tel:+5551997066347",
       copyable: true
     },
-    {
-      icon: MessageCircle,
-      label: "WhatsApp",
-      value: "Chamar no WhatsApp",
-      href: "https://wa.me/555180547148",
-      external: true,
-      copyable: false
-    },
-    {
-      icon: Send,
-      label: "Telegram",
-      value: "Chamar no Telegram",
-      href: "https://t.me/+5551980547148",
-      external: true,
-      copyable: false
-    }
   ];
 
   const copyToClipboard = (text: string, index: number) => {

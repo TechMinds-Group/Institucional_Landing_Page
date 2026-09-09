@@ -57,7 +57,7 @@ export function Hero() {
                 {t.hero.requestDemo}
               </button>
               <button
-                onClick={() => smoothScrollTo("section-contato")}
+                onClick={() => window.open("https://wa.me/5551997066347?text=Ola%2C%20tudo%20bem%3F%20Gostaria%20de%20conhecer%20melhor%20os%20produtos%20e%20solucoes%20da%20TechMinds.%20Podem%20me%20ajudar%3F", "_blank", "noopener,noreferrer")}
                 className="w-full sm:w-auto px-7 py-3.5 rounded-full border-2 border-[#5BC8C0] text-[#5BC8C0] font-semibold hover:bg-[#5BC8C0]/10 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5BC8C0]"
               >
                 {t.hero.seeHowItWorks}

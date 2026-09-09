@@ -37,24 +37,10 @@ export function Products() {
         "Customizável com o catálogo de cortes da sua barbearia",
       ],
     },
-    ZoneMap: {
-      name: "ZoneMap",
-      tag: "Mapas Interativos",
-      status: t.products.items[2].status,
-      description:
-        "Plataforma de mapas interativos com design clean, moderno e flat para espaços extensos como zoológicos, jardins botânicos, parques e eventos. Permite que visitantes explorem o local, encontrem pontos de interesse e acompanhem eventos em tempo real.",
-      features: [
-        "Mapa interativo com design flat e moderno",
-        "Cadastro e exibição de pontos de interesse customizados",
-        "Eventos em tempo real com localização no mapa",
-        "Navegação intuitiva por categorias e filtros",
-        "Totalmente customizável para qualquer tipo de espaço",
-      ],
-    },
     "Escola Conectada": {
       name: "Escola Conectada",
       tag: "Gestão Educacional",
-      status: t.products.items[3].status,
+      status: t.products.items[2].status,
       description:
         "Sistema de gestão escolar completo que centraliza matrículas, frequência, notas, comunicação com responsáveis e relatórios pedagógicos em uma única plataforma. Customizável para se adequar à grade e aos processos de cada instituição.",
       features: [
@@ -68,7 +54,7 @@ export function Products() {
     Lumen: {
       name: "Lumen",
       tag: "Educação & Filosofia",
-      status: t.products.items[4].status,
+      status: t.products.items[3].status,
       description:
         "Dashboard educacional interativo para exploração histórica e filosófica do pensamento político ocidental. Mapeie pensadores desde a Antiguidade até o Contemporâneo através de nove eixos analíticos (4 políticos + 5 metodológicos), rastreie leituras e visualize seu perfil político-filosófico personalizado.",
       features: [
@@ -166,8 +152,7 @@ export function Products() {
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                 </button>
 
-                {/* Hover glow */}
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#7B5EA7]/0 via-[#6B8DC4]/0 to-[#5BC8C0]/0 group-hover:from-[#7B5EA7]/5 group-hover:via-[#6B8DC4]/5 group-hover:to-[#5BC8C0]/5 transition-all duration-300 pointer-events-none" />
+
               </div>
             ))}
           </div>

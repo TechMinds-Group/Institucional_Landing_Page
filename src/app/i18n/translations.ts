@@ -162,7 +162,7 @@ export const translations: Record<Language, Translations> = {
         {
           name: 'Groom',
           tag: 'Gestão & Automação',
-          status: 'Em desenvolvimento',
+          status: 'Disponível',
           description: 'Sistema completo de gestão para barbearias com agendamento automático via WhatsApp, controle de caixa, fila de espera e relatórios gerenciais.',
           highlight: 'Integração nativa com WhatsApp.',
           cta: 'Saiba mais'
@@ -173,14 +173,6 @@ export const translations: Record<Language, Translations> = {
           status: 'Disponível',
           description: 'Sistema com IA que gera sugestões de cortes de cabelo personalizadas para cada cliente com base no formato do rosto. Ideal para barbearias e salões.',
           highlight: 'Sugestões geradas em segundos com IA.',
-          cta: 'Saiba mais'
-        },
-        {
-          name: 'ZoneMap',
-          tag: 'Mapas Interativos',
-          status: 'Em desenvolvimento',
-          description: 'Plataforma de mapas interativos com design clean, moderno e flat para espaços extensos como zoológicos, jardins botânicos e eventos. Exibe pontos de interesse, eventos em tempo real e localização de atrações com navegação intuitiva.',
-          highlight: 'Design flat e totalmente customizável.',
           cta: 'Saiba mais'
         },
         {
@@ -254,7 +246,7 @@ export const translations: Record<Language, Translations> = {
       tagline: 'Sistemas que evoluem. Negócios que crescem.',
       copyright: '© 2025 TechMinds. Todos os direitos reservados.',
       productsTitle: 'Sistemas',
-      productLinks: ['Groom', 'VibeCut', 'ZoneMap', 'Escola Conectada', 'Lumen'],
+      productLinks: ['Groom', 'VibeCut', 'Escola Conectada', 'Lumen'],
       companyTitle: 'Empresa',
       companyLinks: ['Sobre nós', 'Contato'],
       legalTitle: 'Legal',
@@ -347,14 +339,6 @@ export const translations: Record<Language, Translations> = {
           cta: 'Learn more'
         },
         {
-          name: 'ZoneMap',
-          tag: 'Data Visualization',
-          status: 'Available',
-          description: 'Platform of interactive and customizable maps for businesses that need to visualize geographic data, routes, points of interest, or territories.',
-          highlight: 'Fully customizable by segment.',
-          cta: 'Learn more'
-        },
-        {
           name: 'Escola Conectada',
           tag: 'Educational Management',
           status: 'Available',
@@ -425,7 +409,7 @@ export const translations: Record<Language, Translations> = {
       tagline: 'Technology that works for you.',
       copyright: '© 2025 TechMinds. All rights reserved.',
       productsTitle: 'Products',
-      productLinks: ['Groom', 'VibeCut', 'ZoneMap', 'Escola Conectada', 'Lumen'],
+      productLinks: ['Groom', 'VibeCut', 'Escola Conectada', 'Lumen'],
       companyTitle: 'Company',
       companyLinks: ['About us', 'Contact'],
       legalTitle: 'Legal',
@@ -519,14 +503,6 @@ export const translations: Record<Language, Translations> = {
           cta: 'Más información'
         },
         {
-          name: 'ZoneMap',
-          tag: 'Visualización de Datos',
-          status: 'Disponible',
-          description: 'Plataforma de mapas interactivos y personalizables para negocios que necesitan visualizar datos geográficos, rutas, puntos de interés o territorios.',
-          highlight: 'Totalmente personalizable por segmento.',
-          cta: 'Más información'
-        },
-        {
           name: 'Escola Conectada',
           tag: 'Gestión Educativa',
           status: 'Disponible',
@@ -597,7 +573,7 @@ export const translations: Record<Language, Translations> = {
       tagline: 'Tecnología que trabaja por ti.',
       copyright: '© 2025 TechMinds. Todos los derechos reservados.',
       productsTitle: 'Productos',
-      productLinks: ['Groom', 'VibeCut', 'ZoneMap', 'Escola Conectada', 'Lumen'],
+      productLinks: ['Groom', 'VibeCut', 'Escola Conectada', 'Lumen'],
       companyTitle: 'Empresa',
       companyLinks: ['Sobre nosotros', 'Contacto'],
       legalTitle: 'Legal',

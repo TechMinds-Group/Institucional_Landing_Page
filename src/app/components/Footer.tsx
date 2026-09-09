@@ -102,19 +102,10 @@ export function Footer({ onProductClick }: FooterProps) {
             <p className="text-gray-400 mb-6">{t.footer.tagline}</p>
 
             {/* Quick Access Icons */}
-            <div className="flex gap-4">
+            <div className="flex gap-y-[16px] gap-x-[15px] m-[0px]">
               {/* GitHub */}
               <div className="relative">
-                <a
-                  href="https://github.com/TechMinds-Group"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#1A1A2E] flex items-center justify-center text-[#5BC8C0] hover:brightness-125 transition-all"
-                  onMouseEnter={() => setHoveredIcon('github')}
-                  onMouseLeave={() => setHoveredIcon(null)}
-                >
-                  <Github className="w-5 h-5" />
-                </a>
+                
                 {hoveredIcon === 'github' && (
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[#1A1A2E] border border-[#5BC8C0] rounded-lg text-xs text-white whitespace-nowrap animate-fade-in pointer-events-none z-50">
                     GitHub
@@ -147,10 +138,10 @@ export function Footer({ onProductClick }: FooterProps) {
               {/* WhatsApp */}
               <div className="relative">
                 <a
-                  href="https://wa.me/555180547148"
+                  href="https://wa.me/5551997066347"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#1A1A2E] flex items-center justify-center text-[#5BC8C0] hover:brightness-125 transition-all"
+                  className="w-10 h-10 rounded-full bg-[#1A1A2E] flex items-center justify-center text-[#5BC8C0] hover:brightness-125 transition-all gap-y-[0px] gap-x-[15px]"
                   onMouseEnter={() => setHoveredIcon('whatsapp')}
                   onMouseLeave={() => setHoveredIcon(null)}
                 >
@@ -165,16 +156,7 @@ export function Footer({ onProductClick }: FooterProps) {
 
               {/* Telegram */}
               <div className="relative">
-                <a
-                  href="https://t.me/+5551980547148"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[#1A1A2E] flex items-center justify-center text-[#5BC8C0] hover:brightness-125 transition-all"
-                  onMouseEnter={() => setHoveredIcon('telegram')}
-                  onMouseLeave={() => setHoveredIcon(null)}
-                >
-                  <Send className="w-5 h-5" />
-                </a>
+                
                 {hoveredIcon === 'telegram' && (
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[#1A1A2E] border border-[#5BC8C0] rounded-lg text-xs text-white whitespace-nowrap animate-fade-in pointer-events-none z-50">
                     Telegram
@@ -193,15 +175,11 @@ export function Footer({ onProductClick }: FooterProps) {
             </h4>
             <ul className="space-y-3">
               {t.footer.productLinks.map((link, index) => (
-                <li key={index} style={{ lineHeight: "36px" }}>
-                  <button
+                <li key={index} style={{ lineHeight: "36px" }}><button
                     onClick={() => onProductClick?.(link)}
                     className="text-gray-400 hover:text-[#5BC8C0] transition-colors duration-150 cursor-pointer text-left"
                     style={{ fontSize: "15px" }}
-                  >
-                    {link}
-                  </button>
-                </li>
+                  >{link}</button></li>
               ))}
             </ul>
           </div>
