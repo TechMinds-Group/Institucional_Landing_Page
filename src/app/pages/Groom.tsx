@@ -636,6 +636,7 @@ function SectionFooter() {
       <div className="content-stretch flex items-center justify-between pt-[24px] relative shrink-0 w-full">
         <div aria-hidden className="absolute border-[#1f2937] border-solid border-t inset-0 pointer-events-none" />
         <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#94a3b8] text-[12px]">© 2026 Groom — Todos os direitos reservados.</p>
+        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#64748b] text-[11px]">69.184.592 MICHEL LEMOS BITTENCOURT &mdash; CNPJ: 69.184.592/0001-45</p>
       </div>
     </div>
   );

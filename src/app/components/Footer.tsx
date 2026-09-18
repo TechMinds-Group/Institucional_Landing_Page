@@ -386,9 +386,12 @@ export function Footer({ onProductClick }: FooterProps) {
         </div>
 
         {/* Copyright */}
-        <div className="pt-8 border-t border-white/5">
+        <div className="pt-8 border-t border-white/5 flex flex-col items-center gap-1">
           <p className="text-center text-gray-500 text-sm">
             {t.footer.copyright}
+          </p>
+          <p className="text-center text-gray-600 text-xs">
+            69.184.592 MICHEL LEMOS BITTENCOURT &mdash; CNPJ: 69.184.592/0001-45
           </p>
         </div>
       </div>
