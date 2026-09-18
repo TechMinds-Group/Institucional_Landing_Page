@@ -637,14 +637,16 @@ function SectionFooter() {
         <div aria-hidden className="absolute border-[#1f2937] border-solid border-t inset-0 pointer-events-none" />
         <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#94a3b8] text-[12px]">© 2026 Groom — Todos os direitos reservados.</p>
       </div>
-      <footer style={{ textAlign: "center", padding: "24px", fontSize: "14px", color: "#6c757d", borderTop: "1px solid #1f2937" }}>
-        <p style={{ marginBottom: "6px", fontWeight: 600, color: "#cbd5e1" }}>
+      <footer style={{ textAlign: "center", padding: "24px", fontSize: "14px", color: "#6b7280", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <p style={{ marginBottom: "6px", fontWeight: 600, color: "#d1d5db" }}>
           Nome Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT
         </p>
         <p style={{ marginBottom: "6px" }}>
           CNPJ: 69.184.592/0001-45 | Guaíba - RS
         </p>
-
+        <p style={{ marginTop: "12px", fontSize: "12px" }}>
+          © 2026 TechMinds. Todos os direitos reservados.
+        </p>
       </footer>
     </div>
   );

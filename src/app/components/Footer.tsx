@@ -386,21 +386,19 @@ export function Footer({ onProductClick }: FooterProps) {
         </div>
 
         {/* Copyright */}
-        <div className="pt-8 border-t border-white/5 flex flex-col items-center gap-1">
-          <p className="text-center text-gray-500 text-sm">
-            © 2026 TechMinds. Todos os direitos reservados.
-          </p>
-        </div>
+        
       </div>
 
-      <footer style={{ textAlign: "center", padding: "24px", fontSize: "14px", color: "#6c757d", borderTop: "1px solid #e9ecef" }}>
-        <p style={{ marginBottom: "6px", fontWeight: 600, color: "#343a40" }}>
+      <footer style={{ textAlign: "center", padding: "24px", fontSize: "14px", color: "#6b7280", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <p style={{ marginBottom: "6px", fontWeight: 600, color: "#d1d5db" }}>
           Nome Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT
         </p>
         <p style={{ marginBottom: "6px" }}>
           CNPJ: 69.184.592/0001-45 | Guaíba - RS
         </p>
-
+        <p style={{ marginTop: "12px", fontSize: "12px" }}>
+          © 2026 TechMinds. Todos os direitos reservados.
+        </p>
       </footer>
     </footer>
   );
