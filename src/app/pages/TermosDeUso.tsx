@@ -146,7 +146,7 @@ function TermosDeUsoContent() {
 
       {/* Product Selector Cards */}
       <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-testid="legal-tabs-grid">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4" data-testid="legal-tabs-grid">
           {products.map((product) => (
             <button
               key={product.id}
