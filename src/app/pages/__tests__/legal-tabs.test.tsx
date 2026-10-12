@@ -159,8 +159,10 @@ describe("i18n das tabs legais — troca viva, provider único (RN-004/RN-007)",
     // PT inicial
     expect(screen.getByText("Inteligência Artificial")).toBeInTheDocument();
 
-    // Troca ao vivo via pill do provider único (drawer de idiomas — PN-005 single)
-    fireEvent.click(screen.getByRole("button", { name: "EN" }));
+    // Troca ao vivo via pill único do NavbarB (design B) — escopo do grupo
+    // de idiomas: o drawer mobile também rende pills pt/en/es no DOM.
+    const languagePills = screen.getByTestId("navb-language-pills");
+    fireEvent.click(within(languagePills).getByRole("button", { name: "EN" }));
 
     expect(screen.getByText("Artificial Intelligence")).toBeInTheDocument();
     expect(screen.getByText("February 11, 2026")).toBeInTheDocument();

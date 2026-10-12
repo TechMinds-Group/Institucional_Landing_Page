@@ -196,6 +196,10 @@ export interface LegalProductMeta {
   lumenLastUpdated: string;
   termsInPrep: string;
   policyInPrep: string;
+  /** Rótulo do pill de disponibilidade legal (design B — frame 3:31384). */
+  availableLabel: string;
+  /** Rótulo de vigência do cabeçalho do documento oficial (design B). */
+  lastUpdatedLabel: string;
 }
 
 export const legalProductMeta: Record<Language, LegalProductMeta> = {
@@ -210,6 +214,8 @@ export const legalProductMeta: Record<Language, LegalProductMeta> = {
     lumenLastUpdated: '24 de maio de 2026',
     termsInPrep: 'Termos em elaboração',
     policyInPrep: 'Política em elaboração',
+    availableLabel: 'Disponível',
+    lastUpdatedLabel: 'Última atualização:',
   },
   en: {
     vibecutTag: 'Artificial Intelligence',
@@ -222,6 +228,8 @@ export const legalProductMeta: Record<Language, LegalProductMeta> = {
     lumenLastUpdated: 'May 24, 2026',
     termsInPrep: 'Terms in preparation',
     policyInPrep: 'Policy in preparation',
+    availableLabel: 'Available',
+    lastUpdatedLabel: 'Last updated:',
   },
   es: {
     vibecutTag: 'Inteligencia Artificial',
@@ -234,6 +242,8 @@ export const legalProductMeta: Record<Language, LegalProductMeta> = {
     lumenLastUpdated: '24 de mayo de 2026',
     termsInPrep: 'Términos en elaboración',
     policyInPrep: 'Política en elaboración',
+    availableLabel: 'Disponible',
+    lastUpdatedLabel: 'Última actualización:',
   },
 };
 
