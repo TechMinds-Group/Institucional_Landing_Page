@@ -3,6 +3,11 @@ import { MainPage } from "./pages/MainPage";
 import { TermosDeUso } from "./pages/TermosDeUso";
 import { Privacidade } from "./pages/Privacidade";
 import { Groom } from "./pages/Groom";
+// Landings de produto (RN-025 — CR-006/ADR-014): rotas no padrão
+// do /groom, sem guards — site público.
+import { VibeCutPage } from "./pages/landings/VibeCutPage";
+import { LumenPage } from "./pages/landings/LumenPage";
+import { FasToPage } from "./pages/landings/FasToPage";
 
 export const router = createBrowserRouter([
   {
@@ -28,5 +33,18 @@ export const router = createBrowserRouter([
   {
     path: "/groom",
     Component: Groom,
+  },
+  // ── RN-025: landings de produto ──
+  {
+    path: "/vibecut",
+    Component: VibeCutPage,
+  },
+  {
+    path: "/lumen",
+    Component: LumenPage,
+  },
+  {
+    path: "/fasto",
+    Component: FasToPage,
   },
 ]);
