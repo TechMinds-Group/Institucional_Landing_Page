@@ -30,7 +30,6 @@ const NAV_LINKS = [
   { key: "howWeWork", targetId: SECTION_IDS.comoFunciona },
   { key: "pilares", targetId: SECTION_IDS.pilares },
   { key: "company", targetId: SECTION_IDS.empresa },
-  { key: "contact", targetId: SECTION_IDS.contato },
 ] as const;
 
 type NavLinkKey = (typeof NAV_LINKS)[number]["key"];
@@ -59,7 +58,6 @@ export function NavbarB() {
     howWeWork: t.navB.howWeWork,
     pilares: t.navB.pilares,
     company: t.navB.company,
-    contact: t.navB.contact,
   };
 
   const handleAnchorClick = (
@@ -89,7 +87,6 @@ export function NavbarB() {
     { label: t.nav.home, sectionId: SECTION_IDS.hero },
     { label: t.nav.about, sectionId: SECTION_IDS.empresa },
     { label: t.nav.products, sectionId: SECTION_IDS.catalogo },
-    { label: t.nav.contact, sectionId: SECTION_IDS.contato },
   ];
 
   const handleDrawerNavClick = (sectionId: string) => {

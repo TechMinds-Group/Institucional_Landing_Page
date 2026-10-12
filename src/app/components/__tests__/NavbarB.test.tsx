@@ -7,7 +7,7 @@ import { SECTION_IDS } from "../../constants/anchors";
 describe("NavbarB (RN-022-1)", () => {
   beforeEach(() => resetI18n());
 
-  it("exibe marca, 5 links âncora e 3 pills de idioma em PT (default)", () => {
+  it("exibe marca, 4 links âncora e 3 pills de idioma em PT (default)", () => {
     renderWithProviders(<NavbarB />);
 
     expect(screen.getAllByText("TechMinds").length).toBeGreaterThan(0);
@@ -28,10 +28,6 @@ describe("NavbarB (RN-022-1)", () => {
     expect(links.getByRole("link", { name: "Empresa" })).toHaveAttribute(
       "href",
       `#${SECTION_IDS.empresa}`
-    );
-    expect(links.getByRole("link", { name: "Contato" })).toHaveAttribute(
-      "href",
-      `#${SECTION_IDS.contato}`
     );
 
     const pills = within(screen.getByTestId("navb-language-pills"));
@@ -79,7 +75,7 @@ describe("NavbarB (RN-022-1)", () => {
     expect(document.body.style.overflow).toBe("hidden");
 
     // Links do drawer apontam para o contrato de âncoras B (RN-024):
-    // Início → hero · Sobre → empresa · Produtos → catalogo · Contato → contato
+    // Início → hero · Sobre → empresa (Company and trust) · Produtos → catalogo
     expect(screen.getByRole("button", { name: "Início" })).toHaveAttribute(
       "data-testid",
       `drawer-link-${SECTION_IDS.hero}`
@@ -92,14 +88,10 @@ describe("NavbarB (RN-022-1)", () => {
       "data-testid",
       `drawer-link-${SECTION_IDS.catalogo}`
     );
-    expect(screen.getByRole("button", { name: "Contato" })).toHaveAttribute(
-      "data-testid",
-      `drawer-link-${SECTION_IDS.contato}`
-    );
 
     // Clique em âncora do drawer: sem exceção e drawer fechado.
     expect(() =>
-      fireEvent.click(screen.getByRole("button", { name: "Contato" }))
+      fireEvent.click(screen.getByRole("button", { name: "Produtos" }))
     ).not.toThrow();
     expect(document.body.style.overflow).toBe("");
   });

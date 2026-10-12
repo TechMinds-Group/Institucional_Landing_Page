@@ -285,7 +285,6 @@ export interface Translations {
     howWeWork: string;
     pilares: string;
     company: string;
-    contact: string;
   };
   heroB: {
     eyebrow: string;
@@ -456,8 +455,7 @@ export const translations: Record<Language, Translations> = {
       solutions: 'Catálogo',
       howWeWork: 'Como funciona',
       pilares: 'Pilares',
-      company: 'Empresa',
-      contact: 'Contato'
+      company: 'Empresa'
     },
     heroB: {
       eyebrow: 'Tecnologia para negócios que crescem',
@@ -1336,8 +1334,7 @@ export const translations: Record<Language, Translations> = {
       solutions: 'Catalog',
       howWeWork: 'How it works',
       pilares: 'Pillars',
-      company: 'Company',
-      contact: 'Contact'
+      company: 'Company'
     },
     heroB: {
       eyebrow: 'Technology for growing businesses',
@@ -2217,8 +2214,7 @@ export const translations: Record<Language, Translations> = {
       solutions: 'Catálogo',
       howWeWork: 'Cómo funciona',
       pilares: 'Pilares',
-      company: 'Empresa',
-      contact: 'Contacto'
+      company: 'Empresa'
     },
     heroB: {
       eyebrow: 'Tecnología para negocios que crecen',
