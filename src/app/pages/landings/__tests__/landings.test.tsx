@@ -22,7 +22,7 @@ import { EMAILS_BY_AREA } from "../../../constants/contacts";
 // + asserção estrutural do routes.ts (fonte única real).
 
 const here = dirname(fileURLToPath(import.meta.url));
-const routesSource = readFileSync(resolve(here, "..", "..", "..", "routes.ts"), "utf-8");
+const routesSource = readFileSync(resolve(here, "..", "..", "..", "routes.tsx"), "utf-8");
 
 const ROUTE_STUBS = (
   <Routes>
