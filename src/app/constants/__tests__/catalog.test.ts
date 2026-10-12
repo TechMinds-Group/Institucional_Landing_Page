@@ -36,11 +36,19 @@ describe("Modelo de conteúdo do catálogo B (RN-019-1 — CR-001)", () => {
     expect(byId(pt, "escola-conectada").status).toBe("em-desenvolvimento");
   });
 
-  it("gate de CTA: apenas Groom é habilitado com href /groom (CR-004)", () => {
+  it("gate de CTA: landings próprias habilitadas — CR-006 (rotas) + CR-008 (ativação); Escola aguarda landing", () => {
+    const expected: Record<string, string | null> = {
+      groom: "/groom",
+      fasto: "/fasto",
+      lumen: "/lumen",
+      vibecut: "/vibecut",
+      "escola-conectada": null,
+    };
     for (const product of pt) {
-      if (product.id === "groom") {
-        expect(product.cta.enabled).toBe(true);
-        expect(product.cta.href).toBe("/groom");
+      const href = expected[product.id];
+      if (href) {
+        expect(product.cta.enabled, product.id).toBe(true);
+        expect(product.cta.href, product.id).toBe(href);
       } else {
         expect(product.cta.enabled, product.id).toBe(false);
         expect(product.cta.href, product.id).toBeNull();

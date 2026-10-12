@@ -224,14 +224,28 @@ describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
     expect(cta).toHaveTextContent("Conhecer Groom");
   });
 
-  it("CTAs de FasTo/Lumen/VibeCut/Escola desabilitados, sem navegação e sem modal", () => {
+  it("CTAs ativos para os 4 produtos com landing (CR-008) — rotas do CR-006", () => {
     renderWithProviders(<CatalogSection />);
 
-    for (const id of ["fasto", "lumen", "vibecut", "escola-conectada"]) {
+    const expected: Record<string, string> = {
+      groom: "/groom",
+      fasto: "/fasto",
+      lumen: "/lumen",
+      vibecut: "/vibecut",
+    };
+    for (const [id, href] of Object.entries(expected)) {
       const cta = within(cardById(id)).getByTestId("product-cta");
-      expect(cta.tagName, id).toBe("BUTTON");
-      expect(cta, id).toBeDisabled();
+      expect(cta.tagName, id).toBe("A");
+      expect(cta, id).toHaveAttribute("href", href);
     }
+  });
+
+  it("CTA da Escola Conectada permanece desabilitado (aguarda landing — CR-008), sem modal", () => {
+    renderWithProviders(<CatalogSection />);
+
+    const cta = within(cardById("escola-conectada")).getByTestId("product-cta");
+    expect(cta.tagName).toBe("BUTTON");
+    expect(cta).toBeDisabled();
 
     // CR-005: nenhum modal de produto no fluxo do catálogo
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();

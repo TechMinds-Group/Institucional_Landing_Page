@@ -32,8 +32,12 @@ export interface CatalogProduct {
   segmento: string;
   headline: string;
   beneficios: string[];
-  /** Gate de CTA por landing própria (CR-004/ADR-013): só Groom → /groom. */
-  cta: { labelKey: CatalogCtaLabelKey; href: "/groom" | null; enabled: boolean };
+  /** Gate de CTA por landing própria (CR-004/CR-008 — rotas do CR-006). Escola Conectada aguarda landing. */
+  cta: {
+    labelKey: CatalogCtaLabelKey;
+    href: CatalogCtaHref;
+    enabled: boolean;
+  };
 }
 
 interface CatalogProductStatic {
@@ -43,6 +47,14 @@ interface CatalogProductStatic {
   icon: LucideIcon;
   cta: CatalogProduct["cta"];
 }
+
+/** Rotas de landing próprias (CR-006): /groom, /vibecut, /lumen e /fasto. Escola Conectada aguarda landing (RN-032/CR-008). */
+export type CatalogCtaHref =
+  | "/groom"
+  | "/vibecut"
+  | "/lumen"
+  | "/fasto"
+  | null;
 
 const CATALOG_STRUCTURE: CatalogProductStatic[] = [
   {
@@ -57,21 +69,21 @@ const CATALOG_STRUCTURE: CatalogProductStatic[] = [
     nome: "FasTo",
     status: "ativo",
     icon: CalendarDays,
-    cta: { labelKey: "conhecer-fasto", href: null, enabled: false },
+    cta: { labelKey: "conhecer-fasto", href: "/fasto", enabled: true },
   },
   {
     id: "lumen",
     nome: "Lumen",
     status: "ativo",
     icon: Orbit,
-    cta: { labelKey: "conhecer-lumen", href: null, enabled: false },
+    cta: { labelKey: "conhecer-lumen", href: "/lumen", enabled: true },
   },
   {
     id: "vibecut",
     nome: "VibeCut",
     status: "em-desenvolvimento",
     icon: ScanFace,
-    cta: { labelKey: "conhecer-vibecut", href: null, enabled: false },
+    cta: { labelKey: "conhecer-vibecut", href: "/vibecut", enabled: true },
   },
   {
     id: "escola-conectada",
