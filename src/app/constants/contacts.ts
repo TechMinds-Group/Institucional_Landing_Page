@@ -29,3 +29,8 @@ export function buildWhatsAppUrl(message: string): string {
 // Mensagem pré-preenchida do contexto Hero (RN-022-2).
 export const WHATSAPP_HERO_MESSAGE =
   'Olá! Gostaria de conversar sobre as soluções da TechMinds para a minha rotina.';
+
+// Mensagem pré-preenchida do bloco "Desenvolvimento sob medida" (RN-020) —
+// contexto próprio do bloco, distinto dos demais CTAs.
+export const WHATSAPP_CUSTOM_DEV_MESSAGE =
+  'Olá! Tenho uma necessidade fora do catálogo e gostaria de falar sobre um desenvolvimento sob medida com a TechMinds.';

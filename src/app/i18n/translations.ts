@@ -1,5 +1,12 @@
 export type Language = 'pt' | 'en' | 'es';
 
+/** Texto de um produto do catálogo B resolvido em um idioma (RN-019-1). */
+export interface CatalogProductText {
+  segmento: string;
+  headline: string;
+  beneficios: string[];
+}
+
 export interface Translations {
   nav: {
     home: string;
@@ -32,6 +39,45 @@ export interface Translations {
       title: string;
       description: string;
     }[];
+    hook: string;
+  };
+  catalogB: {
+    eyebrow: string;
+    title: string;
+    activeStatement: string;
+    developingStatement: string;
+    carouselTitle: string;
+    carouselSubtitle: string;
+    carouselPrev: string;
+    carouselNext: string;
+    paginationLabel: string;
+    badgeActive: string;
+    badgeDeveloping: string;
+    ctaLabels: {
+      'conhecer-groom': string;
+      'conhecer-fasto': string;
+      'conhecer-lumen': string;
+      'conhecer-vibecut': string;
+      'conhecer-escola-conectada': string;
+    };
+    vibecutThumbAlt: string;
+    demoBarVibecut: string;
+    demoBarEscola: string;
+    demoEscolaTabs: string[];
+    products: {
+      groom: CatalogProductText;
+      fasto: CatalogProductText;
+      lumen: CatalogProductText;
+      vibecut: CatalogProductText;
+      'escola-conectada': CatalogProductText;
+    };
+    custom: {
+      eyebrow: string;
+      title: string;
+      description: string;
+      ctaWhatsApp: string;
+      microcopy: string;
+    };
     hook: string;
   };
   hero: {
@@ -170,6 +216,84 @@ export const translations: Record<Language, Translations> = {
         }
       ],
       hook: 'O próximo passo é reunir o que importa. Encontre seu caminho no catálogo.'
+    },
+    catalogB: {
+      eyebrow: 'Encontre o seu caminho',
+      title: 'Qual parte da sua rotina pode ficar mais clara?',
+      activeStatement: 'Cinco produtos no catálogo. Groom, FasTo e Lumen estão ativos.',
+      developingStatement: 'VibeCut e Escola Conectada estão em desenvolvimento.',
+      carouselTitle: 'Explore as soluções',
+      carouselSubtitle: 'Cinco produtos, organizados em um fluxo visual mais compacto e fácil de navegar.',
+      carouselPrev: 'Cartão anterior',
+      carouselNext: 'Próximo cartão',
+      paginationLabel: 'Ir para o cartão',
+      badgeActive: '● Ativo',
+      badgeDeveloping: 'Em desenvolvimento',
+      ctaLabels: {
+        'conhecer-groom': 'Conhecer Groom',
+        'conhecer-fasto': 'Conhecer FasTo',
+        'conhecer-lumen': 'Conhecer Lumen',
+        'conhecer-vibecut': 'Conhecer VibeCut',
+        'conhecer-escola-conectada': 'Conhecer Escola Conectada'
+      },
+      vibecutThumbAlt: 'Prévia ilustrativa da interface do VibeCut',
+      demoBarVibecut: 'VibeCut · DEMO ILUSTRATIVA',
+      demoBarEscola: 'Escola Conectada · DEMO PENDENTE',
+      demoEscolaTabs: ['Matrículas', 'Frequência', 'Notas'],
+      products: {
+        groom: {
+          segmento: 'Para barbearias',
+          headline: 'Sua agenda e suas contas na mesma direção.',
+          beneficios: [
+            'Agendamento via WhatsApp',
+            'Controle financeiro e fila de espera',
+            'Relatórios para acompanhar a operação'
+          ]
+        },
+        fasto: {
+          segmento: 'Para estética e beleza',
+          headline: 'Cuide dos clientes. Organize o que vem depois.',
+          beneficios: [
+            'Agenda online e manual, com catálogo',
+            'Clube de assinaturas',
+            'Lembretes e cobranças via WhatsApp'
+          ]
+        },
+        lumen: {
+          segmento: 'Para educação e filosofia',
+          headline: 'Mais contexto para explorar ideias.',
+          beneficios: [
+            'Pensadores e obras em perspectiva',
+            'Exploração em 9 eixos analíticos',
+            'Uma ferramenta para educação e filosofia'
+          ]
+        },
+        vibecut: {
+          segmento: 'Para barbearias e salões',
+          headline: 'Uma referência pessoal antes de escolher o corte.',
+          beneficios: [
+            'Sugestões personalizadas de cortes',
+            'Possibilidades para barbearias e salões'
+          ]
+        },
+        'escola-conectada': {
+          segmento: 'Para instituições de ensino',
+          headline: 'Uma visão compartilhada da vida escolar.',
+          beneficios: [
+            'Matrículas, frequência e notas',
+            'Comunicação e relatórios',
+            'Customizável por instituição'
+          ]
+        }
+      },
+      custom: {
+        eyebrow: 'Seu negócio tem outra dinâmica?',
+        title: 'O sistema pode partir da sua operação.',
+        description: 'Para necessidades fora do catálogo, desenvolvemos sob medida, com escopo e customização acordados.',
+        ctaWhatsApp: 'Conversar no WhatsApp',
+        microcopy: 'Conte sua rotina na mesma conversa comercial.'
+      },
+      hook: 'Veja como é trabalhar com a TechMinds.'
     },
     hero: {
       headline: 'Softwares prontos, em evolução constante e moldados para o seu negócio.',
@@ -368,6 +492,84 @@ export const translations: Record<Language, Translations> = {
       ],
       hook: 'The next step is bringing what matters together. Find your path in the catalog.'
     },
+    catalogB: {
+      eyebrow: 'Find your path',
+      title: 'Which part of your routine could be clearer?',
+      activeStatement: 'Five products in the catalog. Groom, FasTo and Lumen are active.',
+      developingStatement: 'VibeCut and Escola Conectada are under development.',
+      carouselTitle: 'Explore the solutions',
+      carouselSubtitle: 'Five products, organized in a more compact visual flow that is easier to browse.',
+      carouselPrev: 'Previous card',
+      carouselNext: 'Next card',
+      paginationLabel: 'Go to card',
+      badgeActive: '● Active',
+      badgeDeveloping: 'In development',
+      ctaLabels: {
+        'conhecer-groom': 'Discover Groom',
+        'conhecer-fasto': 'Discover FasTo',
+        'conhecer-lumen': 'Discover Lumen',
+        'conhecer-vibecut': 'Discover VibeCut',
+        'conhecer-escola-conectada': 'Discover Escola Conectada'
+      },
+      vibecutThumbAlt: 'Illustrative preview of the VibeCut interface',
+      demoBarVibecut: 'VibeCut · ILLUSTRATIVE DEMO',
+      demoBarEscola: 'Escola Conectada · PENDING DEMO',
+      demoEscolaTabs: ['Enrollments', 'Attendance', 'Grades'],
+      products: {
+        groom: {
+          segmento: 'For barbershops',
+          headline: 'Your schedule and your finances moving in the same direction.',
+          beneficios: [
+            'Booking via WhatsApp',
+            'Financial control and waiting list',
+            'Reports to keep track of your operation'
+          ]
+        },
+        fasto: {
+          segmento: 'For beauty and aesthetics',
+          headline: 'Take care of your clients. Organize what comes next.',
+          beneficios: [
+            'Online and manual booking, with a service catalog',
+            'Membership club',
+            'Reminders and charges via WhatsApp'
+          ]
+        },
+        lumen: {
+          segmento: 'For education and philosophy',
+          headline: 'More context to explore ideas.',
+          beneficios: [
+            'Thinkers and works in perspective',
+            'Exploration across 9 analytical axes',
+            'A tool for education and philosophy'
+          ]
+        },
+        vibecut: {
+          segmento: 'For barbershops and hair salons',
+          headline: 'A personal reference before choosing the haircut.',
+          beneficios: [
+            'Personalized haircut suggestions',
+            'Possibilities for barbershops and salons'
+          ]
+        },
+        'escola-conectada': {
+          segmento: 'For educational institutions',
+          headline: 'A shared view of school life.',
+          beneficios: [
+            'Enrollments, attendance and grades',
+            'Communication and reports',
+            'Customizable per institution'
+          ]
+        }
+      },
+      custom: {
+        eyebrow: 'Does your business run differently?',
+        title: 'The system can start from your operation.',
+        description: 'For needs outside the catalog, we develop custom solutions, with scope and customization agreed upon.',
+        ctaWhatsApp: 'Chat on WhatsApp',
+        microcopy: 'Tell us about your routine in the same sales conversation.'
+      },
+      hook: 'See what it is like to work with TechMinds.'
+    },
     hero: {
       headline: 'AI systems that transform your entire business.',
       subheadline: 'Automate processes, integrate systems, and scale with cutting-edge artificial intelligence — for businesses of any size.',
@@ -565,6 +767,84 @@ export const translations: Record<Language, Translations> = {
         }
       ],
       hook: 'El próximo paso es reunir lo que importa. Encuentra tu camino en el catálogo.'
+    },
+    catalogB: {
+      eyebrow: 'Encuentra tu camino',
+      title: '¿Qué parte de tu rutina puede quedar más clara?',
+      activeStatement: 'Cinco productos en el catálogo. Groom, FasTo y Lumen están activos.',
+      developingStatement: 'VibeCut y Escola Conectada están en desarrollo.',
+      carouselTitle: 'Explora las soluciones',
+      carouselSubtitle: 'Cinco productos, organizados en un flujo visual más compacto y fácil de navegar.',
+      carouselPrev: 'Tarjeta anterior',
+      carouselNext: 'Siguiente tarjeta',
+      paginationLabel: 'Ir a la tarjeta',
+      badgeActive: '● Activo',
+      badgeDeveloping: 'En desarrollo',
+      ctaLabels: {
+        'conhecer-groom': 'Conocer Groom',
+        'conhecer-fasto': 'Conocer FasTo',
+        'conhecer-lumen': 'Conocer Lumen',
+        'conhecer-vibecut': 'Conocer VibeCut',
+        'conhecer-escola-conectada': 'Conocer Escola Conectada'
+      },
+      vibecutThumbAlt: 'Vista ilustrativa de la interfaz de VibeCut',
+      demoBarVibecut: 'VibeCut · DEMO ILUSTRATIVA',
+      demoBarEscola: 'Escola Conectada · DEMO PENDIENTE',
+      demoEscolaTabs: ['Matrículas', 'Asistencia', 'Notas'],
+      products: {
+        groom: {
+          segmento: 'Para barberías',
+          headline: 'Tu agenda y tus cuentas en la misma dirección.',
+          beneficios: [
+            'Agendamiento por WhatsApp',
+            'Control financiero y lista de espera',
+            'Informes para acompañar la operación'
+          ]
+        },
+        fasto: {
+          segmento: 'Para estética y belleza',
+          headline: 'Cuide a los clientes. Organice lo que viene después.',
+          beneficios: [
+            'Agenda online y manual, con catálogo',
+            'Club de suscripciones',
+            'Recordatorios y cobros por WhatsApp'
+          ]
+        },
+        lumen: {
+          segmento: 'Para educación y filosofía',
+          headline: 'Más contexto para explorar ideas.',
+          beneficios: [
+            'Pensadores y obras en perspectiva',
+            'Exploración en 9 ejes analíticos',
+            'Una herramienta para educación y filosofía'
+          ]
+        },
+        vibecut: {
+          segmento: 'Para barberías y salones',
+          headline: 'Una referencia personal antes de elegir el corte.',
+          beneficios: [
+            'Sugerencias personalizadas de cortes',
+            'Posibilidades para barberías y salones'
+          ]
+        },
+        'escola-conectada': {
+          segmento: 'Para instituciones de enseñanza',
+          headline: 'Una visión compartida de la vida escolar.',
+          beneficios: [
+            'Matrículas, asistencia y notas',
+            'Comunicación e informes',
+            'Personalizable por institución'
+          ]
+        }
+      },
+      custom: {
+        eyebrow: '¿Tu negocio tiene otra dinámica?',
+        title: 'El sistema puede partir de tu operación.',
+        description: 'Para necesidades fuera del catálogo, desarrollamos a medida, con alcance y personalización acordados.',
+        ctaWhatsApp: 'Conversar por WhatsApp',
+        microcopy: 'Cuéntanos tu rutina en la misma conversación comercial.'
+      },
+      hook: 'Vea cómo es trabajar con TechMinds.'
     },
     hero: {
       headline: 'Sistemas de IA que transforman todo tu negocio.',

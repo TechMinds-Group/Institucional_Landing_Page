@@ -2,9 +2,9 @@ import { NavbarB } from "../components/NavbarB";
 import { HeroB } from "../components/HeroB";
 import { SocialProof } from "../components/SocialProof";
 import { ProblemSection } from "../components/ProblemSection";
+import { CatalogSection } from "../components/CatalogSection";
 import { Features } from "../components/Features";
 import { HowItWorks } from "../components/HowItWorks";
-import { Products } from "../components/Products";
 import { FinalCTA } from "../components/FinalCTA";
 import { Footer } from "../components/Footer";
 import { ProductModal, ProductData } from "../components/ProductModal";
@@ -107,9 +107,12 @@ export function MainPage() {
       <HeroB />
       <SocialProof />
       <ProblemSection />
+      {/* Catálogo do design B (RN-019) — substitui o grid Products legado.
+          Seções legadas seguintes (SocialProof/Features/HowItWorks/FinalCTA)
+          e o rodapé + ProductModal permanecem até RN-021/RN-024. */}
+      <CatalogSection />
       <Features />
       <HowItWorks />
-      <Products />
       <FinalCTA />
       <Footer onProductClick={handleProductClick} />
       
