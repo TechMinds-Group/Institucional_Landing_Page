@@ -225,7 +225,7 @@ function SectionPainSolution() {
           </div>
           <div className="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start relative shrink-0 text-[#0f172a] w-full">
             <p className="font-['Manrope:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[18px] w-full">Cliente marcou e simplesmente não apareceu?</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic opacity-80 relative shrink-0 text-[14px] w-full">Você reservou o horário, recusou outros clientes e ficou com a cadeira vazia. Dinheiro perdido. Com o Groom, lembretes automáticos no WhatsApp reduzem faltas drasticamente.</p>
+            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic opacity-80 relative shrink-0 text-[14px] w-full">Lembretes automáticos pelo WhatsApp ajudam a reduzir as faltas.</p>
           </div>
         </div>
         {/* Pain Card 2 */}
@@ -238,7 +238,7 @@ function SectionPainSolution() {
           </div>
           <div className="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start relative shrink-0 text-[#0f172a] w-full">
             <p className="font-['Manrope:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[18px] w-full">Anotou no papel e perdeu o agendamento?</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic opacity-80 relative shrink-0 text-[14px] w-full">Aquele rabisco que ninguém entende, a folha que sumiu, o horário que foi marcado duas vezes. Já aconteceu, né? Com o Groom, sua agenda é digital, na nuvem e acessível de qualquer lugar.</p>
+            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic opacity-80 relative shrink-0 text-[14px] w-full">Sua agenda digital fica organizada e segura na nuvem.</p>
           </div>
         </div>
         {/* Pain Card 3 */}
@@ -251,7 +251,7 @@ function SectionPainSolution() {
           </div>
           <div className="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start relative shrink-0 text-[#0f172a] w-full">
             <p className="font-['Manrope:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[18px] w-full">Planos de assinatura e serviços avulsos</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic opacity-80 relative shrink-0 text-[14px] w-full">Cliente com plano de assinatura contratado sendo cobrado como avulso, ou pior — serviço feito e ninguém cobrou. Controlar assinantes na planilha vira confusão. No Groom, cada cliente tem seu perfil organizado com plano, validade e serviços separados automaticamente.</p>
+            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic opacity-80 relative shrink-0 text-[14px] w-full">Perfil, validade e serviços separados para simplificar a gestão.</p>
           </div>
         </div>
         {/* Pain Card 4 */}
@@ -264,7 +264,7 @@ function SectionPainSolution() {
           </div>
           <div className="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start relative shrink-0 text-[#0f172a] w-full">
             <p className="font-['Manrope:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[18px] w-full">Seu barbeiro chegou e não sabia a agenda do dia?</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic opacity-80 relative shrink-0 text-[14px] w-full">Profissional perdido perguntando quem é o próximo, cliente esperando sem necessidade, horários trocados. No Groom, cada profissional vê sua agenda em tempo real no celular.</p>
+            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic opacity-80 relative shrink-0 text-[14px] w-full">Cada profissional acompanha a agenda em tempo real pelo celular.</p>
           </div>
         </div>
         {/* Pain Card 5 */}
@@ -281,7 +281,7 @@ function SectionPainSolution() {
           </div>
           <div className="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start overflow-clip relative shrink-0 text-[#0f172a] w-full">
             <p className="font-['Manrope:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[18px] w-full">Terça-feira vazia e você nem percebeu o padrão?</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[14px] w-full">Você tem dias e horários mortos e não faz nada a respeito. O Groom identifica esses buracos na agenda e sugere promoções relâmpago com valores calculados para valer a pena — pronto para você anunciar nas redes sociais.</p>
+            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[14px] w-full">Identifique horários vazios e encontre oportunidades para promoções.</p>
           </div>
         </div>
         {/* Pain Card 6 */}
@@ -296,7 +296,7 @@ function SectionPainSolution() {
           </div>
           <div className="[word-break:break-word] content-stretch flex flex-col gap-[12px] items-start overflow-clip relative shrink-0 text-[#0f172a] w-full">
             <p className="font-['Manrope:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[18px] w-full">Cliente sumiu e você nem notou?</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[14px] w-full">Ele vinha todo mês, parou de aparecer e você só percebeu semanas depois. O Groom monitora a frequência de cada cliente e avisa você quando ele passa do tempo normal sem voltar — para que você decida se quer enviar uma mensagem personalizada, além de promoções automáticas em aniversários.</p>
+            <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[14px] w-full">Acompanhe a frequência dos clientes e lembre os aniversários.</p>
           </div>
         </div>
       </div>
@@ -306,10 +306,10 @@ function SectionPainSolution() {
 
 function SectionHowItWorks() {
   const steps = [
-    { num: "01", icon: <path d={svgPaths.p163a41e0} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "Cliente agenda em segundos", desc: "Seu cliente acessa o link exclusivo da sua barbearia ou manda uma mensagem direto no WhatsApp do estabelecimento. Escolhe o profissional, o serviço e o horário disponível — tudo rápido e sem complicação." },
-    { num: "02", icon: <path d={svgPaths.p28682900} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "WhatsApp notifica", desc: "O profissional recebe uma notificação instantânea no WhatsApp com opções rápidas para confirmar ou recusar. O cliente é notificado na hora com a resposta e todos os detalhes do agendamento." },
-    { num: "03", icon: <path d={svgPaths.p23bc3600} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "Lembretes automáticos", desc: "O sistema envia lembretes de confirmação de forma inteligente, nos horários mais estratégicos antes do agendamento. Tudo automático, sem configuração — o Groom decide o melhor momento para reduzir faltas e cancelamentos de última hora em até 80%." },
-    { num: "04", icon: <path d={svgPaths.p26837680} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "Você domina o painel", desc: "Faturamento, ocupação, planos ativos, ranking da equipe e muito mais. Conte com análise preditiva, simulações de cenários — como mais clientes, valores diferentes — e dados completos para tomar decisões com segurança." },
+    { num: "01", icon: <path d={svgPaths.p163a41e0} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "Cliente agenda em segundos", desc: "Pelo seu link exclusivo ou WhatsApp, o cliente escolhe profissional, serviço e horário." },
+    { num: "02", icon: <path d={svgPaths.p28682900} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "WhatsApp notifica", desc: "O profissional confirma ou recusa o agendamento e o cliente é notificado." },
+    { num: "03", icon: <path d={svgPaths.p23bc3600} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "Lembretes automáticos", desc: "Mensagens em horários estratégicos, sem trabalho manual. Tudo automático." },
+    { num: "04", icon: <path d={svgPaths.p26837680} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "Você domina o painel", desc: "Faturamento, ocupação, planos, equipe e análises em um só lugar." },
   ];
   return (
     <div id="como-funciona" className="bg-[#1a2233] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
@@ -360,18 +360,18 @@ function CheckSmIcon({ color = "#0D6EFD" }: { color?: string }) {
 
 function SectionFeatures() {
   const features = [
-    { title: "WhatsApp Integrado", desc: "Robô automatizado que realiza o agendamento, confirmação e envia lembrete amigável." },
-    { title: "Agendamento Online 24h", desc: "Cada estabelecimento tem seu link público para o cliente agendar sozinho a qualquer hora." },
-    { title: "Dashboard Inteligente", desc: "Faturamento consolidado, ocupação, gestão de assinaturas recorrentes e ticket médio atualizado." },
-    { title: "Clube de Assinaturas (MRR)", desc: "Crie planos mensais ou semanais de recorrência e garanta estabilidade no seu faturamento." },
-    { title: "Relatórios e Simulador", desc: "Projeções de crescimento para o próximo semestre e relatórios detalhados de desempenho." },
-    { title: "Gestão de Equipe", desc: "Controle individual de horários, serviços prestados, comissões e níveis de acesso ao sistema." },
-    { title: "Catálogo de Serviços", desc: "Apresente um catálogo digital elegante dos seus serviços, pacotes e tratamentos estéticos." },
-    { title: "Migração de Dados", desc: "Importe sua base de clientes e histórico de outros sistemas em poucos cliques. Precisa migrar dados específicos? Entre em contato com a gente e negociamos a melhor solução." },
-    { title: "Suporte Ultra Rápido", desc: "Atendimento humanizado direto no WhatsApp. Nossa equipe técnica responde em poucos minutos com atenção real ao seu problema." },
-    { title: "Feriados e Bloqueios", desc: "Importe todos os feriados do ano em um clique. Configure folgas da equipe e bloqueios de agenda sem risco de agendar em dia fechado." },
-    { title: "Tema Claro/Escuro", desc: "Adapte o visual do seu painel administrativo como preferir com elegância premium." },
-    { title: "Multi-idioma nativo", desc: "Suporte nativo e completo para clientes em português, inglês e espanhol." },
+    { title: "WhatsApp Integrado", desc: "Agendamentos e confirmações no seu WhatsApp." },
+    { title: "Agendamento Online 24h", desc: "Seu link de agendamento sempre disponível." },
+    { title: "Dashboard Inteligente", desc: "Uma visão clara da operação do negócio." },
+    { title: "Clube de Assinaturas (MRR)", desc: "Planos recorrentes para fidelizar clientes." },
+    { title: "Relatórios e Simulador", desc: "Dados para apoiar suas decisões." },
+    { title: "Gestão de Equipe", desc: "Profissionais, comissões e agenda conectados." },
+    { title: "Catálogo de Serviços", desc: "Seus serviços organizados em um catálogo." },
+    { title: "Migração de Dados", desc: "Traga seus dados do sistema anterior." },
+    { title: "Suporte Ultra Rápido", desc: "Atendimento direto com a nossa equipe." },
+    { title: "Feriados e Bloqueios", desc: "Controle a disponibilidade da agenda." },
+    { title: "Tema Claro/Escuro", desc: "Escolha o visual que funciona para você." },
+    { title: "Multi-idioma nativo", desc: "Idiomas disponíveis dentro do software." },
   ];
   return (
     <div id="funcionalidades" className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
@@ -380,7 +380,7 @@ function SectionFeatures() {
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
           <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0d6efd] text-[12px] uppercase whitespace-nowrap">RECURSOS COMPLETOS</p>
         </div>
-        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#0f172a] text-2xl md:text-3xl lg:text-[36px] text-center w-[min-content]">Tudo que você precisa em uma única plataforma</p>
+        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#0f172a] text-2xl md:text-3xl lg:text-[36px] text-center w-[min-content]">Tudo que você precisa em uma única plataforma.</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative shrink-0 w-full">
         {features.map((f) => (
@@ -401,7 +401,11 @@ function SectionFeatures() {
             <path d={svgPaths.p13053670} stroke="#F1C75C" strokeLinecap="round" strokeWidth="2" />
           </svg>
         </div>
-        <p className="[word-break:break-word] flex-[1_0_0] font-['Inter:Regular',sans-serif] font-normal leading-[1.5] min-w-px not-italic relative text-[#f8fafc] text-[15px]">Enquanto outros sistemas resolvem um pedaço do problema, o Groom entrega a solução completa. Agendamento, WhatsApp, assinaturas, dados e gestão — tudo no mesmo lugar.</p>
+        {/* Callout — copy dividida em título (bold) + descrição (dossier g2 §6, RN-036-3) */}
+        <div className="[word-break:break-word] flex-[1_0_0] flex flex-col gap-[6px] min-w-px relative">
+          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[1.5] not-italic relative text-[#f8fafc] text-[15px]">Enquanto outros sistemas resolvem um pedaço do problema, o Groom entrega a solução completa.</p>
+          <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic relative text-[#cbd5e1] text-[14px]">Agendamento, WhatsApp, assinaturas, dados e gestão — tudo no mesmo lugar.</p>
+        </div>
       </div>
     </div>
   );
