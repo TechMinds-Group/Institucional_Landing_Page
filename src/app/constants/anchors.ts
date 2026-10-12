@@ -15,3 +15,32 @@ export const SECTION_IDS = {
   empresa: 'empresa',
   contato: 'contato',
 } as const;
+
+// ── Landings de produto (RN-025) ──────────────────────────────────
+// IDs de âncora por landing (navbar RN-026 — dossiê g1 / UI_SPEC §1):
+// VibeCut "Como funciona · Estilos · Privacidade · FAQ" (+ Testes p/
+// CTA) · Lumen "Acervo · Como funciona · Seu perfil · FAQ" ·
+// FasTo "Como funciona · Recursos · Clube · FAQ". Prefixo por produto
+// evita colisão entre landings. A regra global `section[id] {
+// scroll-margin-top: 100px }` (styles/index.css) cobre essas seções.
+export const LANDING_SECTION_IDS = {
+  vibecut: {
+    comoFunciona: 'vibecut-como-funciona',
+    estilos: 'vibecut-estilos',
+    privacidade: 'vibecut-privacidade',
+    faq: 'vibecut-faq',
+    testes: 'vibecut-testes',
+  },
+  lumen: {
+    acervo: 'lumen-acervo',
+    comoFunciona: 'lumen-como-funciona',
+    seuPerfil: 'lumen-seu-perfil',
+    faq: 'lumen-faq',
+  },
+  fasto: {
+    comoFunciona: 'fasto-como-funciona',
+    recursos: 'fasto-recursos',
+    clube: 'fasto-clube',
+    faq: 'fasto-faq',
+  },
+} as const;
