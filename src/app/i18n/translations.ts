@@ -10,6 +10,30 @@ export interface Translations {
     contact: string;
     getStarted: string;
   };
+  navB: {
+    solutions: string;
+    howWeWork: string;
+    company: string;
+    contact: string;
+  };
+  heroB: {
+    eyebrow: string;
+    headline: string;
+    supportLine1: string;
+    supportLine2: string;
+    ctaWhatsApp: string;
+    microcopy: string;
+    hook: string;
+    imageAlt: string;
+  };
+  problemB: {
+    title: string;
+    cards: {
+      title: string;
+      description: string;
+    }[];
+    hook: string;
+  };
   hero: {
     headline: string;
     subheadline: string;
@@ -112,6 +136,40 @@ export const translations: Record<Language, Translations> = {
       customers: 'Clientes',
       contact: 'Contato',
       getStarted: 'Ver soluções'
+    },
+    navB: {
+      solutions: 'Soluções',
+      howWeWork: 'Como trabalhamos',
+      company: 'Empresa',
+      contact: 'Contato'
+    },
+    heroB: {
+      eyebrow: 'Tecnologia para negócios que crescem',
+      headline: 'Menos rotina dispersa. Mais controle para crescer.',
+      supportLine1: 'Sistemas prontos, em evolução constante e moldados à sua operação — com manutenção e suporte incluídos.',
+      supportLine2: 'Você conversa com a gente, e a tecnologia acompanha o crescimento do seu negócio.',
+      ctaWhatsApp: 'Conversar no WhatsApp',
+      microcopy: 'Escopo, suporte e condições acordados com você.',
+      hook: 'Veja qual solução faz sentido para sua rotina.',
+      imageAlt: 'Ilustração de um hub orbital noturno conectando os sistemas TechMinds'
+    },
+    problemB: {
+      title: 'O problema da rotina dispersa',
+      cards: [
+        {
+          title: 'Pedidos espalhados no WhatsApp',
+          description: 'Conversas simultâneas, anotações manuais e informações importantes perdidas no meio das mensagens.'
+        },
+        {
+          title: 'Agenda difícil de acompanhar',
+          description: 'Horários combinados por mensagem, com remarcações e conflitos que escapam do controle.'
+        },
+        {
+          title: 'Dados separados para decidir',
+          description: 'Cada informação em um lugar diferente — e nenhuma visão completa do negócio na hora de decidir.'
+        }
+      ],
+      hook: 'O próximo passo é reunir o que importa. Encontre seu caminho no catálogo.'
     },
     hero: {
       headline: 'Softwares prontos, em evolução constante e moldados para o seu negócio.',
@@ -276,6 +334,40 @@ export const translations: Record<Language, Translations> = {
       contact: 'Contact',
       getStarted: 'Get started'
     },
+    navB: {
+      solutions: 'Solutions',
+      howWeWork: 'How we work',
+      company: 'Company',
+      contact: 'Contact'
+    },
+    heroB: {
+      eyebrow: 'Technology for growing businesses',
+      headline: 'Less scattered routine. More control to grow.',
+      supportLine1: 'Ready-made systems, constantly evolving and shaped to your operation — with maintenance and support included.',
+      supportLine2: 'You talk to us, and the technology keeps up with your business growth.',
+      ctaWhatsApp: 'Chat on WhatsApp',
+      microcopy: 'Scope, support and conditions agreed with you.',
+      hook: 'See which solution makes sense for your routine.',
+      imageAlt: 'Illustration of a nighttime orbital hub connecting TechMinds systems'
+    },
+    problemB: {
+      title: 'The problem of the scattered routine',
+      cards: [
+        {
+          title: 'Orders scattered across WhatsApp',
+          description: 'Simultaneous chats, manual notes and important information lost in the middle of messages.'
+        },
+        {
+          title: 'A schedule that is hard to follow',
+          description: 'Appointments arranged by message, with reschedules and conflicts slipping out of control.'
+        },
+        {
+          title: 'Data separated when deciding',
+          description: 'Each piece of information in a different place — and no complete view of the business when making decisions.'
+        }
+      ],
+      hook: 'The next step is bringing what matters together. Find your path in the catalog.'
+    },
     hero: {
       headline: 'AI systems that transform your entire business.',
       subheadline: 'Automate processes, integrate systems, and scale with cutting-edge artificial intelligence — for businesses of any size.',
@@ -439,6 +531,40 @@ export const translations: Record<Language, Translations> = {
       customers: 'Clientes',
       contact: 'Contacto',
       getStarted: 'Comenzar ahora'
+    },
+    navB: {
+      solutions: 'Soluciones',
+      howWeWork: 'Cómo trabajamos',
+      company: 'Empresa',
+      contact: 'Contacto'
+    },
+    heroB: {
+      eyebrow: 'Tecnología para negocios que crecen',
+      headline: 'Menos rutina dispersa. Más control para crecer.',
+      supportLine1: 'Sistemas listos, en evolución constante y moldeados a tu operación — con mantenimiento y soporte incluidos.',
+      supportLine2: 'Tú conversas con nosotros, y la tecnología acompaña el crecimiento de tu negocio.',
+      ctaWhatsApp: 'Conversar por WhatsApp',
+      microcopy: 'Alcance, soporte y condiciones acordados contigo.',
+      hook: 'Mira qué solución tiene sentido para tu rutina.',
+      imageAlt: 'Ilustración de un hub orbital nocturno conectando los sistemas de TechMinds'
+    },
+    problemB: {
+      title: 'El problema de la rutina dispersa',
+      cards: [
+        {
+          title: 'Pedidos dispersos en WhatsApp',
+          description: 'Conversas simultáneas, anotaciones manuales e información importante perdida entre los mensajes.'
+        },
+        {
+          title: 'Agenda difícil de seguir',
+          description: 'Horarios combinados por mensaje, con reprogramaciones y conflictos que se escapan del control.'
+        },
+        {
+          title: 'Datos separados al decidir',
+          description: 'Cada información en un lugar distinto — y ninguna visión completa del negocio al momento de decidir.'
+        }
+      ],
+      hook: 'El próximo paso es reunir lo que importa. Encuentra tu camino en el catálogo.'
     },
     hero: {
       headline: 'Sistemas de IA que transforman todo tu negocio.',

@@ -1,7 +1,7 @@
-import { Navigation } from "../components/Navigation";
-import { Hero } from "../components/Hero";
+import { NavbarB } from "../components/NavbarB";
+import { HeroB } from "../components/HeroB";
 import { SocialProof } from "../components/SocialProof";
-import { ProblemSolution } from "../components/ProblemSolution";
+import { ProblemSection } from "../components/ProblemSection";
 import { Features } from "../components/Features";
 import { HowItWorks } from "../components/HowItWorks";
 import { Products } from "../components/Products";
@@ -103,10 +103,10 @@ export function MainPage() {
   return (
     <div className="min-h-screen bg-[#0D0D0D] font-['Inter',sans-serif]">
       <div id="main-scroll-sentinel" className="absolute top-0 h-px w-px pointer-events-none" />
-      <Navigation />
-      <Hero />
+      <NavbarB />
+      <HeroB />
       <SocialProof />
-      <ProblemSolution />
+      <ProblemSection />
       <Features />
       <HowItWorks />
       <Products />
