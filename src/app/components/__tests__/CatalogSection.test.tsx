@@ -1,12 +1,19 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { screen, within, fireEvent } from "@testing-library/react";
-import { CatalogSection } from "../CatalogSection";
+import { screen, within, fireEvent, act } from "@testing-library/react";
+import { CatalogSection, computePageCount } from "../CatalogSection";
 import { renderWithProviders, resetI18n } from "../../../test/test-utils";
 import { SECTION_IDS } from "../../constants/anchors";
 import { WHATSAPP_HERO_MESSAGE, WHATSAPP_NUMBER } from "../../constants/contacts";
 
 // Ordem canônica do carrossel (CR-001): groom, fasto, lumen, vibecut,
-// escola-conectada — posições 1–5 da paginação numerada.
+// escola-conectada.
+//
+// Paginação dinâmica (revisão 11/10/2026): o nº de páginas vem das medidas
+// reais do viewport (mount + resize via computePageCount), não da
+// quantidade fixa de produtos. jsdom não mede scroll — nas specs de
+// componente, as métricas são determinadas no elemento (fallback de 1
+// página em jsdom), e computePageCount é verificada como função pura.
+// Mockups ilustrativos removidos dos cartões na revisão 11/10/2026.
 
 function cardById(id: string): HTMLElement {
   const card = screen
@@ -31,9 +38,54 @@ function stubScrollTo(): { calls: unknown[] } {
   return { calls };
 }
 
+/** Sobrescreve as métricas de layout do viewport e dispara o resize
+ *  medindo de novo no listener do componente. */
+function stubViewportMetrics(scrollWidth: number, clientWidth: number) {
+  const viewport = screen.getByTestId("carousel-viewport");
+  Object.defineProperty(viewport, "scrollWidth", {
+    value: scrollWidth,
+    configurable: true,
+  });
+  Object.defineProperty(viewport, "clientWidth", {
+    value: clientWidth,
+    configurable: true,
+  });
+  act(() => {
+    window.dispatchEvent(new Event("resize"));
+  });
+}
+
 afterEach(() => {
   delete (Element.prototype as unknown as Record<string, unknown>).scrollTo;
   vi.restoreAllMocks();
+});
+
+describe("computePageCount (paginação pela quantidade real de conteúdo)", () => {
+  it("sem overflow → 1 página", () => {
+    expect(computePageCount(2000, 2000)).toBe(1);
+  });
+
+  it("faixa menor que o viewport → 1 página", () => {
+    expect(computePageCount(100, 400)).toBe(1);
+  });
+
+  it("medidas 0/indefinidas → 1 página (fallback seguro)", () => {
+    expect(computePageCount(0, 400)).toBe(1);
+    expect(computePageCount(400, 0)).toBe(1);
+    expect(computePageCount(0, 0)).toBe(1);
+    expect(
+      computePageCount(undefined as unknown as number, 400)
+    ).toBe(1);
+    expect(computePageCount(400, undefined as unknown as number)).toBe(1);
+  });
+
+  it("overflow real → ceil((scrollWidth - clientWidth) / 400) + 1 (ex.: 3 páginas)", () => {
+    expect(computePageCount(1000, 400)).toBe(3);
+  });
+
+  it("5 cartões de 400px em viewport de 400px → 5 páginas", () => {
+    expect(computePageCount(2000, 400)).toBe(5);
+  });
 });
 
 describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
@@ -60,11 +112,24 @@ describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
     ).toBeInTheDocument();
   });
 
-  it("renderiza 5 cartões com índice de chips e paginação numerada 1–5", () => {
+  it("renderiza 5 cartões e 5 chips; paginação com fallback de 1 página em jsdom", () => {
     renderWithProviders(<CatalogSection />);
 
     expect(screen.getAllByTestId("product-card")).toHaveLength(5);
     expect(screen.getAllByTestId("catalog-chip")).toHaveLength(5);
+    // jsdom mede 0 → computePageCount(0, 0) = 1
+    expect(pageButtons().map((p) => p.textContent)).toEqual(["1"]);
+    expect(pageButtons()[0]).toHaveAttribute("aria-current", "true");
+    // Única página: setas com stop nas duas pontas
+    expect(screen.getByTestId("carousel-prev")).toBeDisabled();
+    expect(screen.getByTestId("carousel-next")).toBeDisabled();
+  });
+
+  it("paginação dinâmica reflete o conteúdo medido do viewport (resize)", () => {
+    renderWithProviders(<CatalogSection />);
+
+    stubViewportMetrics(2000, 400);
+
     expect(pageButtons().map((p) => p.textContent)).toEqual([
       "1",
       "2",
@@ -72,25 +137,28 @@ describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
       "4",
       "5",
     ]);
+    // Página 1 continua ativa após recontagem
+    expect(pageButtons()[0]).toHaveAttribute("aria-current", "true");
   });
 
-  it("setas navegam pelos cartões com stop nas pontas (decisão documentada)", () => {
+  it("setas navegam pelas páginas com stop nas pontas (decisão documentada)", () => {
     const { calls } = stubScrollTo();
     renderWithProviders(<CatalogSection />);
+    stubViewportMetrics(2000, 400);
 
     const next = screen.getByTestId("carousel-next");
     const prev = screen.getByTestId("carousel-prev");
 
-    // Posição inicial 1: prev desabilitada (STOP — sem wrap)
+    // Página 1: prev desabilitada (STOP — sem wrap)
     expect(prev).toBeDisabled();
     expect(next).not.toBeDisabled();
 
-    // 4 avanços → posição 5, next desabilitada
+    // 4 avanços → página 5 (última), next desabilitada
     for (let i = 0; i < 4; i++) fireEvent.click(next);
     expect(pageButtons()[4]).toHaveAttribute("aria-current", "true");
     expect(next).toBeDisabled();
     expect(prev).not.toBeDisabled();
-    // deslocamento por cartão (400px) na posição 5
+    // deslocamento por cartão (400px) na página 5
     expect(calls.at(-1)).toEqual({ left: 1600, behavior: "smooth" });
 
     // Volta: paginação reflete o índice ativo
@@ -101,15 +169,31 @@ describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
   it("paginação numerada controla a posição do carrossel", () => {
     const { calls } = stubScrollTo();
     renderWithProviders(<CatalogSection />);
+    stubViewportMetrics(2000, 400);
 
-    fireEvent.click(pageButtons()[2]); // posição 3
+    fireEvent.click(pageButtons()[2]); // página 3
     expect(pageButtons()[2]).toHaveAttribute("aria-current", "true");
     expect(calls.at(-1)).toEqual({ left: 800, behavior: "smooth" });
+  });
+
+  it("scroll do viewport é a fonte da verdade da página ativa (onScroll)", () => {
+    renderWithProviders(<CatalogSection />);
+    stubViewportMetrics(2000, 400);
+
+    const viewport = screen.getByTestId("carousel-viewport");
+    Object.defineProperty(viewport, "scrollLeft", {
+      value: 1200, // 1200/400 = índice 3 → página 4
+      configurable: true,
+    });
+    fireEvent.scroll(viewport);
+
+    expect(pageButtons()[3]).toHaveAttribute("aria-current", "true");
   });
 
   it("chips compartilham a posição com o carrossel", () => {
     const { calls } = stubScrollTo();
     renderWithProviders(<CatalogSection />);
+    stubViewportMetrics(2000, 400);
 
     const chips = screen.getAllByTestId("catalog-chip");
     fireEvent.click(chips[3]); // VibeCut
@@ -153,29 +237,12 @@ describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
-  it("mockup demo ilustrativo do VibeCut (barra + thumb de referência)", () => {
+  it("cartões não exibem mockups (removidos na revisão 11/10/2026)", () => {
     renderWithProviders(<CatalogSection />);
 
-    const mockup = screen.getByTestId("mockup-vibecut");
-    expect(mockup).toHaveTextContent("VibeCut · DEMO ILUSTRATIVA");
-    const img = within(mockup).getByRole("img");
-    expect(img.getAttribute("src")).toMatch(/vibecut-demo-ref/);
-  });
-
-  it("mockup placeholder 'DEMO PENDENTE' da Escola Conectada com abas", () => {
-    renderWithProviders(<CatalogSection />);
-
-    const mockup = screen.getByTestId("mockup-escola");
-    expect(mockup).toHaveTextContent("Escola Conectada · DEMO PENDENTE");
-    expect(within(mockup).getByText("Matrículas")).toBeInTheDocument();
-    expect(within(mockup).getByText("Frequência")).toBeInTheDocument();
-    expect(within(mockup).getByText("Notas")).toBeInTheDocument();
-  });
-
-  it("Groom, FasTo e Lumen não exibem bloco de mockup demo", () => {
-    renderWithProviders(<CatalogSection />);
-
-    for (const id of ["groom", "fasto", "lumen"]) {
+    expect(screen.queryByTestId("mockup-vibecut")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("mockup-escola")).not.toBeInTheDocument();
+    for (const id of ["groom", "fasto", "lumen", "vibecut", "escola-conectada"]) {
       const card = cardById(id);
       expect(
         card.querySelector("[data-testid='mockup-vibecut']"),
@@ -224,6 +291,7 @@ describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
     } as MediaQueryList);
 
     renderWithProviders(<CatalogSection />);
+    stubViewportMetrics(2000, 400);
 
     fireEvent.click(screen.getByTestId("carousel-next"));
     expect(calls.at(-1)).toEqual({ left: 400, behavior: "auto" });

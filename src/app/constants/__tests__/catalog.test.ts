@@ -48,15 +48,10 @@ describe("Modelo de conteúdo do catálogo B (RN-019-1 — CR-001)", () => {
     }
   });
 
-  it("mockups correspondem à tabela da análise (VibeCut demo; Escola pendente)", () => {
-    expect(byId(pt, "groom").mockup.tipo).toBe("imagem");
-    expect(byId(pt, "fasto").mockup.tipo).toBe("imagem");
-    expect(byId(pt, "lumen").mockup.tipo).toBe("imagem");
-    expect(byId(pt, "vibecut").mockup.tipo).toBe("demo-ilustrativo");
-    expect(byId(pt, "vibecut").mockup.asset).toBeTruthy();
-    expect(byId(pt, "escola-conectada").mockup.tipo).toBe(
-      "placeholder-demo-pendente"
-    );
+  it("produtos não expõem campo mockup (removido na revisão 11/10/2026)", () => {
+    for (const product of pt) {
+      expect("mockup" in product, product.id).toBe(false);
+    }
   });
 
   it("conteúdo de cada produto é resolvido nos 3 idiomas (RN-004)", () => {

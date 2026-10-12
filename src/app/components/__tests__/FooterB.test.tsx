@@ -1,46 +1,20 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { screen, fireEvent, act, within, render } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+import { screen, within, render } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { I18nProvider } from "../../i18n/I18nContext";
 import { FooterB } from "../FooterB";
 import { renderWithProviders, resetI18n } from "../../../test/test-utils";
-import { EMAILS_BY_AREA } from "../../constants/contacts";
 import { SECTION_IDS } from "../../constants/anchors";
 
-// RN-024-3 (RNs RN-003/RN-024): Rodapé B — 3 grupos de navegação, gate de
+// RN-024-3 (RNs RN-024): Rodapé B — 3 grupos de navegação, gate de
 // Sistemas por landing própria (Groom → /groom), links legais para as
-// páginas (sem modal — CR-005), contatos por área copiáveis (RN-003) e
-// identificação empresarial. i18n RN-004.
-
-async function flushPromises() {
-  await act(async () => {});
-}
+// páginas (sem modal — CR-005) e identificação empresarial. i18n RN-004.
+// A linha "Contatos por área" foi removida na revisão de 11/10/2026
+// (duplicava contatos já exibidos no Company Trust).
 
 describe("FooterB (RN-024-3)", () => {
-  let writeText: ReturnType<typeof vi.fn>;
-  let execCommand: ReturnType<typeof vi.fn>;
-  let originalExecCommand: unknown;
-
   beforeEach(() => {
     resetI18n();
-    writeText = vi.fn().mockResolvedValue(undefined);
-    Object.defineProperty(navigator, "clipboard", {
-      value: { writeText },
-      configurable: true,
-    });
-    originalExecCommand = document.execCommand;
-    execCommand = vi.fn(() => true);
-    (document as unknown as Record<string, unknown>).execCommand = execCommand;
-  });
-
-  afterEach(() => {
-    Object.defineProperty(navigator, "clipboard", {
-      value: undefined,
-      configurable: true,
-    });
-    (document as unknown as Record<string, unknown>).execCommand =
-      originalExecCommand;
-    vi.useRealTimers();
   });
 
   it("exibe fundo escuro, marca + statement e identificação empresarial em PT", () => {
@@ -123,41 +97,13 @@ describe("FooterB (RN-024-3)", () => {
     );
   });
 
-  it("contatos por área copiáveis com feedback 'Copiado!' por 2s (RN-003)", async () => {
-    vi.useFakeTimers();
+  it("não renderiza a linha de contatos por área (removida na revisão 11/10/2026)", () => {
     renderWithProviders(<FooterB />);
 
-    const contacts = screen.getByTestId("footerb-contacts");
-    expect(within(contacts).getByText("Carreiras")).toBeInTheDocument();
-    expect(within(contacts).getByText(EMAILS_BY_AREA.careers)).toBeInTheDocument();
-    expect(within(contacts).getByText("Suporte")).toBeInTheDocument();
-    expect(within(contacts).getByText(EMAILS_BY_AREA.support)).toBeInTheDocument();
-    expect(within(contacts).getByText("Privacidade e conformidade")).toBeInTheDocument();
-    expect(within(contacts).getByText(EMAILS_BY_AREA.compliance)).toBeInTheDocument();
-
-    fireEvent.click(screen.getByTestId("footerb-contact-support-button"));
-    await flushPromises();
-
-    expect(writeText).toHaveBeenCalledWith(EMAILS_BY_AREA.support);
-    expect(screen.getByText("Copiado!")).toBeInTheDocument();
-
-    await act(async () => vi.advanceTimersByTime(2000));
-    expect(screen.queryByText("Copiado!")).not.toBeInTheDocument();
-  });
-
-  it("cópia via fallback execCommand quando clipboard nativo está indisponível", async () => {
-    vi.useFakeTimers();
-    Object.defineProperty(navigator, "clipboard", {
-      value: undefined,
-      configurable: true,
-    });
-    renderWithProviders(<FooterB />);
-
-    fireEvent.click(screen.getByTestId("footerb-contact-careers-button"));
-    await flushPromises();
-
-    expect(execCommand).toHaveBeenCalledWith("copy");
-    expect(screen.getByText("Copiado!")).toBeInTheDocument();
+    expect(screen.queryByTestId("footerb-contacts")).not.toBeInTheDocument();
+    // Os contatos por área continuam no Company Trust (não no Rodapé)
+    expect(screen.queryByText("Carreiras")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("footerb-contact-support-button")).not.toBeInTheDocument();
   });
 
   it("reflete o idioma ativo quando o dicionário é EN (RN-004)", () => {
@@ -188,7 +134,7 @@ describe("FooterB (RN-024-3)", () => {
     expect(within(footer).getByText("Términos de uso")).toBeInTheDocument();
     expect(within(footer).getByText("Nombre Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT")).toBeInTheDocument();
     expect(within(footer).getByText("© 2026 TechMinds. Todos los derechos reservados.")).toBeInTheDocument();
-    expect(within(footer).getByText("Contactos por área")).toBeInTheDocument();
+    expect(within(footer).queryByText("Contactos por área")).not.toBeInTheDocument();
   });
 
   it("renderiza em rota legal sem quebrar (FooterB autossuficiente — sem props de modal)", async () => {

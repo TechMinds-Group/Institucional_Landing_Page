@@ -60,10 +60,6 @@ export interface Translations {
       'conhecer-vibecut': string;
       'conhecer-escola-conectada': string;
     };
-    vibecutThumbAlt: string;
-    demoBarVibecut: string;
-    demoBarEscola: string;
-    demoEscolaTabs: string[];
     products: {
       groom: CatalogProductText;
       fasto: CatalogProductText;
@@ -158,14 +154,6 @@ export interface Translations {
       terms: string;
       privacy: string;
     };
-    contactsTitle: string;
-    contacts: {
-      careers: string;
-      support: string;
-      compliance: string;
-    };
-    copyHint: string;
-    copied: string;
     legalName: string;
     cnpj: string;
     copyright: string;
@@ -249,10 +237,6 @@ export const translations: Record<Language, Translations> = {
         'conhecer-vibecut': 'Conhecer VibeCut',
         'conhecer-escola-conectada': 'Conhecer Escola Conectada'
       },
-      vibecutThumbAlt: 'Prévia ilustrativa da interface do VibeCut',
-      demoBarVibecut: 'VibeCut · DEMO ILUSTRATIVA',
-      demoBarEscola: 'Escola Conectada · DEMO PENDENTE',
-      demoEscolaTabs: ['Matrículas', 'Frequência', 'Notas'],
       products: {
         groom: {
           segmento: 'Para barbearias',
@@ -414,14 +398,6 @@ export const translations: Record<Language, Translations> = {
         terms: 'Termos de uso',
         privacy: 'Privacidade'
       },
-      contactsTitle: 'Contatos por área',
-      contacts: {
-        careers: 'Carreiras',
-        support: 'Suporte',
-        compliance: 'Privacidade e conformidade'
-      },
-      copyHint: 'Clique para copiar',
-      copied: 'Copiado!',
       legalName: 'Nome Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT',
       cnpj: 'CNPJ: 69.184.592/0001-45 | Guaíba - RS',
       copyright: '© 2026 TechMinds. Todos os direitos reservados.'
@@ -503,10 +479,6 @@ export const translations: Record<Language, Translations> = {
         'conhecer-vibecut': 'Discover VibeCut',
         'conhecer-escola-conectada': 'Discover Escola Conectada'
       },
-      vibecutThumbAlt: 'Illustrative preview of the VibeCut interface',
-      demoBarVibecut: 'VibeCut · ILLUSTRATIVE DEMO',
-      demoBarEscola: 'Escola Conectada · PENDING DEMO',
-      demoEscolaTabs: ['Enrollments', 'Attendance', 'Grades'],
       products: {
         groom: {
           segmento: 'For barbershops',
@@ -668,14 +640,6 @@ export const translations: Record<Language, Translations> = {
         terms: 'Terms of use',
         privacy: 'Privacy'
       },
-      contactsTitle: 'Contacts by area',
-      contacts: {
-        careers: 'Careers',
-        support: 'Support',
-        compliance: 'Privacy and conformity'
-      },
-      copyHint: 'Click to copy',
-      copied: 'Copied!',
       legalName: 'Legal Name: 69.184.592 MICHEL LEMOS BITTENCOURT',
       cnpj: 'CNPJ: 69.184.592/0001-45 | Guaíba - RS',
       copyright: '© 2026 TechMinds. All rights reserved.'
@@ -758,10 +722,6 @@ export const translations: Record<Language, Translations> = {
         'conhecer-vibecut': 'Conocer VibeCut',
         'conhecer-escola-conectada': 'Conocer Escola Conectada'
       },
-      vibecutThumbAlt: 'Vista ilustrativa de la interfaz de VibeCut',
-      demoBarVibecut: 'VibeCut · DEMO ILUSTRATIVA',
-      demoBarEscola: 'Escola Conectada · DEMO PENDIENTE',
-      demoEscolaTabs: ['Matrículas', 'Asistencia', 'Notas'],
       products: {
         groom: {
           segmento: 'Para barberías',
@@ -923,14 +883,6 @@ export const translations: Record<Language, Translations> = {
         terms: 'Términos de uso',
         privacy: 'Privacidad'
       },
-      contactsTitle: 'Contactos por área',
-      contacts: {
-        careers: 'Carreras',
-        support: 'Soporte',
-        compliance: 'Privacidad y conformidad'
-      },
-      copyHint: 'Haz clic para copiar',
-      copied: '¡Copiado!',
       legalName: 'Nombre Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT',
       cnpj: 'CNPJ: 69.184.592/0001-45 | Guaíba - RS',
       copyright: '© 2026 TechMinds. Todos los derechos reservados.'

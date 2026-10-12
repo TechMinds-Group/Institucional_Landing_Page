@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { useI18n } from "../i18n/I18nContext";
@@ -11,36 +11,91 @@ import { CustomDevelopmentBlock } from "./CustomDevelopmentBlock";
 const CARD_WIDTH = 400;
 
 /**
+ * Contagem de páginas a partir das medidas do viewport do carrossel
+ * (fonte da verdade da paginação — reflete a quantidade real de
+ * conteúdo em qualquer largura de tela):
+ * - 0/indefinido ou sem overflow → 1 página;
+ * - caso contrário, Cartões completos além do viewport + 1
+ *   (`Math.ceil((scrollWidth - clientWidth) / CARD_WIDTH) + 1`).
+ */
+export function computePageCount(
+  scrollWidth: number,
+  clientWidth: number
+): number {
+  if (!Number.isFinite(scrollWidth) || !Number.isFinite(clientWidth)) return 1;
+  if (scrollWidth <= 0 || clientWidth <= 0) return 1;
+  if (scrollWidth <= clientWidth) return 1;
+  return Math.ceil((scrollWidth - clientWidth) / CARD_WIDTH) + 1;
+}
+
+/**
  * Seção "Catálogo de soluções" do design B (RN-019): intro com estados
  * textuais do canônico CR-001, índice de chips (um por produto), carrossel
- * horizontal de cartões 400px com paginação numerada 1–5 + setas prev/next,
+ * horizontal de cartões 400px com paginação numerada dinâmica (contagem por
+ * posições de scroll do viewport — mount + resize) + setas prev/next,
  * bloco "Desenvolvimento sob medida" (RN-020) e gancho final para a
  * próxima seção (RN-022).
  *
  * Decisões de implementação (design não define): pontas do carrossel com
- * STOP (setas desabilitam em 1 e 5 — sem wrap) e deslocamento por scroll
- * nativo do viewport (clamp automático no fim da faixa), suave exceto com
- * prefers-reduced-motion (RN-022).
+ * STOP (setas desabilitam na primeira e na última página — sem wrap),
+ * deslocamento por scroll nativo do viewport (clamp automático no fim da
+ * faixa), suave exceto com prefers-reduced-motion (RN-022). O scroll do
+ * viewport é a fonte da verdade da posição ativa (onScroll re-sincroniza o
+ * índice). Mockups ilustrativos dos cartões removidos na revisão de
+ * 11/10/2026.
  */
 export function CatalogSection() {
   const { t } = useI18n();
   const products = getCatalogProducts(t.catalogB);
   const [index, setIndex] = useState(0);
+  const [pageCount, setPageCount] = useState(1);
   const viewportRef = useRef<HTMLDivElement>(null);
-  const lastIndex = products.length - 1;
+  const lastIndex = pageCount - 1;
+
+  const clampIndex = (i: number) => Math.max(0, Math.min(i, lastIndex));
+
+  // Paginação dinâmica: mede o viewport no mount e a cada resize — a
+  // quantidade de páginas reflete a quantidade real de conteúdo. Em
+  // ambientes sem medição (jsdom), fallback de 1 página. Cleanup remove o
+  // listener; clamp mantém o índice dentro dos limites ao reduzir páginas.
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const measure = () => {
+      setPageCount(
+        computePageCount(viewport.scrollWidth, viewport.clientWidth)
+      );
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  useEffect(() => {
+    setIndex((current) => clampIndex(current));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageCount]);
 
   const goTo = (i: number) => {
-    setIndex(i);
+    setIndex(clampIndex(i));
     const viewport = viewportRef.current;
     if (viewport && typeof viewport.scrollTo === "function") {
       const reduceMotion =
         typeof window.matchMedia === "function" &&
         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       viewport.scrollTo({
-        left: i * CARD_WIDTH,
+        left: clampIndex(i) * CARD_WIDTH,
         behavior: reduceMotion ? "auto" : "smooth",
       });
     }
+  };
+
+  // O scroll do viewport é a fonte da verdade: volta do usuário (arraste,
+  // trackpad, teclado) re-sincroniza a página ativa com a posição real.
+  const handleViewportScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    setIndex(
+      clampIndex(Math.round(e.currentTarget.scrollLeft / CARD_WIDTH))
+    );
   };
 
   return (
@@ -112,6 +167,7 @@ export function CatalogSection() {
             ref={viewportRef}
             className="overflow-x-hidden"
             data-testid="carousel-viewport"
+            onScroll={handleViewportScroll}
           >
             <div data-testid="carousel-track" className="flex">
               {products.map((product) => (
@@ -133,7 +189,7 @@ export function CatalogSection() {
               <ChevronLeft className="w-5 h-5" aria-hidden="true" />
             </button>
 
-            {products.map((_, i) => (
+            {Array.from({ length: pageCount }, (_, i) => (
               <button
                 key={i}
                 type="button"
@@ -232,46 +288,6 @@ function ProductCard({ product }: { product: CatalogProduct }) {
             </li>
           ))}
         </ul>
-
-        {/* Mockup de demonstração (regra 5: produto sem demo nunca vazio) */}
-        {product.mockup.tipo === "demo-ilustrativo" && product.mockup.asset && (
-          <div
-            data-testid="mockup-vibecut"
-            className="rounded-xl overflow-hidden border border-[#D9DDE3] mb-4"
-          >
-            <div className="bg-[#111318] text-white text-[11px] font-semibold uppercase tracking-wider px-3 py-2">
-              {t.catalogB.demoBarVibecut}
-            </div>
-            <img
-              src={product.mockup.asset}
-              alt={t.catalogB.vibecutThumbAlt}
-              className="w-full h-auto"
-            />
-          </div>
-        )}
-        {product.mockup.tipo === "placeholder-demo-pendente" && (
-          <div
-            data-testid="mockup-escola"
-            className="rounded-xl overflow-hidden border border-[#D9DDE3] mb-4"
-          >
-            <div className="bg-[#111318] text-white text-[11px] font-semibold uppercase tracking-wider px-3 py-2">
-              {t.catalogB.demoBarEscola}
-            </div>
-            <div className="bg-[#F7F8FC] p-3">
-              <div className="flex gap-1.5 mb-3">
-                {t.catalogB.demoEscolaTabs.map((tab) => (
-                  <span
-                    key={tab}
-                    className="px-2 py-1 rounded bg-white border border-[#D9DDE3] text-[11px] text-[#4B5563]"
-                  >
-                    {tab}
-                  </span>
-                ))}
-              </div>
-              <div className="h-16 rounded bg-white border border-dashed border-[#D9DDE3]" />
-            </div>
-          </div>
-        )}
 
         {/* CTA "Conhecer X" — gate por landing própria (RN-006/CR-004) */}
         {product.cta.enabled && product.cta.href ? (

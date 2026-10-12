@@ -1,10 +1,8 @@
 import { Link, useLocation, useNavigate } from "react-router";
 import { Logo } from "./Logo";
-import { CopyContact } from "./CopyContact";
 import { useI18n } from "../i18n/I18nContext";
 import { smoothScrollTo } from "../utils/scroll";
 import { SECTION_IDS } from "../constants/anchors";
-import { EMAILS_BY_AREA } from "../constants/contacts";
 
 /**
  * Nav "Sistemas" do rodapé — os 5 produtos do canônico CR-001/ADR-012.
@@ -27,13 +25,14 @@ const SYSTEMS_LINKS: ReadonlyArray<
  * Rodapé do design B (RN-024-3 — frame #111:12609, fundo #111318, id
  * `contato`): marca + statement; navegação em 3 grupos — Sistemas (gate por
  * landing), Empresa (âncoras da Main) e Legal (páginas próprias, destino
- * padrão vibecut — fallback RN-007; **sem modal** — CR-005/ADR-013); linha
- * de contatos por área copiáveis (RN-003 via CopyContact); divisor
+ * padrão vibecut — fallback RN-007; **sem modal** — CR-005/ADR-013); divisor
  * #303342; identificação empresarial (CNPJ real — ADR-005) + © 2026.
  *
- * Redes sociais ausentes no design B — não criar links (gap confirmado).
- * Desktop-first (frame B mobile inexistente): padding adaptado em telas
- * menores conforme RN-011 (tap targets ≥44px, sem overflow-x).
+ * A linha "Contatos por área" foi removida na revisão de 11/10/2026
+ * (duplicava os contatos do Company Trust). Redes sociais ausentes no
+ * design B — não criar links (gap confirmado). Desktop-first (frame B
+ * mobile inexistente): padding adaptado em telas menores conforme RN-011
+ * (tap targets ≥44px, sem overflow-x).
  */
 export function FooterB() {
   const { t } = useI18n();
@@ -163,40 +162,6 @@ export function FooterB() {
               </ul>
             </div>
           </nav>
-        </div>
-
-        {/* Linha "Contatos por área" — copiáveis (RN-003) */}
-        <div
-          data-testid="footerb-contacts"
-          className="flex flex-col sm:flex-row sm:flex-wrap gap-x-8 gap-y-3 mb-10"
-        >
-          <span className="text-white font-semibold text-sm">
-            {footerB.contactsTitle}
-          </span>
-          <CopyContact
-            value={EMAILS_BY_AREA.careers}
-            label={footerB.contacts.careers}
-            copiedLabel={footerB.copied}
-            hint={footerB.copyHint}
-            className="text-[#818BA1]"
-            testId="footerb-contact-careers"
-          />
-          <CopyContact
-            value={EMAILS_BY_AREA.support}
-            label={footerB.contacts.support}
-            copiedLabel={footerB.copied}
-            hint={footerB.copyHint}
-            className="text-[#818BA1]"
-            testId="footerb-contact-support"
-          />
-          <CopyContact
-            value={EMAILS_BY_AREA.compliance}
-            label={footerB.contacts.compliance}
-            copiedLabel={footerB.copied}
-            hint={footerB.copyHint}
-            className="text-[#818BA1]"
-            testId="footerb-contact-compliance"
-          />
         </div>
 
         {/* Divisor */}

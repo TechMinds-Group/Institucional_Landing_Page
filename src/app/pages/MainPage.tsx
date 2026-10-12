@@ -4,7 +4,8 @@ import { ProblemSection } from "../components/ProblemSection";
 import { CatalogSection } from "../components/CatalogSection";
 import { HowItWorksB } from "../components/HowItWorksB";
 import { PillarsSection } from "../components/PillarsSection";
-import { SocialProofSection } from "../components/SocialProofSection";
+// RN-023: a prova social fica fora da composição por ora — ver
+// comentário no local da renderização.
 // RN-024: fechamento do design B — trust panel "Company and trust" (RN-024-2)
 // e Rodapé B (RN-024-3). Seções legadas FinalCTA/Footer removidas (RN-024-4);
 // o modal de produto e os detalhes embutidos nele saem junto (CR-005/ADR-013
@@ -51,12 +52,12 @@ export function MainPage() {
       <ProblemSection />
       {/* Catálogo do design B (RN-019) + bloco sob medida (RN-020). */}
       <CatalogSection />
-      {/* Main B (RN-021): Como funciona → Pilares de entrega → Prova social
-          e próximo passo (RN-023). Seções legadas SocialProof/Features/
-          HowItWorks removidas. */}
+      {/* Main B (RN-021): Como funciona → Pilares de entrega.
+          A prova social (RN-023) fica oculta — comentário abaixo. */}
       <HowItWorksB />
       <PillarsSection />
-      <SocialProofSection />
+      {/* RN-023 — Prova social oculta por ora (decisão 11/10/2026, operador):
+          reativar após validação/autorização dos cases. */}
       {/* RN-024 (fechamento do design B): trust panel "Company and trust" +
           Rodapé B substituem FinalCTA/Footer; sem modal (CR-005/ADR-013). */}
       <CompanyTrustSection />

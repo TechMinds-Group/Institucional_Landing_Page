@@ -21,21 +21,21 @@ describe("MainPage — composição Main B (RN-021)", () => {
     expect(source).not.toMatch(/<(SocialProof|Features|HowItWorks)[\s/>]/);
   });
 
-  it("renderiza as três seções B (Como funciona, Pilares, Prova social)", () => {
+  it("renderiza as seções B (Como funciona, Pilares) e prova social oculta por ora (RN-023)", () => {
     expect(source).toContain("../components/HowItWorksB");
     expect(source).toContain("<HowItWorksB");
     expect(source).toContain("../components/PillarsSection");
     expect(source).toContain("<PillarsSection");
-    expect(source).toContain("../components/SocialProofSection");
-    expect(source).toContain("<SocialProofSection");
+    // RN-023 — ocultada por decisão de 11/10/2026 (reativar após
+    // validação/autorização dos cases): nem import nem renderização.
+    expect(source).not.toContain("SocialProofSection");
   });
 
-  it("ordem do design B: Catálogo → Como funciona → Pilares → Prova social → Company and trust → Rodapé B", () => {
+  it("ordem do design B: Catálogo → Como funciona → Pilares → Company and trust → Rodapé B", () => {
     const positions = [
       source.indexOf("<CatalogSection"),
       source.indexOf("<HowItWorksB"),
       source.indexOf("<PillarsSection"),
-      source.indexOf("<SocialProofSection"),
       source.indexOf("<CompanyTrustSection"),
       source.indexOf("<FooterB"),
     ];
@@ -43,7 +43,7 @@ describe("MainPage — composição Main B (RN-021)", () => {
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);
   });
 
-  it("estrutura B completa: NavbarB → HeroB → Problema → Catálogo → Como funciona → Pilares → Prova social → Company and trust → Rodapé B (RN-024)", () => {
+  it("estrutura B completa: NavbarB → HeroB → Problema → Catálogo → Como funciona → Pilares → Company and trust → Rodapé B (RN-024; prova social oculta — RN-023)", () => {
     const positions = [
       source.indexOf("<NavbarB"),
       source.indexOf("<HeroB"),
@@ -51,7 +51,6 @@ describe("MainPage — composição Main B (RN-021)", () => {
       source.indexOf("<CatalogSection"),
       source.indexOf("<HowItWorksB"),
       source.indexOf("<PillarsSection"),
-      source.indexOf("<SocialProofSection"),
       source.indexOf("<CompanyTrustSection"),
       source.indexOf("<FooterB"),
     ];
