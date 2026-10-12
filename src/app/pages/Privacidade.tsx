@@ -7,8 +7,10 @@ import { privacySections, lumenPrivacySections, legalProductMeta, crossLinkLabel
 import { LumenPrivacyPolicy } from "../components/legal/LumenPrivacyPolicy";
 import { ArrowUp } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
+import { DEFAULT_LEGAL_PRODUCT, getLegalProductTabs, type CatalogProductId } from "./legalTabs";
 
-type ProductId = "vibecut" | "groom" | "zonemap" | "escola-conectada" | "lumen";
+// Slugs legais = ids do canônico CR-001 (fonte única constants/catalog.ts — RN-007).
+type ProductId = CatalogProductId;
 
 // ─── Outer wrapper — single source of truth for I18nProvider ─────────────────
 export function Privacidade() {
@@ -32,19 +34,14 @@ function PrivacidadeContent() {
 
   const meta = legalProductMeta[safeLang];
 
-  const products = [
-    { id: "vibecut" as ProductId,          name: "VibeCut",          tag: meta.vibecutTag,        lastUpdated: meta.vibecutLastUpdated, disabled: false },
-    { id: "groom" as ProductId,            name: "Groom",            tag: meta.groomTag,          lastUpdated: t.legal.comingSoon,      disabled: true  },
-    { id: "zonemap" as ProductId,          name: "ZoneMap",          tag: meta.zonemapTag,        lastUpdated: t.legal.comingSoon,      disabled: true  },
-    { id: "escola-conectada" as ProductId, name: "Escola Conectada", tag: meta.escolaConectadaTag,lastUpdated: t.legal.comingSoon,      disabled: true  },
-    { id: "lumen" as ProductId,            name: "Lumen",            tag: meta.lumenTag,          lastUpdated: meta.lumenLastUpdated,   disabled: false },
-  ];
+  // Tabs derivam do canônico CR-001 via legalTabs.ts — ordem do canônico,
+  // ZoneMap-fora e disponibilidade legal ≠ status comercial (RN-007/CR-001).
+  const products = getLegalProductTabs(t.catalogB, meta, t.legal.comingSoon);
 
-  const defaultProduct = "vibecut";
   const initialProduct =
     productParam && products.find((p) => p.id === productParam && !p.disabled)
       ? productParam
-      : defaultProduct;
+      : DEFAULT_LEGAL_PRODUCT;
 
   const [selectedProduct, setSelectedProduct] = useState<ProductId>(initialProduct);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -143,12 +140,13 @@ function PrivacidadeContent() {
 
       {/* Product Selector Cards */}
       <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-testid="legal-tabs-grid">
           {products.map((product) => (
             <button
               key={product.id}
               onClick={() => handleProductClick(product.id)}
               disabled={product.disabled}
+              data-testid={`legal-tab-${product.id}`}
               className={`
                 relative p-5 rounded-xl transition-all duration-200 text-left
                 ${
