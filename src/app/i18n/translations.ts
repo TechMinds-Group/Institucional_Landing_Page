@@ -283,6 +283,7 @@ export interface Translations {
   navB: {
     solutions: string;
     howWeWork: string;
+    pilares: string;
     company: string;
     contact: string;
   };
@@ -452,8 +453,9 @@ export const translations: Record<Language, Translations> = {
       getStarted: 'Ver soluções'
     },
     navB: {
-      solutions: 'Soluções',
-      howWeWork: 'Como trabalhamos',
+      solutions: 'Catálogo',
+      howWeWork: 'Como funciona',
+      pilares: 'Pilares',
       company: 'Empresa',
       contact: 'Contato'
     },
@@ -1331,8 +1333,9 @@ export const translations: Record<Language, Translations> = {
       getStarted: 'Get started'
     },
     navB: {
-      solutions: 'Solutions',
-      howWeWork: 'How we work',
+      solutions: 'Catalog',
+      howWeWork: 'How it works',
+      pilares: 'Pillars',
       company: 'Company',
       contact: 'Contact'
     },
@@ -2211,8 +2214,9 @@ export const translations: Record<Language, Translations> = {
       getStarted: 'Comenzar ahora'
     },
     navB: {
-      solutions: 'Soluciones',
-      howWeWork: 'Cómo trabajamos',
+      solutions: 'Catálogo',
+      howWeWork: 'Cómo funciona',
+      pilares: 'Pilares',
       company: 'Empresa',
       contact: 'Contacto'
     },

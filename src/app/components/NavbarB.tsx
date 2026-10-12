@@ -28,6 +28,7 @@ import { SECTION_IDS } from "../constants/anchors";
 const NAV_LINKS = [
   { key: "solutions", targetId: SECTION_IDS.catalogo },
   { key: "howWeWork", targetId: SECTION_IDS.comoFunciona },
+  { key: "pilares", targetId: SECTION_IDS.pilares },
   { key: "company", targetId: SECTION_IDS.empresa },
   { key: "contact", targetId: SECTION_IDS.contato },
 ] as const;
@@ -56,6 +57,7 @@ export function NavbarB() {
   const labels: Record<NavLinkKey, string> = {
     solutions: t.navB.solutions,
     howWeWork: t.navB.howWeWork,
+    pilares: t.navB.pilares,
     company: t.navB.company,
     contact: t.navB.contact,
   };

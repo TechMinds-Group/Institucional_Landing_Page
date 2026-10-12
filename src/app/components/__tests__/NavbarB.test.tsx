@@ -7,19 +7,23 @@ import { SECTION_IDS } from "../../constants/anchors";
 describe("NavbarB (RN-022-1)", () => {
   beforeEach(() => resetI18n());
 
-  it("exibe marca, 4 links âncora e 3 pills de idioma em PT (default)", () => {
+  it("exibe marca, 5 links âncora e 3 pills de idioma em PT (default)", () => {
     renderWithProviders(<NavbarB />);
 
     expect(screen.getAllByText("TechMinds").length).toBeGreaterThan(0);
 
     const links = within(screen.getByTestId("navb-links"));
-    expect(links.getByRole("link", { name: "Soluções" })).toHaveAttribute(
+    expect(links.getByRole("link", { name: "Catálogo" })).toHaveAttribute(
       "href",
       `#${SECTION_IDS.catalogo}`
     );
-    expect(links.getByRole("link", { name: "Como trabalhamos" })).toHaveAttribute(
+    expect(links.getByRole("link", { name: "Como funciona" })).toHaveAttribute(
       "href",
       `#${SECTION_IDS.comoFunciona}`
+    );
+    expect(links.getByRole("link", { name: "Pilares" })).toHaveAttribute(
+      "href",
+      `#${SECTION_IDS.pilares}`
     );
     expect(links.getByRole("link", { name: "Empresa" })).toHaveAttribute(
       "href",
@@ -52,8 +56,8 @@ describe("NavbarB (RN-022-1)", () => {
 
     expect(document.documentElement.lang).toBe("es");
     expect(localStorage.getItem("techminds-language")).toBe("es");
-    expect(within(screen.getByTestId("navb-links")).getByText("Soluciones")).toBeInTheDocument();
-    expect(within(screen.getByTestId("navb-links")).getByText("Cómo trabajamos")).toBeInTheDocument();
+    expect(within(screen.getByTestId("navb-links")).getByText("Catálogo")).toBeInTheDocument();
+    expect(within(screen.getByTestId("navb-links")).getByText("Cómo funciona")).toBeInTheDocument();
   });
 
   it("clicar em âncora ainda não entregue é no-op seguro (sem exceção)", () => {
@@ -61,7 +65,7 @@ describe("NavbarB (RN-022-1)", () => {
 
     const links = within(screen.getByTestId("navb-links"));
     expect(() =>
-      fireEvent.click(links.getByRole("link", { name: "Soluções" }))
+      fireEvent.click(links.getByRole("link", { name: "Catálogo" }))
     ).not.toThrow();
     expect(screen.getByTestId("navb-links")).toBeInTheDocument();
   });

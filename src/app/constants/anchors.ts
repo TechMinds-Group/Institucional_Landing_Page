@@ -12,6 +12,7 @@ export const SECTION_IDS = {
   problema: 'problema',
   catalogo: 'catalogo',
   comoFunciona: 'como-funciona',
+  pilares: 'pilares',
   empresa: 'empresa',
   contato: 'contato',
 } as const;

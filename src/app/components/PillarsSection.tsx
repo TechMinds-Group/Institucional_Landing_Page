@@ -18,7 +18,7 @@ export function PillarsSection() {
   const { t } = useI18n();
 
   return (
-    <section className="bg-white">
+    <section id={SECTION_IDS.pilares} className="bg-white">
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
         <div className="motion-safe max-w-2xl mx-auto text-center mb-12">
           <p className="text-sm font-semibold uppercase tracking-widest text-[#4B5563] mb-4">
