@@ -66,7 +66,7 @@ describe("NavbarB (RN-022-1)", () => {
     expect(screen.getByTestId("navb-links")).toBeInTheDocument();
   });
 
-  it("drawer mobile (RN-012): abre pelo hamburger, trava o scroll do body e mantém links legados", () => {
+  it("drawer mobile (RN-012): abre pelo hamburger, trava o scroll do body e usa o contrato de âncoras do design B", () => {
     renderWithProviders(<NavbarB />);
 
     expect(document.body.style.overflow).toBe("");
@@ -74,11 +74,29 @@ describe("NavbarB (RN-022-1)", () => {
     fireEvent.click(screen.getByRole("button", { name: /open menu/i }));
     expect(document.body.style.overflow).toBe("hidden");
 
-    // Links legados do drawer intactos (RN-012 — inalterado)
-    expect(screen.getByRole("button", { name: "Produtos" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Início" })).toBeInTheDocument();
+    // Links do drawer apontam para o contrato de âncoras B (RN-024):
+    // Início → hero · Sobre → empresa · Produtos → catalogo · Contato → contato
+    expect(screen.getByRole("button", { name: "Início" })).toHaveAttribute(
+      "data-testid",
+      `drawer-link-${SECTION_IDS.hero}`
+    );
+    expect(screen.getByRole("button", { name: "Sobre" })).toHaveAttribute(
+      "data-testid",
+      `drawer-link-${SECTION_IDS.empresa}`
+    );
+    expect(screen.getByRole("button", { name: "Produtos" })).toHaveAttribute(
+      "data-testid",
+      `drawer-link-${SECTION_IDS.catalogo}`
+    );
+    expect(screen.getByRole("button", { name: "Contato" })).toHaveAttribute(
+      "data-testid",
+      `drawer-link-${SECTION_IDS.contato}`
+    );
 
-    fireEvent.click(screen.getByRole("button", { name: /close menu/i }));
+    // Clique em âncora do drawer: sem exceção e drawer fechado.
+    expect(() =>
+      fireEvent.click(screen.getByRole("button", { name: "Contato" }))
+    ).not.toThrow();
     expect(document.body.style.overflow).toBe("");
   });
 });

@@ -3,6 +3,15 @@ import imgLogo from "../../imports/logo.png";
 import imgDashboardPreview from "../../imports/GroomLandingPage-3/20860e87f1caa68bf54946def42a084f479fa552.png";
 import { CreditCard, Bot, Ghost, Brain, DollarSign, RefreshCw, Flame, Crown, Sprout, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+// DEBT-003 (RN-024-1): Deep-links do WhatsApp vêm do módulo único de contatos
+// — substituição mecânica dos literais codificados diretamente no código (sem mudança de copy).
+import {
+  buildWhatsAppUrl,
+  WHATSAPP_GROOM_TRIAL_MESSAGE,
+  WHATSAPP_GROOM_PLAN_ESSENCIAL_MESSAGE,
+  WHATSAPP_GROOM_PLAN_PROFISSIONAL_MESSAGE,
+  WHATSAPP_GROOM_FLOATING_MESSAGE,
+} from "../constants/contacts";
 
 const svgPaths = {
   p12fd63e0: "M2 22C2 17.5 5.5 14 10 14C11.5 14 12.8 14.4 14 15",
@@ -85,7 +94,7 @@ function SectionHero() {
           <a href="https://groom.techminds.net.br/login" className="border-[#f1c75c] border-[1.5px] border-solid cursor-pointer content-stretch flex items-center justify-center overflow-clip px-[20px] py-[8px] relative rounded-[8px] shrink-0 hover:bg-[#f1c75c]/10 transition-colors">
             <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#f1c75c] text-[14px] whitespace-nowrap">Entrar</p>
           </a>
-          <a href="https://wa.me/5551997066347?text=Ol%C3%A1%2C%20equipe%20Groom!%20Tudo%20bem%20por%20a%C3%AD%3F%20Fiquei%20super%20interessado%20e%20gostaria%20de%20aproveitar%20o%20teste%20gratuito%20de%2015%20dias.%20Podem%20me%20ajudar%20a%20dar%20os%20primeiros%20passos%3F" target="_blank" rel="noreferrer" className="bg-[#f1c75c] cursor-pointer content-stretch flex items-start px-[24px] py-[10px] relative rounded-[8px] shrink-0">
+          <a href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noreferrer" className="bg-[#f1c75c] cursor-pointer content-stretch flex items-start px-[24px] py-[10px] relative rounded-[8px] shrink-0">
             <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[14px] whitespace-nowrap">TESTAR GRÁTIS</p>
           </a>
         </div>
@@ -105,7 +114,7 @@ function SectionHero() {
           </p>
           <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.6] min-w-full not-italic relative shrink-0 text-[#cbd5e1] text-[16px] w-[min-content]">O Groom é o sistema mais completo de agendamento e gestão para barbearias, salões de beleza, estúdios de tatuagem e clínicas de estética. O cliente agenda online, você recebe no WhatsApp, ninguém perde horário e seu faturamento escala.</p>
           <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
-            <a href="https://wa.me/5551997066347?text=Ol%C3%A1%2C%20equipe%20Groom!%20Tudo%20bem%20por%20a%C3%AD%3F%20Fiquei%20super%20interessado%20e%20gostaria%20de%20aproveitar%20o%20teste%20gratuito%20de%2015%20dias.%20Podem%20me%20ajudar%20a%20dar%20os%20primeiros%20passos%3F" target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex gap-[10px] items-center w-full md:w-auto px-[32px] py-4 md:py-[16px] relative rounded-[8px] shrink-0 justify-center md:justify-start">
+            <a href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex gap-[10px] items-center w-full md:w-auto px-[32px] py-4 md:py-[16px] relative rounded-[8px] shrink-0 justify-center md:justify-start">
               <p className="[word-break:break-word] font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[15px] text-center">QUERO TESTAR GRÁTIS POR 15 DIAS</p>
               <svg className="relative shrink-0" fill="none" height="18" viewBox="0 0 18 18" width="18">
                 <path d={svgPaths.p394a7400} stroke="#0F172A" strokeLinecap="round" strokeWidth="2" />
@@ -441,7 +450,7 @@ function SectionPricing() {
             ))}
           </div>
           <div className="mt-auto content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-            <a href="https://wa.me/5551997066347?text=Ol%C3%A1!%20Adorei%20a%20proposta%20do%20Plano%20Essencial%20e%20gostaria%20de%20come%C3%A7ar%20a%20usar%20o%20teste%20gr%C3%A1tis%20de%2015%20dias%20no%20meu%20estabelecimento.%20Como%20podemos%20iniciar%3F" target="_blank" rel="noreferrer" className="content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
+            <a href={buildWhatsAppUrl(WHATSAPP_GROOM_PLAN_ESSENCIAL_MESSAGE)} target="_blank" rel="noreferrer" className="content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
               <div aria-hidden className="absolute border border-[#0f172a] border-solid inset-0 pointer-events-none rounded-[8px]" />
               <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[13px] tracking-wide whitespace-nowrap">COMEÇAR 15 DIAS GRÁTIS</p>
             </a>
@@ -485,7 +494,7 @@ function SectionPricing() {
             ))}
           </div>
           <div className="mt-auto content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-            <a href="https://wa.me/5551997066347?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Fiquei%20muito%20impressionado%20com%20os%20recursos%20do%20Plano%20Profissional!%20Quero%20experimentar%20os%2015%20dias%20gratuitos%20para%20ver%20tudo%20na%20pr%C3%A1tica.%20Como%20fa%C3%A7o%20para%20ativar%3F" target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
+            <a href={buildWhatsAppUrl(WHATSAPP_GROOM_PLAN_PROFISSIONAL_MESSAGE)} target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
               <p className="font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[13px] tracking-wide text-center">QUERO O PLANO PROFISSIONAL GRÁTIS</p>
             </a>
             <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#f8fafc] text-[12px]">Inclui até 5 profissionais e 1.000 clientes.</p>
@@ -591,7 +600,7 @@ function SectionFinalCta() {
         <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#f8fafc] text-2xl md:text-3xl lg:text-[40px] text-center w-[min-content]">Pronto para profissionalizar seu negócio?</p>
       </div>
       <div className="content-stretch flex flex-col gap-[24px] items-center relative shrink-0 w-full">
-        <a href="https://wa.me/5551997066347?text=Ol%C3%A1%2C%20equipe%20Groom!%20Tudo%20bem%20por%20a%C3%AD%3F%20Fiquei%20super%20interessado%20e%20gostaria%20de%20aproveitar%20o%20teste%20gratuito%20de%2015%20dias.%20Podem%20me%20ajudar%20a%20dar%20os%20primeiros%20passos%3F" target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex gap-[12px] items-center w-full md:w-auto px-[48px] py-[20px] relative rounded-[8px] shrink-0 justify-center">
+        <a href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex gap-[12px] items-center w-full md:w-auto px-[48px] py-[20px] relative rounded-[8px] shrink-0 justify-center">
           <p className="[word-break:break-word] font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[16px] text-center">COMEÇAR GRÁTIS POR 15 DIAS</p>
           <svg fill="none" height="20" viewBox="0 0 20 20" width="20">
             <path d={svgPaths.p2df9a900} stroke="#0F172A" strokeLinecap="round" strokeWidth="2" />
@@ -688,7 +697,8 @@ function ScrollToTopButton() {
 
 function FloatingWhatsappCta() {
   const handleClick = () => {
-    window.open("https://wa.me/5551997066347?text=Ol%C3%A1%2C%20tudo%20bem%3F%20Vi%20o%20site%20do%20Groom%20e%20adorei%20a%20proposta.%20Gostaria%20muito%20de%20conversar%20com%20voc%C3%AAs%20para%20conhecer%20melhor%20o%20sistema%20e%20entender%20como%20ele%20pode%20me%20ajudar.", "_blank", "noopener,noreferrer");
+    // DEBT-003 (RN-024-1): deep-link vem do módulo único de contatos.
+    window.open(buildWhatsAppUrl(WHATSAPP_GROOM_FLOATING_MESSAGE), "_blank", "noopener,noreferrer");
   };
   return (
     <button

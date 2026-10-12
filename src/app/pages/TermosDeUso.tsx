@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navigation } from "../components/Navigation";
-import { Footer } from "../components/Footer";
+import { FooterB } from "../components/FooterB";
 import { I18nProvider, useI18n } from "../i18n/I18nContext";
 import { Language } from "../i18n/translations";
 import { termsSections, lumenTermsSections, legalProductMeta, crossLinkLabels } from "../i18n/legalContent";
@@ -116,8 +116,6 @@ function TermosDeUsoContent() {
       }, 200);
     }
   };
-
-  const handleFooterProductClick = () => navigate("/#section-produtos");
 
   const selectedProductName = products.find((p) => p.id === selectedProduct)?.name ?? "";
   const crossLink = crossLinkLabels[safeLang];
@@ -262,7 +260,9 @@ function TermosDeUsoContent() {
         <ArrowUp className="w-4 h-4" />
       </button>
 
-      <Footer onProductClick={handleFooterProductClick} />
+      {/* RN-024-3: Rodapé B — sem modal (CR-005); autossuficiente,
+          navega por rotas/âncoras com o contexto de rota atual. */}
+      <FooterB />
     </div>
   );
 }

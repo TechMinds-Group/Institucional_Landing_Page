@@ -3,7 +3,7 @@ import { screen, within, fireEvent } from "@testing-library/react";
 import { CatalogSection } from "../CatalogSection";
 import { renderWithProviders, resetI18n } from "../../../test/test-utils";
 import { SECTION_IDS } from "../../constants/anchors";
-import { WHATSAPP_HERO_MESSAGE } from "../../constants/contacts";
+import { WHATSAPP_HERO_MESSAGE, WHATSAPP_NUMBER } from "../../constants/contacts";
 
 // Ordem canônica do carrossel (CR-001): groom, fasto, lumen, vibecut,
 // escola-conectada — posições 1–5 da paginação numerada.
@@ -204,7 +204,7 @@ describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
 
     const cta = screen.getByTestId("custom-dev-whatsapp-cta");
     expect(cta.getAttribute("href")).not.toBe(
-      `https://wa.me/5551997066347?text=${encodeURIComponent(WHATSAPP_HERO_MESSAGE)}`
+      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_HERO_MESSAGE)}`
     );
   });
 

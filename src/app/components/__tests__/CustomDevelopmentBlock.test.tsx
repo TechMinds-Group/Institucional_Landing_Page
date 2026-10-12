@@ -6,6 +6,7 @@ import {
   buildWhatsAppUrl,
   WHATSAPP_CUSTOM_DEV_MESSAGE,
 } from "../../constants/contacts";
+import { WHATSAPP_NUMBER } from "../../constants/contacts";
 
 describe("CustomDevelopmentBlock (RN-020 — Desenvolvimento sob medida)", () => {
   beforeEach(() => resetI18n());
@@ -30,7 +31,7 @@ describe("CustomDevelopmentBlock (RN-020 — Desenvolvimento sob medida)", () =>
     ).toBeInTheDocument();
   });
 
-  it("CTA branco abre wa.me/5551997066347 em nova aba com mensagem própria (RN-002)", () => {
+  it("CTA branco abre deep-link wa.me em nova aba com mensagem própria (RN-002)", () => {
     renderWithProviders(<CustomDevelopmentBlock />);
 
     const cta = screen.getByTestId("custom-dev-whatsapp-cta");
@@ -40,7 +41,7 @@ describe("CustomDevelopmentBlock (RN-020 — Desenvolvimento sob medida)", () =>
       buildWhatsAppUrl(WHATSAPP_CUSTOM_DEV_MESSAGE)
     );
     expect(cta.getAttribute("href")).toMatch(
-      /^https:\/\/wa\.me\/5551997066347\?text=/
+      new RegExp(`^https:\\/\\/wa\\.me\\/${WHATSAPP_NUMBER}\\?text=`)
     );
     expect(cta).toHaveAttribute("target", "_blank");
     expect(cta.getAttribute("rel")).toContain("noopener");

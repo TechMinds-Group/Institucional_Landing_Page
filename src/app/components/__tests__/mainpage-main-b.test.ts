@@ -6,7 +6,8 @@ import { translations } from "../../i18n/translations";
 
 // RN-021: as seções legadas SocialProof/Features/HowItWorks saem da MainPage
 // e entram as seções B — Como funciona → Pilares de entrega → Prova social —
-// após o Catálogo (ordem do design B). FinalCTA/Footer permanecem (RN-024).
+// após o Catálogo (ordem do design B). RN-024: o fechamento passa a ser
+// Company and trust (RN-024-2) + Rodapé B (RN-024-3), sem FinalCTA/Footer.
 // Verificação por fonte: MainPage não é montada nos testes (IntersectionObserver).
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -29,13 +30,30 @@ describe("MainPage — composição Main B (RN-021)", () => {
     expect(source).toContain("<SocialProofSection");
   });
 
-  it("ordem do design B: Catálogo → Como funciona → Pilares → Prova social → FinalCTA", () => {
+  it("ordem do design B: Catálogo → Como funciona → Pilares → Prova social → Company and trust → Rodapé B", () => {
     const positions = [
       source.indexOf("<CatalogSection"),
       source.indexOf("<HowItWorksB"),
       source.indexOf("<PillarsSection"),
       source.indexOf("<SocialProofSection"),
-      source.indexOf("<FinalCTA"),
+      source.indexOf("<CompanyTrustSection"),
+      source.indexOf("<FooterB"),
+    ];
+    expect(positions.every((p) => p >= 0)).toBe(true);
+    expect([...positions].sort((a, b) => a - b)).toEqual(positions);
+  });
+
+  it("estrutura B completa: NavbarB → HeroB → Problema → Catálogo → Como funciona → Pilares → Prova social → Company and trust → Rodapé B (RN-024)", () => {
+    const positions = [
+      source.indexOf("<NavbarB"),
+      source.indexOf("<HeroB"),
+      source.indexOf("<ProblemSection"),
+      source.indexOf("<CatalogSection"),
+      source.indexOf("<HowItWorksB"),
+      source.indexOf("<PillarsSection"),
+      source.indexOf("<SocialProofSection"),
+      source.indexOf("<CompanyTrustSection"),
+      source.indexOf("<FooterB"),
     ];
     expect(positions.every((p) => p >= 0)).toBe(true);
     expect([...positions].sort((a, b) => a - b)).toEqual(positions);

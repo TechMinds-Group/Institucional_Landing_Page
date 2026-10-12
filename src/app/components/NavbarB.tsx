@@ -20,8 +20,9 @@ import { SECTION_IDS } from "../constants/anchors";
  * i18n (RN-004): pills chamam o I18nContext existente — persistência em
  * localStorage['techminds-language'] e <html lang> garantidas pelo contexto.
  *
- * Drawer mobile (RN-012): permanece como está — gap de design mobile
- * (frame B mobile inexistente). Links do drawer seguem âncoras legadas.
+ * Drawer mobile (RN-012): permanece com a mesma estrutura, com os links
+ * atualizados para o contrato de âncoras do design B (RN-024) — hero,
+ * empresa (Company and trust), catalogo e contato (rodapé).
  */
 
 const NAV_LINKS = [
@@ -79,12 +80,14 @@ export function NavbarB() {
     }
   };
 
-  // Drawer mobile (RN-012) — links e âncoras legadas mantidos como estão
+  // Drawer mobile (RN-012) — links atualizados para o contrato de âncoras
+  // do design B (constants/anchors.ts): Início → hero · Sobre → empresa
+  // (Company and trust) · Produtos → catálogo · Contato → rodapé.
   const drawerLinks = [
-    { label: t.nav.home, action: () => handleDrawerNavClick("top"), href: "#" },
-    { label: t.nav.about, action: () => handleDrawerNavClick("section-sobre"), href: "#section-sobre" },
-    { label: t.nav.products, action: () => handleDrawerNavClick("section-produtos"), href: "#section-produtos" },
-    { label: t.nav.contact, action: () => handleDrawerNavClick("section-contato"), href: "#section-contato" },
+    { label: t.nav.home, sectionId: SECTION_IDS.hero },
+    { label: t.nav.about, sectionId: SECTION_IDS.empresa },
+    { label: t.nav.products, sectionId: SECTION_IDS.catalogo },
+    { label: t.nav.contact, sectionId: SECTION_IDS.contato },
   ];
 
   const handleDrawerNavClick = (sectionId: string) => {
@@ -217,7 +220,8 @@ export function NavbarB() {
           {drawerLinks.map((link, i) => (
             <button
               key={i}
-              onClick={link.action}
+              data-testid={`drawer-link-${link.sectionId}`}
+              onClick={() => handleDrawerNavClick(link.sectionId)}
               className="w-full text-left px-6 text-gray-200 cursor-pointer transition-colors hover:text-[#5BC8C0] hover:bg-white/5"
               style={{
                 height: "48px",
@@ -263,7 +267,7 @@ export function NavbarB() {
 
           {/* CTA Button */}
           <button
-            onClick={() => handleDrawerNavClick("section-produtos")}
+            onClick={() => handleDrawerNavClick(SECTION_IDS.catalogo)}
             className="w-full py-3 rounded-full bg-gradient-to-r from-[#7B5EA7] via-[#6B8DC4] to-[#5BC8C0] text-white font-semibold cursor-pointer focus:outline-none shadow-[0_4px_18px_rgba(123,94,167,0.55)]"
             style={{ fontSize: "15px" }}
           >

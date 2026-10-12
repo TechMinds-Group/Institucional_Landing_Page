@@ -5,17 +5,19 @@ import { CatalogSection } from "../components/CatalogSection";
 import { HowItWorksB } from "../components/HowItWorksB";
 import { PillarsSection } from "../components/PillarsSection";
 import { SocialProofSection } from "../components/SocialProofSection";
-import { FinalCTA } from "../components/FinalCTA";
-import { Footer } from "../components/Footer";
-import { ProductModal, ProductData } from "../components/ProductModal";
-import { useState, useEffect, useRef } from "react";
-import { useI18n } from "../i18n/I18nContext";
+// RN-024: fechamento do design B — trust panel "Company and trust" (RN-024-2)
+// e Rodapé B (RN-024-3). Seções legadas FinalCTA/Footer removidas (RN-024-4);
+// o modal de produto e os detalhes embutidos nele saem junto (CR-005/ADR-013
+// — o footer legado era o último consumidor do modal).
+import { CompanyTrustSection } from "../components/CompanyTrustSection";
+import { FooterB } from "../components/FooterB";
+import { useEffect, useState } from "react";
 import { smoothScrollTo } from "../utils/scroll";
+// DEBT-003 (RN-024-1): deep-link do botão flutuante vem do módulo único de
+// contatos — substituição mecânica do literal hardcoded (copy preservada).
+import { buildWhatsAppUrl, WHATSAPP_MAIN_FLOATING_MESSAGE } from "../constants/contacts";
 
 export function MainPage() {
-  const { t } = useI18n();
-  const [selectedProduct, setSelectedProduct] = useState<ProductData | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -41,65 +43,6 @@ export function MainPage() {
     }
   }, []);
 
-  const productDetails: Record<string, ProductData> = {
-    'Groom': {
-      name: 'Groom',
-      tag: 'Gestão & Automação',
-      status: t.products.items[0].status,
-      description: 'Sistema completo de gestão para barbearias, desenvolvido para automatizar a operação do dia a dia e eliminar processos manuais. Integração nativa com WhatsApp para agendamentos automáticos, sem precisar de aplicativos de terceiros.',
-      features: [
-        'Agendamento automático via WhatsApp',
-        'Controle de caixa e fechamento diário',
-        'Gestão de fila de espera em tempo real',
-        'Relatórios gerenciais e histórico de clientes',
-        'Painel administrativo para múltiplos profissionais'
-      ]
-    },
-    'VibeCut': {
-      name: 'VibeCut',
-      tag: 'Inteligência Artificial',
-      status: t.products.items[1].status,
-      description: 'Sistema com IA que analisa o formato do rosto do cliente e gera sugestões visuais de cortes de cabelo personalizados. Aumenta o engajamento no atendimento e reduz a indecisão na cadeira.',
-      features: [
-        'Análise facial por IA em segundos',
-        'Geração de sugestões visuais de corte personalizadas',
-        'Interface intuitiva para uso no salão ou pelo próprio cliente',
-        'Customizável com o catálogo de cortes da sua barbearia'
-      ]
-    },
-    'ZoneMap': {
-      name: 'ZoneMap',
-      tag: 'Mapas Interativos',
-      status: t.products.items[2].status,
-      description: 'Plataforma de mapas interativos com design clean, moderno e flat para espaços extensos como zoológicos, jardins botânicos, parques e eventos. Permite que visitantes explorem o local, encontrem pontos de interesse e acompanhem eventos em tempo real.',
-      features: [
-        'Mapa interativo com design flat e moderno',
-        'Cadastro e exibição de pontos de interesse customizados',
-        'Eventos em tempo real com localização no mapa',
-        'Navegação intuitiva por categorias e filtros',
-        'Totalmente customizável para qualquer tipo de espaço'
-      ]
-    },
-    'Escola Conectada': {
-      name: 'Escola Conectada',
-      tag: 'Gestão Educacional',
-      status: t.products.items[3].status,
-      description: 'Sistema de gestão escolar completo que centraliza matrículas, frequência, notas, comunicação com responsáveis e relatórios pedagógicos em uma única plataforma. Customizável para se adequar à grade e aos processos de cada instituição.',
-      features: [
-        'Gestão de matrículas e cadastro de alunos',
-        'Controle de frequência e notas por turma',
-        'Comunicação direta com pais e responsáveis',
-        'Relatórios pedagógicos e administrativos',
-        'Customização sob medida para cada instituição'
-      ]
-    }
-  };
-
-  const handleProductClick = (productName: string) => {
-    setSelectedProduct(productDetails[productName]);
-    setIsModalOpen(true);
-  };
-
   return (
     <div className="min-h-screen bg-[#0D0D0D] font-['Inter',sans-serif]">
       <div id="main-scroll-sentinel" className="absolute top-0 h-px w-px pointer-events-none" />
@@ -110,19 +53,14 @@ export function MainPage() {
       <CatalogSection />
       {/* Main B (RN-021): Como funciona → Pilares de entrega → Prova social
           e próximo passo (RN-023). Seções legadas SocialProof/Features/
-          HowItWorks removidas nesta feature; FinalCTA/Footer permanecem
-          até RN-024. */}
+          HowItWorks removidas. */}
       <HowItWorksB />
       <PillarsSection />
       <SocialProofSection />
-      <FinalCTA />
-      <Footer onProductClick={handleProductClick} />
-      
-      <ProductModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        product={selectedProduct}
-      />
+      {/* RN-024 (fechamento do design B): trust panel "Company and trust" +
+          Rodapé B substituem FinalCTA/Footer; sem modal (CR-005/ADR-013). */}
+      <CompanyTrustSection />
+      <FooterB />
 
       {/* Scroll to top button */}
       <button
@@ -141,7 +79,7 @@ export function MainPage() {
 
       {/* Floating WhatsApp button */}
       <button
-        onClick={() => window.open("https://wa.me/5551997066347?text=Ola%2C%20tudo%20bem%3F%20Gostaria%20de%20conhecer%20melhor%20os%20produtos%20e%20solucoes%20da%20TechMinds.%20Podem%20me%20ajudar%3F", "_blank", "noopener,noreferrer")}
+        onClick={() => window.open(buildWhatsAppUrl(WHATSAPP_MAIN_FLOATING_MESSAGE), "_blank", "noopener,noreferrer")}
         className="fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-[#22c55e] hover:bg-[#16a34a] text-white font-semibold text-sm px-5 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 cursor-pointer"
         aria-label="Fale conosco pelo WhatsApp"
       >

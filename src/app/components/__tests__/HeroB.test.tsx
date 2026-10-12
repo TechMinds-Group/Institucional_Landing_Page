@@ -5,7 +5,7 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { HeroB } from "../HeroB";
 import { renderWithProviders, resetI18n } from "../../../test/test-utils";
-import { buildWhatsAppUrl, WHATSAPP_HERO_MESSAGE } from "../../constants/contacts";
+import { buildWhatsAppUrl, WHATSAPP_HERO_MESSAGE, WHATSAPP_NUMBER } from "../../constants/contacts";
 import { SECTION_IDS } from "../../constants/anchors";
 
 // Fonte do stylesheet de animação (RN-022) — lida direto para assegurar
@@ -39,7 +39,9 @@ describe("HeroB (RN-022-2)", () => {
     renderWithProviders(<HeroB />);
 
     const cta = screen.getByTestId("hero-whatsapp-cta");
-    expect(cta.getAttribute("href")).toMatch(/^https:\/\/wa\.me\/5551997066347\?text=/);
+    expect(cta.getAttribute("href")).toMatch(
+      new RegExp(`^https:\\/\\/wa\\.me\\/${WHATSAPP_NUMBER}\\?text=`)
+    );
     expect(cta).toHaveAttribute("href", buildWhatsAppUrl(WHATSAPP_HERO_MESSAGE));
     expect(cta).toHaveAttribute("target", "_blank");
     expect(cta.getAttribute("rel")).toContain("noopener");
