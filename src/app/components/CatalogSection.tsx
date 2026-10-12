@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { useI18n } from "../i18n/I18nContext";
@@ -29,6 +29,14 @@ export function computePageCount(
 }
 
 /**
+ * Janela de silêncio do guard programático: libera o scroll programático
+ * após `scrollend` nativo (quando suportado) ou ~150 ms sem novos scroll
+ * events — o que ocorrer primeiro. Cada evento durante o guard rearma a
+ * janela, então a liberação acontece só quando o scroll assentar.
+ */
+const PROGRAMMATIC_GUARD_MS = 150;
+
+/**
  * Seção "Catálogo de soluções" do design B (RN-019): intro com estados
  * textuais do canônico CR-001, índice de chips (um por produto), carrossel
  * horizontal de cartões 400px com paginação numerada dinâmica (contagem por
@@ -37,27 +45,85 @@ export function computePageCount(
  * próxima seção (RN-022).
  *
  * Decisões de implementação (design não define): pontas do carrossel com
- * STOP (setas desabilitam na primeira e na última página — sem wrap),
- * deslocamento por scroll nativo do viewport (clamp automático no fim da
- * faixa), suave exceto com prefers-reduced-motion (RN-022). O scroll do
- * viewport é a fonte da verdade da posição ativa (onScroll re-sincroniza o
- * índice). Mockups ilustrativos dos cartões removidos na revisão de
- * 11/10/2026.
+ * STOP (setas desabilitam na primeira e na última posição de scroll — sem
+ * wrap), deslocamento por scroll nativo do viewport (clamp automático no
+ * fim da faixa), suave exceto com prefers-reduced-motion (RN-022).
+ *
+ * Posição vs seleção (RN-019 — correção da seleção dos chips): o scroll DO
+ * VIEWPORT é a fonte da verdade da posição (onScroll re-sincroniza para o
+ * primeiro card inteiro visível). Os chips selecionam o produto clicado
+ * SEM forçá-lo a uma posição de scroll: rolam até min(índice·400px,
+ * maxScroll) — clamp nativo da faixa. Com 5 cards de 400px e viewport
+ * ~1248px, mais de um card fica visível: para os DOIS ÚLTIMOS produtos
+ * (VibeCut, Escola Conectada) o scroll encosta no fim da faixa e o card
+ * entra visível parcialmente à direita — o chip FICA selecionado; uma
+ * rolagem manual depois re-sincroniza a seleção para o first-visible
+ * (consequência honesta, não é bug).
+ *
+ * Scroll PROGRAMÁTICO (chips, paginação, setas) não re-sincroniza: guard
+ * ref `programmatic` ativo libera por `scrollend` nativo (quando suportado)
+ * ou debounce de ~150 ms sem novos scroll events; liberado, o scroll
+ * manual volta a seguir a viewport.
  */
 export function CatalogSection() {
   const { t } = useI18n();
   const products = getCatalogProducts(t.catalogB);
-  const [index, setIndex] = useState(0);
+  // Dois estados que NÃO colapsam (RN-019):
+  // - position: posição de scroll do viewport em páginas (0..pageCount-1) —
+  //   fonte do highlight da paginação numerada e do STOP das setas;
+  // - selected: produto selecionado (0..products.length-1) — fonte do
+  //   aria-current dos chips. Podem divergir quando um chip aponta além da
+  //   última posição de scroll (documentado acima).
+  const [position, setPosition] = useState(0);
+  const [selected, setSelected] = useState(0);
   const [pageCount, setPageCount] = useState(1);
   const viewportRef = useRef<HTMLDivElement>(null);
-  const lastIndex = pageCount - 1;
+  const programmaticRef = useRef(false);
+  const settleTimerRef = useRef<number | undefined>(undefined);
 
-  const clampIndex = (i: number) => Math.max(0, Math.min(i, lastIndex));
+  /** Libera o guard programático e desfaz listener/timer pendentes. */
+  const settleProgrammaticScroll = useCallback(() => {
+    programmaticRef.current = false;
+    if (settleTimerRef.current !== undefined) {
+      clearTimeout(settleTimerRef.current);
+      settleTimerRef.current = undefined;
+    }
+    viewportRef.current?.removeEventListener(
+      "scrollend",
+      settleProgrammaticScroll
+    );
+  }, []);
+
+  /** (Re)arma a liberação por silêncio de scroll (fallback do scrollend). */
+  const restartSettleTimer = useCallback(() => {
+    if (settleTimerRef.current !== undefined) {
+      clearTimeout(settleTimerRef.current);
+    }
+    settleTimerRef.current = window.setTimeout(
+      settleProgrammaticScroll,
+      PROGRAMMATIC_GUARD_MS
+    );
+  }, [settleProgrammaticScroll]);
+
+  /** Marca scroll programático em andamento: enquanto o guard estiver
+   *  ativo, onScroll não sobrescreve posição/seleção. O listener
+   *  `scrollend` é adicionado sempre — só dispara em suporte real. */
+  const startProgrammaticScroll = useCallback(() => {
+    programmaticRef.current = true;
+    viewportRef.current?.addEventListener(
+      "scrollend",
+      settleProgrammaticScroll
+    );
+    restartSettleTimer();
+  }, [settleProgrammaticScroll, restartSettleTimer]);
+
+  // Limpeza no unmount: listener scrollend + timer pendente.
+  useEffect(() => () => settleProgrammaticScroll(), [settleProgrammaticScroll]);
 
   // Paginação dinâmica: mede o viewport no mount e a cada resize — a
   // quantidade de páginas reflete a quantidade real de conteúdo. Em
   // ambientes sem medição (jsdom), fallback de 1 página. Cleanup remove o
-  // listener; clamp mantém o índice dentro dos limites ao reduzir páginas.
+  // listener; clamp mantém a posição dentro dos limites ao reduzir páginas.
   useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport) return;
@@ -71,31 +137,67 @@ export function CatalogSection() {
     return () => window.removeEventListener("resize", measure);
   }, []);
 
+  // Redução de páginas clampa apenas a POSIÇÃO (a seleção de chip não
+  // depende de pageCount — products é estático).
   useEffect(() => {
-    setIndex((current) => clampIndex(current));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setPosition((current) => Math.max(0, Math.min(current, pageCount - 1)));
   }, [pageCount]);
 
-  const goTo = (i: number) => {
-    setIndex(clampIndex(i));
+  /** Rola a faixa programaticamente (o clamp final é nativo do scroll —
+   *  pela largura da faixa real, não por páginas). */
+  const programmaticScrollTo = (left: number) => {
     const viewport = viewportRef.current;
-    if (viewport && typeof viewport.scrollTo === "function") {
-      const reduceMotion =
-        typeof window.matchMedia === "function" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      viewport.scrollTo({
-        left: clampIndex(i) * CARD_WIDTH,
-        behavior: reduceMotion ? "auto" : "smooth",
-      });
-    }
+    if (!viewport || typeof viewport.scrollTo !== "function") return;
+    const reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    viewport.scrollTo({
+      left,
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
   };
 
-  // O scroll do viewport é a fonte da verdade: volta do usuário (arraste,
-  // trackpad, teclado) re-sincroniza a página ativa com a posição real.
-  const handleViewportScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    setIndex(
-      clampIndex(Math.round(e.currentTarget.scrollLeft / CARD_WIDTH))
+  /** Chips: selecionam o produto clicado SEM depender da posição de scroll.
+   *  A rolagem usa clamp pela faixa (maxScroll), então o card do produto
+   *  entra visível na viewport — mesmo sem ficar no canto esquerdo quando
+   *  o fim da faixa é alcançado (ex.: os DOIS ÚLTIMOS produtos com viewport
+   *  ~1248px — consequência honesta documentada no cabeçalho). */
+  const goToProduct = (productIndex: number) => {
+    const viewport = viewportRef.current;
+    const maxScroll = viewport
+      ? Math.max(0, viewport.scrollWidth - viewport.clientWidth)
+      : 0;
+    const left = Math.min(productIndex * CARD_WIDTH, maxScroll);
+    setSelected(productIndex);
+    setPosition(
+      Math.max(0, Math.min(Math.round(left / CARD_WIDTH), pageCount - 1))
     );
+    startProgrammaticScroll();
+    programmaticScrollTo(left);
+  };
+
+  /** Paginação/setas: navegam POR POSIÇÃO (clamp nas pontas de pageCount) e
+   *  selecionam o chip do first-visible (clamp ao último produto). */
+  const goToPage = (page: number) => {
+    const clamped = Math.max(0, Math.min(page, pageCount - 1));
+    setPosition(clamped);
+    setSelected(Math.max(0, Math.min(clamped, products.length - 1)));
+    startProgrammaticScroll();
+    programmaticScrollTo(clamped * CARD_WIDTH);
+  };
+
+  // Fonte da verdade da posição: scroll MANUAL (arraste, trackpad, teclado)
+  // re-sincroniza posição e seleção com a viewport real. Durante o guard
+  // programático os eventos são ignorados (apenas rearma a janela de
+  // silêncio — sem sobrescrever a seleção).
+  const handleViewportScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (programmaticRef.current) {
+      restartSettleTimer();
+      return;
+    }
+    const firstVisible = Math.round(e.currentTarget.scrollLeft / CARD_WIDTH);
+    setPosition(Math.max(0, Math.min(firstVisible, pageCount - 1)));
+    setSelected(Math.max(0, Math.min(firstVisible, products.length - 1)));
   };
 
   return (
@@ -133,11 +235,11 @@ export function CatalogSection() {
             <button
               key={product.id}
               type="button"
-              onClick={() => goTo(i)}
-              aria-current={i === index ? "true" : undefined}
+              onClick={() => goToProduct(i)}
+              aria-current={i === selected ? "true" : undefined}
               data-testid="catalog-chip"
               className={`min-h-[44px] px-4 py-2 rounded-full text-sm font-medium border transition-colors cursor-pointer motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-[#1F3A5F] ${
-                i === index
+                i === selected
                   ? "bg-[#1F3A5F] text-white border-[#1F3A5F]"
                   : "bg-white text-[#1F3A5F] border-[#D9DDE3] hover:border-[#1F3A5F]"
               }`}
@@ -180,8 +282,8 @@ export function CatalogSection() {
           <div className="flex items-center justify-center gap-3 mt-8">
             <button
               type="button"
-              onClick={() => goTo(index - 1)}
-              disabled={index === 0}
+              onClick={() => goToPage(position - 1)}
+              disabled={position === 0}
               aria-label={t.catalogB.carouselPrev}
               data-testid="carousel-prev"
               className="size-11 inline-flex items-center justify-center rounded-full border border-[#D9DDE3] text-[#1F3A5F] hover:border-[#1F3A5F] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-[#1F3A5F]"
@@ -193,12 +295,12 @@ export function CatalogSection() {
               <button
                 key={i}
                 type="button"
-                onClick={() => goTo(i)}
+                onClick={() => goToPage(i)}
                 aria-label={`${t.catalogB.paginationLabel} ${i + 1}`}
-                aria-current={i === index ? "true" : undefined}
+                aria-current={i === position ? "true" : undefined}
                 data-testid="carousel-page"
                 className={`size-11 inline-flex items-center justify-center rounded-full text-sm font-semibold transition-colors cursor-pointer motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-[#1F3A5F] ${
-                  i === index
+                  i === position
                     ? "bg-[#1F3A5F] text-white"
                     : "bg-white text-[#1F3A5F] border border-[#D9DDE3] hover:border-[#1F3A5F]"
                 }`}
@@ -209,8 +311,8 @@ export function CatalogSection() {
 
             <button
               type="button"
-              onClick={() => goTo(index + 1)}
-              disabled={index === lastIndex}
+              onClick={() => goToPage(position + 1)}
+              disabled={position === pageCount - 1}
               aria-label={t.catalogB.carouselNext}
               data-testid="carousel-next"
               className="size-11 inline-flex items-center justify-center rounded-full border border-[#D9DDE3] text-[#1F3A5F] hover:border-[#1F3A5F] transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed motion-reduce:transition-none focus:outline-none focus:ring-2 focus:ring-[#1F3A5F]"

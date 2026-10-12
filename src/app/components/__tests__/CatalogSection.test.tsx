@@ -14,6 +14,12 @@ import { WHATSAPP_HERO_MESSAGE, WHATSAPP_NUMBER } from "../../constants/contacts
 // componente, as métricas são determinadas no elemento (fallback de 1
 // página em jsdom), e computePageCount é verificada como função pura.
 // Mockups ilustrativos removidos dos cartões na revisão 11/10/2026.
+//
+// Posição vs seleção (hotfix RN-019): chips selecionam o produto clicado
+// SEM clamp por posição de scroll (rolagem até min(índice·400, maxScroll));
+// scroll programático tem guard (scrollend ou debounce ~150 ms) que impede
+// o onScroll de reverter a seleção; scroll MANUAL re-sincroniza posição e
+// seleção para o first-visible. Paginação/setas continuam por POSIÇÃO.
 
 function cardById(id: string): HTMLElement {
   const card = screen
@@ -56,6 +62,7 @@ function stubViewportMetrics(scrollWidth: number, clientWidth: number) {
 }
 
 afterEach(() => {
+  vi.useRealTimers();
   delete (Element.prototype as unknown as Record<string, unknown>).scrollTo;
   vi.restoreAllMocks();
 });
@@ -309,5 +316,168 @@ describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
 
     fireEvent.click(screen.getByTestId("carousel-next"));
     expect(calls.at(-1)).toEqual({ left: 400, behavior: "auto" });
+  });
+});
+
+// Hotfix de seleção (RN-019 — bug do relato em desktop): com viewport
+// ~1248px a faixa rende pageCount 3; o clamp antigo por pageCount fazia
+// "VibeCut" (3) e "Escola Conectada" (4) nunca ficarem selecionados —
+// onScroll arredondava de volta para o Lumen (2). Agora:
+// 1. chip seleciona O CLICADO e rola até min(índice·400, maxScroll);
+// 2. scroll programático tem guard (scrollend/debounce ~150 ms) — os
+//    scroll events do próprio scrollTo não re-sincronizam a seleção;
+// 3. scroll manual re-sincroniza para o first-visible;
+// 4. consequência honesta: com 5 cards de 400px e viewport ~1248px, mais
+//    de um card fica visível — os DOIS ÚLTIMOS produtos mostram o card
+//    parcialmente à direita (faixa encosta no fim) com o chip selecionado;
+//    rolagem manual depois volta ao first-visible. Paginação/setas continuam
+//    por POSIÇÃO (STOP coerente com posição, não com o produto).
+describe("Seleção de chips sem clamp por posição de scroll (RN-019 — hotfix)", () => {
+  beforeEach(() => resetI18n());
+
+  it("chip além da última posição seleciona O CLICADO (fallback 1 página em jsdom)", () => {
+    stubScrollTo();
+    renderWithProviders(<CatalogSection />);
+
+    // jsdom mede 0 → pageCount 1: o clamp antigo reverteria VibeCut/Escola
+    // ao Lumen (bug do relato). Seleção não depende de pageCount.
+    const chips = screen.getAllByTestId("catalog-chip");
+    fireEvent.click(chips[3]); // VibeCut
+    expect(chips[3]).toHaveAttribute("aria-current", "true");
+
+    fireEvent.click(chips[4]); // Escola Conectada
+    expect(chips[4]).toHaveAttribute("aria-current", "true");
+    expect(chips[3]).not.toHaveAttribute("aria-current");
+  });
+
+  it("chip além da última posição rola até o fim da faixa (pageCount 3 — desktop)", () => {
+    const { calls } = stubScrollTo();
+    renderWithProviders(<CatalogSection />);
+    stubViewportMetrics(2000, 1248); // 5 cards de 400px + viewport 1248 → 3 páginas
+
+    const chips = screen.getAllByTestId("catalog-chip");
+    const pages = pageButtons();
+    expect(pages).toHaveLength(3);
+
+    // Consequência honesta: maxScroll = 2000-1248 = 752px → o card do
+    // VibeCut entra visível parcialmente à direita e o chip FICA
+    // selecionado; a PAGINAÇÃO segue a posição (fim da faixa = página 3).
+    fireEvent.click(chips[3]); // VibeCut
+    expect(chips[3]).toHaveAttribute("aria-current", "true");
+    expect(pages[2]).toHaveAttribute("aria-current", "true");
+    expect(calls.at(-1)).toEqual({ left: 752, behavior: "smooth" });
+    // STOP das setas é pela POSIÇÃO, não pelo produto
+    expect(screen.getByTestId("carousel-next")).toBeDisabled();
+    expect(screen.getByTestId("carousel-prev")).not.toBeDisabled();
+
+    fireEvent.click(chips[4]); // Escola Conectada
+    expect(chips[4]).toHaveAttribute("aria-current", "true");
+    expect(pages[2]).toHaveAttribute("aria-current", "true");
+    expect(calls.at(-1)).toEqual({ left: 752, behavior: "smooth" });
+  });
+
+  it("guard programático: scroll event do scrollTo não reverte a seleção; scrollend libera", () => {
+    stubScrollTo();
+    renderWithProviders(<CatalogSection />);
+    stubViewportMetrics(2000, 1248);
+
+    const viewport = screen.getByTestId("carousel-viewport");
+    Object.defineProperty(viewport, "scrollLeft", {
+      value: 752,
+      configurable: true,
+    });
+
+    const chips = screen.getAllByTestId("catalog-chip");
+    fireEvent.click(chips[3]); // VibeCut → guard ativo
+    expect(chips[3]).toHaveAttribute("aria-current", "true");
+
+    // Scroll event disparado pelo próprio scrollTo (programático): o guard
+    // impede o onScroll de re-sincronizar para o first-visible (2 — Lumen).
+    fireEvent.scroll(viewport);
+    expect(chips[3]).toHaveAttribute("aria-current", "true");
+    expect(pageButtons()[2]).toHaveAttribute("aria-current", "true");
+
+    // scrollend nativo libera o guard...
+    act(() => {
+      viewport.dispatchEvent(new Event("scrollend"));
+    });
+
+    // ...e o PRÓXIMO scroll — agora manual — re-sincroniza o first-visible.
+    fireEvent.scroll(viewport);
+    expect(chips[3]).not.toHaveAttribute("aria-current");
+    expect(chips[2]).toHaveAttribute("aria-current", "true");
+    expect(pageButtons()[2]).toHaveAttribute("aria-current", "true");
+  });
+
+  it("fallback debounce: guard libera ~150 ms sem novos scroll events (sem scrollend)", () => {
+    vi.useFakeTimers();
+    try {
+      stubScrollTo();
+      renderWithProviders(<CatalogSection />);
+      stubViewportMetrics(2000, 1248);
+
+      const viewport = screen.getByTestId("carousel-viewport");
+      Object.defineProperty(viewport, "scrollLeft", {
+        value: 752,
+        configurable: true,
+      });
+
+      const chips = screen.getAllByTestId("catalog-chip");
+      fireEvent.click(chips[4]); // Escola Conectada → guard ativo
+      expect(chips[4]).toHaveAttribute("aria-current", "true");
+
+      // Eventos programáticos enquanto o guard está ativo: segue bloqueado
+      // e rearma a janela de silêncio a cada evento.
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
+      act(() => {
+        vi.advanceTimersByTime(100);
+      });
+      act(() => {
+        fireEvent.scroll(viewport);
+      });
+      act(() => {
+        vi.advanceTimersByTime(100);
+      });
+      expect(chips[4]).toHaveAttribute("aria-current", "true");
+
+      // Silêncio ≥ 150 ms libera o guard; scroll manual re-sincroniza.
+      act(() => {
+        vi.advanceTimersByTime(200);
+      });
+      fireEvent.scroll(viewport);
+      expect(chips[4]).not.toHaveAttribute("aria-current");
+      expect(chips[2]).toHaveAttribute("aria-current", "true");
+      expect(pageButtons()[2]).toHaveAttribute("aria-current", "true");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("paginação/setas navegam por posição E selecionam o chip do first-visible (pageCount 3)", () => {
+    const { calls } = stubScrollTo();
+    renderWithProviders(<CatalogSection />);
+    stubViewportMetrics(2000, 1248);
+
+    const chips = screen.getAllByTestId("catalog-chip");
+    const pages = pageButtons();
+
+    // Paginação por posição: página 2 → rola 400px (1 cartão por página)
+    fireEvent.click(pages[1]);
+    expect(pages[1]).toHaveAttribute("aria-current", "true");
+    expect(chips[1]).toHaveAttribute("aria-current", "true"); // first-visible
+    expect(calls.at(-1)).toEqual({ left: 400, behavior: "smooth" });
+
+    // Setas por posição: next → página 3 (STOP no fim da faixa)
+    fireEvent.click(screen.getByTestId("carousel-next"));
+    expect(pageButtons()[2]).toHaveAttribute("aria-current", "true");
+    expect(screen.getByTestId("carousel-next")).toBeDisabled();
+    expect(chips[2]).toHaveAttribute("aria-current", "true");
+    expect(calls.at(-1)).toEqual({ left: 800, behavior: "smooth" });
+
+    // Chip além da posição não altera o STOP por posição: prev volta
+    fireEvent.click(screen.getByTestId("carousel-prev"));
+    expect(pageButtons()[1]).toHaveAttribute("aria-current", "true");
   });
 });
