@@ -80,6 +80,53 @@ export interface Translations {
     };
     hook: string;
   };
+  howItWorksB: {
+    eyebrow: string;
+    title: string;
+    support: string;
+    steps: {
+      number: string;
+      title: string;
+      description: string;
+    }[];
+    /** Etapa 01 — chips de opções do catálogo (ilustração HTML/CSS). */
+    stepChips: string[];
+    /** Etapa 02 — itens com check (ilustração HTML/CSS). */
+    stepChecklist: string[];
+    /** Etapa 03 — painel "rotina conectada" (ilustração HTML/CSS). */
+    stepPanelTitle: string;
+    stepPanelRows: string[];
+    note: string;
+    hook: string;
+  };
+  pillarsB: {
+    eyebrow: string;
+    title: string;
+    support: string;
+    items: {
+      title: string;
+      description: string;
+    }[];
+    hook: string;
+  };
+  socialProofB: {
+    eyebrow: string;
+    title: string;
+    support: string;
+    pendingTag: string;
+    resultLabel: string;
+    /** Estrutura pronta para receber conteúdo autorizado sem refactor (RN-023). */
+    cards: {
+      segment: string;
+      testimonial: string;
+      result: string;
+      logo: string;
+      name: string;
+      roleCompany: string;
+    }[];
+    note: string;
+    hook: string;
+  };
   hero: {
     headline: string;
     subheadline: string;
@@ -293,7 +340,82 @@ export const translations: Record<Language, Translations> = {
         ctaWhatsApp: 'Conversar no WhatsApp',
         microcopy: 'Conte sua rotina na mesma conversa comercial.'
       },
-      hook: 'Veja como é trabalhar com a TechMinds.'
+      hook: 'Produto ou sob medida: veja como saímos da escolha para a operação.'
+    },
+    howItWorksB: {
+      eyebrow: 'Como trabalhamos',
+      title: 'O que acontece depois da primeira conversa?',
+      support: 'Três passos simples, com decisões claras em cada etapa.',
+      steps: [
+        {
+          number: '01',
+          title: 'Escolher',
+          description: 'Conte sua rotina e identifique um produto ativo ou um projeto sob medida.'
+        },
+        {
+          number: '02',
+          title: 'Contratar',
+          description: 'Alinhe escopo, suporte, customização e condições antes de começar.'
+        },
+        {
+          number: '03',
+          title: 'Operar',
+          description: 'Inicie a operação conforme a disponibilidade e o que foi acordado.'
+        }
+      ],
+      stepChips: ['Groom', 'FasTo', 'Lumen'],
+      stepChecklist: ['Escopo definido', 'Suporte acordado', 'Condições alinhadas'],
+      stepPanelTitle: 'Sua rotina, conectada',
+      stepPanelRows: ['Agendamento confirmado', 'Caixa fechado', 'Relatório enviado'],
+      note: 'VibeCut e Escola Conectada permanecem em desenvolvimento. A conversa não implica acesso imediato.',
+      hook: 'E depois da entrega? A continuidade também precisa estar combinada.'
+    },
+    pillarsB: {
+      eyebrow: 'Continuidade com clareza',
+      title: 'Seu sistema não termina na entrega.',
+      support: 'Manutenção, evolução e performance orientam a entrega. A cobertura de cada pilar é definida no contrato.',
+      items: [
+        {
+          title: 'Manutenção',
+          description: 'Correções, estabilidade e segurança conforme contrato.'
+        },
+        {
+          title: 'Evolução',
+          description: 'Melhorias e novas versões com escopo e condições acordados.'
+        },
+        {
+          title: 'Performance',
+          description: 'Estrutura e desempenho definidos para cada solução, conforme contrato.'
+        }
+      ],
+      hook: 'Quer avaliar esse caminho para o seu negócio? Comece com uma conversa direta.'
+    },
+    socialProofB: {
+      eyebrow: 'Experiências de clientes',
+      title: 'Resultados merecem contexto. E evidência.',
+      support: 'Espaços reservados para casos e depoimentos reais. Publicação após validação e autorização dos clientes.',
+      pendingTag: 'CONTEÚDO PENDENTE',
+      resultLabel: 'Resultado verificado',
+      cards: [
+        {
+          segment: 'Barbearias',
+          testimonial: '[Depoimento aprovado a inserir]',
+          result: '[Resultado e contexto a validar]',
+          logo: '[Logo]',
+          name: '[Nome]',
+          roleCompany: '[Cargo] · [Empresa]'
+        },
+        {
+          segment: 'Estética e beleza',
+          testimonial: '[Depoimento aprovado a inserir]',
+          result: '[Resultado e contexto a validar]',
+          logo: '[Logo]',
+          name: '[Nome]',
+          roleCompany: '[Cargo] · [Empresa]'
+        }
+      ],
+      note: 'Depoimentos, logos e resultados ainda não confirmados. Nenhum número comercial é apresentado como prova.',
+      hook: 'Enquanto os casos são preparados, você pode conhecer a proposta diretamente.'
     },
     hero: {
       headline: 'Softwares prontos, em evolução constante e moldados para o seu negócio.',
@@ -568,7 +690,82 @@ export const translations: Record<Language, Translations> = {
         ctaWhatsApp: 'Chat on WhatsApp',
         microcopy: 'Tell us about your routine in the same sales conversation.'
       },
-      hook: 'See what it is like to work with TechMinds.'
+      hook: 'Product or custom-built: see how we go from choosing to operating.'
+    },
+    howItWorksB: {
+      eyebrow: 'How we work',
+      title: 'What happens after the first conversation?',
+      support: 'Three simple steps, with clear decisions at each stage.',
+      steps: [
+        {
+          number: '01',
+          title: 'Choose',
+          description: 'Tell us about your routine and identify an active product or a custom project.'
+        },
+        {
+          number: '02',
+          title: 'Hire',
+          description: 'Align scope, support, customization and conditions before starting.'
+        },
+        {
+          number: '03',
+          title: 'Operate',
+          description: 'Start the operation according to availability and what was agreed.'
+        }
+      ],
+      stepChips: ['Groom', 'FasTo', 'Lumen'],
+      stepChecklist: ['Scope defined', 'Support agreed', 'Conditions aligned'],
+      stepPanelTitle: 'Your routine, connected',
+      stepPanelRows: ['Booking confirmed', 'Cash closed', 'Report sent'],
+      note: 'VibeCut and Escola Conectada remain in development. The conversation does not imply immediate access.',
+      hook: 'And after delivery? Continuity also needs to be agreed.'
+    },
+    pillarsB: {
+      eyebrow: 'Continuity with clarity',
+      title: 'Your system does not end at delivery.',
+      support: 'Maintenance, evolution and performance guide the delivery. The coverage of each pillar is defined in the contract.',
+      items: [
+        {
+          title: 'Maintenance',
+          description: 'Fixes, stability and security as per contract.'
+        },
+        {
+          title: 'Evolution',
+          description: 'Improvements and new versions with agreed scope and conditions.'
+        },
+        {
+          title: 'Performance',
+          description: 'Structure and performance defined for each solution, as per contract.'
+        }
+      ],
+      hook: 'Want to evaluate this path for your business? Start with a direct conversation.'
+    },
+    socialProofB: {
+      eyebrow: 'Client experiences',
+      title: 'Results deserve context. And evidence.',
+      support: 'Reserved spaces for real cases and testimonials. Publication after client validation and authorization.',
+      pendingTag: 'CONTENT PENDING',
+      resultLabel: 'Verified result',
+      cards: [
+        {
+          segment: 'Barbershops',
+          testimonial: '[Approved testimonial to be inserted]',
+          result: '[Result and context to be validated]',
+          logo: '[Logo]',
+          name: '[Name]',
+          roleCompany: '[Role] · [Company]'
+        },
+        {
+          segment: 'Beauty and aesthetics',
+          testimonial: '[Approved testimonial to be inserted]',
+          result: '[Result and context to be validated]',
+          logo: '[Logo]',
+          name: '[Name]',
+          roleCompany: '[Role] · [Company]'
+        }
+      ],
+      note: 'Testimonials, logos and results not yet confirmed. No commercial numbers are presented as proof.',
+      hook: 'While the cases are being prepared, you can get to know the proposal directly.'
     },
     hero: {
       headline: 'AI systems that transform your entire business.',
@@ -844,7 +1041,82 @@ export const translations: Record<Language, Translations> = {
         ctaWhatsApp: 'Conversar por WhatsApp',
         microcopy: 'Cuéntanos tu rutina en la misma conversación comercial.'
       },
-      hook: 'Vea cómo es trabajar con TechMinds.'
+      hook: 'Producto o a medida: vea cómo pasamos de la elección a la operación.'
+    },
+    howItWorksB: {
+      eyebrow: 'Cómo trabajamos',
+      title: '¿Qué sucede después de la primera conversación?',
+      support: 'Tres pasos simples, con decisiones claras en cada etapa.',
+      steps: [
+        {
+          number: '01',
+          title: 'Elegir',
+          description: 'Cuéntanos tu rutina e identifica un producto activo o un proyecto a medida.'
+        },
+        {
+          number: '02',
+          title: 'Contratar',
+          description: 'Alinea alcance, soporte, personalización y condiciones antes de empezar.'
+        },
+        {
+          number: '03',
+          title: 'Operar',
+          description: 'Inicia la operación conforme la disponibilidad y lo acordado.'
+        }
+      ],
+      stepChips: ['Groom', 'FasTo', 'Lumen'],
+      stepChecklist: ['Alcance definido', 'Soporte acordado', 'Condiciones alineadas'],
+      stepPanelTitle: 'Tu rutina, conectada',
+      stepPanelRows: ['Reserva confirmada', 'Caja cerrada', 'Informe enviado'],
+      note: 'VibeCut y Escola Conectada permanecen en desarrollo. La conversación no implica acceso inmediato.',
+      hook: '¿Y después de la entrega? La continuidad también necesita estar acordada.'
+    },
+    pillarsB: {
+      eyebrow: 'Continuidad con claridad',
+      title: 'Tu sistema no termina en la entrega.',
+      support: 'Mantenimiento, evolución y performance orientan la entrega. La cobertura de cada pilar se define en el contrato.',
+      items: [
+        {
+          title: 'Mantenimiento',
+          description: 'Correcciones, estabilidad y seguridad según contrato.'
+        },
+        {
+          title: 'Evolución',
+          description: 'Mejoras y nuevas versiones con alcance y condiciones acordados.'
+        },
+        {
+          title: 'Performance',
+          description: 'Estructura y desempeño definidos para cada solución, según contrato.'
+        }
+      ],
+      hook: '¿Quieres evaluar este camino para tu negocio? Empieza con una conversa directa.'
+    },
+    socialProofB: {
+      eyebrow: 'Experiencias de clientes',
+      title: 'Los resultados merecen contexto. Y evidencia.',
+      support: 'Espacios reservados para casos y testimonios reales. Publicación tras validación y autorización de los clientes.',
+      pendingTag: 'CONTENIDO PENDIENTE',
+      resultLabel: 'Resultado verificado',
+      cards: [
+        {
+          segment: 'Barberías',
+          testimonial: '[Testimonio aprobado a insertar]',
+          result: '[Resultado y contexto por validar]',
+          logo: '[Logo]',
+          name: '[Nombre]',
+          roleCompany: '[Cargo] · [Empresa]'
+        },
+        {
+          segment: 'Estética y belleza',
+          testimonial: '[Testimonio aprobado a insertar]',
+          result: '[Resultado y contexto por validar]',
+          logo: '[Logo]',
+          name: '[Nombre]',
+          roleCompany: '[Cargo] · [Empresa]'
+        }
+      ],
+      note: 'Testimonios, logos y resultados aún no confirmados. Ningún número comercial se presenta como prueba.',
+      hook: 'Mientras se preparan los casos, puedes conocer la propuesta directamente.'
     },
     hero: {
       headline: 'Sistemas de IA que transforman todo tu negocio.',

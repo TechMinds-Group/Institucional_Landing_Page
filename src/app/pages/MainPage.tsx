@@ -1,10 +1,10 @@
 import { NavbarB } from "../components/NavbarB";
 import { HeroB } from "../components/HeroB";
-import { SocialProof } from "../components/SocialProof";
 import { ProblemSection } from "../components/ProblemSection";
 import { CatalogSection } from "../components/CatalogSection";
-import { Features } from "../components/Features";
-import { HowItWorks } from "../components/HowItWorks";
+import { HowItWorksB } from "../components/HowItWorksB";
+import { PillarsSection } from "../components/PillarsSection";
+import { SocialProofSection } from "../components/SocialProofSection";
 import { FinalCTA } from "../components/FinalCTA";
 import { Footer } from "../components/Footer";
 import { ProductModal, ProductData } from "../components/ProductModal";
@@ -105,14 +105,16 @@ export function MainPage() {
       <div id="main-scroll-sentinel" className="absolute top-0 h-px w-px pointer-events-none" />
       <NavbarB />
       <HeroB />
-      <SocialProof />
       <ProblemSection />
-      {/* Catálogo do design B (RN-019) — substitui o grid Products legado.
-          Seções legadas seguintes (SocialProof/Features/HowItWorks/FinalCTA)
-          e o rodapé + ProductModal permanecem até RN-021/RN-024. */}
+      {/* Catálogo do design B (RN-019) + bloco sob medida (RN-020). */}
       <CatalogSection />
-      <Features />
-      <HowItWorks />
+      {/* Main B (RN-021): Como funciona → Pilares de entrega → Prova social
+          e próximo passo (RN-023). Seções legadas SocialProof/Features/
+          HowItWorks removidas nesta feature; FinalCTA/Footer permanecem
+          até RN-024. */}
+      <HowItWorksB />
+      <PillarsSection />
+      <SocialProofSection />
       <FinalCTA />
       <Footer onProductClick={handleProductClick} />
       
