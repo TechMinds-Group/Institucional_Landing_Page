@@ -54,17 +54,22 @@ describe("FooterB (RN-024-3)", () => {
     expect(within(legal).getByRole("link", { name: "Privacidade" })).toBeInTheDocument();
   });
 
-  it("gate por landing: só Groom vai a /groom; demais produtos apontam para a âncora do Catálogo", () => {
+  it("gate por landing: Groom/VibeCut/FasTo/Lumen vão às páginas próprias; Escola Conectada aponta para a âncora do Catálogo (CR-008)", () => {
     renderWithProviders(<FooterB />);
 
     const systems = screen.getByTestId("footerb-nav-systems");
-    expect(within(systems).getByRole("link", { name: "Groom" })).toHaveAttribute("href", "/groom");
-    for (const product of ["VibeCut", "FasTo", "Lumen", "Escola Conectada"]) {
-      expect(within(systems).getByRole("link", { name: product })).toHaveAttribute(
-        "href",
-        `#${SECTION_IDS.catalogo}`
-      );
+    for (const [product, href] of [
+      ["Groom", "/groom"],
+      ["VibeCut", "/vibecut"],
+      ["FasTo", "/fasto"],
+      ["Lumen", "/lumen"],
+    ] as const) {
+      expect(within(systems).getByRole("link", { name: product })).toHaveAttribute("href", href);
     }
+    expect(within(systems).getByRole("link", { name: "Escola Conectada" })).toHaveAttribute(
+      "href",
+      `#${SECTION_IDS.catalogo}`
+    );
   });
 
   it("links legais navegam para as páginas (vibecut — fallback RN-007), sem modal", () => {
