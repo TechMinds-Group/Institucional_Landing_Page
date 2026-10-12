@@ -189,7 +189,8 @@ export interface LegalProductMeta {
   vibecutTag: string;
   vibecutLastUpdated: string;
   groomTag: string;
-  zonemapTag: string;
+  fastoTag: string;
+  fastoLastUpdated: string;
   escolaConectadaTag: string;
   lumenTag: string;
   lumenLastUpdated: string;
@@ -202,7 +203,8 @@ export const legalProductMeta: Record<Language, LegalProductMeta> = {
     vibecutTag: 'Inteligência Artificial',
     vibecutLastUpdated: '11 de fevereiro de 2026',
     groomTag: 'Gestão & Automação',
-    zonemapTag: 'Mapas Interativos',
+    fastoTag: 'Em breve',
+    fastoLastUpdated: 'Em breve',
     escolaConectadaTag: 'Gestão Educacional',
     lumenTag: 'Educação & Filosofia',
     lumenLastUpdated: '24 de maio de 2026',
@@ -213,7 +215,8 @@ export const legalProductMeta: Record<Language, LegalProductMeta> = {
     vibecutTag: 'Artificial Intelligence',
     vibecutLastUpdated: 'February 11, 2026',
     groomTag: 'Management & Automation',
-    zonemapTag: 'Interactive Maps',
+    fastoTag: 'Coming soon',
+    fastoLastUpdated: 'Coming soon',
     escolaConectadaTag: 'Educational Management',
     lumenTag: 'Education & Philosophy',
     lumenLastUpdated: 'May 24, 2026',
@@ -224,7 +227,8 @@ export const legalProductMeta: Record<Language, LegalProductMeta> = {
     vibecutTag: 'Inteligencia Artificial',
     vibecutLastUpdated: '11 de febrero de 2026',
     groomTag: 'Gestión & Automatización',
-    zonemapTag: 'Mapas Interactivos',
+    fastoTag: 'Próximamente',
+    fastoLastUpdated: 'Próximamente',
     escolaConectadaTag: 'Gestión Educativa',
     lumenTag: 'Educación & Filosofía',
     lumenLastUpdated: '24 de mayo de 2026',
