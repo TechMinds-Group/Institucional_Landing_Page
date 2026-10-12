@@ -213,16 +213,17 @@ describe("Groom — Funcionalidades (RN-036-3: copy enxuta)", () => {
 });
 
 describe("Groom — linha 🔒-criptografia (divergência do split — AC RN-036-4)", () => {
-  // it.todo deliberado: a copy "🔒 Sem taxa de configuração. Cancele quando
-  // quiser. Seus dados estão 100% protegidos com criptografia de ponta a
-  // ponta." está no bloco Planos e preços [Groom.tsx:621], cuja remoção
-  // pertence à feature irmã RN-014 (Diferenciais e Planos). Enquanto a
-  // remoção da irmã não estiver aplicada nesta branch, a asserção de
-  // ausência ficaria vermelha — registrar como pendente/remove o skip
-  // quando o lote RN-014 for integrado.
-  it.todo(
-    "frase '100% protegidos com criptografia de ponta a ponta.' ausente da página — pendente até a feature irmã RN-014 aplicar a remoção (remover este skip no lote)"
-  );
+  // Feature irmã RN-014 (Diferenciais/Planos) aplicou a remoção do bloco
+  // [Groom.tsx:621 pré-RN-014] nesta branch — it.todo transformado em
+  // asserção ativa; sem skip/todo restante no lote.
+  it("frase '100% protegidos com criptografia de ponta a ponta.' ausente da página (removida pelo lote RN-014)", () => {
+    renderWithProviders(<Groom />);
+
+    const bodyText = document.body.textContent ?? "";
+    expect(bodyText).not.toContain("criptografia de ponta a ponta");
+    expect(bodyText).not.toContain("100% protegidos");
+    expect(bodyText).not.toContain("Sem taxa de configuração");
+  });
 });
 
 describe("Groom — regressão (RN-036-4): preços RN-014 e demais seções intactos", () => {
@@ -247,7 +248,7 @@ describe("Groom — regressão (RN-036-4): preços RN-014 e demais seções inta
     ).toBeInTheDocument();
   });
 
-  it("seções fora do escopo não regrediram (hero, strip, diferenciais, FAQ, convite, rodapé)", () => {
+  it("seções fora do escopo não regrediram (hero, strip, FAQ, convite, rodapé) e RN-014 nos diferenciais", () => {
     renderWithProviders(<Groom />);
 
     // Hero (RN-033-2) e strip (RN-033-3) intocados.
@@ -259,14 +260,11 @@ describe("Groom — regressão (RN-036-4): preços RN-014 e demais seções inta
     expect(strip).toHaveTextContent("Salões de beleza");
     expect(strip).toHaveTextContent("Estúdios de tatuagem");
     expect(strip).toHaveTextContent("Clínicas de estética");
-    // Diferenciais mantidos (feature irmã RN-014 vem depois).
-    expect(
-      screen.getByText(
-        "Seu sistema cobra extra por qualquer recurso básico?"
-      )
-    ).toBeInTheDocument();
+    // Diferenciais no estado RN-014 (feature irmã integrada): benefícios
+    // curtos substituem as perguntas retóricas, VibeCut com gating "Em breve".
+    expect(screen.getByText("Essenciais sem surpresa")).toBeInTheDocument();
     // Trás da página íntegro.
-    expect(screen.getByText("Perguntas Frequentes")).toBeInTheDocument();
+    expect(screen.getByText("Perguntas frequentes")).toBeInTheDocument();
     expect(
       screen.getByText("Pronto para profissionalizar seu negócio?")
     ).toBeInTheDocument();

@@ -1,5 +1,4 @@
-import imgLogo from "../../imports/logo.png";
-import { CreditCard, Bot, Ghost, Brain, DollarSign, RefreshCw, Flame, Crown, Sprout, Menu, X, Scissors, MessageCircle, LayoutDashboard, CalendarClock, ArrowRight } from "lucide-react";
+import { Sprout, Bot, Flame, Menu, X, Scissors, MessageCircle, LayoutDashboard, CalendarClock, ArrowRight, BadgeCheck, UserRoundSearch, ScanFace, Repeat, DatabaseBackup, ChevronDown, Minus } from "lucide-react";
 import { useState, useEffect, type ReactNode } from "react";
 // DEBT-003 (RN-024-1): Deep-links do WhatsApp vêm do módulo único de contatos
 // — substituição mecânica dos literais codificados diretamente no código (sem mudança de copy).
@@ -412,56 +411,63 @@ function SectionFeatures() {
 }
 
 function SectionBenefits() {
+  // RN-036/RN-014-1 — títulos trocam perguntas retóricas por benefícios curtos
+  // (copy EXATA do dossier g2 §7); ícones lucide identificados no frame mobile
+  // (dossier g2 §0): badge-check, bot, user-round-search, scan-face, repeat,
+  // database-backup.
   const cards = [
     {
-      icon: <CreditCard size={20} color="#f1c75c" />,
-      title: "Seu sistema cobra extra por qualquer recurso básico?",
-      desc: "Chega de surpresas na fatura no fim do mês. No Groom você sabe exatamente o que está pagando, com recursos essenciais inclusos desde o primeiro plano e sem pegadinhas de cobrança por funcionalidade.",
+      icon: <BadgeCheck size={22} color="#f1c75c" />,
+      title: "Essenciais sem surpresa",
+      desc: "Recursos essenciais sem cobranças surpresa.",
     },
     {
-      icon: <Bot size={20} color="#f1c75c" />,
-      title: "Ainda perde tempo respondendo mensagem por mensagem no WhatsApp?",
-      desc: "Nosso Robô de WhatsApp trabalha 24h por você. Ele atende, mostra horários disponíveis, envia confirmações automáticas e permite o cliente agendar sozinho. Você foca no atendimento enquanto o robô cuida da agenda.",
+      icon: <Bot size={22} color="#f1c75c" />,
+      title: "Seu robô no WhatsApp 24h",
+      desc: "Atende, agenda e confirma enquanto você cuida do negócio.",
     },
     {
-      icon: <Ghost size={20} color="#f1c75c" />,
-      title: "Seus clientes somem e você nem percebe para onde eles foram?",
-      desc: "O Groom monitora o histórico de frequência de cada cliente e te avisa quando alguém parou de vir. Com 1 clique você aciona a mensagem de retorno no WhatsApp antes que ele vá para a concorrência.",
+      icon: <UserRoundSearch size={22} color="#f1c75c" />,
+      title: "Recupere clientes inativos",
+      desc: "Acompanhe a frequência e identifique quem deixou de voltar.",
     },
     {
-      icon: <Brain size={20} color="#f1c75c" />,
-      title: "Já imaginou oferecer consultoria de visagismo por IA no seu atendimento?",
-      desc: "Com o VibeCut (IA exclusiva do Groom), você tira foto do rosto do cliente e a IA sugere os cortes e estilos perfeitos para o formato de rosto dele. Entregue uma experiência visual moderna e surpreenda cada cliente na cadeira.",
+      // RN-023-style gating (CR-007/CR-001/ADR-012): card estático — "Em breve"
+      // já está na copy aprovada; sem link, sem data e sem promessa de
+      // disponibilidade em outra linha.
+      icon: <ScanFace size={22} color="#f1c75c" />,
+      title: "VibeCut: visagismo com IA",
+      desc: "Integração futura no plano Elite. Em breve, sugestões visuais de cortes para seus clientes.",
     },
     {
-      icon: <DollarSign size={20} color="#f1c75c" />,
-      title: "Seu faturamento depende só de quem aparece no dia?",
-      desc: "Com o Clube de Assinaturas do Groom, você cria planos mensais para seus clientes e gerencia tudo em um só lugar. Fidelize sua base, garanta previsibilidade no faturamento e pare de depender só da agenda do dia.",
+      icon: <Repeat size={22} color="#f1c75c" />,
+      title: "Receita mais previsível",
+      desc: "Clube de assinaturas para fidelizar clientes e organizar a receita recorrente.",
     },
     {
-      icon: <RefreshCw size={20} color="#f1c75c" />,
-      title: "Com medo da migração dar trabalho e perder seus cadastros antigos?",
-      desc: "Vem do Tua Agenda? Importação automática em poucos cliques. Usa outro sistema? Sem problema — fala com a gente que nosso time analisa e cuida de toda a migração dos seus dados pra você. Ninguém fica pra trás.",
+      icon: <DatabaseBackup size={22} color="#f1c75c" />,
+      title: "Migração sem complicação",
+      desc: "Do Tua Agenda, automática. De outros sistemas, assistida pela nossa equipe.",
     },
   ];
 
   return (
     <div id="diferenciais" className="bg-[#0b0f1a] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
-      <div className="content-stretch flex flex-col gap-[24px] items-center relative shrink-0 w-full">
+      <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(241,199,92,0.08)] content-stretch flex items-center gap-[8px] px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
           <Flame size={13} color="#f1c75c" className="shrink-0" />
           <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#f1c75c] text-[12px] uppercase whitespace-nowrap">POR QUE O GROOM É DIFERENTE?</p>
         </div>
         <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[1.2] min-w-full relative shrink-0 text-[#f8fafc] text-2xl md:text-3xl lg:text-[40px] text-center w-[min-content]">O que o Groom faz pelo seu negócio que nenhum outro sistema faz</p>
-        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.5] not-italic relative shrink-0 text-[#94a3b8] text-[15px] text-center">Tecnologia de verdade para quem quer crescer: Inteligência Artificial, Robô de WhatsApp 24h, Clube de Assinaturas e migração simplificada.</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative shrink-0 w-full">
         {cards.map((card) => (
-          <div key={card.title} className="bg-[#161b22] content-stretch flex flex-col gap-[20px] items-start p-[32px] relative rounded-[12px]">
+          <div key={card.title} data-testid="groom-benefit-card" className="bg-[#161b22] content-stretch flex flex-col gap-[20px] items-start p-[32px] relative rounded-[12px]">
             <div aria-hidden className="absolute border border-[#1f2937] border-solid inset-0 pointer-events-none rounded-[12px]" />
             <div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full">
-              <div className="bg-[rgba(241,199,92,0.06)] content-stretch flex items-center justify-center relative rounded-[8px] shrink-0 size-[40px]">
+              {/* Ícones vetoriais 44×44 (0 assets raster — dossier g2 §7) */}
+              <div className="bg-[rgba(241,199,92,0.06)] content-stretch flex items-center justify-center relative rounded-[8px] shrink-0 size-[44px]">
                 {card.icon}
               </div>
               <p className="[word-break:break-word] font-['Manrope:Bold',sans-serif] font-bold leading-[1.3] relative shrink-0 text-[#f8fafc] text-[18px] flex-1 min-w-0">{card.title}</p>
@@ -481,7 +487,7 @@ function SectionPricing() {
       <div className="content-stretch flex flex-col gap-[20px] items-center relative shrink-0 w-full">
         <div className="content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
-          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0d6efd] text-[12px] uppercase whitespace-nowrap">PLANOS E PREÇOS</p>
+          <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0d6efd] text-[12px] uppercase whitespace-nowrap">PLANOS PARA O SEU MOMENTO</p>
         </div>
         <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[1.2] min-w-full relative shrink-0 text-[#0f172a] text-2xl md:text-3xl lg:text-[40px] text-center w-[min-content]">Escolha o plano ideal para automatizar seu atendimento e aumentar seu faturamento.</p>
         <p className="font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#64748b] text-[15px] text-center">Teste por 15 dias sem pagar nada. Cancele quando quiser, sem taxas e sem fidelidade.</p>
@@ -491,8 +497,9 @@ function SectionPricing() {
       {/* Plans */}
       <div className="flex flex-col lg:flex-row gap-6 items-stretch relative shrink-0 w-full">
 
-        {/* Plan 1: Essencial */}
-        <div className="bg-white content-stretch flex flex-1 flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
+        {/* RN-014-2 — plano Essencial: nome UPPERCASE; limites EXATOS em fw600
+        antes do divisor (dossier g2 §8); CTA WhatsApp deep-link (DEBT-003). */}
+        <div data-testid="groom-plan-essencial" className="bg-white content-stretch flex flex-1 flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
           <div aria-hidden className="absolute border border-[#e2e8f0] border-solid inset-0 pointer-events-none rounded-[16px]" />
           <div className="content-stretch flex items-center gap-[5px] px-[12px] py-[4px] relative rounded-[100px] shrink-0">
             <div aria-hidden className="absolute border border-[#cbd5e1] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -500,7 +507,7 @@ function SectionPricing() {
             <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#64748b] text-[11px] uppercase whitespace-nowrap">OPERACIONAL BÁSICO</p>
           </div>
           <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
-            <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#0f172a] text-[28px]">Essencial</p>
+            <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#0f172a] text-[28px]">ESSENCIAL</p>
             <p className="font-['Inter:Regular',sans-serif] font-normal italic leading-[1.4] not-italic relative shrink-0 text-[#64748b] text-[13px]">Para quem quer parar de perder tempo com agenda de papel e furos de horário.</p>
           </div>
           <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full">
@@ -526,16 +533,18 @@ function SectionPricing() {
             ))}
           </div>
           <div className="mt-auto content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
+            {/* Limites EXATOS (RN-014), destacados fw600, antes do divisor */}
+            <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold not-italic relative shrink-0 text-[#0f172a] text-[13px]">Inclui até 3 profissionais e 500 clientes.</p>
+            <div aria-hidden className="relative w-full border-t border-[#e2e8f0] border-solid" />
             <a href={buildWhatsAppUrl(WHATSAPP_GROOM_PLAN_ESSENCIAL_MESSAGE)} target="_blank" rel="noreferrer" className="content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
               <div aria-hidden className="absolute border border-[#0f172a] border-solid inset-0 pointer-events-none rounded-[8px]" />
               <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[13px] tracking-wide whitespace-nowrap">COMEÇAR 15 DIAS GRÁTIS</p>
             </a>
-            <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#94a3b8] text-[12px]">Inclui até 3 profissionais e 500 clientes.</p>
           </div>
         </div>
 
         {/* Plan 2: Profissional (featured) */}
-        <div className="bg-[#0f172a] content-stretch drop-shadow-[0px_8px_24px_rgba(241,199,92,0.12)] flex flex-1 flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
+        <div data-testid="groom-plan-profissional" className="bg-[#0f172a] content-stretch drop-shadow-[0px_8px_24px_rgba(241,199,92,0.12)] flex flex-1 flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
           <div aria-hidden className="absolute border-2 border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[16px]" />
           <div className="bg-[rgba(241,199,92,0.1)] content-stretch flex items-center gap-[6px] px-[12px] py-[4px] relative rounded-[100px] shrink-0">
             <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -543,7 +552,7 @@ function SectionPricing() {
             <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#f1c75c] text-[11px] uppercase whitespace-nowrap">CAMPEÃO DE VENDAS</p>
           </div>
           <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
-            <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#f8fafc] text-[28px]">Profissional</p>
+            <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#f8fafc] text-[28px]">PROFISSIONAL</p>
             <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.4] not-italic relative shrink-0 text-[#94a3b8] text-[13px]">Para quem quer fidelizar clientes, gerar receita recorrente e crescer no automático.</p>
           </div>
           <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full">
@@ -570,32 +579,42 @@ function SectionPricing() {
             ))}
           </div>
           <div className="mt-auto content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
+            {/* Limites EXATOS (RN-014), destacados fw600, antes do divisor */}
+            <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold not-italic relative shrink-0 text-[#f8fafc] text-[13px]">Inclui até 5 profissionais e 1.000 clientes.</p>
+            <div aria-hidden className="relative w-full border-t border-[#1f2937] border-solid" />
             <a href={buildWhatsAppUrl(WHATSAPP_GROOM_PLAN_PROFISSIONAL_MESSAGE)} target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
               <p className="font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[13px] tracking-wide text-center">QUERO O PLANO PROFISSIONAL GRÁTIS</p>
             </a>
-            <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#f8fafc] text-[12px]">Inclui até 5 profissionais e 1.000 clientes.</p>
           </div>
         </div>
 
-        {/* Plan 3: Elite */}
-        <div className="bg-[#f0f4ff] content-stretch flex flex-1 flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
-          <div aria-hidden className="absolute border border-[#818cf8] border-solid inset-0 pointer-events-none rounded-[16px]" />
-          <div className="content-stretch flex items-center gap-[6px] px-[12px] py-[4px] relative rounded-[100px] shrink-0">
-            <div aria-hidden className="absolute border border-[#818cf8] border-solid inset-0 pointer-events-none rounded-[100px]" />
-            <Crown size={13} color="#4f46e5" className="shrink-0" />
-            <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#4f46e5] text-[11px] uppercase whitespace-nowrap">MAIS COMPLETO — IA INTEGRADA</p>
+        {/* Plan 3: Elite — RN-015/CR-007: badge "Em breve" junto ao título e CTA
+        desabilitado (sem href/handler); tokens neutros — ícone de coroa e paleta
+        indigo do código pré-RN-014 removidos (dossier g2 §8). */}
+        <div data-testid="groom-plan-elite" className="bg-white content-stretch flex flex-1 flex-col gap-[24px] items-start min-w-px p-[32px] relative rounded-[16px]">
+          <div aria-hidden className="absolute border border-[#e2e8f0] border-solid inset-0 pointer-events-none rounded-[16px]" />
+          <div className="content-stretch flex items-center gap-[5px] px-[12px] py-[4px] relative rounded-[100px] shrink-0">
+            <div aria-hidden className="absolute border border-[#cbd5e1] border-solid inset-0 pointer-events-none rounded-[100px]" />
+            <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#64748b] text-[11px] uppercase whitespace-nowrap">MAIS COMPLETO — IA INTEGRADA</p>
           </div>
           <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
-            <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#0f172a] text-[28px]">Elite</p>
+            <div className="flex items-center gap-[12px] flex-wrap relative shrink-0">
+              <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#0f172a] text-[28px]">ELITE</p>
+              {/* Badge de disponibilidade (padrão RN-005/CR-002 — âmbar com dot) */}
+              <span data-testid="groom-elite-badge" className="inline-flex items-center gap-[6px] rounded-full bg-[rgba(241,199,92,0.1)] border border-[#f1c75c] px-[10px] py-[3px] text-[12px] font-semibold text-[#745617] whitespace-nowrap">
+                <span aria-hidden className="block size-[6px] rounded-full bg-[#f1c75c]" />
+                Em breve
+              </span>
+            </div>
             <p className="font-['Inter:Regular',sans-serif] font-normal leading-[1.4] not-italic relative shrink-0 text-[#64748b] text-[13px]">Para estabelecimentos que querem lucrar mais com tecnologia de ponta.</p>
           </div>
           <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-full">
             <p className="font-['Inter:Regular',sans-serif] font-normal line-through not-italic relative shrink-0 text-[#94a3b8] text-[13px]">De R$ 149,90</p>
             <div className="content-stretch flex gap-[4px] items-baseline relative shrink-0">
-              <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold relative shrink-0 text-[#0d6efd] text-[40px]">R$ 89,90</p>
-              <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#64748b] text-[14px]">/ mês</p>
+              <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold relative shrink-0 text-[#0f172a] text-[40px]">R$ 89,90</p>
+              <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#64748b] text-[14px]">/mês</p>
             </div>
-            <p className="font-['Inter:Bold',sans-serif] font-bold leading-[1.4] not-italic relative shrink-0 text-[#4f46e5] text-[12px]">Por menos de R$ 3 por dia, tenha IA trabalhando pelo seu negócio!</p>
+            <p className="font-['Inter:Bold',sans-serif] font-bold leading-[1.4] not-italic relative shrink-0 text-[#0f172a] text-[12px]">Por menos de R$ 3 por dia, tenha IA trabalhando pelo seu negócio!</p>
           </div>
           <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
             {[
@@ -614,15 +633,16 @@ function SectionPricing() {
             ))}
           </div>
           <div className="mt-auto content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-            <div className="bg-[#e2e8f0] content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full">
+            {/* Limites EXATOS (RN-014), destacados fw600, antes do divisor */}
+            <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold not-italic relative shrink-0 text-[#0f172a] text-[13px]">Inclui até 15 profissionais e 5.000 clientes.</p>
+            <div aria-hidden className="relative w-full border-t border-[#e2e8f0] border-solid" />
+            {/* RN-015 — sem CTA ativo: botão desabilitado (sem href/handler) */}
+            <button disabled data-testid="groom-elite-cta" className="bg-[#e2e8f0] content-stretch flex items-center justify-center py-[14px] relative rounded-[8px] shrink-0 w-full cursor-not-allowed">
               <p className="font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#94a3b8] text-[13px] tracking-wide whitespace-nowrap">DISPONÍVEL EM BREVE</p>
-            </div>
-            <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#94a3b8] text-[12px]">Inclui até 15 profissionais e 5.000 clientes.</p>
+            </button>
           </div>
         </div>
       </div>
-
-      <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#94a3b8] text-[13px] text-center w-full">🔒 Sem taxa de configuração. Cancele quando quiser. Seus dados estão 100% protegidos com criptografia de ponta a ponta.</p>
     </div>
   );
 }
@@ -630,6 +650,10 @@ function SectionPricing() {
 
 
 function SectionFaq() {
+  // RN-035 — accordion vertical (dossier g2 §9): uma pergunta aberta por vez
+  // (padrão do design: 1 item expandido ao carregar); desktop chevron rotaciona,
+  // mobile ícone `minus` no item aberto. Copy das Q&A 100% idêntica ao código
+  // [Groom.tsx:557-564 pré-RN-014] — sem reescrita.
   const faqs = [
     { q: "Preciso de cartão de crédito para testar?", a: "Não. Oferecemos 15 dias totalmente grátis para você testar sem precisar cadastrar cartão ou qualquer compromisso financeiro inicial." },
     { q: "E se eu já uso outro sistema de agendamento?", a: "Vem do Tua Agenda? Importação automática em poucos cliques. Usa outro sistema? Fala com a gente que nosso time analisa e cuida de toda a migração dos seus dados pra você." },
@@ -638,6 +662,7 @@ function SectionFaq() {
     { q: "Tem suporte para me ajudar?", a: "Claro! Nosso time atende diretamente via WhatsApp de verdade. Sem respostas automáticas padrão, atendimento feito por pessoas prontas para te ajudar." },
     { q: "Posso cancelar quando quiser?", a: "Sim. Sem contratos ou multas. Você pode exportar seus dados a qualquer momento e solicitar o cancelamento da sua assinatura com 1 clique." },
   ];
+  const [openIndex, setOpenIndex] = useState(0);
   return (
     <div id="faq" className="bg-[#0d1117] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
@@ -645,21 +670,51 @@ function SectionFaq() {
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
           <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0d6efd] text-[12px] uppercase whitespace-nowrap">FAQ</p>
         </div>
-        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#f8fafc] text-2xl md:text-3xl lg:text-[40px] text-center w-[min-content]">Perguntas Frequentes</p>
+        {/* Título lowercase — delta de copy g2 §9 */}
+        <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] min-w-full relative shrink-0 text-[#f8fafc] text-2xl md:text-3xl lg:text-[40px] text-center w-[min-content]">Perguntas frequentes</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative shrink-0 w-full">
-        {faqs.map((faq) => (
-          <div key={faq.q} className="bg-[#161b22] content-stretch flex flex-col gap-[16px] items-start min-w-px p-[28px] relative rounded-[12px]">
-            <div aria-hidden className="absolute border border-[#1f2937] border-solid inset-0 pointer-events-none rounded-[12px]" />
-            <div className="content-stretch flex items-center justify-between gap-[12px] relative shrink-0 w-full">
-              <p className="[word-break:break-word] flex-[1_0_0] font-['Manrope:Bold',sans-serif] font-bold leading-[1.3] min-w-px relative text-[#f8fafc] text-[16px]">{faq.q}</p>
-              <svg className="shrink-0" fill="none" height="20" viewBox="0 0 20 20" width="20">
-                <path d="M5 7.5L10 12.5L15 7.5" stroke="#0D6EFD" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-              </svg>
+      <div data-testid="groom-faq" className="flex flex-col gap-[12px] relative shrink-0 w-full">
+        {faqs.map((faq, index) => {
+          const open = openIndex === index;
+          return (
+            <div key={faq.q} data-testid="groom-faq-item" className="bg-[#161b22] content-stretch min-w-px relative rounded-[12px]">
+              <div aria-hidden className="absolute border border-[#1f2937] border-solid inset-0 pointer-events-none rounded-[12px]" />
+              <button
+                id={`groom-faq-button-${index}`}
+                aria-expanded={open}
+                aria-controls={`groom-faq-panel-${index}`}
+                data-testid={`groom-faq-trigger-${index}`}
+                onClick={() => setOpenIndex((curr) => (curr === index ? null : index))}
+                className="relative w-full flex items-center justify-between gap-[12px] text-left px-[24px] py-[20px] cursor-pointer"
+              >
+                <p className="[word-break:break-word] flex-[1_0_0] font-['Manrope:Bold',sans-serif] font-bold leading-[1.3] min-w-px relative text-[#f8fafc] text-[16px]">{faq.q}</p>
+                {/* Desktop: chevron rotacionando · Mobile: `minus` no item aberto */}
+                <ChevronDown
+                  size={20}
+                  color="#f1c75c"
+                  aria-hidden
+                  className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180 hidden lg:block" : ""}`}
+                />
+                <Minus
+                  size={20}
+                  color="#f1c75c"
+                  aria-hidden
+                  className={`lg:hidden shrink-0 ${open ? "" : "hidden"}`}
+                />
+              </button>
+              <div
+                id={`groom-faq-panel-${index}`}
+                role="region"
+                aria-labelledby={`groom-faq-button-${index}`}
+                data-testid={`groom-faq-panel-${index}`}
+                hidden={!open}
+                className="relative px-[24px] pb-[20px]"
+              >
+                <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.6] not-italic relative text-[#94a3b8] text-[14px] w-full">{faq.a}</p>
+              </div>
             </div>
-            <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.6] not-italic relative shrink-0 text-[#94a3b8] text-[14px] w-full">{faq.a}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -682,20 +737,30 @@ function SectionFinalCta() {
             <path d={svgPaths.p2df9a900} stroke="#0F172A" strokeLinecap="round" strokeWidth="2" />
           </svg>
         </a>
-        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#cbd5e1] text-[13px] text-center">⚡ Sem cartão de crédito. Configuração em 5 minutos. Cancele quando quiser.</p>
+        {/* Convite — copy idêntica ao código, SEM ⚡ (delta dossier g2 §10) */}
+        <p className="font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#cbd5e1] text-[13px] text-center">Sem cartão de crédito. Configuração em 5 minutos. Cancele quando quiser.</p>
       </div>
     </div>
   );
 }
 
 function SectionFooter() {
+  // Âncoras do próprio Groom (dossier g2 §11) — "Planos e Preços" → "Preços".
+  const footerNav = [
+    { label: "Como Funciona", href: "#como-funciona" },
+    { label: "Funcionalidades", href: "#funcionalidades" },
+    { label: "Diferenciais", href: "#diferenciais" },
+    { label: "Preços", href: "#precos" },
+    { label: "FAQ", href: "#faq" },
+  ];
   return (
     <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-[48px] items-start pb-[48px] pt-[64px] px-5 md:px-12 lg:px-[120px] relative shrink-0 w-full">
       <div aria-hidden className="absolute border-[#1f2937] border-solid border-t inset-0 pointer-events-none" />
       <div className="content-stretch flex flex-col lg:flex-row items-start justify-between gap-10 relative shrink-0 w-full">
         <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full lg:w-[360px]">
+          {/* Marca scissors + wordmark (dossier g2 §11 — sem raster) */}
           <div className="flex gap-[10px] items-center relative shrink-0">
-            <img alt="Groom logo" className="size-[36px] object-contain" src={imgLogo} />
+            <Scissors size={36} className="text-[#f1c75c]" aria-hidden />
             <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#f8fafc] text-[20px] whitespace-nowrap">Groom</p>
           </div>
           <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.5] min-w-full not-italic relative shrink-0 text-[#94a3b8] text-[13px] w-[min-content]">Sistema completo de gestão e agendamento para barbearias, salões de beleza, estúdios de tatuagem e clínicas de estética.</p>
@@ -703,11 +768,11 @@ function SectionFooter() {
         <div className="content-stretch flex flex-wrap gap-8 lg:gap-[64px] items-start relative shrink-0">
           <div className="content-stretch flex flex-col gap-[16px] items-start leading-[normal] relative shrink-0">
             <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold relative shrink-0 text-[#f8fafc] text-[14px]">Navegação</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#94a3b8] text-[13px]">Como Funciona</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#94a3b8] text-[13px]">Funcionalidades</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#94a3b8] text-[13px]">Diferenciais</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#94a3b8] text-[13px]">Planos e Preços</p>
-            <p className="font-['Inter:Regular',sans-serif] font-normal not-italic relative shrink-0 text-[#94a3b8] text-[13px]">FAQ</p>
+            <nav data-testid="groom-footer-nav" className="flex flex-col gap-[16px] items-start">
+              {footerNav.map((link) => (
+                <a key={link.href} href={link.href} className="font-['Inter:Regular',sans-serif] font-normal not-italic relative text-[#94a3b8] text-[13px] hover:text-[#f8fafc] transition-colors cursor-pointer">{link.label}</a>
+              ))}
+            </nav>
           </div>
           <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0">
             <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#f8fafc] text-[14px]">Desenvolvimento</p>
@@ -720,17 +785,19 @@ function SectionFooter() {
       </div>
       <div className="content-stretch flex items-center justify-between pt-[24px] relative shrink-0 w-full">
         <div aria-hidden className="absolute border-[#1f2937] border-solid border-t inset-0 pointer-events-none" />
-        <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#94a3b8] text-[12px]">© 2026 Groom — Todos os direitos reservados.</p>
+        {/* © unificada conforme frame (dossier g2 §11) — PEND-013 em aberto
+        ("© 2026 Groom" × "© TechMinds"); revisitar se o operador fechar diferente. */}
+        <p data-testid="groom-copyright" className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#94a3b8] text-[12px]">© 2026 Groom — Todos os direitos reservados.</p>
       </div>
+      {/* Identificação empresarial — dado real de faturamento (ADR-005/SEC-001);
+      texto EXATO, nunca alterar ou remover. Sem © secundária (dupla © removida —
+      © unificada acima; PEND-013). */}
       <footer style={{ textAlign: "center", padding: "24px", fontSize: "14px", color: "#6b7280", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <p style={{ marginBottom: "6px", fontWeight: 600, color: "#d1d5db" }}>
           Nome Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT
         </p>
         <p style={{ marginBottom: "6px" }}>
           CNPJ: 69.184.592/0001-45 | Guaíba - RS
-        </p>
-        <p style={{ marginTop: "12px", fontSize: "12px" }}>
-          © 2026 TechMinds. Todos os direitos reservados.
         </p>
       </footer>
     </div>

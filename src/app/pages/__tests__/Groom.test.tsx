@@ -257,7 +257,8 @@ describe("Groom — regressão mínima (RN-033-4)", () => {
   it("seções de trás continuam renderizando (FAQ, convite e rodapé)", () => {
     renderWithProviders(<Groom />);
 
-    expect(screen.getByText("Perguntas Frequentes")).toBeInTheDocument();
+    // Título FAQ lowercase — delta de copy aprovado (dossier g2 §9 / RN-014-3).
+    expect(screen.getByText("Perguntas frequentes")).toBeInTheDocument();
     expect(
       screen.getByText("Pronto para profissionalizar seu negócio?")
     ).toBeInTheDocument();
