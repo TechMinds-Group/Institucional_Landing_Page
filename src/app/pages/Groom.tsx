@@ -1,8 +1,6 @@
-import imgIconContainer from "../../imports/GroomLandingPage-3/2e6ab184d92ccf9c9cc749dc008d4aec29ea5790.png";
 import imgLogo from "../../imports/logo.png";
-import imgDashboardPreview from "../../imports/GroomLandingPage-3/20860e87f1caa68bf54946def42a084f479fa552.png";
-import { CreditCard, Bot, Ghost, Brain, DollarSign, RefreshCw, Flame, Crown, Sprout, Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { CreditCard, Bot, Ghost, Brain, DollarSign, RefreshCw, Flame, Crown, Sprout, Menu, X, Scissors, MessageCircle, LayoutDashboard, CalendarClock, ArrowRight } from "lucide-react";
+import { useState, useEffect, type ReactNode } from "react";
 // DEBT-003 (RN-024-1): Deep-links do WhatsApp vêm do módulo único de contatos
 // — substituição mecânica dos literais codificados diretamente no código (sem mudança de copy).
 import {
@@ -33,6 +31,73 @@ const svgPaths = {
   pa8388c0: "M10.9999 20.001H1.9992M19.0006 20.0012L12.242 21.6903C12.0946 21.727 11.9408 21.7297 11.7922 21.6982C11.6436 21.6666 11.5042 21.6016 11.3844 21.5081C11.2647 21.4146 11.1679 21.2951 11.1012 21.1586C11.0346 21.0221 11 20.8722 10.9999 20.7203V4.56294C11.0001 4.25911 11.0695 3.95833 11.2029 3.68533C11.3363 3.41234 11.5301 3.17332 11.7696 2.98642C12.0092 2.79952 12.2882 2.66964 12.5854 2.60665C12.8827 2.54366 13.1903 2.54922 13.4851 2.6229L17.4854 3.62292C17.9182 3.73107 18.3023 3.98075 18.5768 4.33226C18.8513 4.68378 19.0005 5.11696 19.0006 5.56296V20.0012ZM19.0006 20.0012L22.0008 20.001M10.9999 4.00073H7.99968C7.4692 4.00073 6.96046 4.21145 6.58535 4.58653C6.21025 4.96161 5.99952 5.47032 5.99952 6.00077V20.001M14.0002 12.0009H14.0102",
 };
 
+// RN-033-2/RN-034 — Nó "Ecosystem" 130×130 da composição orbital (96px no mobile).
+// WhatsApp é o nó central destacado; Gestão e Agenda apoiam nas órbitas laterais.
+function EcosystemNode({
+  testId,
+  label,
+  icon,
+  layout,
+}: {
+  testId: string;
+  label: string;
+  icon: ReactNode;
+  layout: "left" | "center" | "right";
+}) {
+  const position =
+    layout === "center"
+      ? "left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 bg-[rgba(241,199,92,0.1)] shadow-[0px_0px_36px_0px_rgba(241,199,92,0.28)] ring-[#f1c75c]/70"
+      : layout === "left"
+        ? "left-0 top-1/2 -translate-y-1/2 bg-[#161b22] ring-[#1f2937]"
+        : "right-0 top-1/2 -translate-y-1/2 bg-[#161b22] ring-[#1f2937]";
+  return (
+    <div data-testid={testId} className={`absolute flex size-[96px] sm:size-[130px] flex-col items-center justify-center gap-[6px] rounded-[24px] ring-1 ${position}`}>
+      {icon}
+      <p className={`font-['Inter:Bold',sans-serif] font-bold leading-[normal] text-[12px] sm:text-[13px] ${layout === "center" ? "text-[#f8fafc]" : "text-[#b3bacb]"}`}>{label}</p>
+    </div>
+  );
+}
+
+// Composição "ecosystem orbital" — Gestão · WhatsApp (destacado) · Agenda:
+// Inner/Outer orbit (elipses) + Flow (setas) em SVG, nós com ícones lucide —
+// substitui o mockup PNG do dashboard (0 assets raster — dossier g2 §3, RN-034).
+function HeroEcosystem() {
+  return (
+    <div data-testid="groom-ecosystem" data-name="scheduling-ecosystem" className="relative mx-auto flex aspect-square w-full max-w-[420px] items-center justify-center">
+      <svg aria-hidden fill="none" viewBox="0 0 420 420" className="absolute inset-0 size-full">
+        {/* Inner orbit */}
+        <ellipse cx="210" cy="210" rx="86" ry="34" stroke="#526074" strokeDasharray="6 8" strokeWidth="1.5" />
+        {/* Outer orbit */}
+        <ellipse cx="210" cy="210" rx="164" ry="68" stroke="#526074" strokeDasharray="6 8" strokeOpacity="0.7" strokeWidth="1.5" />
+        {/* Flow — setas de fluxo (path vetorial reutilizado) */}
+        <path d={svgPaths.p2df9a900} stroke="#f1c75c" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" transform="translate(202 92) scale(0.8)" />
+        <path d={svgPaths.p2df9a900} stroke="#526074" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" transform="translate(202 304) scale(0.8) rotate(180 10 10)" />
+      </svg>
+      <EcosystemNode testId="eco-node-gestao" label="Gestão" layout="left" icon={<LayoutDashboard size={30} className="text-[#b3bacb]" />} />
+      <EcosystemNode testId="eco-node-whatsapp" label="WhatsApp" layout="center" icon={<MessageCircle size={34} className="text-[#f1c75c]" />} />
+      <EcosystemNode testId="eco-node-agenda" label="Agenda" layout="right" icon={<CalendarClock size={30} className="text-[#b3bacb]" />} />
+    </div>
+  );
+}
+
+// RN-033-3 — Strip "Service segments" no fim do bloco Hero (antes de
+// "Problemas e soluções"): copy literal do dossier g2 §3, sem links/CTAs.
+function ServiceSegmentsStrip() {
+  const segments = ["Barbearias", "Salões de beleza", "Estúdios de tatuagem", "Clínicas de estética"];
+  return (
+    <div data-testid="groom-segment-strip" data-name="service-segments" className="w-full border-t border-[#1f2937]/70 pt-8">
+      <ul className="flex flex-wrap items-center justify-center gap-x-[14px] gap-y-[10px]">
+        {segments.map((segment, index) => (
+          <li key={segment} className="flex items-center gap-[14px]">
+            {index > 0 && <span aria-hidden className="size-[4px] rounded-full bg-[#f1c75c]/60" />}
+            <span className="font-['Inter:Semi_Bold',sans-serif] font-semibold whitespace-nowrap text-[#b3bacb] text-[13px] lg:text-[14px]">{segment}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function SectionHero() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navLinks = [
@@ -51,21 +116,21 @@ function SectionHero() {
           {/* Backdrop */}
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setDrawerOpen(false)} />
           {/* Drawer */}
-          <div className="relative z-10 bg-[#0d1117] w-[280px] h-full flex flex-col pt-14 px-6 pb-6 gap-8 shadow-2xl">
+          <div data-testid="groom-drawer" className="relative z-10 bg-[#0d1117] w-[280px] h-full flex flex-col pt-14 px-6 pb-6 gap-8 shadow-2xl">
             {/* Drawer header */}
             <div className="flex items-center justify-between">
               <div className="flex gap-[10px] items-center">
-                <img alt="" className="size-[28px] object-contain" src={imgLogo} />
-                <p className="font-['Manrope:ExtraBold',sans-serif] font-extrabold text-[#f8fafc] text-[20px]">Groom</p>
+                <Scissors size={28} className="text-[#f1c75c]" aria-hidden />
+                <p className="font-['Inter:Extra_Bold',sans-serif] font-extrabold text-[#f8fafc] text-[20px]">Groom</p>
               </div>
-              <button onClick={() => setDrawerOpen(false)} className="text-[#94a3b8] hover:text-[#f8fafc] p-1">
+              <button onClick={() => setDrawerOpen(false)} aria-label="Fechar menu" className="text-[#94a3b8] hover:text-[#f8fafc] p-1">
                 <X size={22} />
               </button>
             </div>
             {/* Nav links */}
             <nav className="flex flex-col gap-1">
               {navLinks.map((link) => (
-                <a key={link.href} href={link.href} onClick={() => setDrawerOpen(false)} className="px-3 py-3 rounded-lg text-[#cbd5e1] font-['Inter:Semi_Bold',sans-serif] font-semibold text-[15px] hover:bg-[#1f2937] hover:text-[#f8fafc] transition-colors">
+                <a key={link.href} href={link.href} onClick={() => setDrawerOpen(false)} className="px-3 py-3 rounded-lg text-[#b3bacb] font-['Inter:Semi_Bold',sans-serif] font-semibold text-[15px] hover:bg-[#1f2937] hover:text-[#f8fafc] transition-colors">
                   {link.label}
                 </a>
               ))}
@@ -74,60 +139,67 @@ function SectionHero() {
         </div>
       )}
 
-      {/* Nav */}
-      <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
-        {/* Logo */}
-        <div className="content-stretch flex gap-[10px] items-center relative shrink-0">
-          <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 size-[28px]">
-            <img alt="" className="absolute inset-0 max-w-none object-contain pointer-events-none size-full" src={imgIconContainer} />
-          </div>
-          <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[normal] relative shrink-0 text-[#f8fafc] text-[24px] whitespace-nowrap">Groom</p>
+      {/* Navigation — RN-033-1: CR-007 remove o botão "Entrar" (login segue acessível
+      pela URL própria do produto); 5 âncoras mantêm destinos; CTA TESTAR GRÁTIS
+      (deep-link WhatsApp — DEBT-003/ADR-010) abre em nova aba. */}
+      <div data-testid="groom-nav" className="content-stretch flex items-center justify-between relative shrink-0 w-full">
+        {/* Marca — símbolo scissors vetorial, sem PNG (dossier g2 §2) */}
+        <div data-testid="groom-brand" className="flex gap-[10px] items-center relative shrink-0">
+          <Scissors size={26} className="shrink-0 text-[#f1c75c]" aria-hidden />
+          <p className="font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] text-[#f8fafc] text-[24px] whitespace-nowrap">Groom</p>
         </div>
-        {/* Nav links — desktop only */}
-        <div className="hidden lg:flex [word-break:break-word] content-stretch font-['Inter:Semi_Bold',sans-serif] font-semibold gap-[32px] items-center leading-[normal] not-italic relative shrink-0 text-[#cbd5e1] text-[14px] whitespace-nowrap">
+        {/* Nav links — desktop (tokens B: #b3bacb substitui #cbd5e1) */}
+        <div data-testid="groom-nav-links" className="hidden lg:flex [word-break:break-word] content-stretch font-['Inter:Semi_Bold',sans-serif] font-semibold gap-[32px] items-center leading-[normal] not-italic relative shrink-0 text-[#b3bacb] text-[14px] whitespace-nowrap">
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} className="relative shrink-0 hover:text-[#f8fafc] transition-colors">{link.label}</a>
           ))}
         </div>
-        {/* CTA group — desktop only */}
-        <div className="hidden lg:flex content-stretch gap-[16px] items-center justify-center overflow-clip relative shrink-0">
-          <a href="https://groom.techminds.net.br/login" className="border-[#f1c75c] border-[1.5px] border-solid cursor-pointer content-stretch flex items-center justify-center overflow-clip px-[20px] py-[8px] relative rounded-[8px] shrink-0 hover:bg-[#f1c75c]/10 transition-colors">
-            <p className="[word-break:break-word] font-['Inter:Semi_Bold',sans-serif] font-semibold leading-[normal] not-italic relative shrink-0 text-[#f1c75c] text-[14px] whitespace-nowrap">Entrar</p>
-          </a>
-          <a href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noreferrer" className="bg-[#f1c75c] cursor-pointer content-stretch flex items-start px-[24px] py-[10px] relative rounded-[8px] shrink-0">
+        {/* CTA — desktop (sem "Entrar" — CR-007) */}
+        <div className="hidden lg:flex content-stretch gap-[16px] items-center justify-center relative shrink-0">
+          <a data-testid="groom-nav-trial-cta" href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noopener noreferrer" className="bg-[#f1c75c] cursor-pointer content-stretch flex items-center gap-[8px] px-[24px] py-[10px] relative rounded-[8px] shrink-0 hover:bg-[#f2cb69] transition-colors">
             <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[14px] whitespace-nowrap">TESTAR GRÁTIS</p>
+            <ArrowRight size={16} color="#0F172A" className="shrink-0" />
           </a>
         </div>
-        {/* Hamburger — mobile/tablet only */}
-        <button className="lg:hidden text-[#f8fafc] p-1" onClick={() => setDrawerOpen(true)}>
-          <Menu size={26} />
-        </button>
+        {/* Mobile — header do design g2: "Header trial action" TESTAR GRÁTIS + hamburger */}
+        <div className="flex gap-[12px] items-center relative shrink-0 lg:hidden">
+          <a data-testid="groom-nav-trial-cta" href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noopener noreferrer" className="bg-[#f1c75c] flex items-center gap-[6px] px-[14px] py-[8px] rounded-[8px]">
+            <p className="font-['Inter:Bold',sans-serif] font-bold text-[#0f172a] text-[12px] whitespace-nowrap">TESTAR GRÁTIS</p>
+            <ArrowRight size={13} color="#0F172A" className="shrink-0" />
+          </a>
+          <button className="text-[#f8fafc] p-1" onClick={() => setDrawerOpen(true)} aria-label="Abrir menu">
+            <Menu size={26} />
+          </button>
+        </div>
       </div>
       {/* Hero body */}
-      <div className="content-stretch flex flex-col lg:flex-row gap-[48px] items-center relative shrink-0 w-full">
+      <div data-testid="groom-hero" className="content-stretch flex flex-col lg:flex-row gap-[48px] items-center relative shrink-0 w-full">
         {/* Hero left */}
         <div className="content-stretch flex flex-[1_0_0] flex-col gap-[32px] items-start min-w-px relative w-full">
 
-          <p className="[word-break:break-word] font-['Manrope:ExtraBold',sans-serif] font-extrabold leading-[0] min-w-full relative shrink-0 text-[#f8fafc] text-3xl lg:text-[44px] w-[min-content]">
-            <span className="leading-[1.15]">{`Enquanto você organiza agenda no papel, seu concorrente está faturando com o `}</span>
-            <span className="leading-[1.15] text-[#f1c75c]">Groom.</span>
-          </p>
-          <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.6] min-w-full not-italic relative shrink-0 text-[#cbd5e1] text-[16px] w-[min-content]">O Groom é o sistema mais completo de agendamento e gestão para barbearias, salões de beleza, estúdios de tatuagem e clínicas de estética. O cliente agenda online, você recebe no WhatsApp, ninguém perde horário e seu faturamento escala.</p>
+          {/* Eyebrow novo (âmbar) + H1 único, sem span — deltas deste bloco (dossier g2 §3) */}
+          <div className="content-stretch flex flex-col gap-[16px] items-start relative w-full">
+            <p data-testid="groom-hero-eyebrow" className="font-['Inter:Bold',sans-serif] font-bold leading-[1.4] relative shrink-0 text-[#f1c75c] text-[12px] uppercase tracking-[0.08em]">SUA AGENDA ORGANIZADA. SEU NEGÓCIO NO CONTROLE.</p>
+            <h1 className="font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[1.15] relative text-[#f8fafc] text-3xl lg:text-[44px]">Enquanto você organiza agenda no papel, seu concorrente está faturando com o Groom.</h1>
+          </div>
+          <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[1.6] min-w-full not-italic relative shrink-0 text-[#b3bacb] text-[16px] w-[min-content]">O Groom é o sistema mais completo de agendamento e gestão para barbearias, salões de beleza, estúdios de tatuagem e clínicas de estética. O cliente agenda online, você recebe no WhatsApp, ninguém perde horário e seu faturamento escala.</p>
           <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
-            <a href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noreferrer" className="bg-[#f1c75c] content-stretch flex gap-[10px] items-center w-full md:w-auto px-[32px] py-4 md:py-[16px] relative rounded-[8px] shrink-0 justify-center md:justify-start">
+            <a data-testid="groom-hero-cta" href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noopener noreferrer" className="bg-[#f1c75c] content-stretch flex gap-[10px] items-center w-full md:w-auto px-[32px] py-4 md:py-[16px] relative rounded-[8px] shrink-0 justify-center md:justify-start hover:bg-[#f2cb69] transition-colors">
               <p className="[word-break:break-word] font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[15px] text-center">QUERO TESTAR GRÁTIS POR 15 DIAS</p>
               <svg className="relative shrink-0" fill="none" height="18" viewBox="0 0 18 18" width="18">
                 <path d={svgPaths.p394a7400} stroke="#0F172A" strokeLinecap="round" strokeWidth="2" />
               </svg>
             </a>
-            <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#94a3b8] text-[12px]">⚡ Sem cartão de crédito. Sem compromisso. Configuração em 5 minutos.</p>
+            <p className="[word-break:break-word] font-['Inter:Regular',sans-serif] font-normal leading-[normal] not-italic relative shrink-0 text-[#94a3b8] text-[12px]">Sem cartão de crédito. Sem compromisso. Configuração em 5 minutos.</p>
           </div>
         </div>
-        {/* Dashboard preview */}
-        <div className="flex-1 min-w-0 relative shrink-0 w-full">
-          <img alt="" className="hidden md:block w-full h-auto object-cover rounded-[15px]" src={imgDashboardPreview} />
+        {/* Ecosystem orbital — composição vetorial (0 raster, RN-034) */}
+        <div className="relative flex-1 min-w-0 w-full">
+          <HeroEcosystem />
         </div>
       </div>
+      {/* Service segments — fim do bloco Hero, antes de "Problemas e soluções" (RN-033-3) */}
+      <ServiceSegmentsStrip />
     </div>
   );
 }
