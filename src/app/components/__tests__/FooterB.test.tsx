@@ -47,7 +47,6 @@ describe("FooterB (RN-024-3)", () => {
 
     const company = screen.getByTestId("footerb-nav-company");
     expect(within(company).getByRole("link", { name: "Sobre nós" })).toBeInTheDocument();
-    expect(within(company).getByRole("link", { name: "Contato" })).toBeInTheDocument();
 
     const legal = screen.getByTestId("footerb-nav-legal");
     expect(within(legal).getByRole("link", { name: "Termos de uso" })).toBeInTheDocument();
@@ -95,10 +94,6 @@ describe("FooterB (RN-024-3)", () => {
     expect(within(company).getByRole("link", { name: "Sobre nós" })).toHaveAttribute(
       "href",
       `#${SECTION_IDS.empresa}`
-    );
-    expect(within(company).getByRole("link", { name: "Contato" })).toHaveAttribute(
-      "href",
-      `#${SECTION_IDS.contato}`
     );
   });
 

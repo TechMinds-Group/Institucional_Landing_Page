@@ -124,15 +124,6 @@ export function FooterB() {
                     {footerB.nav.about}
                   </a>
                 </li>
-                <li style={{ lineHeight: "36px" }}>
-                  <a
-                    href={`#${SECTION_IDS.contato}`}
-                    onClick={(e) => handleAnchorClick(e, SECTION_IDS.contato)}
-                    className="text-[#818BA1] hover:text-[#39B9B5] transition-colors duration-150 cursor-pointer text-[15px]"
-                  >
-                    {footerB.nav.contact}
-                  </a>
-                </li>
               </ul>
             </div>
 

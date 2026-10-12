@@ -413,7 +413,6 @@ export interface Translations {
       companyTitle: string;
       legalTitle: string;
       about: string;
-      contact: string;
       terms: string;
       privacy: string;
     };
@@ -661,7 +660,6 @@ export const translations: Record<Language, Translations> = {
         companyTitle: 'Empresa',
         legalTitle: 'Legal',
         about: 'Sobre nós',
-        contact: 'Contato',
         terms: 'Termos de uso',
         privacy: 'Privacidade'
       },
@@ -1540,7 +1538,6 @@ export const translations: Record<Language, Translations> = {
         companyTitle: 'Company',
         legalTitle: 'Legal',
         about: 'About us',
-        contact: 'Contact',
         terms: 'Terms of use',
         privacy: 'Privacy'
       },
@@ -2420,7 +2417,6 @@ export const translations: Record<Language, Translations> = {
         companyTitle: 'Empresa',
         legalTitle: 'Legal',
         about: 'Sobre nosotros',
-        contact: 'Contacto',
         terms: 'Términos de uso',
         privacy: 'Privacidad'
       },
