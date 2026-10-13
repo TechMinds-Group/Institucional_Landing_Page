@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { FileText, ShieldCheck, Sparkles, CircleCheck } from "lucide-react";
+import { FileText, ShieldCheck, Sparkles, CircleCheck, Smartphone } from "lucide-react";
 import { LandingPageLayout } from "../../components/landing/LandingPageLayout";
 import { LandingCta } from "../../components/landing/LandingCta";
 import { LandingFaq } from "../../components/landing/LandingFaq";
@@ -48,10 +48,20 @@ const THEME: LandingTheme = {
 };
 
 /** Eyebrow numerado do design ("01 / TEMA"). */
-function NumberedEyebrow({ number, label }: { number: string; label: string }) {
+function NumberedEyebrow({
+  number,
+  label,
+  accent = "#F5B942",
+  numberColor = "#5A6B8C",
+}: {
+  number: string;
+  label: string;
+  accent?: string;
+  numberColor?: string;
+}) {
   return (
-    <p className="text-xs font-bold tracking-[0.2em] text-[#F5B942] uppercase">
-      <span className="text-[#5A6B8C]">{number}</span> / {label}
+    <p className="text-xs font-bold tracking-[0.2em] uppercase" style={{ color: accent }}>
+      <span style={{ color: numberColor }}>{number}</span> / {label}
     </p>
   );
 }
@@ -406,31 +416,48 @@ export function VibeCutPage() {
         </div>
       </section>
 
-      {/* 07 Testes e disponibilidade */}
-      <section id={S.testes} className="px-5 md:px-8 lg:px-12 py-14 border-t border-[#151B2E]">
-        <div className="max-w-7xl mx-auto grid gap-8 lg:grid-cols-2 lg:items-center">
-          <div className="flex flex-col gap-3">
-            <NumberedEyebrow number="07" label={c.availability.eyebrow} />
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#F8FAFC] max-w-xl">
-              {c.availability.title}
-            </h2>
-            <p className="text-sm text-[#818BA1] max-w-xl">{c.availability.note}</p>
+      {/* 07 Testes e disponibilidade — frame #109:8228 (dark + acabamento bronze) */}
+      <section id={S.testes} className="border-t border-[#2D3748] px-5 md:px-8 lg:px-12 py-16 md:py-20">
+        <div className="max-w-7xl mx-auto grid gap-10 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_550px] lg:items-center">
+          <div className="flex flex-col gap-6">
+            <NumberedEyebrow number="07" label={c.availability.eyebrow} accent="#C9A566" numberColor="#C9A566" />
+            <div className="flex flex-col gap-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#E8E6E3] leading-[1.15] tracking-[-0.02em] max-w-xl">
+                {c.availability.title}
+              </h2>
+              <p className="text-base text-[#9CA3AF] leading-[1.65]">{c.availability.body}</p>
+            </div>
+            <p className="text-sm text-[#9CA3AF] leading-[1.5]">{c.availability.note}</p>
           </div>
           <div
             data-testid="vibecut-availability-card"
-            className="rounded-2xl border border-[#232A3E] bg-[#101730] p-6 flex flex-col gap-4"
+            className="w-full max-w-[550px] lg:ml-auto rounded-lg border border-[#C9A566]/33 bg-[#1A1F2E] overflow-hidden"
           >
-            <p className="text-lg font-bold text-[#F8FAFC]">{c.availability.cardTitle}</p>
-            <span className="text-[10px] font-bold tracking-widest px-3 py-1.5 rounded-full bg-[#F5B942]/10 border border-[#F5B942]/40 text-[#F5B942] max-w-max">
-              {c.availability.cardTag}
-            </span>
-            <div className="grid gap-2 text-sm">
-              {c.availability.rows.map((row) => (
-                <div key={row.label} className="flex items-center justify-between gap-4">
-                  <span className="text-[#818BA1]">{row.label}</span>
-                  <span className="text-[#F8FAFC] font-semibold">{row.value}</span>
-                </div>
-              ))}
+            {/* Acabamento bronze — faixa 4px no topo */}
+            <div
+              className="h-1 w-full"
+              style={{
+                background: "linear-gradient(135deg, rgba(201,165,102,1) 0%, rgba(139,111,71,1) 50%, rgba(107,87,66,1) 100%)",
+              }}
+            />
+            <div className="flex flex-col gap-6 p-7">
+              <div className="flex items-center gap-3">
+                <Smartphone className="w-7 h-7 shrink-0 text-[#E8E6E3]" aria-hidden="true" />
+                <p className="text-2xl font-bold text-[#E8E6E3] leading-[1.2]">
+                  {c.availability.cardTitle}
+                </p>
+              </div>
+              <span className="self-start px-2.5 py-1.5 rounded-lg bg-[rgba(201,165,102,0.07)] border border-[#C9A566]/33 text-xs font-bold text-[#C9A566]">
+                {c.availability.cardTag}
+              </span>
+              <div className="flex flex-col gap-4">
+                {c.availability.rows.map((row) => (
+                  <div key={row.label} className="flex items-center justify-between gap-4">
+                    <span className="text-sm font-medium text-[#9CA3AF]">{row.label}</span>
+                    <span className="text-sm font-semibold text-[#E8E6E3]">{row.value}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

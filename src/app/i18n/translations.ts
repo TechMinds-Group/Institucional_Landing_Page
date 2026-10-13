@@ -92,6 +92,7 @@ export interface VibecutLanding {
   availability: {
     eyebrow: string;
     title: string;
+    body: string;
     cardTitle: string;
     cardTag: string;
     rows: { label: string; value: string }[];
@@ -838,6 +839,7 @@ export const translations: Record<Language, Translations> = {
       availability: {
         eyebrow: 'EM DESENVOLVIMENTO',
         title: 'Uma nova experiência. Ainda em testes internos.',
+        body: 'O VibeCut para Android está na versão 1.0.6. Esta página apresenta a proposta e o funcionamento do produto, não um acesso público para usá-lo.',
         cardTitle: 'VibeCut para Android',
         cardTag: 'TESTES INTERNOS · V1.0.6',
         rows: [
@@ -845,7 +847,7 @@ export const translations: Record<Language, Translations> = {
           { label: 'Acesso público', value: 'Não disponível' },
           { label: 'Lançamento', value: 'Sem data anunciada' }
         ],
-        note: 'A demonstração de upload na web descreve o funcionamento; não indica disponibilidade pública da experiência web.'
+        note: 'Ainda não publicado em lojas. Não há download público ou data de lançamento anunciada.'
       },
       faq: {
         eyebrow: 'ANTES DE COMEÇAR',
@@ -1717,6 +1719,7 @@ export const translations: Record<Language, Translations> = {
       availability: {
         eyebrow: 'IN DEVELOPMENT',
         title: 'A new experience. Still in internal testing.',
+        body: 'The VibeCut Android app is at version 1.0.6. This page presents the product proposal and how it works — not a public access to use it.',
         cardTitle: 'VibeCut for Android',
         cardTag: 'INTERNAL TESTING · V1.0.6',
         rows: [
@@ -1724,7 +1727,7 @@ export const translations: Record<Language, Translations> = {
           { label: 'Public access', value: 'Not available' },
           { label: 'Launch', value: 'No date announced' }
         ],
-        note: 'The upload demonstration on the web describes how it works; it does not indicate public availability of the web experience.'
+        note: 'Not yet published on stores. No public download or announced release date.'
       },
       faq: {
         eyebrow: 'BEFORE YOU START',
@@ -2595,6 +2598,7 @@ export const translations: Record<Language, Translations> = {
       availability: {
         eyebrow: 'EN DESARROLLO',
         title: 'Una nueva experiencia. Aún en pruebas internas.',
+        body: 'El VibeCut para Android está en la versión 1.0.6. Esta página presenta la propuesta y el funcionamiento del producto, no un acceso público para usarlo.',
         cardTitle: 'VibeCut para Android',
         cardTag: 'PRUEBAS INTERNAS · V1.0.6',
         rows: [
@@ -2602,7 +2606,7 @@ export const translations: Record<Language, Translations> = {
           { label: 'Acceso público', value: 'No disponible' },
           { label: 'Lanzamiento', value: 'Sin fecha anunciada' }
         ],
-        note: 'La demostración de carga en la web describe el funcionamiento; no indica disponibilidad pública de la experiencia web.'
+        note: 'Aún no publicado en tiendas. No hay descarga pública ni fecha de lanzamiento anunciada.'
       },
       faq: {
         eyebrow: 'ANTES DE EMPEZAR',
