@@ -460,7 +460,7 @@ export function LumenPage() {
 
       {/* 9 FAQ */}
       <section id={S.faq} className="px-5 md:px-8 lg:px-12 py-14 border-t border-[#E4DCC5]">
-        <div className="max-w-5xl mx-auto flex flex-col gap-8">
+        <div className="max-w-7xl mx-auto flex flex-col gap-8">
           <Eyebrow label={c.faq.eyebrow} />
           <h2 className={`text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#1E2B4A] max-w-2xl ${THEME.titleFont}`}>
             {c.faq.title}
@@ -479,7 +479,7 @@ export function LumenPage() {
 
       {/* Convite à exploração */}
       <section className="px-5 md:px-8 lg:px-12 py-16 border-t border-[#E4DCC5]">
-        <div className="max-w-5xl mx-auto flex flex-col items-center gap-5 text-center">
+        <div className="max-w-7xl mx-auto flex flex-col items-center gap-5 text-center">
           <Eyebrow label={c.invite.eyebrow} />
           <h2 className={`text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#1E2B4A] max-w-2xl ${THEME.titleFont}`}>
             {c.invite.title}

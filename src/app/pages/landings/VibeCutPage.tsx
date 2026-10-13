@@ -465,7 +465,7 @@ export function VibeCutPage() {
 
       {/* 08 FAQ */}
       <section id={S.faq} className="px-5 md:px-8 lg:px-12 py-14 border-t border-[#151B2E]">
-        <div className="max-w-5xl mx-auto flex flex-col gap-8">
+        <div className="max-w-7xl mx-auto flex flex-col gap-8">
           <NumberedEyebrow number="08" label={c.faq.eyebrow} />
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#F8FAFC] max-w-2xl">
             {c.faq.title}
@@ -484,7 +484,7 @@ export function VibeCutPage() {
 
       {/* Convite à descoberta */}
       <section className="px-5 md:px-8 lg:px-12 py-16 border-t border-[#151B2E]">
-        <div className="max-w-5xl mx-auto flex flex-col items-center gap-5 text-center">
+        <div className="max-w-7xl mx-auto flex flex-col items-center gap-5 text-center">
           <p className="text-xs font-bold tracking-[0.2em] text-[#F5B942] uppercase">{c.invite.eyebrow}</p>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#F8FAFC] max-w-2xl">
             {c.invite.title}

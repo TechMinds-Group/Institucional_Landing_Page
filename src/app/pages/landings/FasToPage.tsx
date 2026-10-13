@@ -412,7 +412,7 @@ export function FasToPage() {
 
       {/* 7 FAQ */}
       <section id={S.faq} className="px-5 md:px-8 lg:px-12 py-14 border-t border-[#F1F5F9]">
-        <div className="max-w-5xl mx-auto flex flex-col gap-8">
+        <div className="max-w-7xl mx-auto flex flex-col gap-8">
           <Eyebrow label={c.faq.eyebrow} />
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#0F172A] max-w-2xl">
             {c.faq.title}
@@ -430,7 +430,7 @@ export function FasToPage() {
 
       {/* Convite Ã  apresentaÃ§Ã£o */}
       <section className="px-5 md:px-8 lg:px-12 py-16 border-t border-[#F1F5F9]">
-        <div className="max-w-5xl mx-auto flex flex-col items-center gap-5 text-center">
+        <div className="max-w-7xl mx-auto flex flex-col items-center gap-5 text-center">
           <span
             data-testid="fasto-invite-chip"
             className="text-xs font-bold px-3 py-1.5 rounded-full bg-[#DCFCE7] text-[#166534] max-w-max"
