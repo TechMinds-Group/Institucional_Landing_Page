@@ -1,4 +1,4 @@
-import { Sprout, Bot, Flame, Menu, X, Scissors, MessageCircle, LayoutDashboard, CalendarClock, ArrowRight, BadgeCheck, UserRoundSearch, ScanFace, Repeat, DatabaseBackup, ChevronDown, Minus } from "lucide-react";
+import { Sprout, Bot, Flame, Scissors, MessageCircle, LayoutDashboard, CalendarClock, ArrowRight, BadgeCheck, UserRoundSearch, ScanFace, Repeat, DatabaseBackup, ChevronDown, Minus } from "lucide-react";
 import { useState, useEffect, type ReactNode } from "react";
 import { useNavigate } from "react-router";
 import { Logo } from "../components/Logo";
@@ -99,83 +99,70 @@ function ServiceSegmentsStrip() {
   );
 }
 
-function SectionHero() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
+const navLinks = [
+  { label: "Como Funciona", href: "#como-funciona" },
+  { label: "Funcionalidades", href: "#funcionalidades" },
+  { label: "Diferenciais", href: "#diferenciais" },
+  { label: "Preços", href: "#precos" },
+  { label: "FAQ", href: "#faq" },
+];
+
+/**
+ * Navbar do Groom — alinhada ao padrão ProductNavbar das landings
+ * (RN-026/CR-010): header sticky com bg + border-b + backdrop-blur,
+ * h-16 md:h-20, marca text-lg + pill do produto (accent #f1c75c),
+ * 5 âncoras desktop (gap-7 text-sm) e CTA TESTAR GRÁTIS no desktop
+ * E no mobile — sem hamburger/drawer (PEND-012: menu mobile só quando
+ * decidido; paridade com VibeCut/Lumen).
+ */
+function GroomNavbar() {
   const navigate = useNavigate();
-  const navLinks = [
-    { label: "Como Funciona", href: "#como-funciona" },
-    { label: "Funcionalidades", href: "#funcionalidades" },
-    { label: "Diferenciais", href: "#diferenciais" },
-    { label: "Preços", href: "#precos" },
-    { label: "FAQ", href: "#faq" },
-  ];
 
   return (
-    <div className="bg-gradient-to-b content-stretch flex flex-col from-[#0b0f1a] gap-8 lg:gap-[64px] items-center pb-10 lg:pb-[100px] pt-14 lg:pt-[80px] px-5 md:px-12 lg:px-[120px] relative shrink-0 to-[#1a2233] w-full" data-name="section-hero">
-      {/* Mobile Drawer Overlay */}
-      {drawerOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 flex justify-end">
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setDrawerOpen(false)} />
-          {/* Drawer */}
-          <div data-testid="groom-drawer" className="relative z-10 bg-[#0d1117] w-[280px] h-full flex flex-col pt-14 px-6 pb-6 gap-8 shadow-2xl">
-            {/* Drawer header — padrão de identidade (CR-010): Logo TechMinds + pill do produto */}
-            <div className="flex items-center justify-between">
-              <div className="flex gap-[10px] items-center cursor-pointer" onClick={() => navigate("/")} title="Voltar à página inicial">
-                <Logo className="w-6 h-6" />
-                <p className="font-extrabold text-[#f8fafc] text-[18px]">TechMinds</p>
-                <span className="text-[12px] font-semibold px-2 py-0.5 rounded-full border border-[#f1c75c]/40 text-[#f1c75c] bg-[#f1c75c]/10">Groom</span>
-              </div>
-              <button onClick={() => setDrawerOpen(false)} aria-label="Fechar menu" className="text-[#94a3b8] hover:text-[#f8fafc] p-1">
-                <X size={22} />
-              </button>
-            </div>
-            {/* Nav links */}
-            <nav className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <a key={link.href} href={link.href} onClick={() => setDrawerOpen(false)} className="px-3 py-3 rounded-lg text-[#b3bacb] font-['Inter:Semi_Bold',sans-serif] font-semibold text-[15px] hover:bg-[#1f2937] hover:text-[#f8fafc] transition-colors">
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </div>
-      )}
-
-      {/* Navigation — RN-033-1: CR-007 remove o botão "Entrar" (login segue acessível
-      pela URL própria do produto); 5 âncoras mantêm destinos; CTA TESTAR GRÁTIS
-      (deep-link WhatsApp — DEBT-003/ADR-010) abre em nova aba. */}
-      <div data-testid="groom-nav" className="max-w-7xl content-stretch flex items-center justify-between relative shrink-0 w-full">
-        {/* Marca — padrão de identidade (CR-010): Logo TechMinds + pill do produto (accent #f1c75c — RN-033) */}
-        <div data-testid="groom-brand" className="flex items-center gap-3 cursor-pointer" onClick={() => navigate("/")} title="Voltar à página inicial">
+    <header
+      data-testid="groom-nav"
+      className="sticky top-0 z-40 bg-[#0b0f1a]/90 backdrop-blur border-b border-[#1f2937]/70"
+    >
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-16 md:h-20 px-5 md:px-8 lg:px-12">
+        {/* Bloco de marca — padrão de identidade (CR-010): Logo TechMinds + pill do produto */}
+        <div
+          data-testid="groom-brand"
+          className="flex items-center gap-2 min-w-0 cursor-pointer"
+          onClick={() => navigate("/")}
+          title="Voltar à página inicial"
+        >
           <Logo className="w-7 h-7" />
-          <p className="font-extrabold text-[#f8fafc] text-[24px] whitespace-nowrap">TechMinds</p>
+          <span className="text-lg font-bold text-[#f8fafc] whitespace-nowrap">TechMinds</span>
           <span data-testid="groom-brand-chip" className="text-sm font-semibold px-2.5 py-1 rounded-full border border-[#f1c75c]/40 text-[#f1c75c] bg-[#f1c75c]/10">Groom</span>
         </div>
-        {/* Nav links — desktop (tokens B: #b3bacb substitui #cbd5e1) */}
-        <div data-testid="groom-nav-links" className="hidden lg:flex [word-break:break-word] content-stretch font-['Inter:Semi_Bold',sans-serif] font-semibold gap-[32px] items-center leading-[normal] not-italic relative shrink-0 text-[#b3bacb] text-[14px] whitespace-nowrap">
+
+        {/* Âncoras locais — desktop (some no mobile, padrão das landings) */}
+        <nav data-testid="groom-nav-links" className="hidden md:flex items-center gap-7 text-sm font-semibold text-[#b3bacb]">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="relative shrink-0 hover:text-[#f8fafc] transition-colors">{link.label}</a>
+            <a key={link.href} href={link.href} className="relative hover:text-[#f8fafc] transition-colors">{link.label}</a>
           ))}
-        </div>
-        {/* CTA — desktop (sem "Entrar" — CR-007) */}
-        <div className="hidden lg:flex content-stretch gap-[16px] items-center justify-center relative shrink-0">
-          <a data-testid="groom-nav-trial-cta" href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noopener noreferrer" className="bg-[#f1c75c] cursor-pointer content-stretch flex items-center gap-[8px] px-[24px] py-[10px] relative rounded-[8px] shrink-0 hover:bg-[#f2cb69] transition-colors">
-            <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[#0f172a] text-[14px] whitespace-nowrap">TESTAR GRÁTIS</p>
+        </nav>
+
+        {/* CTA — desktop (deep-link WhatsApp — DEBT-003/ADR-010) */}
+        <div className="hidden md:block">
+          <a data-testid="groom-nav-trial-cta" href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noopener noreferrer" className="bg-[#f1c75c] flex items-center gap-2 px-5 py-2.5 rounded-lg hover:bg-[#f2cb69] transition-colors">
+            <p className="font-bold text-[#0f172a] text-sm whitespace-nowrap">TESTAR GRÁTIS</p>
             <ArrowRight size={16} color="#0F172A" className="shrink-0" />
           </a>
         </div>
-        {/* Mobile — header do design g2: "Header trial action" TESTAR GRÁTIS + hamburger */}
-        <div className="flex gap-[12px] items-center relative shrink-0 lg:hidden">
-          <a data-testid="groom-nav-trial-cta" href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noopener noreferrer" className="bg-[#f1c75c] flex items-center gap-[6px] px-[14px] py-[8px] rounded-[8px]">
-            <p className="font-['Inter:Bold',sans-serif] font-bold text-[#0f172a] text-[12px] whitespace-nowrap">TESTAR GRÁTIS</p>
-            <ArrowRight size={13} color="#0F172A" className="shrink-0" />
-          </a>
-          <button className="text-[#f8fafc] p-1" onClick={() => setDrawerOpen(true)} aria-label="Abrir menu">
-            <Menu size={26} />
-          </button>
-        </div>
+        {/* Mobile: mantém o CTA (conversão) — sem menu/nav */}
+        <a data-testid="groom-nav-trial-cta" href={buildWhatsAppUrl(WHATSAPP_GROOM_TRIAL_MESSAGE)} target="_blank" rel="noopener noreferrer" className="md:hidden bg-[#f1c75c] flex items-center gap-[6px] px-4 py-2 rounded-lg">
+          <p className="font-bold text-[#0f172a] text-xs whitespace-nowrap">TESTAR GRÁTIS</p>
+          <ArrowRight size={13} color="#0F172A" className="shrink-0" />
+        </a>
       </div>
+    </header>
+  );
+}
+
+function SectionHero() {
+  return (
+    <div className="bg-gradient-to-b content-stretch flex flex-col from-[#0b0f1a] gap-8 lg:gap-[64px] items-center pb-10 lg:pb-[100px] pt-10 lg:pt-[64px] px-5 md:px-12 lg:px-[120px] relative shrink-0 to-[#1a2233] w-full" data-name="section-hero">
       {/* Hero body */}
       <div data-testid="groom-hero" className="max-w-7xl content-stretch flex flex-col lg:flex-row gap-[48px] items-center relative shrink-0 w-full">
         {/* Hero left */}
@@ -867,8 +854,9 @@ function FloatingWhatsappCta() {
 
 export function Groom() {
   return (
-    <div className="bg-[#0b0f1a] content-stretch flex flex-col items-start relative w-full overflow-x-hidden">
+    <div className="bg-[#0b0f1a] content-stretch flex flex-col items-start relative w-full overflow-x-clip">
       <div id="groom-scroll-sentinel" className="absolute top-0 h-px w-px pointer-events-none" />
+      <GroomNavbar />
       <SectionHero />
       <SectionPainSolution />
       <SectionHowItWorks />

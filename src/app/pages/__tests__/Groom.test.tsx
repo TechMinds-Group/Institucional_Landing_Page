@@ -203,27 +203,21 @@ describe("Groom — Strip de segmentos (RN-033-3)", () => {
 });
 
 describe("Groom — regressão mínima (RN-033-4)", () => {
-  it("drawer mobile abre com hamburger, tem 5 âncoras, sem links legais, e fecha (equivale ao drawer g2)", async () => {
+  it("menu mobile fora do padrão das landings (PEND-012): sem hamburger e sem drawer — CTA TESTAR GRÁTIS segue visível no mobile", () => {
     renderWithProviders(<Groom />);
 
-    const hamburger = within(screen.getByTestId("groom-nav")).getByRole(
-      "button",
-      { name: "Abrir menu" }
-    );
-    fireEvent.click(hamburger);
+    // Navbar alinhada ao ProductNavbar (RN-026): sem menu mobile
+    expect(screen.queryByRole("button", { name: "Abrir menu" })).not.toBeInTheDocument();
+    expect(screen.queryByTestId("groom-drawer")).not.toBeInTheDocument();
 
-    const drawer = screen.getByTestId("groom-drawer");
-    expect(within(drawer).getAllByRole("link")).toHaveLength(5);
-    expect(
-      within(drawer).queryByText(/termos|privacidade/i)
-    ).not.toBeInTheDocument();
-
-    fireEvent.click(
-      within(drawer).getByRole("button", { name: "Fechar menu" })
-    );
-    await waitFor(() =>
-      expect(screen.queryByTestId("groom-drawer")).not.toBeInTheDocument()
-    );
+    // CTA do header: desktop + mobile (2 instâncias, mesmo destino wa.me)
+    const ctas = screen.getAllByTestId("groom-nav-trial-cta");
+    expect(ctas).toHaveLength(2);
+    for (const cta of ctas) {
+      expect(cta.getAttribute("href")).toMatch(
+        new RegExp(`^https:\\/\\/wa\\.me\\/${WHATSAPP_NUMBER}\\?text=`)
+      );
+    }
   });
 
   it("flutuantes não regrediram: WhatsApp pill e voltar-ao-topo presentes", () => {

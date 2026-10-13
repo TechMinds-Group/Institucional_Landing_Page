@@ -10,10 +10,13 @@ section[id] {
 
 /* ── Global mobile rules ──────────────────────────────────────── */
 
-/* Prevent horizontal overflow at any breakpoint */
+/* Prevent horizontal overflow at any breakpoint.
+   overflow-x: clip (e não hidden) — hidden/scroll em html/body cria um
+   scroll container e QUEBRA position: sticky (navbars de produto). Clip
+   corta o overflow sem criar scrollport — sticky funciona. */
 html, body {
   max-width: 100vw;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* All images are responsive by default */
