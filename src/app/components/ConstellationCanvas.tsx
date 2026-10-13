@@ -8,7 +8,7 @@ import {
 /**
  * Canvas de partículas do Hero B ("Canvas" 620×500 — frame #111:12628,
  * RN-022-2). Restaurado do legado (ConstellationCanvas pré-7f1f829) com
- * adaptações: paleta teal/green coerente com o design B claro, tamanho
+ * adaptações: paleta azul da marca (#24538F/#1F3A5F), tamanho
  * fluido definido pelo container pai (até 620×500, alturas menores no
  * mobile), render estático no primeiro frame sob prefers-reduced-motion
  * (RN-022) e sem dependências novas — Canvas 2D nativo.
@@ -33,12 +33,12 @@ interface ParticleNode {
 
 type IconType = "brain" | "lightning" | "shield" | "gear";
 
-// Paleta B (design claro): teal + green — glow dos nós e conexões.
-const COLOR_TEAL = "#2DD4BF";
-const COLOR_GREEN = "#22C55E";
+// Paleta B (design claro): AZUL da marca (#1F3A5F/#24538F) — glow dos nós e conexões.
+const COLOR_TEAL = "#24538F";
+const COLOR_GREEN = "#1F3A5F";
 // RGB pré-computado para os gradientes (correspondem às cores acima).
-const TEAL_RGB = { r: 45, g: 212, b: 191 };
-const GREEN_RGB = { r: 34, g: 197, b: 94 };
+const TEAL_RGB = { r: 36, g: 83, b: 143 };
+const GREEN_RGB = { r: 31, g: 58, b: 95 };
 const GLOW_RGB = TEAL_RGB;
 
 const CONNECTION_THRESHOLD = 180;
@@ -157,7 +157,7 @@ function initNodes(width: number, height: number): ParticleNode[] {
   return nodes;
 }
 
-/** Colorir os nós pequenos (legado usava purple/cyan; aqui teal/green). */
+/** Colorir os nós pequenos (legado usava purple/cyan; aqui azul da marca). */
 function nodeRgb(color: string) {
   return color === COLOR_TEAL ? TEAL_RGB : GREEN_RGB;
 }
