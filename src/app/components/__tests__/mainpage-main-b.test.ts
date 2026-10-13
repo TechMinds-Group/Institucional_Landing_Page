@@ -69,7 +69,6 @@ describe("Dicionário i18n — chaves e copy canônica do frame (RN-021/RN-004)"
       expect(t.howItWorksB.stepChips).toHaveLength(3);
       expect(t.howItWorksB.stepChecklist).toHaveLength(3);
       expect(t.howItWorksB.stepPanelRows.length).toBeGreaterThan(0);
-      expect(t.howItWorksB.note).toBeTruthy();
       expect(t.pillarsB.items).toHaveLength(3);
       expect(t.socialProofB.cards).toHaveLength(2);
       expect(t.socialProofB.note).toBeTruthy();

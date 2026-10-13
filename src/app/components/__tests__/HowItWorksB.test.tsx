@@ -2,66 +2,65 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { screen, within } from "@testing-library/react";
 import { HowItWorksB } from "../HowItWorksB";
 import { renderWithProviders, resetI18n } from "../../../test/test-utils";
-import { SECTION_IDS } from "../../constants/anchors";
 
-describe("HowItWorksB (RN-021-1)", () => {
+describe("HowItWorksB (frame #111:13082 atualizado 13/10)", () => {
   beforeEach(() => resetI18n());
 
-  it("exibe título, apoio e as 3 etapas na ordem 01 Escolher → 02 Contratar → 03 Operar (PT)", () => {
+  it("intro à esquerda: eyebrow, H2 e support com a copy nova (PT)", () => {
     renderWithProviders(<HowItWorksB />);
 
+    expect(screen.getByText("Como a gente trabalha")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
-      "O que acontece depois da primeira conversa?"
+      "Primeiro, a gente entende o seu negócio."
     );
-    expect(screen.getByText("Três passos simples, com decisões claras em cada etapa."));
+    expect(
+      screen.getByText(
+        "Você conta o que precisa. Juntos, definimos a solução e os próximos passos."
+      )
+    ).toBeInTheDocument();
+  });
+
+  it("etapas com títulos combinados: 01 / Ouvir você → 02 / Combinar os detalhes → 03 / Colocar em prática", () => {
+    renderWithProviders(<HowItWorksB />);
 
     const steps = screen.getAllByTestId("step-card");
     expect(steps).toHaveLength(3);
-    expect(steps[0]).toHaveTextContent("01");
-    expect(steps[0]).toHaveTextContent("Escolher");
+    expect(steps[0]).toHaveTextContent("01 / Ouvir você");
     expect(steps[0]).toHaveTextContent(
-      "Conte sua rotina e identifique um produto ativo ou um projeto sob medida."
+      "Conhecemos sua rotina para avaliar um sistema próprio, um site personalizado ou uma solução sob medida."
     );
-    expect(steps[1]).toHaveTextContent("02");
-    expect(steps[1]).toHaveTextContent("Contratar");
-    expect(steps[2]).toHaveTextContent("03");
-    expect(steps[2]).toHaveTextContent("Operar");
+    expect(steps[1]).toHaveTextContent("02 / Combinar os detalhes");
+    expect(steps[1]).toHaveTextContent(
+      "Alinhamos o que será entregue, as condições e o suporte, para você saber o que esperar."
+    );
+    expect(steps[2]).toHaveTextContent("03 / Colocar em prática");
+    expect(steps[2]).toHaveTextContent(
+      "Começamos conforme a disponibilidade da solução e o que foi combinado com você."
+    );
   });
 
-  it("ilustrações HTML/CSS: chips de opções, itens com check e painel de rotina", () => {
+  it("nota de expectativa e gancho REMOVIDOS (frame 13/10)", () => {
+    renderWithProviders(<HowItWorksB />);
+
+    expect(screen.queryByTestId("how-it-works-note")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("section-hook")).not.toBeInTheDocument();
+  });
+
+  it("ilustrações HTML/CSS: chips de produtos (primeiro selecionado), itens com check e painel de rotina", () => {
     renderWithProviders(<HowItWorksB />);
 
     const chips = within(screen.getByTestId("step-illustration-chips"));
-    expect(chips.getByText("Groom"));
-    expect(chips.getByText("FasTo"));
-    expect(chips.getByText("Lumen"));
+    expect(chips.getByText("Groom")).toBeInTheDocument();
+    expect(chips.getByText("FasTo")).toBeInTheDocument();
+    expect(chips.getByText("Lumen")).toBeInTheDocument();
 
     const checklist = within(screen.getByTestId("step-illustration-checklist"));
-    expect(checklist.getByText("Escopo definido"));
-    expect(checklist.getByText("Suporte acordado"));
-    expect(checklist.getByText("Condições alinhadas"));
+    expect(checklist.getByText("Escopo definido")).toBeInTheDocument();
+    expect(checklist.getByText("Suporte acordado")).toBeInTheDocument();
+    expect(checklist.getByText("Condições alinhadas")).toBeInTheDocument();
 
     const panel = within(screen.getByTestId("step-illustration-panel"));
-    expect(panel.getByText("Sua rotina, conectada"));
-    expect(panel.getByText("Agendamento confirmado"));
-  });
-
-  it("nota de expectativa acompanha os cartões (VibeCut/Escola Conectada em desenvolvimento)", () => {
-    renderWithProviders(<HowItWorksB />);
-
-    expect(screen.getByTestId("how-it-works-note")).toHaveTextContent(
-      "VibeCut e Escola Conectada permanecem em desenvolvimento. A conversa não implica acesso imediato."
-    );
-  });
-
-  it("gancho conduz à próxima seção (#empresa) com a frase do frame", () => {
-    renderWithProviders(<HowItWorksB />);
-
-    const hookLink = within(screen.getByTestId("section-hook")).getByRole("link");
-    expect(hookLink).toHaveAttribute("href", `#${SECTION_IDS.empresa}`);
-    expect(hookLink).toHaveTextContent(
-      "E depois da entrega? A continuidade também precisa estar combinada."
-    );
+    expect(panel.getByText("Sua rotina, conectada")).toBeInTheDocument();
   });
 
   it("cards têm entrada em cascata: motion-safe com delays 1..3 (gating reduced-motion no CSS)", () => {
@@ -74,29 +73,30 @@ describe("HowItWorksB (RN-021-1)", () => {
     expect(steps[2].className).toContain("motion-safe-delay-3");
   });
 
-  it("renderiza em EN quando o idioma persistido é en (RN-004)", () => {
+  it("renderiza a copy nova em EN quando o idioma persistido é en (RN-004)", () => {
     renderWithProviders(<HowItWorksB />, { language: "en" });
 
     expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
-      "What happens after the first conversation?"
+      "First, we get to know your business."
     );
-    expect(screen.getAllByTestId("step-card")[0]).toHaveTextContent("Choose");
-    expect(screen.getByTestId("how-it-works-note")).toHaveTextContent(
-      "VibeCut and Escola Conectada remain in development. The conversation does not imply immediate access."
+    expect(screen.getAllByTestId("step-card")[0]).toHaveTextContent(
+      "We listen to you"
     );
   });
 
-  it("renderiza em ES quando o idioma persistido é es (RN-004)", () => {
+  it("renderiza a copy nova em ES quando o idioma persistido é es (RN-004)", () => {
     renderWithProviders(<HowItWorksB />, { language: "es" });
 
     expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
-      "¿Qué sucede después de la primera conversación?"
+      "Primero, entendemos tu negocio."
     );
-    expect(screen.getAllByTestId("step-card")[1]).toHaveTextContent("Contratar");
+    expect(screen.getAllByTestId("step-card")[1]).toHaveTextContent(
+      "Combinamos los detalles"
+    );
     expect(
       within(screen.getByTestId("step-illustration-checklist")).getByText(
         "Alcance definido"
       )
-    );
+    ).toBeInTheDocument();
   });
 });

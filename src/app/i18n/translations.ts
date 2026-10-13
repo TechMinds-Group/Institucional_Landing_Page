@@ -544,32 +544,30 @@ export const translations: Record<Language, Translations> = {
       hook: 'Produto ou sob medida: veja como saímos da escolha para a operação.'
     },
     howItWorksB: {
-      eyebrow: 'Como trabalhamos',
-      title: 'O que acontece depois da primeira conversa?',
-      support: 'Três passos simples, com decisões claras em cada etapa.',
+      eyebrow: 'Como a gente trabalha',
+      title: 'Primeiro, a gente entende o seu negócio.',
+      support: 'Você conta o que precisa. Juntos, definimos a solução e os próximos passos.',
       steps: [
         {
           number: '01',
-          title: 'Escolher',
-          description: 'Conte sua rotina e identifique um produto ativo ou um projeto sob medida.'
+          title: 'Ouvir você',
+          description: 'Conhecemos sua rotina para avaliar um sistema próprio, um site personalizado ou uma solução sob medida.'
         },
         {
           number: '02',
-          title: 'Contratar',
-          description: 'Alinhe escopo, suporte, customização e condições antes de começar.'
+          title: 'Combinar os detalhes',
+          description: 'Alinhamos o que será entregue, as condições e o suporte, para você saber o que esperar.'
         },
         {
           number: '03',
-          title: 'Operar',
-          description: 'Inicie a operação conforme a disponibilidade e o que foi acordado.'
+          title: 'Colocar em prática',
+          description: 'Começamos conforme a disponibilidade da solução e o que foi combinado com você.'
         }
       ],
       stepChips: ['Groom', 'FasTo', 'Lumen'],
       stepChecklist: ['Escopo definido', 'Suporte acordado', 'Condições alinhadas'],
       stepPanelTitle: 'Sua rotina, conectada',
-      stepPanelRows: ['Agendamento confirmado', 'Caixa fechado', 'Relatório enviado'],
-      note: 'VibeCut e Escola Conectada permanecem em desenvolvimento. A conversa não implica acesso imediato.',
-      hook: 'E depois da entrega? A continuidade também precisa estar combinada.'
+      stepPanelRows: ['Agendamento confirmado', 'Caixa fechado', 'Relatório enviado']
     },
     pillarsB: {
       eyebrow: 'Continuidade com clareza',
@@ -1411,32 +1409,30 @@ export const translations: Record<Language, Translations> = {
       hook: 'Product or custom-built: see how we go from choosing to operating.'
     },
     howItWorksB: {
-      eyebrow: 'How we work',
-      title: 'What happens after the first conversation?',
-      support: 'Three simple steps, with clear decisions at each stage.',
+      eyebrow: 'The way we work',
+      title: 'First, we get to know your business.',
+      support: 'You tell us what you need. Together, we define the solution and the next steps.',
       steps: [
         {
           number: '01',
-          title: 'Choose',
-          description: 'Tell us about your routine and identify an active product or a custom project.'
+          title: 'We listen to you',
+          description: 'We get to know your routine to evaluate a bespoke system, a custom website, or a tailored solution.'
         },
         {
           number: '02',
-          title: 'Hire',
-          description: 'Align scope, support, customization and conditions before starting.'
+          title: 'We align the details',
+          description: 'We align what will be delivered, the conditions and the support, so you know what to expect.'
         },
         {
           number: '03',
-          title: 'Operate',
-          description: 'Start the operation according to availability and what was agreed.'
+          title: 'We put it to work',
+          description: 'We start according to the solution availability and what was agreed with you.'
         }
       ],
       stepChips: ['Groom', 'FasTo', 'Lumen'],
       stepChecklist: ['Scope defined', 'Support agreed', 'Conditions aligned'],
       stepPanelTitle: 'Your routine, connected',
-      stepPanelRows: ['Booking confirmed', 'Cash closed', 'Report sent'],
-      note: 'VibeCut and Escola Conectada remain in development. The conversation does not imply immediate access.',
-      hook: 'And after delivery? Continuity also needs to be agreed.'
+      stepPanelRows: ['Booking confirmed', 'Cash closed', 'Report sent']
     },
     pillarsB: {
       eyebrow: 'Continuity with clarity',
@@ -2279,32 +2275,30 @@ export const translations: Record<Language, Translations> = {
       hook: 'Producto o a medida: vea cómo pasamos de la elección a la operación.'
     },
     howItWorksB: {
-      eyebrow: 'Cómo trabajamos',
-      title: '¿Qué sucede después de la primera conversación?',
-      support: 'Tres pasos simples, con decisiones claras en cada etapa.',
+      eyebrow: 'Así trabajamos',
+      title: 'Primero, entendemos tu negocio.',
+      support: 'Tú cuentas lo que necesitas. Juntos definimos la solución y los próximos pasos.',
       steps: [
         {
           number: '01',
-          title: 'Elegir',
-          description: 'Cuéntanos tu rutina e identifica un producto activo o un proyecto a medida.'
+          title: 'Te escuchamos',
+          description: 'Conocemos tu rutina para evaluar un sistema propio, un sitio personalizado o una solución a medida.'
         },
         {
           number: '02',
-          title: 'Contratar',
-          description: 'Alinea alcance, soporte, personalización y condiciones antes de empezar.'
+          title: 'Combinamos los detalles',
+          description: 'Alineamos lo que se entregará, las condiciones y el soporte, para que sepas qué esperar.'
         },
         {
           number: '03',
-          title: 'Operar',
-          description: 'Inicia la operación conforme la disponibilidad y lo acordado.'
+          title: 'Ponerlo en práctica',
+          description: 'Comenzamos según la disponibilidad de la solución y lo que se combinó contigo.'
         }
       ],
       stepChips: ['Groom', 'FasTo', 'Lumen'],
       stepChecklist: ['Alcance definido', 'Soporte acordado', 'Condiciones alineadas'],
       stepPanelTitle: 'Tu rutina, conectada',
-      stepPanelRows: ['Reserva confirmada', 'Caja cerrada', 'Informe enviado'],
-      note: 'VibeCut y Escola Conectada permanecen en desarrollo. La conversación no implica acceso inmediato.',
-      hook: '¿Y después de la entrega? La continuidad también necesita estar acordada.'
+      stepPanelRows: ['Reserva confirmada', 'Caja cerrada', 'Informe enviado']
     },
     pillarsB: {
       eyebrow: 'Continuidad con claridad',

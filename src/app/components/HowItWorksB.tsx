@@ -1,130 +1,132 @@
-import { CircleCheck } from "lucide-react";
+import { CircleCheck, CalendarDays, Orbit, Scissors } from "lucide-react";
 import { useI18n } from "../i18n/I18nContext";
-import { SectionHook } from "./SectionHook";
 import { SECTION_IDS } from "../constants/anchors";
 
 /**
- * Seção "Como funciona" do design B (RN-021-1): três etapas ilustradas em
- * cartões brancos raio 20px — 01 Escolher (chips de opções do catálogo) →
- * 02 Contratar (itens com check) → 03 Operar (painel "rotina conectada") —
- * seguidas da nota de expectativa (VibeCut e Escola Conectada em
- * desenvolvimento) e do gancho para a próxima seção (RN-022). Entrada com
- * .motion-safe (styles/motion.css — sem animação com prefers-reduced-motion).
+ * Seção "Como funciona" — frame #111:13082 (atualizado 13/10):
+ * intro alinhada à esquerda (eyebrow + H2 + support), 3 cartões de etapa
+ * com ilustrações HTML/CSS e heading combinado "01 / Ouvir você" —
+ * nota de expectativa e gancho REMOVIDOS no frame (13/10).
+ * Entrada com .motion-safe (styles/motion.css — sem animação com
+ * prefers-reduced-motion).
  */
+
+/** Ícones das chips de escolha — ordem do frame (#111:13090–99): scissors · calendar-days · orbit */
+const CHIP_ICONS = [Scissors, CalendarDays, Orbit];
+
 export function HowItWorksB() {
   const { t } = useI18n();
 
   return (
-    <section id={SECTION_IDS.comoFunciona} className="bg-[#F7F8FC]">
+    <section id={SECTION_IDS.comoFunciona} className="bg-[#E3EAF7]">
       <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
-        <div className="motion-safe max-w-2xl mx-auto text-center mb-12">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#4B5563] mb-4">
+        {/* Introdução — alinhada à esquerda conforme frame */}
+        <div className="motion-safe flex flex-col gap-4 mb-10">
+          <p className="text-xs font-bold uppercase tracking-[0.0333em] text-[#1F3A5F]">
             {t.howItWorksB.eyebrow}
           </p>
           <h2
-            className="font-bold text-[#1F3A5F] leading-tight mb-4"
-            style={{ fontSize: "clamp(26px, 3vw, 38px)" }}
+            className="font-bold text-[#1F3A5F] leading-[1.15] tracking-[-0.02em] max-w-2xl"
+            style={{ fontSize: "clamp(28px, 2.8vw, 40px)" }}
           >
             {t.howItWorksB.title}
           </h2>
-          <p className="text-[#4B5563] leading-relaxed">
+          <p className="text-[#4B5563] leading-[1.65] max-w-2xl">
             {t.howItWorksB.support}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        {/* Escolher → contratar → operar */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {t.howItWorksB.steps.map((step, i) => (
             <article
               key={step.number}
               data-testid="step-card"
-              className={`motion-safe motion-safe-delay-${i + 1} bg-white border border-[#D9DDE3] rounded-[20px] p-6 flex flex-col`}
+              className={`motion-safe motion-safe-delay-${i + 1} bg-white rounded-[20px] p-6 flex flex-col gap-5`}
             >
-              {/* Ilustração HTML/CSS da etapa (postura ADR-009 — sem assets) */}
-              <div className="rounded-xl bg-[#F7F8FC] border border-[#EEF1F6] p-4 min-h-[128px] flex flex-col justify-center mb-6">
+              {/* Ilustração da etapa (HTML/CSS — postura ADR-009, sem assets) */}
+              <div className="rounded-xl bg-[rgba(31,58,95,0.08)] p-5 min-h-[178px] flex flex-col justify-center">
                 {i === 0 && (
                   <div
                     data-testid="step-illustration-chips"
-                    className="flex flex-wrap gap-2"
+                    className="flex flex-wrap gap-2.5"
                   >
-                    {t.howItWorksB.stepChips.map((chip) => (
-                      <span
-                        key={chip}
-                        className="px-3 py-1.5 rounded-full bg-white border border-[#D9DDE3] text-sm font-medium text-[#1F3A5F]"
-                      >
-                        {chip}
-                      </span>
-                    ))}
+                    {t.howItWorksB.stepChips.map((chip, ci) => {
+                      const ChipIcon = CHIP_ICONS[ci] ?? Scissors;
+                      return (
+                        <span
+                          key={chip}
+                          className={`w-[116px] h-auto min-h-[116px] rounded-[10px] flex flex-col items-center justify-center gap-3.5 py-3 bg-white ${
+                            ci === 0
+                              ? "border-2 border-[#1F3A5F]"
+                              : "border border-[#D9DDE3]"
+                          }`}
+                        >
+                          <ChipIcon className="w-6 h-6 text-[#1F3A5F]" aria-hidden="true" />
+                          <span className="px-2 text-xs font-semibold text-[#1F3A5F] text-center">
+                            {chip}
+                          </span>
+                        </span>
+                      );
+                    })}
                   </div>
                 )}
                 {i === 1 && (
-                  <ul
+                  <div
                     data-testid="step-illustration-checklist"
-                    className="space-y-2"
+                    className="bg-white rounded-[10px] p-[18px] space-y-3"
                   >
                     {t.howItWorksB.stepChecklist.map((item) => (
-                      <li
+                      <p
                         key={item}
-                        className="flex items-center gap-2 text-sm text-[#1F3A5F]"
+                        className="flex items-center gap-3 text-xs text-[#1F3A5F]"
                       >
                         <CircleCheck
-                          className="w-4 h-4 shrink-0 text-[#132D24]"
+                          className="w-4 h-4 shrink-0 text-[#1F3A5F]"
                           aria-hidden="true"
                         />
                         {item}
-                      </li>
+                      </p>
                     ))}
-                  </ul>
+                  </div>
                 )}
                 {i === 2 && (
                   <div
                     data-testid="step-illustration-panel"
-                    className="bg-white border border-[#D9DDE3] rounded-lg p-3"
+                    className="bg-white rounded-[10px] p-[18px]"
                   >
-                    <p className="text-xs font-semibold text-[#1F3A5F] mb-2">
+                    <p className="flex items-center gap-3 text-[13px] font-semibold text-[#1F3A5F] mb-2">
+                      <span
+                        className="inline-block size-5 shrink-0 rounded bg-[#1F3A5F]-/10"
+                        aria-hidden="true"
+                      />
                       {t.howItWorksB.stepPanelTitle}
                     </p>
                     <div className="space-y-1.5">
                       {t.howItWorksB.stepPanelRows.map((row) => (
-                        <div
+                        <span
                           key={row}
-                          className="flex items-center gap-2 text-[11px] text-[#4B5563]"
-                        >
-                          <span
-                            className="size-1.5 rounded-full bg-[#1F3A5F]/40 shrink-0"
-                            aria-hidden="true"
-                          />
-                          {row}
-                        </div>
+                          className="block h-[42px] rounded-md bg-[rgba(31,58,95,0.08)]"
+                          aria-hidden="true"
+                        />
                       ))}
                     </div>
+                    <div
+                      className="mt-2 h-1.5 rounded bg-[#D9DDE3]"
+                      aria-hidden="true"
+                    />
                   </div>
                 )}
               </div>
 
-              <p className="text-sm font-bold text-[#1F3A5F]/60 mb-1">
-                {step.number}
-              </p>
-              <h3 className="font-semibold text-[#1F3A5F] text-xl mb-2">
-                {step.title}
+              {/* Título combinado da etapa — "01 / Ouvir você" (frame 13/10) */}
+              <h3 className="text-2xl font-bold text-[#1F3A5F] leading-[1.2]">
+                {step.number} / {step.title}
               </h3>
-              <p className="text-[#4B5563] leading-relaxed text-sm">
-                {step.description}
-              </p>
+              <p className="text-[#4B5563] leading-[1.65]">{step.description}</p>
             </article>
           ))}
         </div>
-
-        <p
-          data-testid="how-it-works-note"
-          className="motion-safe text-sm text-[#4B5563] text-center max-w-2xl mx-auto mb-10"
-        >
-          {t.howItWorksB.note}
-        </p>
-
-        <SectionHook
-          text={t.howItWorksB.hook}
-          targetId={SECTION_IDS.empresa}
-        />
       </div>
     </section>
   );
