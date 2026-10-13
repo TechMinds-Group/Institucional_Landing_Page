@@ -567,7 +567,7 @@ export const translations: Record<Language, Translations> = {
       stepChips: ['Groom', 'FasTo', 'Lumen'],
       stepChecklist: ['Escopo definido', 'Suporte acordado', 'Condições alinhadas'],
       stepPanelTitle: 'Sua rotina, conectada',
-      stepPanelRows: ['Agendamento confirmado', 'Caixa fechado', 'Relatório enviado']
+      stepPanelRows: ['Agendamento confirmado', 'Caixa fechada']
     },
     pillarsB: {
       eyebrow: 'Continuidade com clareza',
@@ -1432,7 +1432,7 @@ export const translations: Record<Language, Translations> = {
       stepChips: ['Groom', 'FasTo', 'Lumen'],
       stepChecklist: ['Scope defined', 'Support agreed', 'Conditions aligned'],
       stepPanelTitle: 'Your routine, connected',
-      stepPanelRows: ['Booking confirmed', 'Cash closed', 'Report sent']
+      stepPanelRows: ['Booking confirmed', 'Cash closed']
     },
     pillarsB: {
       eyebrow: 'Continuity with clarity',
@@ -2298,7 +2298,7 @@ export const translations: Record<Language, Translations> = {
       stepChips: ['Groom', 'FasTo', 'Lumen'],
       stepChecklist: ['Alcance definido', 'Soporte acordado', 'Condiciones alineadas'],
       stepPanelTitle: 'Tu rutina, conectada',
-      stepPanelRows: ['Reserva confirmada', 'Caja cerrada', 'Informe enviado']
+      stepPanelRows: ['Reserva confirmada', 'Caja cerrada']
     },
     pillarsB: {
       eyebrow: 'Continuidad con claridad',

@@ -106,7 +106,7 @@ export function HowItWorksB() {
                       {t.howItWorksB.stepPanelRows.map((row) => (
                         <span
                           key={row}
-                          className="block h-[42px] rounded-md bg-[rgba(31,58,95,0.08)]"
+                          className="block h-[27px] rounded-md bg-[rgba(31,58,95,0.08)]"
                           aria-hidden="true"
                         />
                       ))}
