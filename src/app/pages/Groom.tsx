@@ -121,7 +121,7 @@ function GroomNavbar() {
   return (
     <header
       data-testid="groom-nav"
-      className="sticky top-0 z-40 bg-[#0b0f1a]/90 backdrop-blur border-b border-[#1f2937]/70"
+      className="sticky top-0 z-40 w-full bg-[#0b0f1a]/90 backdrop-blur border-b border-[#1f2937]/70"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 md:h-20 px-5 md:px-8 lg:px-12">
         {/* Bloco de marca — padrão de identidade (CR-010): Logo TechMinds + pill do produto */}
