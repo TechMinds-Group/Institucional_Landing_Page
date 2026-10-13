@@ -111,7 +111,7 @@ function SectionHero() {
   ];
 
   return (
-    <div className="bg-gradient-to-b content-stretch flex flex-col from-[#0b0f1a] gap-8 lg:gap-[64px] items-center pb-10 lg:pb-[100px] pt-14 lg:pt-[80px] px-5 md:px-12 lg:px-[clamp(48px,12vw,240px)] relative shrink-0 to-[#1a2233] w-full" data-name="section-hero">
+    <div className="bg-gradient-to-b content-stretch flex flex-col from-[#0b0f1a] gap-8 lg:gap-[64px] items-center pb-10 lg:pb-[100px] pt-14 lg:pt-[80px] px-5 md:px-12 lg:px-[120px] relative shrink-0 to-[#1a2233] w-full" data-name="section-hero">
       {/* Mobile Drawer Overlay */}
       {drawerOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex justify-end">
@@ -145,7 +145,7 @@ function SectionHero() {
       {/* Navigation — RN-033-1: CR-007 remove o botão "Entrar" (login segue acessível
       pela URL própria do produto); 5 âncoras mantêm destinos; CTA TESTAR GRÁTIS
       (deep-link WhatsApp — DEBT-003/ADR-010) abre em nova aba. */}
-      <div data-testid="groom-nav" className="content-stretch flex items-center justify-between relative shrink-0 w-full">
+      <div data-testid="groom-nav" className="max-w-[1280px] content-stretch flex items-center justify-between relative shrink-0 w-full">
         {/* Marca — padrão de identidade (CR-010): Logo TechMinds + pill do produto (accent #f1c75c — RN-033) */}
         <div data-testid="groom-brand" className="flex items-center gap-3 cursor-pointer" onClick={() => navigate("/")} title="Voltar à página inicial">
           <Logo className="w-7 h-7" />
@@ -177,7 +177,7 @@ function SectionHero() {
         </div>
       </div>
       {/* Hero body */}
-      <div data-testid="groom-hero" className="content-stretch flex flex-col lg:flex-row gap-[48px] items-center relative shrink-0 w-full">
+      <div data-testid="groom-hero" className="max-w-[1280px] content-stretch flex flex-col lg:flex-row gap-[48px] items-center relative shrink-0 w-full">
         {/* Hero left */}
         <div className="content-stretch flex flex-[1_0_0] flex-col gap-[32px] items-start min-w-px relative w-full">
 
@@ -203,14 +203,16 @@ function SectionHero() {
         </div>
       </div>
       {/* Service segments — fim do bloco Hero, antes de "Problemas e soluções" (RN-033-3) */}
-      <ServiceSegmentsStrip />
+      <div className="max-w-[1280px] w-full">
+        <ServiceSegmentsStrip />
+      </div>
     </div>
   );
 }
 
 function SectionPainSolution() {
   return (
-    <div className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center [&>*]:max-w-[1280px] px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(13,110,253,0.08)] content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -316,7 +318,7 @@ function SectionHowItWorks() {
     { num: "04", icon: <path d={svgPaths.p26837680} stroke="#94A3B8" strokeLinecap="round" strokeWidth="2" />, title: "Você domina o painel", desc: "Faturamento, ocupação, planos, equipe e análises em um só lugar." },
   ];
   return (
-    <div id="como-funciona" className="bg-[#1a2233] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div id="como-funciona" className="bg-[#1a2233] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center [&>*]:max-w-[1280px] px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(241,199,92,0.08)] content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -378,7 +380,7 @@ function SectionFeatures() {
     { title: "Multi-idioma nativo", desc: "Idiomas disponíveis dentro do software." },
   ];
   return (
-    <div id="funcionalidades" className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div id="funcionalidades" className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center [&>*]:max-w-[1280px] px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(13,110,253,0.08)] content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -457,7 +459,7 @@ function SectionBenefits() {
   ];
 
   return (
-    <div id="diferenciais" className="bg-[#0b0f1a] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div id="diferenciais" className="bg-[#0b0f1a] content-stretch flex flex-col gap-8 lg:gap-[64px] items-center [&>*]:max-w-[1280px] px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(241,199,92,0.08)] content-stretch flex items-center gap-[8px] px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -487,7 +489,7 @@ function SectionBenefits() {
 
 function SectionPricing() {
   return (
-    <div id="precos" className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div id="precos" className="bg-[#f8fafc] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center [&>*]:max-w-[1280px] px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       {/* Header */}
       <div className="content-stretch flex flex-col gap-[20px] items-center relative shrink-0 w-full">
         <div className="content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
@@ -669,7 +671,7 @@ function SectionFaq() {
   ];
   const [openIndex, setOpenIndex] = useState(0);
   return (
-    <div id="faq" className="bg-[#0d1117] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
+    <div id="faq" className="bg-[#0d1117] content-stretch flex flex-col gap-8 lg:gap-[56px] items-center [&>*]:max-w-[1280px] px-5 md:px-12 lg:px-[120px] py-14 lg:py-[96px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#0d6efd] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -727,7 +729,7 @@ function SectionFaq() {
 
 function SectionFinalCta() {
   return (
-    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-[40px] items-center px-5 md:px-12 lg:px-[120px] py-[100px] relative shrink-0 w-full">
+    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-[40px] items-center [&>*]:max-w-[1280px] px-5 md:px-12 lg:px-[120px] py-[100px] relative shrink-0 w-full">
       <div className="content-stretch flex flex-col gap-[16px] items-center relative shrink-0 w-full">
         <div className="bg-[rgba(241,199,92,0.08)] content-stretch flex items-start px-[16px] py-[6px] relative rounded-[100px] shrink-0">
           <div aria-hidden className="absolute border border-[#f1c75c] border-solid inset-0 pointer-events-none rounded-[100px]" />
@@ -759,7 +761,7 @@ function SectionFooter() {
     { label: "FAQ", href: "#faq" },
   ];
   return (
-    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-[48px] items-start pb-[48px] pt-[64px] px-5 md:px-12 lg:px-[120px] relative shrink-0 w-full">
+    <div className="bg-[#0b0f1a] content-stretch flex flex-col gap-[48px] items-start [&>*]:max-w-[1280px] pb-[48px] pt-[64px] px-5 md:px-12 lg:px-[120px] relative shrink-0 w-full">
       <div aria-hidden className="absolute border-[#1f2937] border-solid border-t inset-0 pointer-events-none" />
       <div className="content-stretch flex flex-col lg:flex-row items-start justify-between gap-10 relative shrink-0 w-full">
         <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full lg:w-[360px]">
