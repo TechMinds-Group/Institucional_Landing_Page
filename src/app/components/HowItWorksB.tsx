@@ -56,7 +56,7 @@ export function HowItWorksB() {
                       return (
                         <span
                           key={chip}
-                          className={`w-[116px] h-auto min-h-[116px] rounded-[10px] flex flex-col items-center justify-center gap-3.5 py-3 bg-white ${
+                          className={`flex-1 basis-0 h-auto min-h-[116px] rounded-[10px] flex flex-col items-center justify-center gap-3.5 py-3 bg-white ${
                             ci === 0
                               ? "border-2 border-[#1F3A5F]"
                               : "border border-[#D9DDE3]"
