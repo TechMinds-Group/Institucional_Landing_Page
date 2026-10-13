@@ -48,12 +48,16 @@ interface CatalogProductStatic {
   cta: CatalogProduct["cta"];
 }
 
-/** Rotas de landing próprias (CR-006): /groom, /vibecut, /lumen e /fasto. Escola Conectada aguarda landing (RN-032/CR-008). */
+/**
+ * Gate de CTA por landing própria. Rotas ativas (CR-006): /groom,
+ * /vibecut e /lumen — **FasTo oculto (CR-012)**: rota removida e CTA
+ * desabilitado até a reativação. Escola Conectada aguarda landing
+ * (RN-032/CR-008).
+ */
 export type CatalogCtaHref =
   | "/groom"
   | "/vibecut"
   | "/lumen"
-  | "/fasto"
   | null;
 
 const CATALOG_STRUCTURE: CatalogProductStatic[] = [
@@ -69,7 +73,7 @@ const CATALOG_STRUCTURE: CatalogProductStatic[] = [
     nome: "FasTo",
     status: "ativo",
     icon: CalendarDays,
-    cta: { labelKey: "conhecer-fasto", href: "/fasto", enabled: true },
+    cta: { labelKey: "conhecer-fasto", href: null, enabled: false },
   },
   {
     id: "lumen",

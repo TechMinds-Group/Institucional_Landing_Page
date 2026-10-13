@@ -36,10 +36,10 @@ describe("Modelo de conteúdo do catálogo B (RN-019-1 — CR-001)", () => {
     expect(byId(pt, "escola-conectada").status).toBe("em-desenvolvimento");
   });
 
-  it("gate de CTA: landings próprias habilitadas — CR-006 (rotas) + CR-008 (ativação); Escola aguarda landing", () => {
+  it("gate de CTA: landings próprias habilitadas; FasTo oculto (CR-012) e Escola aguardam landing", () => {
     const expected: Record<string, string | null> = {
       groom: "/groom",
-      fasto: "/fasto",
+      fasto: null,
       lumen: "/lumen",
       vibecut: "/vibecut",
       "escola-conectada": null,

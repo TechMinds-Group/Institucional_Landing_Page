@@ -19,7 +19,7 @@ const EXPECTED_PATHS = [
   "/groom",
   "/vibecut",
   "/lumen",
-  "/fasto",
+  // /fasto oculto permanentemente até reativação (CR-012)
 ];
 
 describe("routes (CR-009 — layout com ScrollRestoration)", () => {
@@ -40,6 +40,11 @@ describe("routes (CR-009 — layout com ScrollRestoration)", () => {
     );
     expect(source).toContain("ScrollRestoration");
     expect(source).toContain("function RootLayout");
+  });
+
+  it("rota /fasto oculta — não pode existir no arquivo real (CR-012)", () => {
+    const source = readFileSync(path.resolve(__dirname, "routes.tsx"), "utf-8");
+    expect(source).not.toMatch(/path: "\/fasto"/);
   });
 
   it("redirecionamentos legais preservados (from /terms-of-use e /privacy)", () => {

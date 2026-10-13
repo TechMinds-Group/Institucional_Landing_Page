@@ -6,17 +6,18 @@ import { SECTION_IDS } from "../constants/anchors";
 
 /**
  * Nav "Sistemas" do rodapé — os 5 produtos do canônico CR-001/ADR-012.
- * Gate por landing própria (CR-004/CR-008 — rotas do CR-006): os 4
- * produtos com página navegam para ela; Escola Conectada (sem landing)
- * aponta para a âncora do Catálogo (RN-019). Nomes de produto são marca —
+ * Gate por landing própria (CR-004/CR-008 — rotas do CR-006): Groom,
+ * VibeCut e Lumen navegam para as páginas; **FasTo oculto (CR-012)** e
+ * Escola Conectada (sem landing) apontam para a âncora do Catálogo
+ * (RN-019). Nomes de produto são marca —
  * não traduzem (mesma convenção de constants/catalog.ts).
  */
 const SYSTEMS_LINKS: ReadonlyArray<
-  { name: string; href: "/groom" | "/vibecut" | "/lumen" | "/fasto" } | { name: string; targetId: string }
+  { name: string; href: "/groom" | "/vibecut" | "/lumen" } | { name: string; targetId: string }
 > = [
   { name: "Groom", href: "/groom" },
   { name: "VibeCut", href: "/vibecut" },
-  { name: "FasTo", href: "/fasto" },
+  // FasTo oculto no gate (CR-012) — sem link até a reativação.
   { name: "Lumen", href: "/lumen" },
   // Escola Conectada: sem landing própria — mantém a âncora do Catálogo (RN-032/CR-008).
   { name: "Escola Conectada", targetId: SECTION_IDS.catalogo },

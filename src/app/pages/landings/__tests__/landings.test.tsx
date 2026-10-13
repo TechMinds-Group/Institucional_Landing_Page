@@ -51,17 +51,18 @@ async function waitForNavbar() {
 }
 
 describe("routes.ts — registro das landings (RN-025/CR-006)", () => {
-  it("declara as 3 rotas novas apontando para as páginas de landing", () => {
+  it("declara as 2 rotas novas apontando para as páginas de landing", () => {
     for (const [path, component] of [
       ["/vibecut", "VibeCutPage"],
       ["/lumen", "LumenPage"],
-      ["/fasto", "FasToPage"],
     ] as const) {
       const entry = routesSource.match(
         new RegExp(`path: "${path}",\\s*Component: ${component}`)
       );
       expect(entry, `rota ${path} → ${component}`).not.toBeNull();
     }
+    // FasTo oculto (CR-012): a rota NÃO pode existir no arquivo real
+    expect(routesSource).not.toMatch(/path: "\/fasto"/);
     // Padrão do /groom — createBrowserRouter, sem guards
     expect(routesSource).toContain("createBrowserRouter");
   });
@@ -73,7 +74,6 @@ describe("Landings — esqueleto e navbar de produto (RN-025/RN-026)", () => {
   it.each([
     ["/vibecut", "VibeCut"],
     ["/lumen", "Lumen"],
-    ["/fasto", "FasTo"],
   ])("%s renderiza o esqueleto (navbar de produto + main + rodapé de produto)", async (path, expected) => {
     await renderAt(path);
     await waitForNavbar();

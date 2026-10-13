@@ -231,12 +231,11 @@ describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
     expect(cta).toHaveTextContent("Conhecer Groom");
   });
 
-  it("CTAs ativos para os 4 produtos com landing (CR-008) — rotas do CR-006", () => {
+  it("CTAs ativos para os 3 produtos com landing (CR-008 menos FasTo oculto — CR-012)", () => {
     renderWithProviders(<CatalogSection />);
 
     const expected: Record<string, string> = {
       groom: "/groom",
-      fasto: "/fasto",
       lumen: "/lumen",
       vibecut: "/vibecut",
     };
@@ -245,6 +244,15 @@ describe("CatalogSection (RN-019-2 — carrossel de soluções)", () => {
       expect(cta.tagName, id).toBe("A");
       expect(cta, id).toHaveAttribute("href", href);
     }
+  });
+
+  it("CTA do FasTo desabilitado — rota oculta (CR-012), BUTTON cinza irreconduzível", () => {
+    renderWithProviders(<CatalogSection />);
+
+    const cta = within(cardById("fasto")).getByTestId("product-cta");
+    expect(cta.tagName).toBe("BUTTON");
+    expect(cta).toBeDisabled();
+    expect(cta).toHaveTextContent("Conhecer FasTo");
   });
 
   it("CTA da Escola Conectada permanece desabilitado (aguarda landing — CR-008), sem modal", () => {

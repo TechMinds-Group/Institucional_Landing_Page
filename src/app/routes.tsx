@@ -5,9 +5,10 @@ import { Privacidade } from "./pages/Privacidade";
 import { Groom } from "./pages/Groom";
 // Landings de produto (RN-025 — CR-006/ADR-014): rotas no padrão
 // do /groom, sem guards — site público.
+// **/fasto removida do gate (CR-012)** — FasToPage.tsx fica no repo
+// para reativação futura; a rota não deve existir enquanto oculta.
 import { VibeCutPage } from "./pages/landings/VibeCutPage";
 import { LumenPage } from "./pages/landings/LumenPage";
-import { FasToPage } from "./pages/landings/FasToPage";
 
 /**
  * Root layout (CR-009 — redireciona-scroll na navegação):
@@ -63,10 +64,7 @@ export const router = createBrowserRouter([
         path: "/lumen",
         Component: LumenPage,
       },
-      {
-        path: "/fasto",
-        Component: FasToPage,
-      },
+      // /fasto oculto permanentemente até reativação (CR-012)
     ],
   },
 ]);

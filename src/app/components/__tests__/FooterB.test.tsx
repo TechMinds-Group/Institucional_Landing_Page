@@ -37,13 +37,14 @@ describe("FooterB (RN-024-3)", () => {
     expect(footer.innerHTML).toContain("border-[#303342]");
   });
 
-  it("nav em 3 grupos: Sistemas (5 produtos), Empresa e Legal", () => {
+  it("nav em 3 grupos: Sistemas (4 itens — FasTo oculto CR-012), Empresa e Legal", () => {
     renderWithProviders(<FooterB />);
 
     const systems = screen.getByTestId("footerb-nav-systems");
-    for (const product of ["Groom", "VibeCut", "FasTo", "Lumen", "Escola Conectada"]) {
+    for (const product of ["Groom", "VibeCut", "Lumen", "Escola Conectada"]) {
       expect(within(systems).getByRole("link", { name: product })).toBeInTheDocument();
     }
+    expect(within(systems).queryByRole("link", { name: "FasTo" })).not.toBeInTheDocument();
 
     const company = screen.getByTestId("footerb-nav-company");
     expect(within(company).getByRole("link", { name: "Sobre nós" })).toBeInTheDocument();
@@ -53,14 +54,13 @@ describe("FooterB (RN-024-3)", () => {
     expect(within(legal).getByRole("link", { name: "Privacidade" })).toBeInTheDocument();
   });
 
-  it("gate por landing: Groom/VibeCut/FasTo/Lumen vão às páginas próprias; Escola Conectada aponta para a âncora do Catálogo (CR-008)", () => {
+  it("gate por landing: Groom/VibeCut/Lumen vão às páginas próprias; FasTo oculto (CR-012) e Escola Conectada apontam para a âncora do Catálogo", () => {
     renderWithProviders(<FooterB />);
 
     const systems = screen.getByTestId("footerb-nav-systems");
     for (const [product, href] of [
       ["Groom", "/groom"],
       ["VibeCut", "/vibecut"],
-      ["FasTo", "/fasto"],
       ["Lumen", "/lumen"],
     ] as const) {
       expect(within(systems).getByRole("link", { name: product })).toHaveAttribute("href", href);
@@ -115,7 +115,6 @@ describe("FooterB (RN-024-3)", () => {
     expect(within(systems).getAllByRole("link").map((l) => l.textContent)).toEqual([
       "Groom",
       "VibeCut",
-      "FasTo",
       "Lumen",
       "Escola Conectada",
     ]);
