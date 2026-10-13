@@ -1,18 +1,20 @@
 import { useI18n } from "../i18n/I18nContext";
-import { SectionHook } from "./SectionHook";
-import { buildWhatsAppUrl, WHATSAPP_HERO_MESSAGE } from "../constants/contacts";
+import { ConstellationCanvas } from "./ConstellationCanvas";
+import { smoothScrollTo } from "../utils/scroll";
 import { SECTION_IDS } from "../constants/anchors";
-import hubOrbitalNoturno from "../../imports/hub-orbital-noturno.png";
+import { ArrowUpRight } from "lucide-react";
 
 /**
- * Hero do design B "Navegação e promessa" (frame #111:12609 — RN-022-2):
- * eyebrow, H1, 2 linhas de apoio, CTA "Conversar no WhatsApp" (deep-link
- * wa.me nova aba com mensagem pré-preenchida — RN-002), microcopy, gancho
- * para a seção Problema (decisão 11/10/2026 — narrativa promessa →
- * problema → catálogo) e imagem "Hub orbital noturno" responsiva (RN-011).
- * Sem CTA de rolagem "Conhecer os produtos" (RN-001 superseded — CR-003).
- * Entrada fade/slide-in via classe utilitária .motion-safe
- * (styles/motion.css), desativada com prefers-reduced-motion: reduce.
+ * Hero do design B (frame #111:12628 — RN-022-2, revisão Figma
+ * 13/10/2026): H1 48px, body de suporte e CTA único "Veja como podemos
+ * ajudar" — âncora interna para o Catálogo (#catalogo via
+ * smoothScrollTo). O deep-link WhatsApp da hero saiu (RN-024-2 passa a
+ * centralizar o canal comercial no trust panel) e eyebrow/gancho/microlines
+ * foram removidos do frame. À direita, "Canvas" 620×500 com partículas
+ * vivas (ConstellationCanvas — restaurado do legado) em wrapper
+ * aria-hidden decorativo; no mobile empilha abaixo da coluna.
+ * Entrada fade/slide-in via .motion-safe (styles/motion.css), desativada
+ * com prefers-reduced-motion: reduce (RN-022) — inclusive o canvas.
  */
 export function HeroB() {
   const { t } = useI18n();
@@ -20,62 +22,44 @@ export function HeroB() {
   return (
     <section
       id={SECTION_IDS.hero}
-      className="relative overflow-hidden bg-[#EAF0F7]"
-      style={{ paddingTop: "80px" }}
+      className="relative overflow-hidden bg-[#E3EAF7] pt-20"
     >
-      <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          {/* Texto */}
-          <div className="motion-safe flex flex-col items-center md:items-start text-center md:text-left max-w-xl mx-auto md:mx-0">
-            <p className="text-sm font-semibold uppercase tracking-widest text-[#4B5563] mb-4">
-              {t.heroB.eyebrow}
-            </p>
+      <div className="max-w-7xl mx-auto px-6 py-14 md:px-12 lg:px-24 lg:py-[72px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-16 items-center">
+          {/* Texto — coluna esquerda 520px (frame): H1 · body · CTA único */}
+          <div className="motion-safe flex flex-col items-center md:items-start text-center md:text-left gap-6 md:max-w-[640px] lg:max-w-[520px] mx-auto md:mx-0">
             <h1
-              className="font-bold text-[#1F3A5F] leading-tight mb-5"
-              style={{ fontSize: "clamp(32px, 4.2vw, 54px)" }}
+              className="font-bold text-[#1F3A5F] text-[34px] md:text-[42px] lg:text-[48px] leading-[1.15] tracking-[-0.0313em]"
             >
               {t.heroB.headline}
             </h1>
-            <p
-              className="text-[#4B5563] leading-relaxed mb-2"
-              style={{ fontSize: "clamp(15px, 1.5vw, 18px)" }}
-            >
-              {t.heroB.supportLine1}
+            <p className="text-[16px] leading-[165%] text-[#4B5563]">
+              {t.heroB.body}
             </p>
-            <p
-              className="text-[#4B5563] leading-relaxed"
-              style={{ fontSize: "clamp(15px, 1.5vw, 18px)" }}
+            <a
+              href={`#${SECTION_IDS.catalogo}`}
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo(SECTION_IDS.catalogo);
+              }}
+              data-testid="hero-cta-catalogo"
+              className="inline-flex items-center justify-center min-h-[44px] px-5 py-[14px] rounded-[10px] bg-[#1F3A5F] text-white text-[14px] font-semibold hover:bg-[#1F3A5F]/90 transition-colors motion-reduce:transition-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1F3A5F] focus:ring-offset-2"
             >
-              {t.heroB.supportLine2}
-            </p>
-
-            <div className="mt-8 flex flex-col items-center md:items-start">
-              <a
-                href={buildWhatsAppUrl(WHATSAPP_HERO_MESSAGE)}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="hero-whatsapp-cta"
-                className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-[#1F3A5F] text-white font-semibold hover:bg-[#1F3A5F]/90 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1F3A5F] focus:ring-offset-2"
-              >
-                {t.heroB.ctaWhatsApp}
-              </a>
-              <p className="mt-3 text-sm text-[#4B5563]/80">{t.heroB.microcopy}</p>
-            </div>
-
-            <SectionHook
-              text={t.heroB.hook}
-              targetId={SECTION_IDS.problema}
-              className="mt-10"
-            />
+              {t.heroB.ctaAid}
+              <ArrowUpRight
+                className="w-[18px] h-[18px] shrink-0"
+                aria-hidden="true"
+              />
+            </a>
           </div>
 
-          {/* Imagem "Hub orbital noturno" — responsiva (RN-011) */}
-          <div className="motion-safe motion-safe-delay-1">
-            <img
-              src={hubOrbitalNoturno}
-              alt={t.heroB.imageAlt}
-              className="w-full h-auto"
-            />
+          {/* Canvas de partículas (620×500, largura fluida; decorativo) */}
+          <div
+            aria-hidden="true"
+            data-testid="hero-canvas"
+            className="motion-safe motion-safe-delay-1 relative w-full max-w-[620px] h-[360px] lg:h-[500px] mx-auto lg:mx-0 lg:justify-self-end"
+          >
+            <ConstellationCanvas />
           </div>
         </div>
       </div>

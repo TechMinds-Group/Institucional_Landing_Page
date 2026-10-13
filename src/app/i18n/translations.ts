@@ -288,14 +288,9 @@ export interface Translations {
     company: string;
   };
   heroB: {
-    eyebrow: string;
     headline: string;
-    supportLine1: string;
-    supportLine2: string;
-    ctaWhatsApp: string;
-    microcopy: string;
-    hook: string;
-    imageAlt: string;
+    body: string;
+    ctaAid: string;
   };
   problemB: {
     title: string;
@@ -458,14 +453,9 @@ export const translations: Record<Language, Translations> = {
       company: 'Empresa'
     },
     heroB: {
-      eyebrow: 'Tecnologia para negócios que crescem',
-      headline: 'Menos rotina dispersa. Mais controle para crescer.',
-      supportLine1: 'Sistemas prontos, em evolução constante e moldados à sua operação — com manutenção e suporte incluídos.',
-      supportLine2: 'Você conversa com a gente, e a tecnologia acompanha o crescimento do seu negócio.',
-      ctaWhatsApp: 'Conversar no WhatsApp',
-      microcopy: 'Escopo, suporte e condições acordados com você.',
-      hook: 'Veja qual solução faz sentido para sua rotina.',
-      imageAlt: 'Ilustração de um hub orbital noturno conectando os sistemas TechMinds'
+      headline: 'Seu negócio precisa aparecer. Sua rotina precisa funcionar. A gente ajuda nos dois.',
+      body: 'Criamos sites personalizados para valorizar seu negócio, sistemas próprios para simplificar a gestão na área da beleza e soluções para automatizar o atendimento pelo WhatsApp. Tudo pensado para facilitar sua rotina e aproximar você dos seus clientes.',
+      ctaAid: 'Veja como podemos ajudar'
     },
     problemB: {
       title: 'O problema da rotina dispersa',
@@ -1337,14 +1327,9 @@ export const translations: Record<Language, Translations> = {
       company: 'Company'
     },
     heroB: {
-      eyebrow: 'Technology for growing businesses',
-      headline: 'Less scattered routine. More control to grow.',
-      supportLine1: 'Ready-made systems, constantly evolving and shaped to your operation — with maintenance and support included.',
-      supportLine2: 'You talk to us, and the technology keeps up with your business growth.',
-      ctaWhatsApp: 'Chat on WhatsApp',
-      microcopy: 'Scope, support and conditions agreed with you.',
-      hook: 'See which solution makes sense for your routine.',
-      imageAlt: 'Illustration of a nighttime orbital hub connecting TechMinds systems'
+      headline: 'Your business needs to be seen. Your routine needs to work. We help with both.',
+      body: 'We build customized websites to boost your business, bespoke systems to simplify beauty-industry management, and solutions to automate WhatsApp service. Everything designed to make your routine easier and bring you closer to your customers.',
+      ctaAid: 'See how we can help'
     },
     problemB: {
       title: 'The problem of the scattered routine',
@@ -2217,14 +2202,9 @@ export const translations: Record<Language, Translations> = {
       company: 'Empresa'
     },
     heroB: {
-      eyebrow: 'Tecnología para negocios que crecen',
-      headline: 'Menos rutina dispersa. Más control para crecer.',
-      supportLine1: 'Sistemas listos, en evolución constante y moldeados a tu operación — con mantenimiento y soporte incluidos.',
-      supportLine2: 'Tú conversas con nosotros, y la tecnología acompaña el crecimiento de tu negocio.',
-      ctaWhatsApp: 'Conversar por WhatsApp',
-      microcopy: 'Alcance, soporte y condiciones acordados contigo.',
-      hook: 'Mira qué solución tiene sentido para tu rutina.',
-      imageAlt: 'Ilustración de un hub orbital nocturno conectando los sistemas de TechMinds'
+      headline: 'Tu negocio necesita aparecer. Tu rutina necesita funcionar. Nosotros te ayudamos con ambos.',
+      body: 'Creamos sitios personalizados para valorar tu negocio, sistemas propios para simplificar la gestión en el área de la belleza y soluciones para automatizar la atención por WhatsApp. Todo pensado para facilitar tu rutina y acercarte a tus clientes.',
+      ctaAid: 'Mira cómo podemos ayudarte'
     },
     problemB: {
       title: 'El problema de la rutina dispersa',
