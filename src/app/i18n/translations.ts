@@ -293,10 +293,11 @@ export interface Translations {
     ctaAid: string;
   };
   problemB: {
+    eyebrow: string;
     title: string;
-    cards: {
+    body: string;
+    situations: {
       title: string;
-      description: string;
     }[];
     hook: string;
   };
@@ -458,22 +459,15 @@ export const translations: Record<Language, Translations> = {
       ctaAid: 'Veja como podemos ajudar'
     },
     problemB: {
-      title: 'O problema da rotina dispersa',
-      cards: [
-        {
-          title: 'Pedidos espalhados no WhatsApp',
-          description: 'Conversas simultâneas, anotações manuais e informações importantes perdidas no meio das mensagens.'
-        },
-        {
-          title: 'Agenda difícil de acompanhar',
-          description: 'Horários combinados por mensagem, com remarcações e conflitos que escapam do controle.'
-        },
-        {
-          title: 'Dados separados para decidir',
-          description: 'Cada informação em um lugar diferente — e nenhuma visão completa do negócio na hora de decidir.'
-        }
+      eyebrow: 'Para facilitar seu dia a dia',
+      title: 'Cuidar do seu negócio pode ser mais simples.',
+      body: 'Entre mensagens no WhatsApp, horários e contas, muita coisa precisa da sua atenção. A gente ajuda a organizar essa rotina para você cuidar melhor dos seus clientes.',
+      situations: [
+        { title: 'Mensagens que se acumulam no WhatsApp' },
+        { title: 'Horários difíceis de organizar' },
+        { title: 'Informações espalhadas para decidir' }
       ],
-      hook: 'O próximo passo é reunir o que importa. Encontre seu caminho no catálogo.'
+      hook: 'Conheça os sistemas que podem facilitar o dia a dia do seu negócio.'
     },
     catalogB: {
       eyebrow: 'Encontre o seu caminho',
@@ -1332,22 +1326,15 @@ export const translations: Record<Language, Translations> = {
       ctaAid: 'See how we can help'
     },
     problemB: {
-      title: 'The problem of the scattered routine',
-      cards: [
-        {
-          title: 'Orders scattered across WhatsApp',
-          description: 'Simultaneous chats, manual notes and important information lost in the middle of messages.'
-        },
-        {
-          title: 'A schedule that is hard to follow',
-          description: 'Appointments arranged by message, with reschedules and conflicts slipping out of control.'
-        },
-        {
-          title: 'Data separated when deciding',
-          description: 'Each piece of information in a different place — and no complete view of the business when making decisions.'
-        }
+      eyebrow: 'To make your day-to-day easier',
+      title: 'Taking care of your business can be simpler.',
+      body: 'Between WhatsApp messages, schedules and payments, a lot needs your attention. We help you organize that routine so you can take better care of your clients.',
+      situations: [
+        { title: 'WhatsApp messages piling up' },
+        { title: 'Schedules that are hard to organize' },
+        { title: 'Scattered information when making decisions' }
       ],
-      hook: 'The next step is bringing what matters together. Find your path in the catalog.'
+      hook: 'Discover the systems that can make your business day-to-day easier.'
     },
     catalogB: {
       eyebrow: 'Find your path',
@@ -2207,22 +2194,15 @@ export const translations: Record<Language, Translations> = {
       ctaAid: 'Mira cómo podemos ayudarte'
     },
     problemB: {
-      title: 'El problema de la rutina dispersa',
-      cards: [
-        {
-          title: 'Pedidos dispersos en WhatsApp',
-          description: 'Conversas simultáneas, anotaciones manuales e información importante perdida entre los mensajes.'
-        },
-        {
-          title: 'Agenda difícil de seguir',
-          description: 'Horarios combinados por mensaje, con reprogramaciones y conflictos que se escapan del control.'
-        },
-        {
-          title: 'Datos separados al decidir',
-          description: 'Cada información en un lugar distinto — y ninguna visión completa del negocio al momento de decidir.'
-        }
+      eyebrow: 'Para facilitar tu día a día',
+      title: 'Cuidar de tu negocio puede ser más simple.',
+      body: 'Entre mensajes de WhatsApp, horarios y cuentas, muchas cosas necesitan tu atención. Te ayudamos a organizar esa rutina para que cuides mejor de tus clientes.',
+      situations: [
+        { title: 'Mensajes que se acumulan en WhatsApp' },
+        { title: 'Horarios difíciles de organizar' },
+        { title: 'Información esparcida para decidir' }
       ],
-      hook: 'El próximo paso es reunir lo que importa. Encuentra tu camino en el catálogo.'
+      hook: 'Conoce los sistemas que pueden facilitar el día a día de tu negocio.'
     },
     catalogB: {
       eyebrow: 'Encuentra tu camino',
