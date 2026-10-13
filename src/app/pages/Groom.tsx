@@ -1,5 +1,7 @@
 import { Sprout, Bot, Flame, Menu, X, Scissors, MessageCircle, LayoutDashboard, CalendarClock, ArrowRight, BadgeCheck, UserRoundSearch, ScanFace, Repeat, DatabaseBackup, ChevronDown, Minus } from "lucide-react";
 import { useState, useEffect, type ReactNode } from "react";
+import { useNavigate } from "react-router";
+import { Logo } from "../components/Logo";
 // DEBT-003 (RN-024-1): Deep-links do WhatsApp vêm do módulo único de contatos
 // — substituição mecânica dos literais codificados diretamente no código (sem mudança de copy).
 import {
@@ -99,6 +101,7 @@ function ServiceSegmentsStrip() {
 
 function SectionHero() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const navigate = useNavigate();
   const navLinks = [
     { label: "Como Funciona", href: "#como-funciona" },
     { label: "Funcionalidades", href: "#funcionalidades" },
@@ -116,11 +119,12 @@ function SectionHero() {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setDrawerOpen(false)} />
           {/* Drawer */}
           <div data-testid="groom-drawer" className="relative z-10 bg-[#0d1117] w-[280px] h-full flex flex-col pt-14 px-6 pb-6 gap-8 shadow-2xl">
-            {/* Drawer header */}
+            {/* Drawer header — padrão de identidade (CR-010): Logo TechMinds + pill do produto */}
             <div className="flex items-center justify-between">
-              <div className="flex gap-[10px] items-center">
-                <Scissors size={28} className="text-[#f1c75c]" aria-hidden />
-                <p className="font-['Inter:Extra_Bold',sans-serif] font-extrabold text-[#f8fafc] text-[20px]">Groom</p>
+              <div className="flex gap-[10px] items-center cursor-pointer" onClick={() => navigate("/")} title="Voltar à página inicial">
+                <Logo className="w-6 h-6" />
+                <p className="font-extrabold text-[#f8fafc] text-[18px]">TechMinds</p>
+                <span className="text-[12px] font-semibold px-2 py-0.5 rounded-full border border-[#f1c75c]/40 text-[#f1c75c] bg-[#f1c75c]/10">Groom</span>
               </div>
               <button onClick={() => setDrawerOpen(false)} aria-label="Fechar menu" className="text-[#94a3b8] hover:text-[#f8fafc] p-1">
                 <X size={22} />
@@ -142,10 +146,11 @@ function SectionHero() {
       pela URL própria do produto); 5 âncoras mantêm destinos; CTA TESTAR GRÁTIS
       (deep-link WhatsApp — DEBT-003/ADR-010) abre em nova aba. */}
       <div data-testid="groom-nav" className="content-stretch flex items-center justify-between relative shrink-0 w-full">
-        {/* Marca — símbolo scissors vetorial, sem PNG (dossier g2 §2) */}
-        <div data-testid="groom-brand" className="flex gap-[10px] items-center relative shrink-0">
-          <Scissors size={26} className="shrink-0 text-[#f1c75c]" aria-hidden />
-          <p className="font-['Inter:Extra_Bold',sans-serif] font-extrabold leading-[normal] text-[#f8fafc] text-[24px] whitespace-nowrap">Groom</p>
+        {/* Marca — padrão de identidade (CR-010): Logo TechMinds + pill do produto (accent #f1c75c — RN-033) */}
+        <div data-testid="groom-brand" className="flex items-center gap-3 cursor-pointer" onClick={() => navigate("/")} title="Voltar à página inicial">
+          <Logo className="w-7 h-7" />
+          <p className="font-extrabold text-[#f8fafc] text-[24px] whitespace-nowrap">TechMinds</p>
+          <span data-testid="groom-brand-chip" className="text-sm font-semibold px-2.5 py-1 rounded-full border border-[#f1c75c]/40 text-[#f1c75c] bg-[#f1c75c]/10">Groom</span>
         </div>
         {/* Nav links — desktop (tokens B: #b3bacb substitui #cbd5e1) */}
         <div data-testid="groom-nav-links" className="hidden lg:flex [word-break:break-word] content-stretch font-['Inter:Semi_Bold',sans-serif] font-semibold gap-[32px] items-center leading-[normal] not-italic relative shrink-0 text-[#b3bacb] text-[14px] whitespace-nowrap">

@@ -46,13 +46,15 @@ describe("Groom — Navigation (RN-033-1, CR-007)", () => {
     expect(document.body.querySelector('a[href*="/login"]')).toBeNull();
   });
 
-  it("navbar mostra a marca Groom com símbolo scissors vetorial, sem PNG", () => {
+  it("navbar segue o padrão de identidade (CR-010): Logo TechMinds + pill Groom com accent #f1c75c", () => {
     renderWithProviders(<Groom />);
 
     const brand = screen.getByTestId("groom-brand");
-    expect(brand).toHaveTextContent("Groom");
-    expect(brand.querySelector("svg")).not.toBeNull();
-    expect(brand.querySelector("img")).toBeNull();
+    expect(brand).toHaveTextContent("TechMinds");
+    expect(within(brand).getByTestId("groom-brand-chip")).toHaveTextContent("Groom");
+    // Logo é o <img> do padrão (Logo component); o scissors raster pré-existente não deve voltar.
+    expect(brand.querySelectorAll("img")).toHaveLength(1);
+    expect(brand.textContent).not.toContain("Testar gratuitamente");
   });
 
   it("navbar mantém as 5 âncoras com os mesmos destinos e IDs estáveis no DOM (RN-011)", () => {
@@ -156,7 +158,11 @@ describe("Groom — Hero orbital (RN-033-2 / RN-034)", () => {
     expect(screen.getByTestId("eco-node-agenda")).not.toHaveClass("z-10");
 
     const hero = document.querySelector('[data-name="section-hero"]');
-    expect(hero?.querySelectorAll("img")).toHaveLength(0);
+    // A marca agora usa o Logo <img> do padrão CR-010 — excluí-la do scan de raster do hero.
+    const heroRaster = Array.from(hero?.querySelectorAll("img") ?? []).filter(
+      (img) => !img.closest("[data-testid='groom-brand']")
+    );
+    expect(heroRaster).toHaveLength(0);
   });
 
   it("imports do mockup PNG do dashboard não existem mais no código (0 assets raster)", () => {
