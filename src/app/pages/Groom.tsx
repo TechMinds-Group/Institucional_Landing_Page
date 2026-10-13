@@ -111,7 +111,7 @@ function SectionHero() {
   ];
 
   return (
-    <div className="bg-gradient-to-b content-stretch flex flex-col from-[#0b0f1a] gap-8 lg:gap-[64px] items-center pb-10 lg:pb-[100px] pt-14 lg:pt-[80px] px-5 md:px-12 lg:px-[120px] relative shrink-0 to-[#1a2233] w-full" data-name="section-hero">
+    <div className="bg-gradient-to-b content-stretch flex flex-col from-[#0b0f1a] gap-8 lg:gap-[64px] items-center pb-10 lg:pb-[100px] pt-14 lg:pt-[80px] px-5 md:px-12 lg:px-[clamp(48px,12vw,240px)] relative shrink-0 to-[#1a2233] w-full" data-name="section-hero">
       {/* Mobile Drawer Overlay */}
       {drawerOpen && (
         <div className="lg:hidden fixed inset-0 z-50 flex justify-end">
