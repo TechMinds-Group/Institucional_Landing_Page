@@ -4,9 +4,10 @@
 // translations.ts; aqui ficam apenas a estrutura e as classes
 // Tailwind (strings literais — Tailwind JIT escaneia o fonte).
 
+import type { ReactNode } from "react";
+
 /** Idade/estado de um CTA de landing (RN-032 — gate de CTAs). */
 export type LandingCtaKind = "anchor" | "route" | "mailto" | "external" | "disabled";
-
 export interface LandingCtaConfig {
   label: string;
   kind: LandingCtaKind;
@@ -42,6 +43,8 @@ export interface LandingNavConfig {
   /** 4 links âncora do produto (RN-026) — labels já traduzidos. */
   links: { label: string; sectionId: string }[];
   cta: LandingCtaConfig;
+  /** Ícone após o label do CTA (ex.: ArrowUpRight 18 — frame #101:13392). */
+  ctaIcon?: ReactNode;
 }
 
 export interface LandingFooterLink {

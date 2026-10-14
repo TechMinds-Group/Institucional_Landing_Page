@@ -74,14 +74,17 @@ export function ProductNavbar({ productName, theme, nav, ctaTestId }: ProductNav
         </nav>
 
         {/* CTA contextual (RN-032 — gate por destino; microcopy na navbar
-            quebraria a altura fixa — tooltip/title cobre o motivo) */}
+            quebraria a altura fixa — tooltip/title cobre o motivo).
+            Estilo do frame (EL-7e6a13b8): padding 14×22, gap 12, semibold + ícone. */}
         <div className="hidden md:block">
           <LandingCta
             cta={nav.cta}
             microcopyHidden
             testId={ctaTestId}
-            className={`${theme.accentBg} ${theme.accentText} rounded-lg px-5 py-2.5 text-sm font-bold transition-opacity`}
-          />
+            className={`${theme.accentBg} ${theme.accentText} inline-flex items-center gap-3 rounded-[8px] px-[22px] py-3.5 text-sm font-semibold transition-opacity`}
+          >
+            {nav.ctaIcon}
+          </LandingCta>
         </div>
         {/* Mobile: mantém o CTA (conversão) — sem menu/nav */}
         <div className="md:hidden">
@@ -89,8 +92,10 @@ export function ProductNavbar({ productName, theme, nav, ctaTestId }: ProductNav
             cta={nav.cta}
             microcopyHidden
             testId={`${ctaTestId}-mobile`}
-            className={`${theme.accentBg} ${theme.accentText} rounded-lg px-4 py-2 text-xs font-bold transition-opacity`}
-          />
+            className={`${theme.accentBg} ${theme.accentText} inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-semibold transition-opacity`}
+          >
+            {nav.ctaIcon && <span aria-hidden className="[&>svg]:size-4">{nav.ctaIcon}</span>}
+          </LandingCta>
         </div>
       </div>
     </header>

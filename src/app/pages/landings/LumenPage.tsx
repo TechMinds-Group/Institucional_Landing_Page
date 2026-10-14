@@ -74,9 +74,9 @@ const THEME: LandingTheme = {
 
 // Botões do frame: raio 8, padding 14×22, Inter 14 semibold.
 const BTN_GOLD =
-  "inline-flex items-center justify-center gap-3 rounded-lg bg-[#C9A84C] px-[22px] py-3.5 text-sm font-semibold text-[#0F1E35]";
+  "inline-flex items-center justify-center gap-3 rounded-[8px] bg-[#C9A84C] px-[22px] py-3.5 text-sm font-semibold text-[#0F1E35]";
 const BTN_NAVY_OUTLINE =
-  "inline-flex items-center justify-center gap-2 rounded-lg border border-[#34435A] px-[22px] py-3.5 text-sm font-semibold text-[#F2EEE2]";
+  "inline-flex items-center justify-center gap-3 rounded-[8px] border border-[#34435A] px-[22px] py-3.5 text-sm font-semibold text-[#F2EEE2]";
 
 /** Padding vertical do frame: 48px mobile → 88px desktop. */
 const SECTION = "px-5 py-12 md:px-8 md:py-16 lg:px-12 lg:py-[88px]";
@@ -193,6 +193,7 @@ export function LumenPage() {
           { label: c.nav.links[3], sectionId: S.faq },
         ],
         cta: { label: c.nav.cta, kind: "external", target: LUMEN_APP_URL },
+        ctaIcon: <ArrowUpRight size={18} aria-hidden />,
       }}
       footer={{
         productName: "Lumen",
