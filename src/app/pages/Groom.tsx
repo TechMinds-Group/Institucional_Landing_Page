@@ -1,5 +1,5 @@
-import { Sprout, Bot, Flame, Scissors, MessageCircle, LayoutDashboard, CalendarClock, ArrowRight, BadgeCheck, UserRoundSearch, ScanFace, Repeat, DatabaseBackup, ChevronDown, Minus } from "lucide-react";
-import { useState, useEffect, type ReactNode } from "react";
+import { Sprout, Bot, Flame, Scissors, MessageCircle, CalendarCheck, ChartNoAxesCombined, ArrowRight, BadgeCheck, UserRoundSearch, ScanFace, Repeat, DatabaseBackup, ChevronDown, Minus } from "lucide-react";
+import { Fragment, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Logo } from "../components/Logo";
 // DEBT-003 (RN-024-1): Deep-links do WhatsApp vêm do módulo único de contatos
@@ -32,51 +32,63 @@ const svgPaths = {
   pa8388c0: "M10.9999 20.001H1.9992M19.0006 20.0012L12.242 21.6903C12.0946 21.727 11.9408 21.7297 11.7922 21.6982C11.6436 21.6666 11.5042 21.6016 11.3844 21.5081C11.2647 21.4146 11.1679 21.2951 11.1012 21.1586C11.0346 21.0221 11 20.8722 10.9999 20.7203V4.56294C11.0001 4.25911 11.0695 3.95833 11.2029 3.68533C11.3363 3.41234 11.5301 3.17332 11.7696 2.98642C12.0092 2.79952 12.2882 2.66964 12.5854 2.60665C12.8827 2.54366 13.1903 2.54922 13.4851 2.6229L17.4854 3.62292C17.9182 3.73107 18.3023 3.98075 18.5768 4.33226C18.8513 4.68378 19.0005 5.11696 19.0006 5.56296V20.0012ZM19.0006 20.0012L22.0008 20.001M10.9999 4.00073H7.99968C7.4692 4.00073 6.96046 4.21145 6.58535 4.58653C6.21025 4.96161 5.99952 5.47032 5.99952 6.00077V20.001M14.0002 12.0009H14.0102",
 };
 
-// RN-033-2/RN-034 — Nó "Ecosystem" 130×130 da composição orbital (96px no mobile).
-// WhatsApp é o nó central destacado; Gestão e Agenda apoiam nas órbitas laterais.
-function EcosystemNode({
-  testId,
-  label,
-  icon,
-  layout,
-}: {
-  testId: string;
-  label: string;
-  icon: ReactNode;
-  layout: "left" | "center" | "right";
-}) {
-  const position =
-    layout === "center"
-      ? "left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 bg-[rgba(241,199,92,0.1)] shadow-[0px_0px_36px_0px_rgba(241,199,92,0.28)] ring-[#f1c75c]/70"
-      : layout === "left"
-        ? "left-0 top-1/2 -translate-y-1/2 bg-[#161b22] ring-[#1f2937]"
-        : "right-0 top-1/2 -translate-y-1/2 bg-[#161b22] ring-[#1f2937]";
-  return (
-    <div data-testid={testId} className={`absolute flex size-[96px] sm:size-[130px] flex-col items-center justify-center gap-[6px] rounded-[24px] ring-1 ${position}`}>
-      {icon}
-      <p className={`font-['Inter:Bold',sans-serif] font-bold leading-[normal] text-[12px] sm:text-[13px] ${layout === "center" ? "text-[#f8fafc]" : "text-[#b3bacb]"}`}>{label}</p>
-    </div>
-  );
-}
+// RN-033-2/RN-034 — "Rede de módulos" (frame #194:580 — delta 13/10):
+// barramento de sincronização à esquerda + 3 módulos empilhados com fluxo
+// âmbar — WhatsApp (IN, destaque âmbar) → Agenda (SYNC) → Gestão (OUT).
+// 0 assets raster; textos PT fixos (RN-018); tags/descrições em mono
+// (IBM Plex Mono no frame — font-mono nativo).
+const MODULE_NODES = [
+  { id: "whatsapp", tag: "IN", name: "WhatsApp", desc: "Confirma e lembra o cliente", icon: MessageCircle, highlight: true },
+  { id: "agenda", tag: "SYNC", name: "Agenda", desc: "Reserva o horário escolhido", icon: CalendarCheck, highlight: false },
+  { id: "gestao", tag: "OUT", name: "Gestão", desc: "Reúne serviços e faturamento", icon: ChartNoAxesCombined, highlight: false },
+] as const;
 
-// Composição "ecosystem orbital" — Gestão · WhatsApp (destacado) · Agenda:
-// Inner/Outer orbit (elipses) + Flow (setas) em SVG, nós com ícones lucide —
-// substitui o mockup PNG do dashboard (0 assets raster — dossier g2 §3, RN-034).
 function HeroEcosystem() {
   return (
-    <div data-testid="groom-ecosystem" data-name="scheduling-ecosystem" className="relative mx-auto flex aspect-square w-full max-w-[420px] items-center justify-center">
-      <svg aria-hidden fill="none" viewBox="0 0 420 420" className="absolute inset-0 size-full">
-        {/* Inner orbit */}
-        <ellipse cx="210" cy="210" rx="86" ry="34" stroke="#526074" strokeDasharray="6 8" strokeWidth="1.5" />
-        {/* Outer orbit */}
-        <ellipse cx="210" cy="210" rx="164" ry="68" stroke="#526074" strokeDasharray="6 8" strokeOpacity="0.7" strokeWidth="1.5" />
-        {/* Flow — setas de fluxo (path vetorial reutilizado) */}
-        <path d={svgPaths.p2df9a900} stroke="#f1c75c" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" transform="translate(202 92) scale(0.8)" />
-        <path d={svgPaths.p2df9a900} stroke="#526074" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" transform="translate(202 304) scale(0.8) rotate(180 10 10)" />
-      </svg>
-      <EcosystemNode testId="eco-node-gestao" label="Gestão" layout="left" icon={<LayoutDashboard size={30} className="text-[#b3bacb]" />} />
-      <EcosystemNode testId="eco-node-whatsapp" label="WhatsApp" layout="center" icon={<MessageCircle size={34} className="text-[#f1c75c]" />} />
-      <EcosystemNode testId="eco-node-agenda" label="Agenda" layout="right" icon={<CalendarClock size={30} className="text-[#b3bacb]" />} />
+    <div data-testid="groom-ecosystem" data-name="module-network" className="relative mx-auto w-full max-w-[420px] pl-14">
+      {/* Barramento de sincronização + ponto de conexão */}
+      <span aria-hidden className="absolute bottom-10 left-4 top-10 w-[1.5px] bg-[#303342]" />
+      <span aria-hidden className="absolute left-3 top-1/2 size-2 -translate-y-1/2 rounded-full bg-[#f1c75c]" />
+      <div className="flex flex-col">
+        {MODULE_NODES.map((module, index) => (
+          <Fragment key={module.id}>
+            {index > 0 && (
+              <span
+                aria-hidden
+                data-testid={`eco-flow-${index}`}
+                className="mx-auto h-6 w-[1.5px] bg-[#f1c75c]"
+              />
+            )}
+            <div
+              data-testid={`eco-node-${module.id}`}
+              className={`flex flex-col justify-center gap-2.5 rounded-lg border p-4 ${
+                module.highlight
+                  ? "border-[#f1c75c] bg-[#f1c75c] text-[#0b0f1a]"
+                  : "border-[#303342] bg-[#171c22]"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-2.5">
+                  <module.icon
+                    size={20}
+                    aria-hidden
+                    className={module.highlight ? "text-[#0b0f1a]" : "text-[#f7f8fc]"}
+                  />
+                  <span className={`text-xl font-bold ${module.highlight ? "text-[#0b0f1a]" : "text-[#f7f8fc]"}`}>
+                    {module.name}
+                  </span>
+                </span>
+                <span className={`font-mono text-[10px] ${module.highlight ? "text-[#0b0f1a]" : "text-[#b3bacb]"}`}>
+                  {module.tag}
+                </span>
+              </div>
+              <p className={`font-mono text-[11px] leading-[1.5] ${module.highlight ? "text-[#0b0f1a]" : "text-[#b3bacb]"}`}>
+                {module.desc}
+              </p>
+            </div>
+          </Fragment>
+        ))}
+      </div>
     </div>
   );
 }

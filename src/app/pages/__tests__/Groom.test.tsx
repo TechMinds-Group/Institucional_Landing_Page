@@ -96,7 +96,7 @@ describe("Groom — Navigation (RN-033-1, CR-007)", () => {
   });
 });
 
-describe("Groom — Hero orbital (RN-033-2 / RN-034)", () => {
+describe("Groom — Hero: rede de módulos (RN-033-2 / RN-034 — frame #194:580)", () => {
   it("exibe eyebrow novo (âmbar), H1 único sem span, description e microcopy sem ⚡", () => {
     renderWithProviders(<Groom />);
 
@@ -142,20 +142,35 @@ describe("Groom — Hero orbital (RN-033-2 / RN-034)", () => {
     expect(cta.getAttribute("rel")).toContain("noreferrer");
   });
 
-  it("composição orbital contém os 3 nós (Gestão · WhatsApp destacado · Agenda) e nenhuma imagem raster no Hero", () => {
+  it("rede de módulos: 3 módulos com tags e descrições (WhatsApp IN destaque âmbar · Agenda SYNC · Gestão OUT), fluxo entre eles e nenhuma imagem raster", () => {
     renderWithProviders(<Groom />);
 
     const eco = screen.getByTestId("groom-ecosystem");
     expect(eco.querySelectorAll("img")).toHaveLength(0);
-    expect(screen.getByTestId("eco-node-gestao")).toHaveTextContent("Gestão");
-    expect(screen.getByTestId("eco-node-whatsapp")).toHaveTextContent(
-      "WhatsApp"
-    );
-    expect(screen.getByTestId("eco-node-agenda")).toHaveTextContent("Agenda");
-    // WhatsApp é o nó central destacado (z-10 + anel âmbar); laterais não o têm.
-    expect(screen.getByTestId("eco-node-whatsapp")).toHaveClass("z-10");
-    expect(screen.getByTestId("eco-node-gestao")).not.toHaveClass("z-10");
-    expect(screen.getByTestId("eco-node-agenda")).not.toHaveClass("z-10");
+
+    const whatsapp = screen.getByTestId("eco-node-whatsapp");
+    expect(whatsapp).toHaveTextContent("WhatsApp");
+    expect(whatsapp).toHaveTextContent("IN");
+    expect(whatsapp).toHaveTextContent("Confirma e lembra o cliente");
+    // WhatsApp é o módulo destacado (fundo âmbar); os demais são escuros
+    expect(whatsapp.className).toContain("bg-[#f1c75c]");
+
+    const agenda = screen.getByTestId("eco-node-agenda");
+    expect(agenda).toHaveTextContent("Agenda");
+    expect(agenda).toHaveTextContent("SYNC");
+    expect(agenda).toHaveTextContent("Reserva o horário escolhido");
+    expect(agenda.className).toContain("bg-[#171c22]");
+    expect(agenda.className).not.toContain("bg-[#f1c75c]");
+
+    const gestao = screen.getByTestId("eco-node-gestao");
+    expect(gestao).toHaveTextContent("Gestão");
+    expect(gestao).toHaveTextContent("OUT");
+    expect(gestao).toHaveTextContent("Reúne serviços e faturamento");
+    expect(gestao.className).toContain("bg-[#171c22]");
+
+    // Fluxo âmbar entre os módulos (2 conectores entre 3 cartões)
+    expect(screen.getByTestId("eco-flow-1")).toBeInTheDocument();
+    expect(screen.getByTestId("eco-flow-2")).toBeInTheDocument();
 
     const hero = document.querySelector('[data-name="section-hero"]');
     // A marca agora usa o Logo <img> do padrão CR-010 — excluí-la do scan de raster do hero.
