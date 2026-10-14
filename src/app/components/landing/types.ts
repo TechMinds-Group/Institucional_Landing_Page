@@ -5,7 +5,7 @@
 // Tailwind (strings literais — Tailwind JIT escaneia o fonte).
 
 /** Idade/estado de um CTA de landing (RN-032 — gate de CTAs). */
-export type LandingCtaKind = "anchor" | "route" | "mailto" | "disabled";
+export type LandingCtaKind = "anchor" | "route" | "mailto" | "external" | "disabled";
 
 export interface LandingCtaConfig {
   label: string;

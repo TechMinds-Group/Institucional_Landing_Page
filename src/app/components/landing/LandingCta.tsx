@@ -83,6 +83,23 @@ export function LandingCta({ cta, microcopy, microcopyId, microcopyHidden, class
     );
   }
 
+  // external — URL de outro domínio (ex.: app do produto — PEND-011 Lumen):
+  // abre em nova aba sem passar pelo router interno.
+  if (cta.kind === "external") {
+    return (
+      <a
+        href={cta.target}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-testid={testId}
+        className={base}
+      >
+        {cta.label}
+        {children}
+      </a>
+    );
+  }
+
   // anchor — rolagem suave com offset da navbar (RN-011)
   return (
     <a

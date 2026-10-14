@@ -43,6 +43,9 @@ import arendtMob from "../../../imports/landings/lumen-retrato-arendt-mob.png";
 
 const S = LANDING_SECTION_IDS.lumen;
 
+/** App do Lumen — destino dos CTAs "Explorar o Lumen" (PEND-011 resolvida 13/10). */
+const LUMEN_APP_URL = "https://lumen.techminds.net.br";
+
 const THEME: LandingTheme = {
   pageBg: "bg-[#F2EEE2]",
   titleFont: "font-['Playfair_Display',Georgia,serif]",
@@ -193,7 +196,7 @@ export function LumenPage() {
           { label: c.nav.links[2], sectionId: S.seuPerfil },
           { label: c.nav.links[3], sectionId: S.faq },
         ],
-        cta: { label: c.nav.cta, kind: "disabled", reason: c.nav.ctaPending },
+        cta: { label: c.nav.cta, kind: "external", target: LUMEN_APP_URL },
       }}
       footer={{
         statement: c.footer.statement,
@@ -228,34 +231,21 @@ export function LumenPage() {
               {c.hero.headline}
             </h1>
             <p className="max-w-xl leading-relaxed text-[#8A9BB8]">{c.hero.paragraph}</p>
-            <div className="flex flex-col items-start gap-2.5" data-testid="lumen-hero-ctas">
-              <div className="flex flex-wrap items-center gap-3">
-                <LandingCta
-                  cta={{ label: c.hero.ctaExplore, kind: "disabled", reason: c.nav.ctaPending }}
-                  microcopy={c.nav.ctaPending}
-                  microcopyId="lumen-hero-cta-pending"
-                  microcopyHidden
-                  testId="lumen-hero-cta-explore"
-                  className={BTN_GOLD}
-                >
-                  <ArrowUpRight size={18} aria-hidden />
-                </LandingCta>
-                <LandingCta
-                  cta={{ label: c.hero.ctaHow, kind: "anchor", target: S.comoFunciona }}
-                  testId="lumen-hero-cta-how"
-                  className={BTN_NAVY_OUTLINE}
-                >
-                  <ArrowDown size={18} aria-hidden />
-                </LandingCta>
-              </div>
-              {/* Microcopy do gate (RN-032) sob a linha de botões — frame #101:13395 */}
-              <p
-                id="lumen-hero-cta-pending"
-                data-testid="lumen-hero-cta-explore-microcopy"
-                className="max-w-md text-xs leading-relaxed text-[#8A9BB8]"
+            <div className="flex flex-wrap items-center gap-3" data-testid="lumen-hero-ctas">
+              <LandingCta
+                cta={{ label: c.hero.ctaExplore, kind: "external", target: LUMEN_APP_URL }}
+                testId="lumen-hero-cta-explore"
+                className={BTN_GOLD}
               >
-                {c.nav.ctaPending}
-              </p>
+                <ArrowUpRight size={18} aria-hidden />
+              </LandingCta>
+              <LandingCta
+                cta={{ label: c.hero.ctaHow, kind: "anchor", target: S.comoFunciona }}
+                testId="lumen-hero-cta-how"
+                className={BTN_NAVY_OUTLINE}
+              >
+                <ArrowDown size={18} aria-hidden />
+              </LandingCta>
             </div>
             {/* "Natureza do produto" do frame (mobile #101:13897) */}
             <p
@@ -653,9 +643,7 @@ export function LumenPage() {
             </div>
             <div className="flex flex-col items-stretch gap-4">
               <LandingCta
-                cta={{ label: c.invite.ctaExplore, kind: "disabled", reason: c.nav.ctaPending }}
-                microcopy={c.nav.ctaPending}
-                microcopyId="lumen-invite-pending"
+                cta={{ label: c.invite.ctaExplore, kind: "external", target: LUMEN_APP_URL }}
                 testId="lumen-invite-cta-explore"
                 className={BTN_GOLD}
               />

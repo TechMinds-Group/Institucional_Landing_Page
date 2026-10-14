@@ -132,16 +132,22 @@ describe("Status por estágio em cada hero (RN-027/CR-006)", () => {
 describe("Gates de CTA nas landings (RN-032/PEND-011)", () => {
   beforeEach(() => resetI18n());
 
-  it("Lumen: os 3 CTAs 'Explorar o Lumen' estão desabilitados com microcopy", async () => {
+  it("Lumen: os 3 CTAs 'Explorar o Lumen' apontam para https://lumen.techminds.net.br em nova aba (PEND-011 resolvida 13/10)", async () => {
     await renderAt("/lumen");
     for (const testId of [
-      "lumen-nav-cta-button",
-      "lumen-hero-cta-explore-button",
-      "lumen-invite-cta-explore-button",
+      "lumen-nav-cta",
+      "lumen-hero-cta-explore",
+      "lumen-invite-cta-explore",
     ]) {
-      expect(screen.getByTestId(testId)).toBeDisabled();
+      const cta = screen.getByTestId(testId);
+      expect(cta.tagName).toBe("A");
+      expect(cta).toHaveAttribute("href", "https://lumen.techminds.net.br");
+      expect(cta).toHaveAttribute("target", "_blank");
+      expect(cta.getAttribute("rel")).toContain("noopener");
+      expect(cta.getAttribute("rel")).toContain("noreferrer");
     }
-    expect(screen.getByTestId("lumen-hero-cta-explore-microcopy")).toBeInTheDocument();
+    // Sem microcopy de gate nos CTAs habilitados
+    expect(screen.queryByTestId("lumen-hero-cta-explore-microcopy")).not.toBeInTheDocument();
   });
 
   it("Lumen: 'Explore o catálogo completo' desabilitado com microcopy (PEND-011)", async () => {
