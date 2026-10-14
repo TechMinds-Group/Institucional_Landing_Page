@@ -128,6 +128,7 @@ export interface LumenLanding {
     eyebrow: string;
     title: string;
     chip: string;
+    support: string;
     cards: { name: string; era: string; dates: string; workLabel: string; work: string; workYear: string }[];
     ctaCatalog: string;
     catalogPending: string;
@@ -153,10 +154,15 @@ export interface LumenLanding {
   perfil: {
     eyebrow: string;
     title: string;
+    intro: string;
     radarLabel: string;
-    radarTags: string[];
+    features: { title: string; description: string }[];
+    mockBadge: string;
+    cardTitle: string;
+    cardSubtitle: string;
     axesTitle: string;
     axes: string[];
+    footnote: string;
     disclaimer: string;
     states: { title: string; description: string }[];
     visualNote: string;
@@ -165,17 +171,22 @@ export interface LumenLanding {
     eyebrow: string;
     title: string;
     intro: string;
-    counts: string;
-    rule: string;
+    stats: { value: string; label: string }[];
+    rule: { title: string; description: string };
     cards: { name: string; work: string; era: string }[];
     insufficient: string;
+    mockBadge: string;
+    cardTitle: string;
+    cardNote: string;
   };
   excel: {
     eyebrow: string;
     title: string;
-    scopes: string[];
-    tableTitle: string;
-    rows: string[];
+    scopes: { name: string; description: string }[];
+    tabs: string[];
+    previewTitle: string;
+    previewSubtitle: string;
+    rows: { thinker: string; work: string }[];
     footer: string;
     expl: string;
   };
@@ -886,7 +897,7 @@ export const translations: Record<Language, Translations> = {
         exploreLinks: ['Acervo', 'Como funciona', 'Seu perfil', 'Perguntas frequentes'],
         productFeaturesTitle: 'Do seu jeito',
         productFeatures: ['Português (BR) · Idioma do produto', 'Claro / Escuro · Tema do produto'],
-        copyright: '© 2026 Lumen · TechMinds.'
+        copyright: '© 2026 Lumen · TechMinds. Todos os direitos reservados.'
       },
       hero: {
         statusChip: 'Painel educacional em operação · Um produto TechMinds',
@@ -911,6 +922,7 @@ export const translations: Record<Language, Translations> = {
         eyebrow: 'O acervo',
         title: 'Ideias de outros tempos. Perguntas que continuam vivas.',
         chip: 'História, filosofia e política em perspectiva.',
+        support: 'Percorra pensadores e obras, encontre conexões e coloque diferentes perspectivas em diálogo. O ponto de partida pode ser uma época, uma obra ou uma pergunta.',
         cards: [
           {
             name: 'Platão',
@@ -939,20 +951,20 @@ export const translations: Record<Language, Translations> = {
         ],
         ctaCatalog: 'Explore o catálogo completo',
         catalogPending: 'O destino do catálogo completo ainda não está definido.',
-        disclaimer: 'Recorte editorial ilustrativo. Retratos são representações artísticas, não fotografias.'
+        disclaimer: 'Recorte editorial ilustrativo. Retratos são representações artísticas; datas se referem às obras, não à disponibilidade de arquivos.'
       },
       howItWorks: {
         title: 'Uma leitura abre a próxima pergunta.',
         steps: [
-          { title: 'Explore', description: 'Navegue o acervo por pensadores, eras e eixos analíticos.' },
+          { title: 'Explore', description: 'Busque pensadores e obras. Combine filtros para descobrir caminhos pelo acervo.' },
           {
             title: 'Marque suas leituras',
             description: 'Um clique registra uma obra lida. Você pode desmarcá-la quando quiser.'
           },
-          { title: 'Observe seu perfil', description: 'Acompanhe as tendências que emergem das suas leituras.' },
+          { title: 'Observe seu perfil', description: 'A partir da primeira obra lida, veja tendências do repertório que você registrou.' },
           {
             title: 'Diversifique',
-            description: 'Com 5 obras lidas, e havendo lacunas, o Lumen sugere próximos passos.'
+            description: 'Com 5 obras lidas, e havendo lacunas, descubra perspectivas menos exploradas.'
           }
         ]
       },
@@ -988,19 +1000,33 @@ export const translations: Record<Language, Translations> = {
       perfil: {
         eyebrow: 'Seu perfil de leitura',
         title: 'Um mapa do seu percurso. Não um rótulo sobre você.',
+        intro: 'O diagnóstico político-filosófico observa as obras que você marcou como lidas. Ele descreve tendências do repertório registrado, não uma verdade definitiva sobre sua identidade.',
         radarLabel: 'Radar político — tendências das suas leituras',
-        radarTags: ['Filosofia política', 'História das ideias', 'Economia política', 'Antropologia', 'Ética'],
+        features: [
+          {
+            title: 'Política em radar',
+            description: 'O radar considera as etiquetas políticas associadas às leituras.'
+          },
+          {
+            title: 'Métodos em perspectiva',
+            description: 'Os eixos metodológicos aparecem em barras, em uma leitura complementar do seu percurso.'
+          }
+        ],
+        mockBadge: 'Exemplo visual · não são dados reais',
+        cardTitle: 'Tendências das leituras',
+        cardSubtitle: 'Radar político · geometria ilustrativa',
         axesTitle: 'Eixos metodológicos',
         axes: ['Lentes históricas', 'Conceitos-chave', 'Contexto das obras'],
+        footnote: 'Sem pontuações reais ou categorias presumidas do catálogo.',
         disclaimer: 'Uma ferramenta educacional para refletir e explorar. Não é teste psicológico nem definição de identidade política.',
         states: [
           {
             title: 'Sem leituras',
-            description: 'O Ver Perfil ainda não aparece até haver ao menos uma obra lida.'
+            description: 'O estado inicial convida a registrar a primeira obra. “Ver Perfil” ainda não aparece.'
           },
           {
             title: 'Com ao menos uma obra lida',
-            description: 'O Ver Perfil passa a aparecer. Sem tendência definida, o resultado é Equilibrado.'
+            description: 'O botão “Ver Perfil” passa a aparecer. Sem tendência definida, o resultado é “Equilibrado”.'
           }
         ],
         visualNote: 'Exemplo visual · não são dados reais. Sem pontuações reais.'
@@ -1008,22 +1034,41 @@ export const translations: Record<Language, Translations> = {
       diversificacao: {
         eyebrow: 'Amplie o horizonte',
         title: 'O próximo livro pode mudar a pergunta.',
-        intro: 'A partir de 5 obras lidas, o Lumen identifica polos pouco explorados e sugere até 5 pensadores compatíveis com as lacunas.',
-        counts: 'Até 3 lacunas · Até 5 pensadores sugeridos',
-        rule: 'Diversificar, não repetir: a prioridade é a aderência às lacunas, depois as obras nunca lidas, depois a ordem alfabética — leituras já registradas não voltam.',
+        intro: 'A partir de 5 obras lidas, o Lumen identifica polos pouco explorados e sugere caminhos para diversificar seu repertório.',
+        stats: [
+          { value: 'Até 3', label: 'lacunas apresentadas' },
+          { value: 'Até 5', label: 'pensadores sugeridos' }
+        ],
+        rule: {
+          title: 'Diversificar, não repetir',
+          description: 'A prioridade é a aderência às lacunas, depois pensadores nunca lidos e, por fim, a ordem alfabética. Obras já lidas não voltam às sugestões.'
+        },
         cards: [
           { name: 'Aristóteles', work: 'Política', era: 'Antiguidade' },
           { name: 'John Locke', work: 'Segundo tratado sobre o governo', era: 'Século XVII' },
           { name: 'Mary Wollstonecraft', work: 'Reivindicação dos direitos da mulher', era: 'Século XVIII' }
         ],
-        insufficient: 'Menos de 5 obras lidas: Dados insuficientes.'
+        insufficient: 'Menos de 5 obras lidas: “Dados insuficientes”. Na barra lateral, as recomendações exigem também ao menos uma lacuna. São 5 obras, não 5 pensadores.',
+        mockBadge: 'Sugestões ilustrativas',
+        cardTitle: 'Outras perspectivas para conhecer',
+        cardNote: 'Exemplos editoriais, não uma recomendação personalizada real. As sugestões dependem das suas leituras e das lacunas encontradas.'
       },
       excel: {
         eyebrow: 'Leve o mapa com você',
         title: 'Do acervo à sua mesa de estudo.',
-        scopes: ['Acervo completo', 'Lidas', 'Pendentes'],
-        tableTitle: 'Obras em perspectiva (exemplo)',
-        rows: ['Platão — A República', 'Maquiavel — O Príncipe', 'Hannah Arendt — A condição humana'],
+        scopes: [
+          { name: 'Acervo completo', description: 'Todas as obras catalogadas.' },
+          { name: 'Lidas', description: 'Somente as obras que você marcou.' },
+          { name: 'Pendentes', description: 'Obras que ainda não foram marcadas como lidas.' }
+        ],
+        tabs: ['Obras', 'Resumo por pensador', 'Progresso por era'],
+        previewTitle: 'Lumen · exportação Excel',
+        previewSubtitle: 'Acervo completo · prévia ilustrativa',
+        rows: [
+          { thinker: 'Platão', work: 'A República' },
+          { thinker: 'Maquiavel', work: 'O Príncipe' },
+          { thinker: 'Hannah Arendt', work: 'A condição humana' }
+        ],
         footer: '158 obras no acervo completo',
         expl: 'Em cada escopo: três abas, percentuais e total geral. O resumo agrupa por pensador; o progresso, por era.'
       },
@@ -1034,18 +1079,18 @@ export const translations: Record<Language, Translations> = {
         blocks: [
           {
             title: 'Leituras no seu dispositivo',
-            description: 'O registro é local, com data e hora. Não há contas, backup em nuvem ou sincronização.'
+            description: 'O registro é local e salvo a cada alteração, com data e hora. Não há contas próprias nem sincronização entre dispositivos.'
           },
           {
             title: 'A busca não guarda o termo',
-            description: 'O Lumen registra apenas o tamanho e o momento da busca.'
+            description: 'As estatísticas registram somente o tamanho da busca e o momento em que ela acontece — não o texto digitado.'
           },
           {
             title: 'Consentimento, se houver anúncios',
-            description: 'Anúncios estão desativados. Se forem ativados, o consentimento é explícito, com recusa persistente.'
+            description: 'Anúncios e monetização estão desativados. Se forem ativados, dependerão de consentimento explícito, com recusa persistente.'
           }
         ],
-        note: 'Fechar o navegador não apaga as leituras. Limpar os dados do navegador apaga — e você pode limpá-las também no Lumen.'
+        note: 'Fechar o navegador não apaga as leituras. Limpar os dados do navegador apaga o histórico; você também pode limpá-lo no Lumen. Não há backup em nuvem. Existem metadados de busca, mas não coleta do termo digitado.'
       },
       faq: {
         eyebrow: 'Antes de começar',
@@ -1054,11 +1099,11 @@ export const translations: Record<Language, Translations> = {
         items: [
           {
             q: 'Todas as obras têm download?',
-            a: 'Não. O Lumen é um catálogo educacional, não uma biblioteca com todos os livros gratuitos. A maioria das obras ainda pode estar indisponível. Só há download quando existe um link; caso contrário, aparece Indisponível. Novos links entram após publicação de uma atualização do catálogo.'
+            a: 'Não. O Lumen é um catálogo educacional, não uma biblioteca com todos os livros gratuitos. A maioria das obras ainda pode estar indisponível. Só há download quando existe um link; caso contrário, aparece “Indisponível”. Novos links entram após publicação de uma atualização do catálogo.'
           },
           {
             q: 'O diagnóstico define minha posição política?',
-            a: 'Não. Ele descreve tendências das obras marcadas como lidas, e não uma verdade definitiva sobre você. Não é teste psicológico. Sem leituras, há um estado inicial; sem tendência definida, o resultado é Equilibrado.'
+            a: 'Não. Ele descreve tendências das obras marcadas como lidas, e não uma verdade definitiva sobre você. Não é teste psicológico. Sem leituras, há um estado inicial; sem tendência definida, o resultado é “Equilibrado”.'
           },
           {
             q: 'Quando aparecem as recomendações?',
@@ -1754,7 +1799,7 @@ export const translations: Record<Language, Translations> = {
         exploreLinks: ['The collection', 'How it works', 'Your profile', 'Frequently asked questions'],
         productFeaturesTitle: 'Your way',
         productFeatures: ['Portuguese (BR) · Product language', 'Light / Dark · Product theme'],
-        copyright: '© 2026 Lumen · TechMinds.'
+        copyright: '© 2026 Lumen · TechMinds. All rights reserved.'
       },
       hero: {
         statusChip: 'Educational panel in operation · A TechMinds product',
@@ -1779,6 +1824,7 @@ export const translations: Record<Language, Translations> = {
         eyebrow: 'The collection',
         title: 'Ideas from other times. Questions still alive.',
         chip: 'History, philosophy and politics in perspective.',
+        support: 'Browse thinkers and works, find connections and put different perspectives in dialogue. The starting point can be an era, a work or a question.',
         cards: [
           {
             name: 'Plato',
@@ -1807,20 +1853,20 @@ export const translations: Record<Language, Translations> = {
         ],
         ctaCatalog: 'Explore the complete catalog',
         catalogPending: 'The destination of the complete catalog is still being defined.',
-        disclaimer: 'Illustrative editorial selection. Portraits are artistic representations, not photographs.'
+        disclaimer: 'Illustrative editorial selection. Portraits are artistic representations; dates refer to the works, not to file availability.'
       },
       howItWorks: {
         title: 'One reading opens the next question.',
         steps: [
-          { title: 'Explore', description: 'Browse the collection by thinkers, eras and analytical axes.' },
+          { title: 'Explore', description: 'Search thinkers and works. Combine filters to discover paths through the collection.' },
           {
             title: 'Mark your readings',
             description: 'One click records a work as read. You can unmark it whenever you like.'
           },
-          { title: 'Observe your profile', description: 'Follow the trends that emerge from your readings.' },
+          { title: 'Observe your profile', description: 'From the first work read, see trends of the repertoire you have logged.' },
           {
             title: 'Diversify',
-            description: 'With 5 works read, and with gaps, the Lumen suggests next steps.'
+            description: 'With 5 works read, and with gaps, discover less explored perspectives.'
           }
         ]
       },
@@ -1856,19 +1902,33 @@ export const translations: Record<Language, Translations> = {
       perfil: {
         eyebrow: 'Your reading profile',
         title: 'A map of your path. Not a label about you.',
+        intro: 'The political-philosophical diagnostic observes the works you marked as read. It describes trends of the logged repertoire, not a definitive truth about your identity.',
         radarLabel: 'Political radar — trends of your readings',
-        radarTags: ['Political philosophy', 'History of ideas', 'Political economy', 'Anthropology', 'Ethics'],
+        features: [
+          {
+            title: 'Politics on the radar',
+            description: 'The radar considers the political labels associated with the readings.'
+          },
+          {
+            title: 'Methods in perspective',
+            description: 'The methodological axes appear as bars, in a complementary reading of your path.'
+          }
+        ],
+        mockBadge: 'Visual example · not real data',
+        cardTitle: 'Reading trends',
+        cardSubtitle: 'Political radar · illustrative geometry',
         axesTitle: 'Methodological axes',
         axes: ['Historical lenses', 'Key concepts', 'Context of the works'],
+        footnote: 'No real scores or categories presumed from the catalog.',
         disclaimer: 'An educational tool for reflection and exploration. Not a psychological test nor a definition of political identity.',
         states: [
           {
             title: 'Without readings',
-            description: 'View Profile does not appear yet until there is at least one work read.'
+            description: 'The initial state invites logging the first work. “View Profile” does not appear yet.'
           },
           {
             title: 'With at least one work read',
-            description: 'View Profile starts to appear. Without a defined trend, the result is Balanced.'
+            description: 'The “View Profile” button starts to appear. Without a defined trend, the result is “Balanced”.'
           }
         ],
         visualNote: 'Visual example · not real data. No real scores.'
@@ -1876,22 +1936,41 @@ export const translations: Record<Language, Translations> = {
       diversificacao: {
         eyebrow: 'Broaden the horizon',
         title: 'The next book can change the question.',
-        intro: 'From 5 works read, the Lumen identifies hardly explored poles and suggests up to 5 thinkers compatible with the gaps.',
-        counts: 'Up to 3 gaps · Up to 5 suggested thinkers',
-        rule: 'Diversify, do not repeat: priority goes to alignment with the gaps, then to works never read, then to alphabetical order — already logged readings do not come back.',
+        intro: 'From 5 works read, the Lumen identifies hardly explored poles and suggests paths to diversify your repertoire.',
+        stats: [
+          { value: 'Up to 3', label: 'gaps presented' },
+          { value: 'Up to 5', label: 'thinkers suggested' }
+        ],
+        rule: {
+          title: 'Diversify, do not repeat',
+          description: 'Priority goes to alignment with the gaps, then thinkers never read and, finally, alphabetical order. Already read works do not return to the suggestions.'
+        },
         cards: [
           { name: 'Aristotle', work: 'Politics', era: 'Antiquity' },
           { name: 'John Locke', work: 'Second Treatise of Government', era: '17th century' },
           { name: 'Mary Wollstonecraft', work: 'A Vindication of the Rights of Woman', era: '18th century' }
         ],
-        insufficient: 'Fewer than 5 works read: Insufficient data.'
+        insufficient: 'Fewer than 5 works read: “Insufficient data”. In the sidebar, recommendations also require at least one gap. It is 5 works, not 5 thinkers.',
+        mockBadge: 'Illustrative suggestions',
+        cardTitle: 'Other perspectives to know',
+        cardNote: 'Editorial examples, not a real personalized recommendation. The suggestions depend on your readings and the gaps found.'
       },
       excel: {
         eyebrow: 'Take your map with you',
         title: 'From the collection to your study desk.',
-        scopes: ['Complete collection', 'Read', 'Pending'],
-        tableTitle: 'Works in perspective (example)',
-        rows: ['Plato — The Republic', 'Machiavelli — The Prince', 'Hannah Arendt — The Human Condition'],
+        scopes: [
+          { name: 'Complete collection', description: 'All cataloged works.' },
+          { name: 'Read', description: 'Only the works you marked.' },
+          { name: 'Pending', description: 'Works not yet marked as read.' }
+        ],
+        tabs: ['Works', 'Summary by thinker', 'Progress by era'],
+        previewTitle: 'Lumen · Excel export',
+        previewSubtitle: 'Complete collection · illustrative preview',
+        rows: [
+          { thinker: 'Plato', work: 'The Republic' },
+          { thinker: 'Machiavelli', work: 'The Prince' },
+          { thinker: 'Hannah Arendt', work: 'The Human Condition' }
+        ],
         footer: '158 works in the complete collection',
         expl: 'In each scope: three tabs, percentages and a grand total. The summary groups by thinker; the progress, by era.'
       },
@@ -1902,18 +1981,18 @@ export const translations: Record<Language, Translations> = {
         blocks: [
           {
             title: 'Readings on your device',
-            description: 'The record is local, with date and time. There are no accounts, cloud backup or synchronization.'
+            description: 'The record is local and saved at every change, with date and time. There are no accounts of our own nor synchronization between devices.'
           },
           {
             title: 'The search does not keep the term',
-            description: 'The Lumen records only the size and the moment of the search.'
+            description: 'The statistics record only the size of the search and the moment it happens — not the typed text.'
           },
           {
             title: 'Consent, if there are ads',
-            description: 'Ads are disabled. If enabled, consent is explicit, with persistent refusal.'
+            description: 'Ads and monetization are disabled. If enabled, they will depend on explicit consent, with persistent refusal.'
           }
         ],
-        note: 'Closing the browser does not erase the readings. Clearing browser data does — and you can also clear them in the Lumen.'
+        note: 'Closing the browser does not erase the readings. Clearing the browser data erases the history; you can also clear it in the Lumen. There is no cloud backup. Search metadata exist, but the typed term is not collected.'
       },
       faq: {
         eyebrow: 'Before you start',
@@ -1922,11 +2001,11 @@ export const translations: Record<Language, Translations> = {
         items: [
           {
             q: 'Do all works have a download?',
-            a: 'No. The Lumen is an educational catalog, not a library with all books for free. Most works may still be unavailable. A download exists only when there is a link; otherwise, Unavailable appears. New links arrive after publication of a catalog update.'
+            a: 'No. The Lumen is an educational catalog, not a library with all books for free. Most works may still be unavailable. A download exists only when there is a link; otherwise, “Unavailable” appears. New links arrive after publication of a catalog update.'
           },
           {
             q: 'Does the diagnostic define my political position?',
-            a: 'No. It describes trends of the works marked as read, not a definitive truth about you. It is not a psychological test. Without readings, there is an initial state; without a defined trend, the result is Balanced.'
+            a: 'No. It describes trends of the works marked as read, not a definitive truth about you. It is not a psychological test. Without readings, there is an initial state; without a defined trend, the result is “Balanced”.'
           },
           {
             q: 'When do recommendations appear?',
@@ -2621,7 +2700,7 @@ export const translations: Record<Language, Translations> = {
         exploreLinks: ['El acervo', 'Cómo funciona', 'Tu perfil', 'Preguntas frecuentes'],
         productFeaturesTitle: 'A tu manera',
         productFeatures: ['Portugués (BR) · Idioma del producto', 'Claro / Oscuro · Tema del producto'],
-        copyright: '© 2026 Lumen · TechMinds.'
+        copyright: '© 2026 Lumen · TechMinds. Todos los derechos reservados.'
       },
       hero: {
         statusChip: 'Panel educacional en operación · Un producto TechMinds',
@@ -2646,6 +2725,7 @@ export const translations: Record<Language, Translations> = {
         eyebrow: 'El acervo',
         title: 'Ideas de otros tiempos. Preguntas que siguen vivas.',
         chip: 'Historia, filosofía y política en perspectiva.',
+        support: 'Recorre pensadores y obras, encuentra conexiones y pone diferentes perspectivas en diálogo. El punto de partida puede ser una época, una obra o una pregunta.',
         cards: [
           {
             name: 'Platón',
@@ -2674,20 +2754,20 @@ export const translations: Record<Language, Translations> = {
         ],
         ctaCatalog: 'Explora el catálogo completo',
         catalogPending: 'El destino del catálogo completo aún no está definido.',
-        disclaimer: 'Recorte editorial ilustrativo. Los retratos son representaciones artísticas, no fotografías.'
+        disclaimer: 'Recorte editorial ilustrativo. Los retratos son representaciones artísticas; las fechas se refieren a las obras, no a la disponibilidad de archivos.'
       },
       howItWorks: {
         title: 'Una lectura abre la siguiente pregunta.',
         steps: [
-          { title: 'Explora', description: 'Navega el acervo por pensadores, eras y ejes analíticos.' },
+          { title: 'Explora', description: 'Busca pensadores y obras. Combina filtros para descubrir caminos por el acervo.' },
           {
             title: 'Marca tus lecturas',
             description: 'Un clic registra una obra leída. Puedes desmarcarla cuando quieras.'
           },
-          { title: 'Observa tu perfil', description: 'Acompaña las tendencias que emergen de tus lecturas.' },
+          { title: 'Observa tu perfil', description: 'A partir de la primera obra leída, ve tendencias del repertorio que registraste.' },
           {
             title: 'Diversifica',
-            description: 'Con 5 obras leídas, y habiendo lagunas, el Lumen sugiere próximos pasos.'
+            description: 'Con 5 obras leídas, y habiendo lagunas, descubre perspectivas menos exploradas.'
           }
         ]
       },
@@ -2723,19 +2803,33 @@ export const translations: Record<Language, Translations> = {
       perfil: {
         eyebrow: 'Tu perfil de lectura',
         title: 'Un mapa de tu recorrido. No una etiqueta sobre ti.',
+        intro: 'El diagnóstico político-filosófico observa las obras que marcaste como leídas. Describe tendencias del repertorio registrado, no una verdad definitiva sobre tu identidad.',
         radarLabel: 'Radar político — tendencias de tus lecturas',
-        radarTags: ['Filosofía política', 'Historia de las ideas', 'Economía política', 'Antropología', 'Ética'],
+        features: [
+          {
+            title: 'Política en el radar',
+            description: 'El radar considera las etiquetas políticas asociadas a las lecturas.'
+          },
+          {
+            title: 'Métodos en perspectiva',
+            description: 'Los ejes metodológicos aparecen en barras, en una lectura complementar de tu recorrido.'
+          }
+        ],
+        mockBadge: 'Ejemplo visual · no son datos reales',
+        cardTitle: 'Tendencias de las lecturas',
+        cardSubtitle: 'Radar político · geometría ilustrativa',
         axesTitle: 'Ejes metodológicos',
         axes: ['Lentes históricas', 'Conceptos clave', 'Contexto de las obras'],
+        footnote: 'Sin puntuaciones reales ni categorías presumidas del catálogo.',
         disclaimer: 'Una herramienta educacional para reflexionar y explorar. No es un test psicológico ni una definición de identidad política.',
         states: [
           {
             title: 'Sin lecturas',
-            description: 'El Ver Perfil aún no aparece hasta que haya al menos una obra leída.'
+            description: 'El estado inicial invita a registrar la primera obra. “Ver Perfil” aún no aparece.'
           },
           {
             title: 'Con al menos una obra leída',
-            description: 'El Ver Perfil pasa a aparecer. Sin tendencia definida, el resultado es Equilibrado.'
+            description: 'El botón “Ver Perfil” pasa a aparecer. Sin tendencia definida, el resultado es “Equilibrado”.'
           }
         ],
         visualNote: 'Ejemplo visual · no son datos reales. Sin puntuaciones reales.'
@@ -2743,22 +2837,41 @@ export const translations: Record<Language, Translations> = {
       diversificacao: {
         eyebrow: 'Amplía el horizonte',
         title: 'El próximo libro puede cambiar la pregunta.',
-        intro: 'A partir de 5 obras leídas, el Lumen identifica polos poco explorados y sugiere hasta 5 pensadores compatibles con las lagunas.',
-        counts: 'Hasta 3 lagunas · Hasta 5 pensadores sugeridos',
-        rule: 'Diversificar, no repetir: la prioridad es la adherencia a las lagunas, luego las obras nunca leídas, luego el orden alfabético — las lecturas ya registradas no vuelven.',
+        intro: 'A partir de 5 obras leídas, el Lumen identifica polos poco explorados y sugiere caminos para diversificar tu repertorio.',
+        stats: [
+          { value: 'Hasta 3', label: 'lagunas presentadas' },
+          { value: 'Hasta 5', label: 'pensadores sugeridos' }
+        ],
+        rule: {
+          title: 'Diversificar, no repetir',
+          description: 'La prioridad es la adherencia a las lagunas, luego pensadores nunca leídos y, por último, el orden alfabético. Las obras ya leídas no vuelven a las sugerencias.'
+        },
         cards: [
           { name: 'Aristóteles', work: 'Política', era: 'Antigüedad' },
           { name: 'John Locke', work: 'Segundo tratado sobre el gobierno', era: 'Siglo XVII' },
           { name: 'Mary Wollstonecraft', work: 'Reivindicación de los derechos de la mujer', era: 'Siglo XVIII' }
         ],
-        insufficient: 'Menos de 5 obras leídas: Datos insuficientes.'
+        insufficient: 'Menos de 5 obras leídas: “Datos insuficientes”. En la barra lateral, las recomendaciones exigen también al menos una laguna. Son 5 obras, no 5 pensadores.',
+        mockBadge: 'Sugerencias ilustrativas',
+        cardTitle: 'Otras perspectivas para conocer',
+        cardNote: 'Ejemplos editoriales, no una recomendación personalizada real. Las sugerencias dependen de tus lecturas y de las lagunas encontradas.'
       },
       excel: {
         eyebrow: 'Lleva el mapa contigo',
         title: 'Del acervo a tu mesa de estudio.',
-        scopes: ['Acervo completo', 'Leídas', 'Pendientes'],
-        tableTitle: 'Obras en perspectiva (ejemplo)',
-        rows: ['Platón — La República', 'Maquiavelo — El Príncipe', 'Hannah Arendt — La condición humana'],
+        scopes: [
+          { name: 'Acervo completo', description: 'Todas las obras catalogadas.' },
+          { name: 'Leídas', description: 'Solo las obras que marcaste.' },
+          { name: 'Pendientes', description: 'Obras que aún no fueron marcadas como leídas.' }
+        ],
+        tabs: ['Obras', 'Resumen por pensador', 'Progreso por era'],
+        previewTitle: 'Lumen · exportación Excel',
+        previewSubtitle: 'Acervo completo · vista previa ilustrativa',
+        rows: [
+          { thinker: 'Platón', work: 'La República' },
+          { thinker: 'Maquiavelo', work: 'El Príncipe' },
+          { thinker: 'Hannah Arendt', work: 'La condición humana' }
+        ],
         footer: '158 obras en el acervo completo',
         expl: 'En cada alcance: tres pestañas, porcentajes y total general. El resumen agrupa por pensador; el progreso, por era.'
       },
@@ -2769,18 +2882,18 @@ export const translations: Record<Language, Translations> = {
         blocks: [
           {
             title: 'Lecturas en tu dispositivo',
-            description: 'El registro es local, con fecha y hora. No hay cuentas, respaldo en la nube ni sincronización.'
+            description: 'El registro es local y se guarda a cada alteración, con fecha y hora. No hay cuentas propias ni sincronización entre dispositivos.'
           },
           {
             title: 'La búsqueda no guarda el término',
-            description: 'El Lumen registra solo el tamaño y el momento de la búsqueda.'
+            description: 'Las estadísticas registran solamente el tamaño de la búsqueda y el momento en que ocurre — no el texto digitado.'
           },
           {
             title: 'Consentimiento, si hay anuncios',
-            description: 'Los anuncios están desactivados. Si se activan, el consentimiento es explícito, con rechazo persistente.'
+            description: 'Anuncios y monetización están desactivados. Si se activan, dependerán de consentimiento explícito, con rechazo persistente.'
           }
         ],
-        note: 'Cerrar el navegador no borra las lecturas. Limpiar los datos del navegador las borra — y también puedes limpiarlas en el Lumen.'
+        note: 'Cerrar el navegador no borra las lecturas. Limpiar los datos del navegador borra el historial; también puedes limpiarlo en el Lumen. No hay respaldo en la nube. Existen metadatos de búsqueda, pero no se recolecta el término digitado.'
       },
       faq: {
         eyebrow: 'Antes de empezar',
@@ -2789,11 +2902,11 @@ export const translations: Record<Language, Translations> = {
         items: [
           {
             q: '¿Todas las obras tienen descarga?',
-            a: 'No. El Lumen es un catálogo educacional, no una biblioteca con todos los libros gratuitos. La mayoría de las obras aún puede estar no disponible. Solo hay descarga cuando existe un enlace; de lo contrario, aparece No disponible. Los nuevos enlaces entran tras la publicación de una actualización del catálogo.'
+            a: 'No. El Lumen es un catálogo educacional, no una biblioteca con todos los libros gratuitos. La mayoría de las obras aún puede estar no disponible. Solo hay descarga cuando existe un enlace; de lo contrario, aparece “No disponible”. Los nuevos enlaces entran tras la publicación de una actualización del catálogo.'
           },
           {
             q: '¿El diagnóstico define mi posición política?',
-            a: 'No. Describe tendencias de las obras marcadas como leídas, no una verdad definitiva sobre ti. No es un test psicológico. Sin lecturas, hay un estado inicial; sin tendencia definida, el resultado es Equilibrado.'
+            a: 'No. Describe tendencias de las obras marcadas como leídas, no una verdad definitiva sobre ti. No es un test psicológico. Sin lecturas, hay un estado inicial; sin tendencia definida, el resultado es “Equilibrado”.'
           },
           {
             q: '¿Cuándo aparecen las recomendaciones?',

@@ -2,20 +2,24 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
+  BookCheck,
   BookOpen,
-  Eye,
+  ChartNoAxesColumn,
+  ChartNoAxesCombined,
+  Compass,
+  Download,
   HardDrive,
   Info,
-  ListChecks,
+  Library,
+  Radar,
+  Route,
   Search,
   SearchCheck,
   ShieldCheck,
-  Shuffle,
   SlidersHorizontal,
+  Sun,
   Bookmark,
-  Table2,
   BookmarkCheck,
-  Library,
   X,
 } from "lucide-react";
 import { LandingPageLayout } from "../../components/landing/LandingPageLayout";
@@ -70,11 +74,9 @@ const THEME: LandingTheme = {
 
 // Botões do frame: raio 8, padding 14×22, Inter 14 semibold.
 const BTN_GOLD =
-  "inline-flex items-center justify-center gap-2 rounded-lg bg-[#C9A84C] px-[22px] py-3.5 text-sm font-semibold text-[#0F1E35]";
+  "inline-flex items-center justify-center gap-3 rounded-lg bg-[#C9A84C] px-[22px] py-3.5 text-sm font-semibold text-[#0F1E35]";
 const BTN_NAVY_OUTLINE =
   "inline-flex items-center justify-center gap-2 rounded-lg border border-[#34435A] px-[22px] py-3.5 text-sm font-semibold text-[#F2EEE2]";
-const BTN_LIGHT_OUTLINE =
-  "inline-flex items-center justify-center gap-2 rounded-lg border border-[#D7D3C8] px-[22px] py-3.5 text-sm font-semibold text-[#0F1E35]";
 
 /** Padding vertical do frame: 48px mobile → 88px desktop. */
 const SECTION = "px-5 py-12 md:px-8 md:py-16 lg:px-12 lg:py-[88px]";
@@ -119,7 +121,7 @@ function SectionHeading({
         {title}
       </h2>
       {support && (
-        <p className={`max-w-2xl leading-relaxed ${onNavy ? "text-[#8A9BB8]" : "text-[#48566B]"}`}>
+        <p className={`max-w-2xl text-base leading-[1.65] ${onNavy ? "text-[#8A9BB8]" : "text-[#48566B]"}`}>
           {support}
         </p>
       )}
@@ -128,22 +130,21 @@ function SectionHeading({
 }
 
 /** Radar político ilustrativo — dados FICTÍCIOS (RN-029/CNP mock). */
-function RadarMock({ tags, label, note }: { tags: string[]; label: string; note: string }) {
+function RadarMock({ label }: { label: string }) {
   const center = 110;
   const radius = 80;
+  const ringCount = 5;
   const levels = [0.25, 0.5, 0.75, 1];
   const values = [0.72, 0.48, 0.34, 0.2, 0.1]; // pontuações de exemplo fixos
-  const points = tags
-    .map((_, i) => {
-      const angle = (Math.PI * 2 * i) / tags.length - Math.PI / 2;
-      const r = radius * values[i % values.length];
-      return `${center + r * Math.cos(angle)},${center + r * Math.sin(angle)}`;
+  const points = values
+    .map((value, i) => {
+      const angle = (Math.PI * 2 * i) / ringCount - Math.PI / 2;
+      return `${center + radius * value * Math.cos(angle)},${center + radius * value * Math.sin(angle)}`;
     })
     .join(" ");
-  const ringCount = 5;
   return (
-    <figure data-testid="lumen-radar" className="flex flex-col items-center gap-3">
-      <svg viewBox="0 0 220 220" className="h-56 w-56" role="img" aria-label={label}>
+    <figure data-testid="lumen-radar" className="flex justify-center">
+      <svg viewBox="0 0 220 220" className="h-[260px] w-[260px]" role="img" aria-label={label}>
         {levels.flatMap((level) =>
           Array.from({ length: ringCount }).map((_, i) => {
             const angle = (Math.PI * 2 * i) / ringCount - Math.PI / 2;
@@ -160,21 +161,13 @@ function RadarMock({ tags, label, note }: { tags: string[]; label: string; note:
         })}
         <polygon points={points} fill="rgba(201,168,76,0.28)" stroke="#C9A84C" strokeWidth={2} />
       </svg>
-      <div className="flex flex-wrap justify-center gap-2">
-        {tags.map((tag) => (
-          <span key={tag} className="rounded-full border border-[#34435A] px-2.5 py-1 text-xs text-[#8A9BB8]">
-            {tag}
-          </span>
-        ))}
-      </div>
-      <figcaption className="text-center text-xs text-[#8A9BB8]">
-        {label} · {note}
-      </figcaption>
     </figure>
   );
 }
 
-const STEP_ICONS = [Search, Bookmark, Eye, Shuffle];
+const STEP_ICONS = [Search, BookCheck, ChartNoAxesCombined, Compass];
+const PERFIL_FEATURE_ICONS = [Radar, ChartNoAxesColumn];
+const EXCEL_SCOPE_ICONS = [Library, BookCheck, Bookmark];
 const BUSCA_ICONS = [Search, SlidersHorizontal, BookmarkCheck];
 const PRIV_ICONS = [HardDrive, SearchCheck, ShieldCheck];
 
@@ -202,6 +195,8 @@ export function LumenPage() {
         cta: { label: c.nav.cta, kind: "external", target: LUMEN_APP_URL },
       }}
       footer={{
+        productName: "Lumen",
+        productIcon: Sun,
         statement: c.footer.statement,
         tagline: c.footer.tagline,
         columns: [
@@ -275,10 +270,10 @@ export function LumenPage() {
       </section>
 
       {/* 1 Dimensões do acervo — strip ivory (frame #101:13422) */}
-      <section className="border-b border-[#D7D3C8] bg-[#F2EEE2] px-5 py-10 md:px-8 lg:px-12">
+      <section className="border-b border-[#D7D3C8] bg-[#F2EEE2] px-5 py-8 md:px-8 lg:px-12">
         <div
           data-testid="lumen-stats"
-          className="max-w-7xl mx-auto grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4"
+          className="max-w-7xl mx-auto grid grid-cols-2 gap-x-6 gap-y-5 md:grid-cols-4"
         >
           {c.stats.items.map((stat) => (
             <div key={stat.label} className="flex flex-col gap-1.5">
@@ -287,7 +282,7 @@ export function LumenPage() {
             </div>
           ))}
           <p
-            className="col-span-2 max-w-2xl text-xs leading-relaxed text-[#48566B] md:col-span-4"
+            className="col-span-2 max-w-2xl text-xs text-[#48566B] md:col-span-4"
             data-testid="lumen-stats-disclaimer"
           >
             {c.stats.disclaimer}
@@ -299,7 +294,12 @@ export function LumenPage() {
       <section id={S.acervo} className={`bg-[#FBF9F3] ${SECTION}`}>
         <div className="max-w-7xl mx-auto flex flex-col gap-10 lg:gap-12">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_245px] lg:items-end lg:gap-8">
-            <SectionHeading eyebrow={c.acervo.eyebrow} title={c.acervo.title} tone="navy" />
+            <SectionHeading
+              eyebrow={c.acervo.eyebrow}
+              title={c.acervo.title}
+              support={c.acervo.support}
+              tone="navy"
+            />
             <p className={`${THEME.titleFont} text-xl italic leading-[1.5] text-[#48566B] lg:justify-self-end`}>
               {c.acervo.chip}
             </p>
@@ -317,15 +317,24 @@ export function LumenPage() {
                   className="h-44 w-full object-cover md:h-[250px]"
                 />
                 <div className="flex flex-1 flex-col gap-4 p-6">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#C9A84C]">
-                    {card.era} · {card.dates}
-                  </p>
-                  <p className={`${THEME.titleFont} text-2xl text-[#0F1E35]`}>{card.name}</p>
-                  <div className="flex flex-col gap-1">
-                    <p className="text-[10px] font-bold tracking-widest text-[#48566B]">{card.workLabel}</p>
-                    <p className="text-sm font-semibold text-[#0F1E35]">
-                      {card.work} · {card.workYear}
+                  {/* Ficha: período em selo + datas à direita */}
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="rounded bg-[#F2EEE2] px-2.5 py-1 text-[11px] font-medium text-[#0F1E35]">
+                      {card.era}
+                    </span>
+                    <span className="text-xs text-[#48566B]">{card.dates}</span>
+                  </div>
+                  <p className={`${THEME.titleFont} text-2xl lg:text-[28px] text-[#0F1E35]`}>{card.name}</p>
+                  <div aria-hidden className="h-px bg-[#D7D3C8]" />
+                  <div className="flex flex-col gap-1.5">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#48566B]">
+                      {card.workLabel}
                     </p>
+                    <div className="flex items-center gap-2.5">
+                      <BookOpen size={18} aria-hidden className="shrink-0 text-[#0F1E35]" />
+                      <p className="text-base font-medium text-[#0F1E35]">{card.work}</p>
+                      <span className="text-xs text-[#48566B]">{card.workYear}</span>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -333,14 +342,15 @@ export function LumenPage() {
           </div>
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
             <p className="max-w-2xl text-sm leading-relaxed text-[#48566B]">{c.acervo.disclaimer}</p>
+            {/* Chrome text-link (Inter SemiBold 14 navy + seta) — gate PEND-011 mantido */}
             <LandingCta
               cta={{ label: c.acervo.ctaCatalog, kind: "disabled", reason: c.acervo.catalogPending }}
               microcopy={c.acervo.catalogPending}
               microcopyId="lumen-catalog-pending"
               testId="lumen-cta-catalog"
-              className={BTN_LIGHT_OUTLINE}
+              className="inline-flex items-center gap-2 border-none bg-transparent p-0 text-sm font-semibold !text-[#0F1E35]"
             >
-              <ArrowRight size={18} aria-hidden />
+              <ArrowRight size={16} aria-hidden />
             </LandingCta>
           </div>
         </div>
@@ -472,6 +482,28 @@ export function LumenPage() {
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,550px)] lg:items-center lg:gap-16">
             <div className="flex flex-col gap-7">
               <SectionHeading eyebrow={c.perfil.eyebrow} title={c.perfil.title} tone="gold" />
+              <p className="max-w-xl text-base leading-[1.65] text-[#8A9BB8]">{c.perfil.intro}</p>
+              <div className="flex flex-col gap-6">
+                {c.perfil.features.map((feature, index) => {
+                  const Icon = PERFIL_FEATURE_ICONS[index];
+                  return (
+                    <article key={feature.title} className="flex gap-4">
+                      {Icon && (
+                        <span
+                          aria-hidden
+                          className="flex size-[42px] shrink-0 items-center justify-center rounded-lg bg-[#182A43]"
+                        >
+                          <Icon size={22} className="text-[#C9A84C]" />
+                        </span>
+                      )}
+                      <div className="flex flex-col gap-2">
+                        <h3 className="text-[17px] font-semibold leading-[1.3] text-[#F2EEE2]">{feature.title}</h3>
+                        <p className="text-sm leading-[1.65] text-[#8A9BB8]">{feature.description}</p>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
               <p
                 className="max-w-xl leading-relaxed text-[#8A9BB8]"
                 data-testid="lumen-perfil-disclaimer"
@@ -480,25 +512,32 @@ export function LumenPage() {
               </p>
             </div>
             <div className="flex flex-col gap-5 rounded-xl border border-[#34435A] bg-[#182A43] p-6 md:p-7">
-              <RadarMock tags={c.perfil.radarTags} label={c.perfil.radarLabel} note={c.perfil.visualNote} />
+              {/* Header do card: selo + título + subtítulo */}
+              <div className="flex flex-col gap-2.5">
+                <span className="max-w-max rounded-[4px] border border-[#C9A84C]/50 px-2.5 py-1 text-[11px] font-medium text-[#C9A84C]">
+                  {c.perfil.mockBadge}
+                </span>
+                <h3 className={`${THEME.titleFont} text-2xl lg:text-[28px] text-[#F2EEE2]`}>
+                  {c.perfil.cardTitle}
+                </h3>
+                <p className="text-[13px] text-[#8A9BB8]">{c.perfil.cardSubtitle}</p>
+              </div>
+              <RadarMock label={c.perfil.radarLabel} />
               <div aria-hidden className="h-px bg-[#34435A]" />
               <div className="flex flex-col gap-3" data-testid="lumen-axes">
                 <p className="text-sm font-semibold text-[#F2EEE2]">{c.perfil.axesTitle}</p>
                 {c.perfil.axes.map((axis, index) => (
                   <div key={axis} className="flex flex-col gap-1.5">
-                    <div className="flex items-center justify-between gap-4 text-sm">
-                      <span className="text-[#F2EEE2]">{axis}</span>
-                      <span className="text-xs text-[#8A9BB8]">{[42, 68, 25][index]}%</span>
-                    </div>
-                    <div className="h-2 rounded-full bg-[#34435A]">
+                    <span className="text-xs text-[#8A9BB8]">{axis}</span>
+                    <div className="h-[5px] rounded bg-[#34435A]">
                       <div
-                        className="h-full rounded-full bg-[#C9A84C]"
-                        style={{ width: `${[42, 68, 25][index]}%` }}
+                        className="h-full rounded bg-[#C9A84C]"
+                        style={{ width: `${[71, 43, 58][index]}%` }}
                       />
                     </div>
                   </div>
                 ))}
-                <span className="text-xs text-[#8A9BB8]">{c.perfil.visualNote}</span>
+                <span className="text-xs text-[#8A9BB8]">{c.perfil.footnote}</span>
               </div>
             </div>
           </div>
@@ -522,29 +561,72 @@ export function LumenPage() {
               <p className="max-w-2xl leading-relaxed text-[#48566B]" data-testid="lumen-diversificacao-intro">
                 {c.diversificacao.intro}
               </p>
-              <p className="text-sm font-bold text-[#0F1E35]">{c.diversificacao.counts}</p>
-              <p className="max-w-2xl text-sm leading-relaxed text-[#48566B]">{c.diversificacao.rule}</p>
-              <p className="text-sm font-semibold text-[#0F1E35]" data-testid="lumen-diversificacao-insufficient">
-                {c.diversificacao.insufficient}
-              </p>
+              {/* Stats 2 blocos lado a lado */}
+              <div className="grid grid-cols-2 gap-6">
+                {c.diversificacao.stats.map((stat) => (
+                  <div key={stat.label} className="flex flex-col gap-1 border-t border-[#D7D3C8] pt-4">
+                    <span className={`${THEME.titleFont} text-3xl text-[#0F1E35]`}>{stat.value}</span>
+                    <span className="text-[13px] text-[#48566B]">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+              {/* Feature row — regra de diversificação */}
+              <article className="flex gap-4">
+                <span
+                  aria-hidden
+                  className="flex size-[42px] shrink-0 items-center justify-center rounded-lg bg-[#E9DFC1]"
+                >
+                  <Route size={22} className="text-[#0F1E35]" />
+                </span>
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-[17px] font-semibold leading-[1.3] text-[#0F1E35]">
+                    {c.diversificacao.rule.title}
+                  </h3>
+                  <p className="text-sm leading-[1.65] text-[#48566B]">{c.diversificacao.rule.description}</p>
+                </div>
+              </article>
             </div>
             <div
               className="flex flex-col gap-4 rounded-xl border border-[#D7D3C8] bg-[#F2EEE2] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)] md:p-7"
               data-testid="lumen-diversificacao-cards"
             >
+              {/* Header do card: selo + título */}
+              <div className="flex flex-col gap-2.5">
+                <span className="max-w-max rounded-[4px] bg-[#E9DFC1] px-2.5 py-1 text-[11px] font-medium text-[#0F1E35]">
+                  {c.diversificacao.mockBadge}
+                </span>
+                <h3 className={`${THEME.titleFont} text-2xl lg:text-[28px] text-[#0F1E35]`}>
+                  {c.diversificacao.cardTitle}
+                </h3>
+              </div>
               {c.diversificacao.cards.map((card) => (
                 <article
                   key={card.name}
-                  className="flex flex-col gap-1 rounded-lg border border-[#D7D3C8] bg-[#FBF9F3] p-4"
+                  className="flex items-center gap-3 rounded-lg border border-[#D7D3C8] bg-[#FBF9F3] p-4"
                 >
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#48566B]">
-                    {card.era}
+                  <span
+                    aria-hidden
+                    className="flex h-10 w-8 shrink-0 items-center justify-center rounded-[4px] bg-[#E9DFC1]"
+                  >
+                    <BookOpen size={18} className="text-[#0F1E35]" />
                   </span>
-                  <p className="text-base font-semibold text-[#0F1E35]">{card.name}</p>
-                  <p className="text-sm italic text-[#48566B]">{card.work}</p>
+                  <div className="flex flex-1 flex-col gap-0.5">
+                    <p className="text-base font-semibold text-[#0F1E35]">{card.name}</p>
+                    <p className="text-[13px] text-[#48566B]">{card.work}</p>
+                    <span className="text-[11px] text-[#48566B]">{card.era}</span>
+                  </div>
+                  <ArrowUpRight size={16} aria-hidden className="shrink-0 text-[#48566B]" />
                 </article>
               ))}
+              <p className="text-[13px] leading-relaxed text-[#48566B]">{c.diversificacao.cardNote}</p>
             </div>
+          </div>
+          {/* Nota de contexto — caixa full-width abaixo do grid */}
+          <div className="flex items-start gap-3 rounded-lg border border-[#D7D3C8] p-4">
+            <Info size={16} aria-hidden className="mt-0.5 shrink-0 text-[#48566B]" />
+            <p className="text-sm leading-[1.65] text-[#48566B]" data-testid="lumen-diversificacao-insufficient">
+              {c.diversificacao.insufficient}
+            </p>
           </div>
         </div>
       </section>
@@ -555,49 +637,67 @@ export function LumenPage() {
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,550px)] lg:items-center lg:gap-16">
             <div className="flex flex-col gap-7">
               <SectionHeading eyebrow={c.excel.eyebrow} title={c.excel.title} tone="navy" />
-              <div className="flex flex-col gap-3" data-testid="lumen-excel-scopes">
-                {c.excel.scopes.map((scope) => (
-                  <div
-                    key={scope}
-                    className="flex items-center gap-3 rounded-lg border border-[#D7D3C8] bg-[#FBF9F3] px-4 py-3"
-                  >
-                    <Table2 size={18} aria-hidden className="shrink-0 text-[#C9A84C]" />
-                    <p className="text-sm font-semibold text-[#0F1E35]">{scope}</p>
-                  </div>
-                ))}
+              {/* Escopos sem card — linha transparente com ícones distintos */}
+              <div className="flex flex-col gap-3.5" data-testid="lumen-excel-scopes">
+                {c.excel.scopes.map((scope, index) => {
+                  const Icon = EXCEL_SCOPE_ICONS[index];
+                  return (
+                    <div key={scope.name} className="flex items-center gap-3.5">
+                      {Icon && <Icon size={22} aria-hidden className="shrink-0 text-[#0F1E35]" />}
+                      <div className="flex flex-col">
+                        <p className="text-sm font-semibold text-[#0F1E35]">{scope.name}</p>
+                        <p className="text-xs text-[#48566B]">{scope.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div
               data-testid="lumen-excel-mock"
               className="flex flex-col overflow-hidden rounded-xl border border-[#D7D3C8] bg-[#FBF9F3] shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
             >
-              <div className="flex items-center gap-3 bg-[#0F1E35] px-5 py-4">
-                <Table2 size={18} aria-hidden className="shrink-0 text-[#C9A84C]" />
-                <p className="text-sm font-semibold text-[#F2EEE2]">{c.excel.tableTitle}</p>
-              </div>
-              <div className="flex gap-2 border-b border-[#D7D3C8] px-5 py-4">
-                {c.excel.scopes.map((scope, index) => (
-                  <span
-                    key={scope}
-                    className={
-                      index === 0
-                        ? "rounded bg-[#E9DFC1] px-2.5 py-1 text-xs font-semibold text-[#0F1E35]"
-                        : "px-2.5 py-1 text-xs text-[#48566B]"
-                    }
-                  >
-                    {scope}
-                  </span>
-                ))}
-              </div>
-              <div className="flex flex-col gap-3 px-5 pb-5 pt-4">
-                <ul className="grid gap-2 text-sm text-[#0F1E35]">
-                  {c.excel.rows.map((row) => (
-                    <li key={row} className="rounded-lg border border-[#D7D3C8] px-3 py-2">
-                      {row}
-                    </li>
+              <div className="flex flex-col gap-4 p-5">
+                {/* Header da prévia: título + subtítulo + download */}
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-col gap-1">
+                    <p className={`${THEME.titleFont} text-lg text-[#0F1E35]`}>{c.excel.previewTitle}</p>
+                    <p className="text-xs text-[#8A9BB8]">{c.excel.previewSubtitle}</p>
+                  </div>
+                  <Download size={18} aria-hidden className="mt-1 shrink-0 text-[#0F1E35]" />
+                </div>
+                {/* Abas do escopo */}
+                <div className="flex gap-2 border-b border-[#D7D3C8]">
+                  {c.excel.tabs.map((tab, index) => (
+                    <span
+                      key={tab}
+                      className={
+                        index === 0
+                          ? "rounded-t bg-[#E9DFC1] px-2.5 py-2 text-[11px] font-semibold text-[#0F1E35]"
+                          : "px-2.5 py-2 text-[11px] text-[#0F1E35]"
+                      }
+                    >
+                      {tab}
+                    </span>
                   ))}
-                </ul>
-                <p className="text-xs text-[#48566B]">{c.excel.footer}</p>
+                </div>
+                {/* Prévia: grid PENSADOR | OBRA */}
+                <div className="flex flex-col">
+                  <div className="grid grid-cols-[135px_minmax(0,1fr)] gap-3 pb-2 text-[11px] font-semibold uppercase tracking-wide text-[#48566B]">
+                    <span>Pensador</span>
+                    <span>Obra</span>
+                  </div>
+                  {c.excel.rows.map((row) => (
+                    <div
+                      key={row.thinker}
+                      className="grid grid-cols-[135px_minmax(0,1fr)] gap-3 border-b border-[#D7D3C8] py-2 text-xs text-[#0F1E35]"
+                    >
+                      <span>{row.thinker}</span>
+                      <span>{row.work}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm font-semibold text-[#0F1E35]">{c.excel.footer}</p>
                 <p className="text-sm leading-relaxed text-[#48566B]">{c.excel.expl}</p>
               </div>
             </div>
@@ -627,7 +727,7 @@ export function LumenPage() {
                   key={block.title}
                   className="flex flex-col gap-5 rounded-xl border border-[#34435A] bg-[#182A43] p-6"
                 >
-                  {Icon && <Icon size={22} aria-hidden className="text-[#C9A84C]" />}
+                  {Icon && <Icon size={26} aria-hidden className="text-[#C9A84C]" />}
                   <h3 className="text-[19px] font-semibold leading-[1.3] text-[#F2EEE2]">{block.title}</h3>
                   <p className="text-sm leading-relaxed text-[#8A9BB8]">{block.description}</p>
                 </article>
@@ -649,7 +749,7 @@ export function LumenPage() {
             items={c.faq.items}
             testId="lumen-faq"
             itemVariants="border-[#D7D3C8] bg-[#F2EEE2]"
-            questionVariants="text-[#0F1E35] text-base"
+            questionVariants="text-[#0F1E35] text-[17px] leading-[1.4]"
             answerVariants="text-sm text-[#48566B]"
             iconVariants="text-[#C9A84C]"
           />
@@ -667,14 +767,16 @@ export function LumenPage() {
               >
                 {c.invite.title}
               </h2>
-              <p className="max-w-2xl leading-relaxed text-[#8A9BB8]">{c.invite.text}</p>
+              <p className="leading-relaxed text-[#8A9BB8]">{c.invite.text}</p>
             </div>
             <div className="flex flex-col items-stretch gap-4">
               <LandingCta
                 cta={{ label: c.invite.ctaExplore, kind: "external", target: LUMEN_APP_URL }}
                 testId="lumen-invite-cta-explore"
                 className={BTN_GOLD}
-              />
+              >
+                <ArrowUpRight size={18} aria-hidden />
+              </LandingCta>
               <p className="text-center text-[13px] leading-relaxed text-[#8A9BB8]">{c.invite.note}</p>
             </div>
           </div>

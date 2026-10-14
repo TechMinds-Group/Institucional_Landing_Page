@@ -26,7 +26,7 @@ export function LandingFaq({
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="flex flex-col gap-4 w-full" data-testid={testId}>
+    <div className="flex flex-col gap-6 w-full" data-testid={testId}>
       {items.map((item, index) => {
         const open = openIndex === index;
         return (

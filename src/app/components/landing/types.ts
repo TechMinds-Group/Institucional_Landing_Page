@@ -4,6 +4,8 @@
 // translations.ts; aqui ficam apenas a estrutura e as classes
 // Tailwind (strings literais — Tailwind JIT escaneia o fonte).
 
+import type { ComponentType } from "react";
+
 /** Idade/estado de um CTA de landing (RN-032 — gate de CTAs). */
 export type LandingCtaKind = "anchor" | "route" | "mailto" | "external" | "disabled";
 
@@ -57,6 +59,14 @@ export interface LandingFooterConfig {
   tagline: string;
   /** Statement corporativo opcional (FasTo — jornada da TechMinds). */
   companyStatement?: string;
+  /**
+   * Marca de produto opcional (Lumen): quando presente, substitui o
+   * Logo TechMinds genérico por emblema circular + wordmark do produto.
+   * VibeCut/FasTo sem a prop mantêm o visual atual (mudança aditiva).
+   */
+  productName?: string;
+  /** Ícone do emblema do produto (ex.: Sun do Lumen) — exige productName. */
+  productIcon?: ComponentType<{ size?: number | string; className?: string }>;
   columns: { title: string; links: LandingFooterLink[] }[];
   copyright: string;
 }

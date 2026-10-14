@@ -91,13 +91,34 @@ export function ProductFooter({ theme, footer, testId = "landing-footer" }: Prod
     >
       <div className="max-w-7xl mx-auto">
         {/* Topo: marca + statement do produto + selo */}
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto] gap-10 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_auto] gap-10 md:gap-20">
           <div>
-            <div className="flex items-center gap-3 mb-3">
-              <Logo className="w-8 h-8" />
-              <span className={`text-xl font-bold ${theme.footerTitle}`}>TechMinds</span>
+            <div
+              className={`flex items-center mb-3 ${
+                footer.productName && footer.productIcon ? "gap-2.5" : "gap-3"
+              }`}
+            >
+              {footer.productName && footer.productIcon ? (
+                <>
+                  {/* Marca de produto (Lumen): emblema + wordmark no lugar do Logo TechMinds */}
+                  <span
+                    aria-hidden
+                    className="flex size-[34px] shrink-0 items-center justify-center rounded-full border border-[#C9A84C]"
+                  >
+                    <footer.productIcon size={22} className="text-[#C9A84C]" />
+                  </span>
+                  <span className={`${theme.titleFont} text-[30px] leading-none ${theme.footerTitle}`}>
+                    {footer.productName}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <Logo className="w-8 h-8" />
+                  <span className={`text-xl font-bold ${theme.footerTitle}`}>TechMinds</span>
+                </>
+              )}
             </div>
-            <p className={`${theme.footerMuted} max-w-sm leading-relaxed`}>{footer.statement}</p>
+            <p className={`${theme.footerMuted} max-w-sm text-sm leading-[1.65]`}>{footer.statement}</p>
             <p className={`mt-3 text-sm font-semibold ${theme.footerTitle}`}>{footer.tagline}</p>
             {footer.companyStatement && (
               <p className={`${theme.footerMuted} text-sm mt-1`}>{footer.companyStatement}</p>
@@ -105,7 +126,7 @@ export function ProductFooter({ theme, footer, testId = "landing-footer" }: Prod
           </div>
 
           {/* Colunas variáveis por produto */}
-          <nav className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <nav className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-20">
             {footer.columns.map((column) => (
               <div key={column.title} data-testid={`${testId}-column`}>
                 <h3
@@ -126,16 +147,13 @@ export function ProductFooter({ theme, footer, testId = "landing-footer" }: Prod
         </div>
 
         {/* Divisor */}
-        <div className={`border-t ${theme.footerDivider} pt-6`} />
+        <div className={`mt-8 border-t ${theme.footerDivider} pt-6`} />
 
-        {/* Identificação empresarial real (ADR-005) — dados de footerB */}
-        <div
-          data-testid={`${testId}-legal-id`}
-          className={`text-center py-6 ${theme.footerMuted} text-sm`}
-        >
-          <p className={`font-semibold ${theme.footerIdentityStrong} mb-1.5`}>{t.footerB.legalName}</p>
+        {/* Identificação empresarial real (ADR-005) — alinhada à esquerda */}
+        <div data-testid={`${testId}-legal-id`} className={`py-6 ${theme.footerMuted} text-[13px]`}>
+          <p className="mb-1.5">{t.footerB.legalName}</p>
           <p className="mb-1.5">{t.footerB.cnpj}</p>
-          <p className={`${theme.footerMuted} text-xs mt-3`}>{footer.copyright}</p>
+          <p className="mt-3">{footer.copyright}</p>
         </div>
       </div>
     </footer>
