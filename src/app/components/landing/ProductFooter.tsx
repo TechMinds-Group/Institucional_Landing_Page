@@ -149,8 +149,10 @@ export function ProductFooter({ theme, footer, testId = "landing-footer" }: Prod
         {/* Divisor */}
         <div className={`mt-8 border-t ${theme.footerDivider} pt-6`} />
 
-        {/* Identificação — apenas © (removido nome empresarial/CNPJ/cidade — pedido do operador 14/10) */}
+        {/* Identificação empresarial real (ADR-005) — alinhada à esquerda */}
         <div data-testid={`${testId}-legal-id`} className={`py-6 ${theme.footerMuted} text-[13px]`}>
+          <p className="mb-1.5">{t.footerB.legalName}</p>
+          <p className="mb-1.5">{t.footerB.cnpj}</p>
           <p className="mt-3">{footer.copyright}</p>
         </div>
       </div>

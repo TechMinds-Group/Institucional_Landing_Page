@@ -160,11 +160,15 @@ export function FooterB() {
         {/* Divisor */}
         <div className="border-t border-[#303342] pt-6" />
 
-        {/* Identificação — apenas © (removido nome empresarial/CNPJ/cidade — pedido do operador 14/10) */}
+        {/* Identificação empresarial — CNPJ real validado (ADR-005) */}
         <div
           data-testid="footerb-legal-id"
           className="text-center py-6 text-[#818BA1] text-sm"
         >
+          <p className="font-semibold text-[#d1d5db] mb-1.5">
+            {footerB.legalName}
+          </p>
+          <p className="mb-1.5">{footerB.cnpj}</p>
           <p className="text-[#818BA1] text-xs mt-3">{footerB.copyright}</p>
         </div>
       </div>

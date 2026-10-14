@@ -489,8 +489,14 @@ describe("Groom — Convite e Rodapé (RN-014-4: RN-014+RN-024, dossier g2 §10�
     });
     expect(portal).toHaveAttribute("href", "https://portal.techminds.net.br");
 
-    // Identificação empresarial REMOVIDA (nome/CNPJ/cidade — pedido do operador 14/10)
-    expect(screen.queryByText(/CNPJ: 69\.184\.592/)).not.toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Nome Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT"
+      )
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("CNPJ: 69.184.592/0001-45 | Guaíba - RS")
+    ).toBeInTheDocument();
   });
 
   it("© unificada em linha única '© 2026 Groom' (frame — PEND-013 em aberto: ajustável na decisão), dupla © TechMinds removida", () => {
