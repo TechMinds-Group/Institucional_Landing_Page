@@ -22,14 +22,13 @@ export function MainPage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
-    const sentinel = document.getElementById("main-scroll-sentinel");
-    if (!sentinel) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setShowScrollTop(!entry.isIntersecting),
-      { threshold: 0 }
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
+    // Botão válido após rolar (~300px — um bloco de altura). Malha por
+    // evento de scroll (robusto em todos os ambientes) em vez de
+    // IntersectionObserver — relato do operador: botão aparecia no topo.
+    const onScroll = () => setShowScrollTop(window.scrollY > 300);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   // Handle hash navigation on mount and when location changes

@@ -11,10 +11,15 @@ section[id] {
 /* ── Global mobile rules ──────────────────────────────────────── */
 
 /* Prevent horizontal overflow at any breakpoint.
-   overflow-x: clip (e não hidden) — hidden/scroll em html/body cria um
+   overflow-x: clip (e não hidden) — hidden/scroll em html cria um
    scroll container e QUEBRA position: sticky (navbars de produto). Clip
-   corta o overflow sem criar scrollport — sticky funciona. */
-html, body {
+   corta o overflow sem criar scrollport — sticky funciona.
+   ATENÇÃO: clip SOMENTE no html. Se aplicar em html E body, a spec CSS
+   promove overflow-y de visible→auto no body → body vira um SEGUNDO
+   scroll container (a roda rola o body; os eventos de scroll da window
+   nunca disparam — botões "voltar ao topo"/observadores param). O clip
+   no html (root) corta o overflow de toda a árvore. */
+html {
   max-width: 100vw;
   overflow-x: clip;
 }
