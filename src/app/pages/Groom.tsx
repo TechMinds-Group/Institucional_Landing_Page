@@ -852,12 +852,13 @@ function FloatingWhatsappCta() {
   return (
     <button
       onClick={handleClick}
-      className="fixed bg-[#22c55e] bottom-[32px] content-stretch cursor-pointer flex gap-[10px] items-center justify-center overflow-clip pl-[20px] pr-[24px] py-[14px] right-[32px] rounded-[50px] shadow-[0px_4px_16px_0px_rgba(0,0,0,0.3)] z-50"
+      aria-label="Fale conosco e teste grátis"
+      className="fixed bg-[#22c55e] bottom-[32px] content-stretch cursor-pointer flex md:gap-[10px] items-center justify-center overflow-clip size-12 md:size-auto md:pl-[20px] md:pr-[24px] md:py-[14px] right-[32px] rounded-full shadow-[0px_4px_16px_0px_rgba(0,0,0,0.3)] z-50"
     >
-      <svg fill="none" height="20" viewBox="0 0 24 20" width="24">
+      <svg fill="none" height="20" viewBox="0 0 24 20" width="24" aria-hidden="true">
         <path d={svgPaths.p16656200} fill="white" />
       </svg>
-      <p className="[word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-nowrap">Fale conosco e teste grátis</p>
+      <p className="hidden md:block [word-break:break-word] font-['Inter:Bold',sans-serif] font-bold leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-nowrap">Fale conosco e teste grátis</p>
     </button>
   );
 }
