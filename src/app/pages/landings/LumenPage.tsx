@@ -228,23 +228,34 @@ export function LumenPage() {
               {c.hero.headline}
             </h1>
             <p className="max-w-xl leading-relaxed text-[#8A9BB8]">{c.hero.paragraph}</p>
-            <div className="flex flex-wrap gap-3" data-testid="lumen-hero-ctas">
-              <LandingCta
-                cta={{ label: c.hero.ctaExplore, kind: "disabled", reason: c.nav.ctaPending }}
-                microcopy={c.nav.ctaPending}
-                microcopyId="lumen-hero-cta-pending"
-                testId="lumen-hero-cta-explore"
-                className={BTN_GOLD}
+            <div className="flex flex-col items-start gap-2.5" data-testid="lumen-hero-ctas">
+              <div className="flex flex-wrap items-center gap-3">
+                <LandingCta
+                  cta={{ label: c.hero.ctaExplore, kind: "disabled", reason: c.nav.ctaPending }}
+                  microcopy={c.nav.ctaPending}
+                  microcopyId="lumen-hero-cta-pending"
+                  microcopyHidden
+                  testId="lumen-hero-cta-explore"
+                  className={BTN_GOLD}
+                >
+                  <ArrowUpRight size={18} aria-hidden />
+                </LandingCta>
+                <LandingCta
+                  cta={{ label: c.hero.ctaHow, kind: "anchor", target: S.comoFunciona }}
+                  testId="lumen-hero-cta-how"
+                  className={BTN_NAVY_OUTLINE}
+                >
+                  <ArrowDown size={18} aria-hidden />
+                </LandingCta>
+              </div>
+              {/* Microcopy do gate (RN-032) sob a linha de botões — frame #101:13395 */}
+              <p
+                id="lumen-hero-cta-pending"
+                data-testid="lumen-hero-cta-explore-microcopy"
+                className="max-w-md text-xs leading-relaxed text-[#8A9BB8]"
               >
-                <ArrowUpRight size={18} aria-hidden />
-              </LandingCta>
-              <LandingCta
-                cta={{ label: c.hero.ctaHow, kind: "anchor", target: S.comoFunciona }}
-                testId="lumen-hero-cta-how"
-                className={BTN_NAVY_OUTLINE}
-              >
-                <ArrowDown size={18} aria-hidden />
-              </LandingCta>
+                {c.nav.ctaPending}
+              </p>
             </div>
             {/* "Natureza do produto" do frame (mobile #101:13897) */}
             <p
