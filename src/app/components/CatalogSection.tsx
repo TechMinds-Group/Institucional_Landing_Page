@@ -15,17 +15,21 @@ const CARD_WIDTH = 400;
  * (fonte da verdade da paginação — reflete a quantidade real de
  * conteúdo em qualquer largura de tela):
  * - 0/indefinido ou sem overflow → 1 página;
- * - caso contrário, Cartões completos além do viewport + 1
- *   (`Math.ceil((scrollWidth - clientWidth) / CARD_WIDTH) + 1`).
+ * - caso contrário, cartões completos além do viewport + 1
+ *   (`Math.round((scrollWidth - clientWidth) / advance) + 1`) — o round
+ *   casa com o modelo de posição (`round(scrollLeft / advance)`) usado
+ *   na navegação; ceil contaria uma página extra com transbordo < 0,5
+ *   cartão (ex.: últimos 5px do cartão 5 no mobile).
  */
 export function computePageCount(
   scrollWidth: number,
-  clientWidth: number
+  clientWidth: number,
+  advance: number = CARD_WIDTH
 ): number {
   if (!Number.isFinite(scrollWidth) || !Number.isFinite(clientWidth)) return 1;
   if (scrollWidth <= 0 || clientWidth <= 0) return 1;
   if (scrollWidth <= clientWidth) return 1;
-  return Math.ceil((scrollWidth - clientWidth) / CARD_WIDTH) + 1;
+  return Math.round((scrollWidth - clientWidth) / advance) + 1;
 }
 
 /**
@@ -78,6 +82,9 @@ export function CatalogSection() {
   const [selected, setSelected] = useState(0);
   const [pageCount, setPageCount] = useState(1);
   const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  /** Avanço real por cartão (mobile: 85vw — medido; desktop/jsdom: 400). */
+  const [cardAdvance, setCardAdvance] = useState(CARD_WIDTH);
   const programmaticRef = useRef(false);
   const settleTimerRef = useRef<number | undefined>(undefined);
 
@@ -124,12 +131,21 @@ export function CatalogSection() {
   // quantidade de páginas reflete a quantidade real de conteúdo. Em
   // ambientes sem medição (jsdom), fallback de 1 página. Cleanup remove o
   // listener; clamp mantém a posição dentro dos limites ao reduzir páginas.
+  // O AVANÇO por cartão é medido da faixa real (no mobile o cartão vale
+  // 85vw, não os 400px fixos — sem isso scroll/paginação desalinham).
   useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport) return;
     const measure = () => {
+      const firstCard = trackRef.current?.firstElementChild as HTMLElement | null;
+      const measured = firstCard?.offsetWidth ?? 0;
+      setCardAdvance(measured > 0 ? measured : CARD_WIDTH);
       setPageCount(
-        computePageCount(viewport.scrollWidth, viewport.clientWidth)
+        computePageCount(
+          viewport.scrollWidth,
+          viewport.clientWidth,
+          measured > 0 ? measured : CARD_WIDTH
+        )
       );
     };
     measure();
@@ -167,10 +183,10 @@ export function CatalogSection() {
     const maxScroll = viewport
       ? Math.max(0, viewport.scrollWidth - viewport.clientWidth)
       : 0;
-    const left = Math.min(productIndex * CARD_WIDTH, maxScroll);
+    const left = Math.min(productIndex * cardAdvance, maxScroll);
     setSelected(productIndex);
     setPosition(
-      Math.max(0, Math.min(Math.round(left / CARD_WIDTH), pageCount - 1))
+      Math.max(0, Math.min(Math.round(left / cardAdvance), pageCount - 1))
     );
     startProgrammaticScroll();
     programmaticScrollTo(left);
@@ -183,7 +199,7 @@ export function CatalogSection() {
     setPosition(clamped);
     setSelected(Math.max(0, Math.min(clamped, products.length - 1)));
     startProgrammaticScroll();
-    programmaticScrollTo(clamped * CARD_WIDTH);
+    programmaticScrollTo(clamped * cardAdvance);
   };
 
   // Fonte da verdade da posição: scroll MANUAL (arraste, trackpad, teclado)
@@ -195,7 +211,7 @@ export function CatalogSection() {
       restartSettleTimer();
       return;
     }
-    const firstVisible = Math.round(e.currentTarget.scrollLeft / CARD_WIDTH);
+    const firstVisible = Math.round(e.currentTarget.scrollLeft / cardAdvance);
     setPosition(Math.max(0, Math.min(firstVisible, pageCount - 1)));
     setSelected(Math.max(0, Math.min(firstVisible, products.length - 1)));
   };
@@ -258,7 +274,7 @@ export function CatalogSection() {
             >
               {t.catalogB.carouselTitle}
             </h3>
-            <p className="text-[#4B5563] leading-relaxed max-w-2xl mx-auto">
+            <p className="hidden md:block text-[#4B5563] leading-relaxed max-w-2xl mx-auto">
               {t.catalogB.carouselSubtitle}
             </p>
           </div>
@@ -271,7 +287,7 @@ export function CatalogSection() {
             data-testid="carousel-viewport"
             onScroll={handleViewportScroll}
           >
-            <div data-testid="carousel-track" className="flex">
+            <div ref={trackRef} data-testid="carousel-track" className="flex">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
