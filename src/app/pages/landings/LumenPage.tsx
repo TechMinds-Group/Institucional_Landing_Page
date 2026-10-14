@@ -14,6 +14,9 @@ import {
   SlidersHorizontal,
   Bookmark,
   Table2,
+  BookmarkCheck,
+  Library,
+  X,
 } from "lucide-react";
 import { LandingPageLayout } from "../../components/landing/LandingPageLayout";
 import { LandingCta } from "../../components/landing/LandingCta";
@@ -172,7 +175,7 @@ function RadarMock({ tags, label, note }: { tags: string[]; label: string; note:
 }
 
 const STEP_ICONS = [Search, Bookmark, Eye, Shuffle];
-const BUSCA_ICONS = [Search, SlidersHorizontal, ListChecks];
+const BUSCA_ICONS = [Search, SlidersHorizontal, BookmarkCheck];
 const PRIV_ICONS = [HardDrive, SearchCheck, ShieldCheck];
 
 export function LumenPage() {
@@ -379,10 +382,17 @@ export function LumenPage() {
                   const Icon = BUSCA_ICONS[index];
                   return (
                     <article key={block.title} className="flex gap-4">
-                      {Icon && <Icon size={18} aria-hidden className="mt-0.5 shrink-0 text-[#C9A84C]" />}
-                      <div className="flex flex-col gap-1">
-                        <h3 className="text-base font-semibold text-[#0F1E35]">{block.title}</h3>
-                        <p className="text-sm leading-relaxed text-[#48566B]">{block.description}</p>
+                      {Icon && (
+                        <span
+                          aria-hidden
+                          className="flex size-[42px] shrink-0 items-center justify-center rounded-lg bg-[#E9DFC1]"
+                        >
+                          <Icon size={22} className="text-[#0F1E35]" />
+                        </span>
+                      )}
+                      <div className="flex flex-col gap-2">
+                        <h3 className="text-[17px] font-semibold leading-[1.3] text-[#0F1E35]">{block.title}</h3>
+                        <p className="text-sm leading-[1.65] text-[#48566B]">{block.description}</p>
                       </div>
                     </article>
                   );
@@ -394,16 +404,34 @@ export function LumenPage() {
               data-testid="lumen-search-mock"
               className="flex flex-col gap-5 rounded-xl border border-[#D7D3C8] bg-[#FBF9F3] p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)] md:p-7"
             >
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <p className="text-sm font-bold text-[#0F1E35]">{c.busca.mockTitle}</p>
-                <span className="rounded bg-[#E9DFC1] px-2.5 py-1.5 text-[11px] font-semibold text-[#0F1E35]">
-                  {c.perfil.visualNote.split("·")[0]}
-                </span>
+              {/* Cabeçalho — "Explorar acervo" + library (frame #101:13561) */}
+              <div className="flex items-center justify-between">
+                <p className={`${THEME.titleFont} text-[26px] leading-[1.2] text-[#0F1E35]`}>
+                  {c.busca.mockTitle.split(" — ")[0]}
+                </p>
+                <Library size={22} aria-hidden className="text-[#0F1E35]" />
               </div>
-              <div className="flex items-center gap-3 rounded-lg border border-[#D7D3C8] px-3.5 py-3">
-                <Search size={16} aria-hidden className="shrink-0 text-[#48566B]" />
-                <span className="text-sm text-[#0F1E35]" data-testid="lumen-mock-query">
+              {/* Selo "Demonstração ilustrativa" — RN-029 */}
+              <span className="max-w-max rounded bg-[#E9DFC1] px-2.5 py-1.5 text-[11px] font-medium text-[#0F1E35]">
+                {c.perfil.visualNote.split("·")[0]}
+              </span>
+              {/* Busca preenchida */}
+              <div className="flex items-center gap-3 rounded-lg border border-[#D7D3C8] px-3.5 py-3.5">
+                <Search size={18} aria-hidden className="shrink-0 text-[#0F1E35]" />
+                <span className="flex-1 text-sm font-medium text-[#0F1E35]" data-testid="lumen-mock-query">
                   {c.busca.mockQuery}
+                </span>
+                <X size={16} aria-hidden className="shrink-0 text-[#48566B]" />
+              </div>
+              {/* Controles — filtros por eixo + filtro de leitura (frame #101:13570) */}
+              <div className="flex flex-wrap gap-3">
+                <span className="flex items-center gap-2 rounded-lg border border-[#D7D3C8] px-2.5 py-2.5 text-xs text-[#0F1E35]">
+                  <SlidersHorizontal size={16} aria-hidden />
+                  {c.busca.mockFilters}
+                </span>
+                <span className="flex items-center gap-2 rounded-lg border border-[#D7D3C8] px-2.5 py-2.5 text-xs text-[#0F1E35]">
+                  <span aria-hidden className="size-3.5 rounded-[3px] border border-[#48566B] bg-white" />
+                  {c.busca.mockReadFilter}
                 </span>
               </div>
               <div className="flex flex-col gap-4 rounded-lg bg-[#F2EEE2] p-5">

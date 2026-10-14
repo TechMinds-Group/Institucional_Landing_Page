@@ -147,6 +147,8 @@ export interface LumenLanding {
     mockDownload: string;
     mockProfileCta: string;
     mockDisclaimer: string;
+    mockFilters: string;
+    mockReadFilter: string;
   };
   perfil: {
     eyebrow: string;
@@ -960,15 +962,15 @@ export const translations: Record<Language, Translations> = {
         blocks: [
           {
             title: 'Encontre além do nome',
-            description: 'A busca funciona sem acentos e ignora maiúsculas e minúsculas.'
+            description: 'Busque por nome, descrição, etiquetas e títulos de obras, sem se preocupar com acentos ou maiúsculas. Na tela de obras, filtre também pelo título.'
           },
           {
             title: 'Combine perspectivas',
-            description: 'A opção Todos neutraliza um eixo. Re-selecionar o mesmo valor limpa aquele filtro.'
+            description: 'Filtros de diferentes eixos se combinam. “Todos” neutraliza um eixo; selecionar de novo o mesmo valor limpa aquele filtro.'
           },
           {
             title: 'Organize o que já leu',
-            description: 'Ative Apenas lidos e acompanhe selos de escopo, como Antropologia.'
+            description: '“Apenas lidos” mostra pensadores com ao menos uma obra lida. Selos dedicados destacam antropologia e escopo.'
           }
         ],
         mockTitle: 'Explorar acervo — Demonstração ilustrativa',
@@ -979,7 +981,9 @@ export const translations: Record<Language, Translations> = {
         mockRecord: 'Registro de exemplo · 10/10/2026, 14:32',
         mockDownload: 'Download: Indisponível · exemplo',
         mockProfileCta: 'Ver Perfil',
-        mockDisclaimer: 'Catálogo não é sinônimo de biblioteca de downloads: só há download quando existe um link.'
+        mockDisclaimer: 'Catálogo não é sinônimo de biblioteca de downloads: só há download quando existe um link.',
+        mockFilters: 'Combinar filtros · 9 eixos',
+        mockReadFilter: 'Filtro de leitura'
       },
       perfil: {
         eyebrow: 'Seu perfil de leitura',
@@ -1826,15 +1830,15 @@ export const translations: Record<Language, Translations> = {
         blocks: [
           {
             title: 'Find beyond the name',
-            description: 'Search works without accents and ignores upper and lower case.'
+            description: 'Search by name, description, tags and work titles, without worrying about accents or capitalization. On the works screen, filter by title too.'
           },
           {
             title: 'Combine perspectives',
-            description: 'The All option neutralizes an axis. Re-selecting the same value clears that filter.'
+            description: 'Filters from different axes combine. “All” neutralizes an axis; selecting the same value again clears that filter.'
           },
           {
             title: 'Organize what you have read',
-            description: 'Turn on Only read and follow scope badges, such as Anthropology.'
+            description: '“Read only” shows thinkers with at least one read work. Dedicated seals highlight anthropology and scope.'
           }
         ],
         mockTitle: 'Explore collection — Illustrative demonstration',
@@ -1845,7 +1849,9 @@ export const translations: Record<Language, Translations> = {
         mockRecord: 'Example record · 10/10/2026, 14:32',
         mockDownload: 'Download: Unavailable · example',
         mockProfileCta: 'View Profile',
-        mockDisclaimer: 'A catalog is not a synonym for a download library: downloads exist only when there is a link.'
+        mockDisclaimer: 'A catalog is not a synonym for a download library: downloads exist only when there is a link.',
+        mockFilters: 'Combine filters · 9 axes',
+        mockReadFilter: 'Read filter'
       },
       perfil: {
         eyebrow: 'Your reading profile',
@@ -2691,15 +2697,15 @@ export const translations: Record<Language, Translations> = {
         blocks: [
           {
             title: 'Encuentra más allá del nombre',
-            description: 'La búsqueda funciona sin tildes e ignora mayúsculas y minúsculas.'
+            description: 'Busca por nombre, descripción, etiquetas y títulos de obras, sin preocuparte por acentos ni mayúsculas. En la pantalla de obras, filtra también por título.'
           },
           {
             title: 'Combina perspectivas',
-            description: 'La opción Todos neutraliza un eje. Re-seleccionar el mismo valor limpia ese filtro.'
+            description: 'Los filtros de diferentes ejes se combinan. “Todos” neutraliza un eje; seleccionar de nuevo el mismo valor limpia ese filtro.'
           },
           {
             title: 'Organiza lo que ya leíste',
-            description: 'Activa Solo leídas y acompaña sellos de alcance, como Antropología.'
+            description: '“Solo leídas” muestra pensadores con al menos una obra leída. Sellos dedicados destacan antropología y alcance.'
           }
         ],
         mockTitle: 'Explorar acervo — Demostración ilustrativa',
@@ -2710,7 +2716,9 @@ export const translations: Record<Language, Translations> = {
         mockRecord: 'Registro de ejemplo · 10/10/2026, 14:32',
         mockDownload: 'Descarga: No disponible · ejemplo',
         mockProfileCta: 'Ver Perfil',
-        mockDisclaimer: 'Catálogo no es sinónimo de biblioteca de descargas: solo hay descarga cuando existe un enlace.'
+        mockDisclaimer: 'Catálogo no es sinónimo de biblioteca de descargas: solo hay descarga cuando existe un enlace.',
+        mockFilters: 'Combinar filtros · 9 ejes',
+        mockReadFilter: 'Filtro de lectura'
       },
       perfil: {
         eyebrow: 'Tu perfil de lectura',
