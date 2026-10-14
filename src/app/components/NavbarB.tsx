@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Logo } from "./Logo";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronRight, ArrowUpRight, Globe, Check } from "lucide-react";
 import { useI18n } from "../i18n/I18nContext";
 import { Language, languageCodes } from "../i18n/translations";
 import { smoothScrollTo } from "../utils/scroll";
@@ -80,13 +80,15 @@ export function NavbarB() {
     }
   };
 
-  // Drawer mobile (RN-012) — links atualizados para o contrato de âncoras
-  // do design B (constants/anchors.ts): Início → hero · Sobre → empresa
-  // (Company and trust) · Produtos → catálogo · Contato → rodapé.
-  const drawerLinks = [
-    { label: t.nav.home, sectionId: SECTION_IDS.hero },
-    { label: t.nav.about, sectionId: SECTION_IDS.empresa },
-    { label: t.nav.products, sectionId: SECTION_IDS.catalogo },
+  // Sidebar mobile (RN-012 — frame #59:3, redesign 14/10): painel
+  // full-screen branco do design B — marca + X, navegação institucional
+  // (contrato de âncoras: Soluções/Como trabalhamos/Empresa/Contato),
+  // seletor de idioma PT/EN/ES com check, documentos legais e CTA.
+  const sidebarLinks = [
+    { label: t.navB.sidebarSolutions, sectionId: SECTION_IDS.catalogo },
+    { label: t.navB.sidebarHowWeWork, sectionId: SECTION_IDS.comoFunciona },
+    { label: t.navB.sidebarCompany, sectionId: SECTION_IDS.empresa },
+    { label: t.navB.sidebarContact, sectionId: SECTION_IDS.contato },
   ];
 
   const handleDrawerNavClick = (sectionId: string) => {
@@ -109,6 +111,12 @@ export function NavbarB() {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     }, 250);
+  };
+
+  /** Documentos legais da sidebar → rotas internas (destino padrão vibecut). */
+  const handleDrawerDocClick = (route: string) => {
+    setIsDrawerOpen(false);
+    setTimeout(() => navigate(route), 250);
   };
 
   return (
@@ -176,101 +184,137 @@ export function NavbarB() {
         </div>
       </nav>
 
-      {/* Mobile Drawer Overlay (RN-012 — inalterado) */}
+      {/* Sidebar mobile (RN-012 — frame #59:3): backdrop + painel full-screen */}
       {isDrawerOpen && (
         <div
-          className="fixed inset-0 z-[60] md:hidden"
-          style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
+          className="fixed inset-0 z-[60] md:hidden bg-[#111318]/60"
           onClick={() => setIsDrawerOpen(false)}
+          aria-hidden="true"
         />
       )}
 
-      {/* Mobile Drawer (RN-012 — inalterado) */}
       <div
-        className="fixed top-0 right-0 h-full z-[70] md:hidden flex flex-col bg-[#111318]"
+        className="fixed inset-0 z-[70] md:hidden flex flex-col bg-white border-r border-[#D9DDE3]"
         style={{
-          width: "min(80vw, 300px)",
-          borderLeft: "1px solid rgba(91,200,192,0.2)",
           transform: isDrawerOpen ? "translateX(0)" : "translateX(100%)",
           transition: "transform 250ms ease-out",
           WebkitOverflowScrolling: "touch",
         }}
+        data-testid="sidebar-mobile"
       >
-        {/* Drawer Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
+        {/* Sidebar header (frame #59:27) */}
+        <div className="h-20 px-6 flex items-center justify-between border-b border-[#D9DDE3] shrink-0">
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={handleDrawerLogoClick}
           >
             <Logo className="w-8 h-8" />
-            <span className="text-xl font-bold text-white">TechMinds</span>
+            <span className="text-xl font-bold text-[#1F3A5F]">TechMinds</span>
           </div>
           <button
-            className="flex items-center justify-center w-11 h-11 text-white cursor-pointer focus:outline-none"
+            className="flex items-center justify-center w-11 h-11 rounded-[10px] border border-[#D9DDE3] text-[#1F3A5F] cursor-pointer focus:outline-none transition-colors hover:border-[#1F3A5F]"
             onClick={() => setIsDrawerOpen(false)}
             aria-label="Close menu"
           >
-            <X className="w-6 h-6" />
+            <X className="w-[22px] h-[22px]" />
           </button>
         </div>
 
-        {/* Nav Links */}
-        <nav className="flex-1 overflow-y-auto">
-          {drawerLinks.map((link, i) => (
-            <button
-              key={i}
-              data-testid={`drawer-link-${link.sectionId}`}
-              onClick={() => handleDrawerNavClick(link.sectionId)}
-              className="w-full text-left px-6 text-gray-200 cursor-pointer transition-colors hover:text-[#5BC8C0] hover:bg-white/5"
-              style={{
-                height: "48px",
-                fontSize: "16px",
-                borderBottom: "1px solid rgba(255,255,255,0.06)",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              {link.label}
-            </button>
-          ))}
-        </nav>
-
-        {/* Bottom section: language + CTA */}
-        <div className="px-5 py-6 border-t border-white/5 space-y-4">
-          {/* Language Pills */}
-          <div className="flex gap-2 justify-center">
-            {(["pt", "en", "es"] as Language[]).map((lang) => (
-              <button
-                key={lang}
-                onClick={() => setLanguage(lang)}
-                className={`flex-1 cursor-pointer rounded-full transition-all duration-150 focus:outline-none`}
-                style={{
-                  height: "32px",
-                  fontSize: "14px",
-                  fontWeight: 600,
-                  background:
-                    language === lang
-                      ? "linear-gradient(90deg, #7B5EA7, #5BC8C0)"
-                      : "transparent",
-                  border:
-                    language === lang
-                      ? "1px solid transparent"
-                      : "1px solid rgba(91,200,192,0.35)",
-                  color: language === lang ? "#fff" : "rgba(255,255,255,0.7)",
-                }}
-              >
-                {languageCodes[lang]}
-              </button>
-            ))}
+        {/* Menu content (frame #59:35 — padding 28px 24px, gap 24) */}
+        <div className="flex-1 overflow-y-auto px-6 pt-7 pb-2 flex flex-col gap-6">
+          {/* Navegação institucional */}
+          <div className="flex flex-col gap-3" data-testid="sidebar-nav">
+            <p className="text-[13px] font-bold text-[#4B5563]">
+              {t.navB.sidebarNavLabel}
+            </p>
+            <div className="flex flex-col">
+              {sidebarLinks.map((link) => (
+                <button
+                  key={link.sectionId}
+                  data-testid={`sidebar-link-${link.sectionId}`}
+                  onClick={() => handleDrawerNavClick(link.sectionId)}
+                  className="h-14 w-full flex items-center justify-between border-b border-[#D9DDE3] cursor-pointer focus:outline-none"
+                >
+                  <span className="text-[16px] font-semibold text-[#1F3A5F]">
+                    {link.label}
+                  </span>
+                  <ChevronRight className="w-[18px] h-[18px] text-[#1F3A5F] shrink-0" aria-hidden="true" />
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* CTA Button */}
+          {/* Seleção de idioma (frame #59:51) */}
+          <div
+            className="rounded-2xl border border-[#D9DDE3] bg-[#F3F5F7] p-4 flex flex-col gap-3"
+            data-testid="sidebar-language"
+            role="group"
+            aria-label="Language"
+          >
+            <div className="flex items-center gap-2">
+              <Globe className="w-[18px] h-[18px] text-[#1F3A5F]" aria-hidden="true" />
+              <span className="text-[13px] font-bold text-[#1F3A5F]">
+                {t.navB.sidebarLangLabel}
+              </span>
+            </div>
+            <div className="flex gap-2">
+              {(["pt", "en", "es"] as Language[]).map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => setLanguage(lang)}
+                  aria-pressed={language === lang}
+                  className={`flex-1 h-11 rounded-[10px] inline-flex items-center justify-center gap-1.5 text-sm font-semibold transition-colors cursor-pointer focus:outline-none ${
+                    language === lang
+                      ? "bg-[#1F3A5F] text-white"
+                      : "bg-white border border-[#D9DDE3] text-[#4B5563] hover:border-[#1F3A5F]"
+                  }`}
+                >
+                  {languageCodes[lang]}
+                  {language === lang && <Check className="w-3.5 h-3.5" aria-hidden="true" />}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Documentos legais (frame #59:63) */}
+          <div className="flex flex-col gap-2" data-testid="sidebar-docs">
+            <p className="text-[13px] font-bold text-[#4B5563]">
+              {t.navB.sidebarDocsLabel}
+            </p>
+            <div className="flex flex-col">
+              <button
+                data-testid="sidebar-doc-terms"
+                onClick={() => handleDrawerDocClick("/terms-of-use")}
+                className="h-11 w-full flex items-center justify-between cursor-pointer focus:outline-none"
+              >
+                <span className="text-sm text-[#4B5563]">
+                  {t.footerB.nav.terms}
+                </span>
+                <ArrowUpRight className="w-[18px] h-[18px] text-[#4B5563] shrink-0" aria-hidden="true" />
+              </button>
+              <button
+                data-testid="sidebar-doc-privacy"
+                onClick={() => handleDrawerDocClick("/privacy")}
+                className="h-11 w-full flex items-center justify-between cursor-pointer focus:outline-none"
+              >
+                <span className="text-sm text-[#4B5563]">
+                  {t.footerB.nav.privacy}
+                </span>
+                <ArrowUpRight className="w-[18px] h-[18px] text-[#4B5563] shrink-0" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Sidebar action (frame #59:72) — CTA primária */}
+        <div className="px-6 pt-4 pb-10 shrink-0">
           <button
             onClick={() => handleDrawerNavClick(SECTION_IDS.catalogo)}
-            className="w-full py-3 rounded-full bg-gradient-to-r from-[#7B5EA7] via-[#6B8DC4] to-[#5BC8C0] text-white font-semibold cursor-pointer focus:outline-none shadow-[0_4px_18px_rgba(123,94,167,0.55)]"
-            style={{ fontSize: "15px" }}
+            data-testid="sidebar-cta"
+            className="w-full h-12 rounded-[10px] bg-[#1F3A5F] text-white text-sm font-bold inline-flex items-center justify-center gap-2.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1F3A5F] focus:ring-offset-2 transition-colors hover:bg-[#16304f]"
           >
-            {t.nav.getStarted}
+            {t.heroB.ctaAid}
+            <ArrowUpRight className="w-[18px] h-[18px]" aria-hidden="true" />
           </button>
         </div>
       </div>

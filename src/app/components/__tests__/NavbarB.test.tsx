@@ -66,7 +66,7 @@ describe("NavbarB (RN-022-1)", () => {
     expect(screen.getByTestId("navb-links")).toBeInTheDocument();
   });
 
-  it("drawer mobile (RN-012): abre pelo hamburger, trava o scroll do body e usa o contrato de âncoras do design B", () => {
+  it("sidebar mobile (RN-012 — frame #59:3): abre pelo hamburger, trava o scroll do body e usa o contrato de âncoras do design B", () => {
     renderWithProviders(<NavbarB />);
 
     expect(document.body.style.overflow).toBe("");
@@ -74,25 +74,48 @@ describe("NavbarB (RN-022-1)", () => {
     fireEvent.click(screen.getByRole("button", { name: /open menu/i }));
     expect(document.body.style.overflow).toBe("hidden");
 
-    // Links do drawer apontam para o contrato de âncoras B (RN-024):
-    // Início → hero · Sobre → empresa (Company and trust) · Produtos → catalogo
-    expect(screen.getByRole("button", { name: "Início" })).toHaveAttribute(
+    // Links da sidebar → contrato de âncoras B (frame #59:36):
+    expect(screen.getByRole("button", { name: "Soluções" })).toHaveAttribute(
       "data-testid",
-      `drawer-link-${SECTION_IDS.hero}`
+      `sidebar-link-${SECTION_IDS.catalogo}`
     );
-    expect(screen.getByRole("button", { name: "Sobre" })).toHaveAttribute(
+    expect(
+      screen.getByRole("button", { name: "Como trabalhamos" })
+    ).toHaveAttribute("data-testid", `sidebar-link-${SECTION_IDS.comoFunciona}`);
+    expect(screen.getByRole("button", { name: "Empresa" })).toHaveAttribute(
       "data-testid",
-      `drawer-link-${SECTION_IDS.empresa}`
+      `sidebar-link-${SECTION_IDS.empresa}`
     );
-    expect(screen.getByRole("button", { name: "Produtos" })).toHaveAttribute(
+    expect(screen.getByRole("button", { name: "Contato" })).toHaveAttribute(
       "data-testid",
-      `drawer-link-${SECTION_IDS.catalogo}`
+      `sidebar-link-${SECTION_IDS.contato}`
     );
 
-    // Clique em âncora do drawer: sem exceção e drawer fechado.
+    // Clique em âncora da sidebar: sem exceção e body destravado (fecha).
     expect(() =>
-      fireEvent.click(screen.getByRole("button", { name: "Produtos" }))
+      fireEvent.click(screen.getByRole("button", { name: "Soluções" }))
     ).not.toThrow();
     expect(document.body.style.overflow).toBe("");
+  });
+
+  it("sidebar mobile: seletor de idioma PT/EN/ES com check no ativo e documentos legais (frame #59:51/#59:63)", async () => {
+    renderWithProviders(<NavbarB />, { language: "pt" });
+
+    fireEvent.click(screen.getByRole("button", { name: /open menu/i }));
+
+    // Grupo de idioma com o ativo em PT (check)
+    const languageBox = screen.getByTestId("sidebar-language");
+    expect(within(languageBox).getByRole("button", { pressed: true })).toHaveTextContent("PT");
+    expect(within(languageBox).getByRole("button", { name: "EN" })).toBeInTheDocument();
+    expect(within(languageBox).getByRole("button", { name: "ES" })).toBeInTheDocument();
+
+    // Troca de idioma na sidebar persiste (RN-004) — sidebar permanece aberta
+    fireEvent.click(within(languageBox).getByRole("button", { name: "EN" }));
+    expect(within(languageBox).getByRole("button", { pressed: true })).toHaveTextContent("EN");
+    expect(localStorage.getItem("techminds-language")).toBe("en");
+
+    // Documentos → rotas legais
+    expect(screen.getByTestId("sidebar-doc-terms")).toBeInTheDocument();
+    expect(screen.getByTestId("sidebar-doc-privacy")).toBeInTheDocument();
   });
 });

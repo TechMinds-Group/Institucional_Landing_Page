@@ -299,6 +299,16 @@ export interface Translations {
     howWeWork: string;
     pilares: string;
     company: string;
+    /* Sidebar mobile (frame #59:3): rótulos da âncora institucional +
+       cabeçalhos de bloco — diferem da navbar no frame (Soluções/Como
+       trabalhamos/Empresa/Contato). */
+    sidebarSolutions: string;
+    sidebarHowWeWork: string;
+    sidebarCompany: string;
+    sidebarContact: string;
+    sidebarNavLabel: string;
+    sidebarLangLabel: string;
+    sidebarDocsLabel: string;
   };
   heroB: {
     headline: string;
@@ -464,7 +474,14 @@ export const translations: Record<Language, Translations> = {
       solutions: 'Catálogo',
       howWeWork: 'Como funciona',
       pilares: 'Pilares',
-      company: 'Empresa'
+      company: 'Empresa',
+      sidebarSolutions: 'Soluções',
+      sidebarHowWeWork: 'Como trabalhamos',
+      sidebarCompany: 'Empresa',
+      sidebarContact: 'Contato',
+      sidebarNavLabel: 'Navegação',
+      sidebarLangLabel: 'Idioma',
+      sidebarDocsLabel: 'Documentos'
     },
     heroB: {
       headline: 'Seu negócio precisa aparecer. Sua rotina precisa funcionar. A gente ajuda nos dois.',
@@ -1365,7 +1382,14 @@ export const translations: Record<Language, Translations> = {
       solutions: 'Catalog',
       howWeWork: 'How it works',
       pilares: 'Pillars',
-      company: 'Company'
+      company: 'Company',
+      sidebarSolutions: 'Solutions',
+      sidebarHowWeWork: 'How we work',
+      sidebarCompany: 'Company',
+      sidebarContact: 'Contact',
+      sidebarNavLabel: 'Navigation',
+      sidebarLangLabel: 'Language',
+      sidebarDocsLabel: 'Documents'
     },
     heroB: {
       headline: 'Your business needs to be seen. Your routine needs to work. We help with both.',
@@ -2267,7 +2291,14 @@ export const translations: Record<Language, Translations> = {
       solutions: 'Catálogo',
       howWeWork: 'Cómo funciona',
       pilares: 'Pilares',
-      company: 'Empresa'
+      company: 'Empresa',
+      sidebarSolutions: 'Soluciones',
+      sidebarHowWeWork: 'Cómo trabajamos',
+      sidebarCompany: 'Empresa',
+      sidebarContact: 'Contacto',
+      sidebarNavLabel: 'Navegación',
+      sidebarLangLabel: 'Idioma',
+      sidebarDocsLabel: 'Documentos'
     },
     heroB: {
       headline: 'Tu negocio necesita aparecer. Tu rutina necesita funcionar. Nosotros te ayudamos con ambos.',
