@@ -268,7 +268,8 @@ describe("Groom — regressão (RN-036-4): preços RN-014 e demais seções inta
     expect(
       screen.getByText("Pronto para profissionalizar seu negócio?")
     ).toBeInTheDocument();
-    expect(screen.getByText(/CNPJ: 69\.184\.592/)).toBeInTheDocument();
+    // Identificação empresarial removida (14/10) — © unificada permanece (PEND-013)
+    expect(screen.queryByText(/CNPJ: 69\.184\.592/)).not.toBeInTheDocument();
   });
 });
 

@@ -153,11 +153,8 @@ describe("ProductFooter — rodapé TechMinds de produto (RN-025)", () => {
       />
     );
     const footer = screen.getByTestId("landing-footer");
-    expect(footer).toHaveTextContent(
-      "Nome Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT"
-    );
-    expect(footer).toHaveTextContent("CNPJ: 69.184.592/0001-45 | Guaíba - RS");
     expect(footer).toHaveTextContent("© 2026 FasTo · TechMinds.");
+    expect(footer.textContent).not.toMatch(/CNPJ|Nome Empresarial/);
     const mailtos = within(footer).getAllByRole("link");
     expect(
       mailtos.some(
