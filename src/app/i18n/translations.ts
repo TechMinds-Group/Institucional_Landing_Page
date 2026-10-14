@@ -483,7 +483,7 @@ export const translations: Record<Language, Translations> = {
     },
     heroB: {
       headline: 'Seu negócio precisa aparecer. Sua rotina precisa funcionar. A gente ajuda nos dois.',
-      body: 'Criamos sites personalizados para valorizar seu negócio, sistemas próprios para simplificar a gestão na área da beleza e soluções para automatizar o atendimento pelo WhatsApp. Tudo pensado para facilitar sua rotina e aproximar você dos seus clientes.',
+      body: 'Criamos sites personalizados para valorizar seu negócio, sistemas próprios para simplificar a gestão e soluções para automatizar o atendimento pelo WhatsApp. Tudo pensado para facilitar sua rotina e aproximar você dos seus clientes.',
       ctaAid: 'Veja como podemos ajudar'
     },
     problemB: {
@@ -1389,7 +1389,7 @@ export const translations: Record<Language, Translations> = {
     },
     heroB: {
       headline: 'Your business needs to be seen. Your routine needs to work. We help with both.',
-      body: 'We build customized websites to boost your business, bespoke systems to simplify beauty-industry management, and solutions to automate WhatsApp service. Everything designed to make your routine easier and bring you closer to your customers.',
+      body: 'We build customized websites to boost your business, bespoke systems to simplify management, and solutions to automate WhatsApp service. Everything designed to make your routine easier and bring you closer to your customers.',
       ctaAid: 'See how we can help'
     },
     problemB: {
@@ -2296,7 +2296,7 @@ export const translations: Record<Language, Translations> = {
     },
     heroB: {
       headline: 'Tu negocio necesita aparecer. Tu rutina necesita funcionar. Nosotros te ayudamos con ambos.',
-      body: 'Creamos sitios personalizados para valorar tu negocio, sistemas propios para simplificar la gestión en el área de la belleza y soluciones para automatizar la atención por WhatsApp. Todo pensado para facilitar tu rutina y acercarte a tus clientes.',
+      body: 'Creamos sitios personalizados para valorar tu negocio, sistemas propios para simplificar la gestión y soluciones para automatizar la atención por WhatsApp. Todo pensado para facilitar tu rutina y acercarte a tus clientes.',
       ctaAid: 'Mira cómo podemos ayudarte'
     },
     problemB: {
