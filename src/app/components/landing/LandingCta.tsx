@@ -14,6 +14,8 @@ export interface LandingCtaSlot {
   microcopy?: string;
   /** ID opcional do motivo (aria-describedby). */
   microcopyId?: string;
+  /** Oculta a microcopy textual (ex.: navbar — o tooltip/title permanece). */
+  microcopyHidden?: boolean;
   className?: string;
   testId: string;
   /** Conteúdo extra após o label (ícone/↗). */
@@ -29,7 +31,7 @@ function isDisabled(cta: LandingCtaConfig): boolean {
   return !cta.target; // destino obrigatório (RN-032)
 }
 
-export function LandingCta({ cta, microcopy, microcopyId, className, testId, children }: LandingCtaProps) {
+export function LandingCta({ cta, microcopy, microcopyId, microcopyHidden, className, testId, children }: LandingCtaProps) {
   const base =
     className ??
     "inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-semibold text-sm transition-colors cursor-pointer";
@@ -50,7 +52,7 @@ export function LandingCta({ cta, microcopy, microcopyId, className, testId, chi
           {cta.label}
           {children}
         </button>
-        {reason && (
+        {reason && !microcopyHidden && (
           <p
             id={microcopyId}
             data-testid={`${testId}-microcopy`}

@@ -73,10 +73,12 @@ export function ProductNavbar({ productName, theme, nav, ctaTestId }: ProductNav
           ))}
         </nav>
 
-        {/* CTA contextual (RN-032 — gate por destino) */}
+        {/* CTA contextual (RN-032 — gate por destino; microcopy na navbar
+            quebraria a altura fixa — tooltip/title cobre o motivo) */}
         <div className="hidden md:block">
           <LandingCta
             cta={nav.cta}
+            microcopyHidden
             testId={ctaTestId}
             className={`${theme.accentBg} ${theme.accentText} rounded-lg px-5 py-2.5 text-sm font-bold transition-opacity`}
           />
@@ -85,6 +87,7 @@ export function ProductNavbar({ productName, theme, nav, ctaTestId }: ProductNav
         <div className="md:hidden">
           <LandingCta
             cta={nav.cta}
+            microcopyHidden
             testId={`${ctaTestId}-mobile`}
             className={`${theme.accentBg} ${theme.accentText} rounded-lg px-4 py-2 text-xs font-bold transition-opacity`}
           />
