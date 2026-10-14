@@ -98,15 +98,15 @@ export function ProductFooter({ theme, footer, testId = "landing-footer" }: Prod
                 footer.productName && footer.productIcon ? "gap-2.5" : "gap-3"
               }`}
             >
-              {footer.productName && footer.productIcon ? (
+              {footer.productName && footer.productLogo ? (
                 <>
-                  {/* Marca de produto (Lumen): emblema + wordmark no lugar do Logo TechMinds */}
-                  <span
+                  {/* Marca de produto (Lumen): emblema oficial + wordmark no lugar do Logo TechMinds */}
+                  <img
+                    src={footer.productLogo}
+                    alt=""
                     aria-hidden
-                    className="flex size-[34px] shrink-0 items-center justify-center rounded-full border border-[#C9A84C]"
-                  >
-                    <footer.productIcon size={22} className="text-[#C9A84C]" />
-                  </span>
+                    className="size-[34px] shrink-0 object-contain"
+                  />
                   <span className={`${theme.titleFont} text-[30px] leading-none ${theme.footerTitle}`}>
                     {footer.productName}
                   </span>

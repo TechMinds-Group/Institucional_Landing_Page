@@ -17,7 +17,6 @@ import {
   SearchCheck,
   ShieldCheck,
   SlidersHorizontal,
-  Sun,
   Bookmark,
   BookmarkCheck,
   X,
@@ -30,6 +29,7 @@ import { LandingTheme } from "../../components/landing/types";
 import { useI18n } from "../../i18n/I18nContext";
 import { LANDING_SECTION_IDS } from "../../constants/anchors";
 import esculturaDesk from "../../../imports/landings/lumen-escultura-livros-desk.png";
+import lumenLogo from "../../../imports/landings/lumen-logo.png";
 import esculturaMob from "../../../imports/landings/lumen-escultura-livros-mob.png";
 import plataoDesk from "../../../imports/landings/lumen-retrato-platao-desk.png";
 import plataoMob from "../../../imports/landings/lumen-retrato-platao-mob.png";
@@ -196,7 +196,7 @@ export function LumenPage() {
       }}
       footer={{
         productName: "Lumen",
-        productIcon: Sun,
+        productLogo: lumenLogo,
         statement: c.footer.statement,
         tagline: c.footer.tagline,
         columns: [
