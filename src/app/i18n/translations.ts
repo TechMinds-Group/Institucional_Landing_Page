@@ -436,8 +436,6 @@ export interface Translations {
       terms: string;
       privacy: string;
     };
-    legalName: string;
-    cnpj: string;
     copyright: string;
   };
   legal: {
@@ -676,8 +674,6 @@ export const translations: Record<Language, Translations> = {
         terms: 'Termos de uso',
         privacy: 'Privacidade'
       },
-      legalName: 'Nome Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT',
-      cnpj: 'CNPJ: 69.184.592/0001-45 | Guaíba - RS',
       copyright: '© 2026 TechMinds. Todos os direitos reservados.'
     },
     legal: {
@@ -1584,8 +1580,6 @@ export const translations: Record<Language, Translations> = {
         terms: 'Terms of use',
         privacy: 'Privacy'
       },
-      legalName: 'Legal Name: 69.184.592 MICHEL LEMOS BITTENCOURT',
-      cnpj: 'CNPJ: 69.184.592/0001-45 | Guaíba - RS',
       copyright: '© 2026 TechMinds. All rights reserved.'
     },
     legal: {
@@ -2493,8 +2487,6 @@ export const translations: Record<Language, Translations> = {
         terms: 'Términos de uso',
         privacy: 'Privacidad'
       },
-      legalName: 'Nombre Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT',
-      cnpj: 'CNPJ: 69.184.592/0001-45 | Guaíba - RS',
       copyright: '© 2026 TechMinds. Todos los derechos reservados.'
     },
     legal: {

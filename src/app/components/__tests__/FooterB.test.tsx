@@ -28,11 +28,10 @@ describe("FooterB (RN-024-3)", () => {
     expect(screen.getAllByText("TechMinds").length).toBeGreaterThan(0);
     expect(within(footer).getByText("Sistemas que evoluem. Negócios que crescem.")).toBeInTheDocument();
 
-    // Identificação (CNPJ real — ADR-005) + © 2026
+    // Identificação — apenas © (nome empresarial/CNPJ/cidade removidos — 14/10)
     const idBlock = screen.getByTestId("footerb-legal-id");
-    expect(within(idBlock).getByText("Nome Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT")).toBeInTheDocument();
-    expect(within(idBlock).getByText("CNPJ: 69.184.592/0001-45 | Guaíba - RS")).toBeInTheDocument();
     expect(within(idBlock).getByText("© 2026 TechMinds. Todos os direitos reservados.")).toBeInTheDocument();
+    expect(within(idBlock).queryByText(/CNPJ|Nome Empresarial/)).not.toBeInTheDocument();
     // Divisor do design
     expect(footer.innerHTML).toContain("border-[#303342]");
   });
@@ -121,7 +120,7 @@ describe("FooterB (RN-024-3)", () => {
     expect(within(footer).getByTestId("footerb-nav-company").textContent).toContain("About us");
     expect(within(footer).getByTestId("footerb-nav-legal").textContent).toContain("Terms of use");
     expect(within(footer).getByText("© 2026 TechMinds. All rights reserved.")).toBeInTheDocument();
-    expect(within(footer).getByText("Legal Name: 69.184.592 MICHEL LEMOS BITTENCOURT")).toBeInTheDocument();
+    expect(within(footer).queryByText(/CNPJ|Legal Name/)).not.toBeInTheDocument();
   });
 
   it("reflete o idioma ativo quando o dicionário é ES (RN-004)", () => {
@@ -131,7 +130,6 @@ describe("FooterB (RN-024-3)", () => {
     expect(within(footer).getByText("Sistemas")).toBeInTheDocument();
     expect(within(footer).getByText("Sobre nosotros")).toBeInTheDocument();
     expect(within(footer).getByText("Términos de uso")).toBeInTheDocument();
-    expect(within(footer).getByText("Nombre Empresarial: 69.184.592 MICHEL LEMOS BITTENCOURT")).toBeInTheDocument();
     expect(within(footer).getByText("© 2026 TechMinds. Todos los derechos reservados.")).toBeInTheDocument();
     expect(within(footer).queryByText("Contactos por área")).not.toBeInTheDocument();
   });
