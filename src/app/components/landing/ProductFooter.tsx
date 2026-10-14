@@ -105,7 +105,7 @@ export function ProductFooter({ theme, footer, testId = "landing-footer" }: Prod
                     src={footer.productLogo}
                     alt=""
                     aria-hidden
-                    className="size-[34px] shrink-0 object-contain"
+                    className="w-[60px] shrink-0 object-contain"
                   />
                   <span className={`${theme.titleFont} text-[30px] leading-none ${theme.footerTitle}`}>
                     {footer.productName}
